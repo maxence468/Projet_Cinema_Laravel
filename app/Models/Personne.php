@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Personne extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['nomPers','prePers','dateNaissPers','lieuNaissPers','photoPers','biblio'];
     protected $table = 'personnes';
     protected $primaryKey = 'idPers';
