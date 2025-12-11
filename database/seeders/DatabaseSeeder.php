@@ -7,6 +7,9 @@ use App\Models\Cinema;
 use App\Models\Film;
 use App\Models\Genre;
 use App\Models\Personne;
+use App\Models\Salle;
+use App\Models\Tarif;
+use App\Models\TypeSalle;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -34,5 +37,11 @@ class DatabaseSeeder extends Seeder
         Film::factory(20)->create();
 
         Genre::factory(20)->create();
+
+        Salle::factory(20)->create();
+
+        TypeSalle::factory(20)->create();
+
+        Tarif::factory(20)->create();
     }
 }
