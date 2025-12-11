@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+$faker = \Faker\Factory::create('fr_FR'); // 'fr_FR' pour français, 'en_US' pour anglai
 
 use App\Models\Personne;
 use App\Models\User;
