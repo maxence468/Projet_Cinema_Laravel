@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 $faker = \Faker\Factory::create('fr_FR'); // 'fr_FR' pour français, 'en_US' pour anglai
 
+use App\Models\Cinema;
 use App\Models\Personne;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -25,5 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Personne::factory(20)->create();
+
+        Cinema::factory(20)->create();
     }
 }

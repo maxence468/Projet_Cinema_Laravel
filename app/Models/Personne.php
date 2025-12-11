@@ -13,8 +13,6 @@ class Personne extends Model
     protected $fillable = ['nomPers','prePers','dateNaissPers','lieuNaissPers','photoPers','biblio'];
     protected $table = 'personnes';
     protected $primaryKey = 'idPers';
-    use HasFactory;
-
     public function films(): BelongsToMany{
         return $this->belongsToMany(Film::class, 'casting', 'pers_id', 'film_id'
         )->withPivot('nomJoue','preJoue','principale','secondaire');
