@@ -14,6 +14,8 @@
 <body>
 <h1>Les salles</h1>
 @foreach($salles as $salle)
+    <h2>Salle {{$salle->idSalle}}</h2>
+    <p>{{$salle->cinema->nomCinema}} {{$salle->cinema->adresseCinema}} {{$salle->cinema->codePostale}}</p>
     @foreach($salle->tarifs as $g)
        <p>Salle {{$salle->idSalle}}, Type tarif : {{$g->libTarif}} ({{$g->prixTarif}} euros )</p>
     @endforeach
