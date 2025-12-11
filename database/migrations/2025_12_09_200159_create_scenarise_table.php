@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('casting', function (Blueprint $table) {
+        Schema::create('scenarise', function (Blueprint $table) {
             $table->unsignedBigInteger('film_id');
             $table->unsignedBigInteger('pers_id');
-            $table->string('nomJoue');
-            $table->string('preJoue');
-            $table->boolean('principale');
-            $table->boolean('secondaire');
 
             $table->foreign('film_id')->references('idFilm')->on('films');
             $table->foreign('pers_id')->references('idPers')->on('personnes');
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('film_personne');
+        Schema::dropIfExists('film_scenariste');
     }
 };

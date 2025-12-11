@@ -19,7 +19,10 @@ use App\Http\Controllers\PersonneController;
 <p>type genre : {{$film->genre->libGenre}} </p>
 
 
-<p>Nom acteurs : {{$film->pivot->nomJoue}}</p>
+    @foreach($film->casting as $pp)
+        @if() @endif
+        <p>{{$pp->pivot->nomJoue}} {{$pp->pivot->preJoue}} ({{$pp->nomPers}})</p>
+    @endforeach
 </body>
 </html>
 

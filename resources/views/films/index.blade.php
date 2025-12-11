@@ -12,7 +12,7 @@ use App\Http\Controllers\FilmController;
 </head>
 <body>
 <h1>Les films</h1>
-@foreach($films as $f)
+@foreach($films->take(2) as $f)
     <h2>Nom film {{$f->titreFilm}}</h2> <br> Description du film <br> {{$f->descFilm}} <br> Sortie en  {{$f->dateSortieFilm}}
         <br> Duree :  {{$f->dureeFilm}} minutes <br> {{$f->posterFilm}}</p>
 
