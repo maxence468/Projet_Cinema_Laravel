@@ -1,7 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+$faker = \Faker\Factory::create('fr_FR'); // 'fr_FR' pour français, 'en_US' pour anglai
 
+use App\Models\Personne;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,5 +23,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+
+
+       $this->call([PersonneSeeder::class,]);
     }
 }
