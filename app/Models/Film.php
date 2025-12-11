@@ -20,7 +20,7 @@ class Film extends Model
     }
 
     public function casting(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'casting', 'film_id', 'pers_id'
+        return $this->belongsToMany(Personne::class, 'caste', 'film_id', 'pers_id'
         )->withPivot('nomJoue','preJoue','principale','secondaire');
 
     }
