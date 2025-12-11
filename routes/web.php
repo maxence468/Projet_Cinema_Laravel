@@ -3,6 +3,7 @@
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SeanceController;
@@ -38,3 +39,5 @@ Route::get('/salles/{salle}', [SalleController::class, 'show']);
 
 Route::get('/seances', [SeanceController::class, 'index']);
 Route::get('/seances/{seance}', [SeanceController::class, 'show']);
+
+Route::get('/', [PageController::class, 'accueil']);
