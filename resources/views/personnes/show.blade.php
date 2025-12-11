@@ -13,7 +13,15 @@ use App\Http\Controllers\PersonneController;
 <body>
 <h1>La personne </h1>
 <p>Nom : {{$personne->nomPers}} <br> Nom : {{$personne->prePers}}</p>
+<h3>Film joué</h3>
+@foreach($personne->films as $p)
+    <p>Nom film : {{$p->titreFilm}}</p>
+@endforeach
 
+<p>Film réalisé</p>
+@foreach($personne->realiser as $a)
+    <p>Nom film : {{$a->titreFilm}}</p>
+@endforeach
 </body>
 </html>
 

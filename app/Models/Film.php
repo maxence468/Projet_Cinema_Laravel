@@ -20,15 +20,15 @@ class Film extends Model
     }
 
     public function casting(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'casting', 'film_id', 'pers_id'
+        return $this->belongsToMany(Personne::class, 'caste', 'film_id', 'pers_id'
         )->withPivot('nomJoue','preJoue','principale','secondaire');
 
     }
     public function realisateurs(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'film_realisateur', 'film_id', 'pers_id');
+        return $this->belongsToMany(Personne::class, 'realise', 'film_id', 'pers_id');
     }
 
     public function scenariste(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'film_scenariste', 'film_id', 'pers_id');
+        return $this->belongsToMany(Personne::class, 'scenarise', 'film_id', 'pers_id');
     }
 }
