@@ -48,9 +48,10 @@ $dernierMercrediStr = $dernierMercredi->format('Y-m-d');
 <main>
     <h2>Les dernières sorties</h2>
     <div class="d-flex flex-row justify-content-between">
+
         @foreach($films->where('dateSortieFilm', $dernierMercrediStr)->take(3) as $film)
             <img src="{{ asset($film->posterFilm) }}" alt="{{ $film->titreFilm }}" class="poster">
-        @endforeach
+
 
     </div>
 </main>
