@@ -1,5 +1,5 @@
-<?php use App\Http\Controllers\SeanceController;
-
+<?php
+use App\Http\Controllers\SeanceController;
 $dernierMercredi = new DateTime('last wednesday');
 
 if ((new DateTime())->format('N') == 3) {
@@ -51,7 +51,7 @@ $dernierMercrediStr = $dernierMercredi->format('Y-m-d');
 
         @foreach($films->where('dateSortieFilm', $dernierMercrediStr)->take(3) as $film)
             <img src="{{ asset($film->posterFilm) }}" alt="{{ $film->titreFilm }}" class="poster">
-
+        @endforeach
 
     </div>
 </main>
@@ -64,7 +64,7 @@ $dernierMercrediStr = $dernierMercredi->format('Y-m-d');
                 Barthelemy Maxence, Gamet Dylan, Hassani Ayad-Youssouf
             </p>
         </div>
-        <img src="{{asset('images/devOreo.png')}}" id="logoDevOreo" alt="DevOreo Logo">
+        <img src="{{asset('images/devoreo.png')}}" id="logoDevOreo" alt="DevOreo Logo">
     </div>
 </footer>
 
