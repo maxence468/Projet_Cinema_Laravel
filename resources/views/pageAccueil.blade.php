@@ -1,4 +1,14 @@
-<?php ?>
+<?php use App\Http\Controllers\SeanceController;
+
+$dernierMercredi = new DateTime('last wednesday');
+
+if ((new DateTime())->format('N') == 3) {
+    $dernierMercredi = new DateTime('today');
+}
+
+$dernierMercrediStr = $dernierMercredi->format('Y-m-d');
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,7 +18,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 <header>
@@ -16,7 +26,7 @@
         <div class="nav-wrapper">
 
             <div class="logo-wrapper">
-                <img src="images/logo_CineForAll.png" alt="Logo CinéForAll">
+                <img src="{{asset('images/logo_CineForAll.png')}}" alt="Logo CinéForAll">
             </div>
             <a href="" class="nav-text accueil">Accueil</a>
             <a href="" class="nav-text film">Recherche film</a>
@@ -38,9 +48,20 @@
 <main>
     <h2>Les dernières sorties</h2>
     <div class="d-flex flex-row justify-content-between">
-        <img class="poster" src="images/poster21JumpStreet.png" alt="poster1">
-        <img class="poster" src="images/posterF&F1.png" alt="poster2">
-        <img class="poster" src="images/posterTaken2.png" alt="poster3">
+        @foreach($films as $film)
+            @if($film->dateSortieFilm == $dernierMercrediStr)
+            <img src="{{asset($film->posterFilm)}}" alt="{{$film->posterFilm}}" class="poster">
+                @foreach($film->seances->take(1) as $seance)
+                    <p>Film : {{$film->titreFilm}}
+                        <br>Cinema {{$seance->salle->cinema->nomCinema}}
+                        <br>  Salle {{$seance->salle->idSalle}}
+                        <br> Date Seance : {{$seance->dateSeance}}
+                        <br> Heure seance : {{$seance->heureSeance}}
+                    </p>
+                @endforeach
+                <p></p>
+            @endif
+        @endforeach
     </div>
 </main>
 
@@ -52,7 +73,7 @@
                 Barthelemy Maxence, Gamet Dylan, Hassani Ayad-Youssouf
             </p>
         </div>
-        <img src="images/devOreo.png" id="logoDevOreo" alt="DevOreo Logo">
+        <img src="{{asset('images/devOreo.png')}}" id="logoDevOreo" alt="DevOreo Logo">
     </div>
 </footer>
 

@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    color: white;
+    height: 100%;
+    background-color: #1c1c1c;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+/* Main container */
+.nav-wrapper {
+    position: relative;
+    width: 100%;
+    height: 105px;
+}
+
+/* Shared nav text */
+.nav-text {
+    position: absolute;
+    font-size: 18px;
+    color: white;
+    font-style: normal;
+    line-height: normal;
+    text-decoration: none;
+}
+
+/* Text positions */
+.accueil {
+    left: 142px;
+    top: 41px;
+    width: 62px;
+}
+
+.film {
+    left: 223px;
+    top: 41px;
+    width: 127px;
+}
+
+.acteur {
+    left: 369px;
+    top: 41px;
+    width: 150px;
+}
+
+.genre {
+    left: 538px;
+    top: 42px;
+    width: 146px;
+}
+
+.programme {
+    left: 703px;
+    top: 42px;
+    width: 223px;
+}
+
+
+.logo-wrapper {
+    position: absolute;
+    left: 6px;
+    top: 0;
+    height: 100%;
+    aspect-ratio: 579 / 521;
+}
+
+.logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* Buttons */
+.btn-nav {
+    position: absolute;
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-nav span {
+    font-size: 18px;
+    color: white;
+    white-space: nowrap;
+}
+
+/* Inscription button */
+.inscription {
+    left: 967px;
+    top: 32px;
+    width: 122px;
+    height: 41px;
+}
+
+/* Connexion button */
+.connexion-wrapper {
+    position: absolute;
+    right: 37px;
+    top: 32px;
+    width: 122px;
+    height: 41px;
+}
+
+.connexion-wrapper .btn-nav {
+    position: absolute;
+    inset: 0;
+}
+
+
+main {
+    flex: 1;
+    margin-top: 3rem;
+    padding: 10px;
+}
+
+.poster {
+    width: 32.5%;
+    height: 592px;
+}
+
+
+#copyright {
+
+}
+
+#logoDevOreo {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+/* Reset already OK */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Footer container */
+.site-footer {
+    background-color: #991917;
+    padding: 0 20px; /* horizontal only */
+}
+
+/* Inner flex wrapper */
+.footer-inner {
+    height: 75px; /* EXACT logo height */
+}
+
+/* Text cleanup */
+.footer-text {
+    flex: 1;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+    line-height: 1;
+    color: white;
+}
+
+.poster {
+    width: 220px;
+    border-radius: 5px;
+    display: block;
+}
+
+
+
+
+
