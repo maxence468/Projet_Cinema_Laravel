@@ -48,20 +48,10 @@ $dernierMercrediStr = $dernierMercredi->format('Y-m-d');
 <main>
     <h2>Les dernières sorties</h2>
     <div class="d-flex flex-row justify-content-between">
-        @foreach($films as $film)
-            @if($film->dateSortieFilm == $dernierMercrediStr)
-            <img src="{{asset($film->posterFilm)}}" alt="{{$film->posterFilm}}" class="poster">
-                @foreach($film->seances->take(1) as $seance)
-                    <p>Film : {{$film->titreFilm}}
-                        <br>Cinema {{$seance->salle->cinema->nomCinema}}
-                        <br>  Salle {{$seance->salle->idSalle}}
-                        <br> Date Seance : {{$seance->dateSeance}}
-                        <br> Heure seance : {{$seance->heureSeance}}
-                    </p>
-                @endforeach
-                <p></p>
-            @endif
+        @foreach($films->where('dateSortieFilm', $dernierMercrediStr)->take(3) as $film)
+            <img src="{{ asset($film->posterFilm) }}" alt="{{ $film->titreFilm }}" class="poster">
         @endforeach
+
     </div>
 </main>
 
