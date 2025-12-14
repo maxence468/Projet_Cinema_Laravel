@@ -51,15 +51,6 @@ $dernierMercrediStr = $dernierMercredi->format('Y-m-d');
         @foreach($films as $film)
             @if($film->dateSortieFilm == $dernierMercrediStr)
             <img src="{{asset($film->posterFilm)}}" alt="{{$film->posterFilm}}" class="poster">
-                @foreach($film->seances->take(1) as $seance)
-                    <p>Film : {{$film->titreFilm}}
-                        <br>Cinema {{$seance->salle->cinema->nomCinema}}
-                        <br>  Salle {{$seance->salle->idSalle}}
-                        <br> Date Seance : {{$seance->dateSeance}}
-                        <br> Heure seance : {{$seance->heureSeance}}
-                    </p>
-                @endforeach
-                <p></p>
             @endif
         @endforeach
     </div>
