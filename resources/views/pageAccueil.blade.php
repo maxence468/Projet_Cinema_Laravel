@@ -1,12 +1,5 @@
 <?php
 use App\Http\Controllers\SeanceController;
-$dernierMercredi = new DateTime('last wednesday');
-
-if ((new DateTime())->format('N') == 3) {
-    $dernierMercredi = new DateTime('today');
-}
-
-$dernierMercrediStr = $dernierMercredi->format('Y-m-d');
 
 ?>
 <!DOCTYPE html>
@@ -49,7 +42,7 @@ $dernierMercrediStr = $dernierMercredi->format('Y-m-d');
     <h2>Les dernières sorties</h2>
     <div class="d-flex flex-row justify-content-between">
 
-        @foreach($films->where('dateSortieFilm', $dernierMercrediStr)->take(3) as $film)
+        @foreach($films as $film)
             <img src="{{ asset($film->posterFilm) }}" alt="{{ $film->titreFilm }}" class="poster">
         @endforeach
 
