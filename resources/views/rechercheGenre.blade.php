@@ -18,7 +18,6 @@
             </option>
         @endforeach
     </select>
-
     <button type="submit">Rechercher</button>
 </form>
 
