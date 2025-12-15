@@ -20,8 +20,8 @@
             <div class="logo-wrapper">
                 <img src="images/logo_CineForAll.png" alt="Logo CinéForAll">
             </div>
-            <a href="pageAccueil.php" class="nav-text accueil">Accueil</a>
-            <a href="rechFilm.php" class="nav-text film">Recherche film</a>
+            <a href="/" class="nav-text accueil">Accueil</a>
+            <a href="/recherche_film" class="nav-text film">Recherche film</a>
             <a href="rechActeur.php" class="nav-text acteur">Recherche acteur</a>
             <a href="rechGenre.php" class="nav-text genre">Recherche genre</a>
             <a href="progSemaine.php" class="nav-text programme">Programme de la semaine</a>
@@ -38,26 +38,33 @@
 </header>
 
 <main class="mainRechFilm">
-    <form method="post" action="">
+    <form method="GET" action="{{ route('recherchefilm') }}">
         <div class="d-flex justify-content-center">
-            <input class="inputRechFilm" type="text" placeholder="Rechercher un film">
+            <input class="inputRechFilm" type="text" name="search" placeholder="Rechercher un film" value="{{ $search ?? '' }}">
             <input type="submit" hidden/>
         </div>
     </form>
     <br>
-    <h2 hidden>Résultats de film pour : "nomFilm"</h2>
-    <div class="row" hidden>
-        <div class="col">
-            <img src="images/poster21JumpStreet.png" alt="filmTrouvé" width="412" height="626">
-        </div>
-        <div class="col">
-            <p>"titre"</p>
-            <p>"description"</p>
-            <p>"genre"</p>
-            <p>"réalisateurs</p>
-            <p>"durée"</p>
-            <p>"dispo cinéma"</p>
-        </div>
+    <ul>
+            @forelse($films as $film)
+            <h2>Résultats de film pour : {{$film->titreFilm}}</h2>
+            <img src="{{asset($film->posterFilm)}}" alt="" class="poster">
+            <div class="col">
+                    <p>Titre : {{$film->titreFilm}}</p>
+                    <p>Description : {{$film->descFilm}}</p>
+                    <p>Genre : {{$film->genre->libGenre}}</p>
+                @foreach($film->realisateurs as $b)
+                        <p>Réalisateurs : {{$b->nomPers}} {{$b->prePers}}</p>
+                    @endforeach
+                    <p>Durée : {{$film->dureeFilm}} minutes</p>
+                @foreach($film->seances as $ss)
+                        <p>Disponible au cinema : {{$ss->dateSeance}} ({{$ss->salle->cinema->nomCinema}}) {{$ss->heureSeance}} heures </p>
+                    @endforeach
+                </div>
+        @empty
+            <li>Aucun film trouvé</li>
+        @endforelse
+    </ul>
     </div>
 </main>
 

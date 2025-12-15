@@ -40,5 +40,6 @@ Route::get('/salles/{salle}', [SalleController::class, 'show']);
 Route::get('/seances', [SeanceController::class, 'index']);
 Route::get('/seances/{seance}', [SeanceController::class, 'show']);
 
+
 Route::get('/', [PageController::class, 'accueil']);
-Route::get('/recherche_film', [PageController::class, 'recherche_film']);
+Route::get('/recherche_film', [PageController::class, 'chercheFilm'])->name('recherchefilm');

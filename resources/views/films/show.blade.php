@@ -20,9 +20,16 @@ use App\Http\Controllers\PersonneController;
 
 
     @foreach($film->casting as $pp)
-        @if() @endif
         <p>{{$pp->pivot->nomJoue}} {{$pp->pivot->preJoue}} ({{$pp->nomPers}})</p>
     @endforeach
+
+@foreach($film->realisateurs as $b)
+    <p>({{$b->nomPers}})</p>
+@endforeach
+
+@foreach($film->seances as $ss)
+    <p>({{$ss->salle->cinema->nomCinema}})</p>
+@endforeach
 </body>
 </html>
 

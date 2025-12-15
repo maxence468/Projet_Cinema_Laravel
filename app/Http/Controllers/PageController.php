@@ -28,8 +28,17 @@ class PageController extends Controller
         return view('pageAccueil',compact('films','salles','seances','cinemas'));
     }
 
-    public function recherche_film(){
-        return view('recherchefilm');
-    }
+    public function chercheFilm(Request $request){
+        $request->validate([
+            'search' => 'nullable|string|max:255'
+        ]);
 
+        $search = $request->input('search');
+
+        $films = Film::when($search, function ($query) use ($search) {
+            $query->where('titreFilm', 'LIKE', '%' . $search . '%');
+        })->get();
+
+        return view('recherchefilm', compact('films', 'search'));
+    }
 }
