@@ -38,26 +38,31 @@
 </header>
 
 <main class="mainRechFilm">
-    <form method="post" action="">
+    <form method="GET" action="{{ route('rechercheActeur') }}">
         <div class="d-flex justify-content-center">
-            <input class="inputRechFilm" type="text" placeholder="Rechercher un acteur">
+            <input class="inputRechFilm" type="text" name="searchActeur" placeholder="Rechercher un acteur" value="{{ $search ?? '' }}">
             <input type="submit" hidden/>
         </div>
     </form>
     <br>
     <div class="toHide">
-        <h2>Résultat pour l'acteur : "nomActeur"</h2>
-        <div class="row">
-            <div class="col">
-                <img src="images/poster21JumpStreet.png" alt="filmTrouvé" width="412" height="626">
-            </div>
-            <div class="col" style="margin-right: 360px">
-                <p>"Nom"</p>
-                <p>"Prénom"</p>
-                <p>"Date de naissance"</p>
-                <p>"Lieu de naissance"</p>
-                <p>"Biographie"</p>
-            </div>
+
+            @foreach($personnes as $p)
+            <h2>Résultat pour l'acteur : {{$p->nomPers}}</h2>
+            <div class="row">
+                <div class="col">
+                    <img src="{{asset($p->photoPers)}}" alt="{{$p->photoPers}}" width="412" height="626">
+                </div>
+                <div class="col" style="margin-right: 360px">
+                    <p>{{$p->nomPers}}</p>
+                    <p>{{$p->prePers}}</p>
+                    <p>{{$p->dateNaissPers}}</p>
+                    <p>{{$p->lieuNaissPers}}</p>
+                    <p>{{$p->biblio}}</p>
+                </div>
+                @endforeach
+                @foreach($p->films as $f)
+                @endforeach
         </div>
     </div>
 </main>

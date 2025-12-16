@@ -51,9 +51,18 @@ class PageController extends Controller
     }
 
 
-    public function rechercheActeur(){
-       $personnes = Personne::all();
-        return view('rechActeur',compact('personnes'));
+    public function rechercheActeur(Request $request){
+        $request->validate([
+            'searchActeur' => 'nullable|string|max:255'
+        ]);
+
+        $search = $request->input('searchActeur');
+
+        $personnes = Personne::when($search, function ($query) use ($search) {
+            $query->where('nomPers', 'LIKE', '%' . $search . '%');
+        })->get();
+
+        return view('rechActeur', compact('personnes', 'search'));
     }
 
 
