@@ -2,7 +2,7 @@
 use Illuminate\Support\Carbon;
 
 ?>
-<!doctype html>
+    <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@ use Illuminate\Support\Carbon;
     <button type="submit">Rechercher</button>
 </form>
 {{--Quand un cinema est choisi--}}
-@if($c->isNotEmpty())
+@if($cinemaChoisi->isNotEmpty())
     {{--    on affiche 7 bouton pour chaque jours de la semaine--}}
     @for ($i = 0; $i <7; $i++)
         <a href="{{ request()->fullUrlWithQuery(['jour' => $jour + $i ])}}">{{$joursSemaine[$i]}} {{$jour + $i}}</a>
@@ -35,17 +35,21 @@ use Illuminate\Support\Carbon;
 
 {{--quand un jour est choisi--}}
 @if(request()->has('jour'))
-    @foreach($seances as $seance)
-        <p>affiche film : {{$seance->film->posterFilm}}</p>
-        <p>Titre film : {{$seance->film->titreFilm}} </p>
-        <p>genre : {{$seance->film->genre->libGenre}}</p>
-        <p>durée : {{$seance->film->dureeFilm}}</p>
-        <p>numero de la salle : {{$seance->idSalle}} </p>
-        <p>heure debut seance : {{$seance->heureSeance}}</p>
-        <p>heure fin seance : {{Carbon::createFromFormat('H:i', $seance->heureSeance)->addMinutes($seance->film->dureeFilm)->format('H:i')}}</p>
-
-        <hr>
-    @endforeach
+    @if($seances->isNotEmpty())
+        @foreach($seances as $seance)
+            <hr>
+            <img src="{{asset($seance->film->posterFilm)}}" alt="{{$seance->film->posterFilm}}">
+            <p>Titre film : {{$seance->film->titreFilm}} </p>
+            <p>genre : {{$seance->film->genre->libGenre}}</p>
+            <p>durée : {{$seance->film->dureeFilm}}</p>
+            <p>numero de la salle : {{$seance->idSalle}} </p>
+            <p>heure debut seance : {{$seance->heureSeance}}</p>
+            <p>heure fin seance : {{Carbon::createFromFormat('H:i', $seance->heureSeance)->addMinutes($seance->film->dureeFilm)->format('H:i')}}</p>
+            <hr>
+        @endforeach
+    @else
+        <p>Aucun film pour ce jour</p>
+    @endif
 @endif
 
 <a href="progSemaineCinema">Effacer la recherche</a>

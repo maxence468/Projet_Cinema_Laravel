@@ -16,7 +16,6 @@ class PageController extends Controller
 
         return view('pageAccueil',compact('films'));
     }
-
     public function genre(Request $request){
         $genres = Genre::all();
         $films = collect();
@@ -32,9 +31,9 @@ class PageController extends Controller
 
     public function progSemaineCinema(Request $request){
         $cinemas = Cinema::all();
-        $c = collect();
+        $cinemaChoisi = collect();
         if($request->has('cinema')){
-            $c = Cinema::where('idCinema', $request->cinema)->get();
+            $cinemaChoisi = Cinema::where('idCinema', $request->cinema)->get();
         }
 
         $joursSemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
@@ -51,11 +50,12 @@ class PageController extends Controller
                 $request->jour
             );
 
-            $salles = $c[0]->salles()->get();
+            $salles = $cinemaChoisi[0]->salles()->get();
             foreach($salles as $salle){
                 $seances = $salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get();
             }
         }
-        return view('progSemaineCinema', compact('cinemas','c', 'jour', 'joursSemaine', 'seances'));
+
+        return view('progSemaineCinema', compact('cinemas','cinemaChoisi', 'jour', 'joursSemaine', 'seances'));
     }
 }
