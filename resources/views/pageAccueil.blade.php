@@ -1,14 +1,16 @@
-    <?php ?>
+<?php
+use App\Http\Controllers\SeanceController;
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Page d'accueil</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href={{asset("style.css")}}>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 <header>
@@ -16,10 +18,10 @@
         <div class="nav-wrapper">
 
             <div class="logo-wrapper">
-                <img src="images/logo_CineForAll.png" alt="Logo CinéForAll">
+                <img src="{{asset('images/logo_CineForAll.png')}}" alt="Logo CinéForAll">
             </div>
             <a href="" class="nav-text accueil">Accueil</a>
-            <a href="" class="nav-text film">Recherche film</a>
+            <a href="/recherche_film" class="nav-text film">Recherche film</a>
             <a href="" class="nav-text acteur">Recherche acteur</a>
             <a href="" class="nav-text genre">Recherche genre</a>
             <a href="" class="nav-text programme">Programme de la semaine</a>
@@ -38,9 +40,11 @@
 <main>
     <h2>Les dernières sorties</h2>
     <div class="d-flex flex-row justify-content-between">
-        <img class="poster" src="images/poster21JumpStreet.png" alt="poster1">
-        <img class="poster" src="images/posterF&F1.png" alt="poster2">
-        <img class="poster" src="images/posterTaken2.png" alt="poster3">
+
+        @foreach($films as $film)
+            <img src="{{ asset($film->posterFilm) }}" alt="{{ $film->titreFilm }}" class="poster">
+        @endforeach
+
     </div>
 </main>
 
@@ -52,7 +56,7 @@
                 Barthelemy Maxence, Gamet Dylan, Hassani Ayad-Youssouf
             </p>
         </div>
-        <img src="images/devOreo.png" id="logoDevOreo" alt="DevOreo Logo">
+        <img src="{{asset('images/devoreo.png')}}" id="logoDevOreo" alt="DevOreo Logo">
     </div>
 </footer>
 

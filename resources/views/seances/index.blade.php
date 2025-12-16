@@ -17,6 +17,7 @@ use App\Http\Controllers\SeanceController;
     <p>ID Seance : {{$s->idSeance}} , heure : {{$s->heureSeance}}, date : {{$s->dateSeance}}, duree {{$s->dureeSeance}} minutes
         <br> Film : {{$s->film->titreFilm}}</p>
     <p>Salle : {{$s->salle->idSalle}}</p>
+    <p>Cinema : {{$s->salle->cinema->nomCinema}}</p>
 
 @endforeach
 <p></p>

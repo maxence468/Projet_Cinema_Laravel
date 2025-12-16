@@ -17,7 +17,7 @@ class Seance extends Model
     }
     protected $table = 'seances';
     protected $primaryKey = 'idSeance';
-    protected $fillable = ['heureSeance', 'dateSeance', 'dureeSeance','idFilm'];
+    protected $fillable = ['heureSeance', 'dateSeance', 'dureeSeance','idFilm','idSalle'];
 
     protected $foreignKey = 'idFilm';
 }

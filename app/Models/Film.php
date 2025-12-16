@@ -31,4 +31,8 @@ class Film extends Model
     public function scenariste(): BelongsToMany{
         return $this->belongsToMany(Personne::class, 'scenarise', 'film_id', 'pers_id');
     }
+
+    public function seances(): HasMany{
+        return $this->hasMany(Seance::class, 'idFilm', 'idFilm');
+    }
 }
