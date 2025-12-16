@@ -28,6 +28,8 @@ Route::get('/typesalles', [TypeSalleController::class, 'index']);
 Route::get('/typesalles/{typesalle}', [TypeSalleController::class, 'show']);
 
 Route::get('/films', [FilmController::class, 'index']);
+Route::get('/films/create', [FilmController::class, 'create'])->name('films.create');
+Route::post('/films', [FilmController::class, 'store']);
 Route::get('/films/{film}', [FilmController::class, 'show']);
 
 Route::get('/tarifs', [TarifController::class, 'index']);

@@ -15,7 +15,7 @@ class Cinema extends Model
     protected $primaryKey = 'idCinema';
     protected $fillable = ['nomCinema','adresseCinema','codePostale'];
 
-    public function salles(): BelongsToMany{
-        return $this->belongsToMany(Salle::class, 'idCinema', 'idCinema');
+    public function salles(): HasMany{
+        return $this->HasMany(Salle::class, 'idCinema', 'idCinema');
     }
 }
