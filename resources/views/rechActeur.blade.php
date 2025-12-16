@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+$message_result = "Résultat pour l'acteur";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -46,9 +48,8 @@
     </form>
     <br>
     <div class="toHide">
-
             @foreach($personnes as $p)
-            <h2>Résultat pour l'acteur : {{$p->nomPers}}</h2>
+            <h2><?php echo $message_result ?> {{$p->nomPers}}</h2>
             <div class="row">
                 <div class="col">
                     <img src="{{asset($p->photoPers)}}" alt="{{$p->photoPers}}" width="412" height="626">
