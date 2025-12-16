@@ -9,13 +9,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
-class PageController extends Controller
-{
-    public function accueil(){
-        $films = Film::all()->take(3);
-
-        return view('pageAccueil',compact('films'));
-    }
+class PageController extends Controller{
     public function genre(Request $request){
         $genres = Genre::all();
         $films = collect();
