@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class PageController extends Controller{
+
     public function genre(Request $request){
         $genres = Genre::all();
         $films = collect();
@@ -22,11 +23,12 @@ class PageController extends Controller{
             $rechercheFaite = true;
         }
 
-        return view('rechercheGenre', compact('genres', 'films', 'rechercheFaite'));
+        return view('rechGenre', compact('genres', 'films', 'rechercheFaite'));
     }
 
     public function progSemaineCinema(Request $request)
     {
+        Carbon::setLocale('fr');
         $cinemas = Cinema::all();
         $cinemaChoisi = collect();
         if ($request->has('cinema')) {
@@ -37,8 +39,11 @@ class PageController extends Controller{
 
         $premierJourSemaine = Carbon::now()->startOfWeek()->format('d');
         $jour = (int)$premierJourSemaine;
+        $mois = Carbon::now()->translatedFormat('F');
+
 
         $seances = collect();
+        $films = collect();
         if ($request->has('jour')) {
             $date = new DateTime();
             $date->setDate(
@@ -51,10 +56,15 @@ class PageController extends Controller{
             foreach ($salles as $salle) {
                 $seances = $salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get();
             }
+
+            foreach($seances as $seance){
+                $films->add($seance->film);
+            }
+            $films = $films->unique('idFilm');
         }
 
 
-        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances'));
+        return view('progSemaine', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances', 'films','mois'));
     }
     public function accueil(){
         $dernierMercredi = new DateTime('last wednesday');

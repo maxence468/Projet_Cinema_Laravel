@@ -38,19 +38,23 @@
 </header>
 
 <main class="mainRechFilm">
-    <form method="post" action="nomGenre">
         <div class="d-flex justify-content-center">
-            <select class="movie" name="movie">
-                <option value="">Veuillez sélectionner un genre</option>
-                <option value="Genre 1">Genre 1</option>
-                <option value="Genre 2">Genre 2</option>
-            </select>
-            <input type="submit" hidden/>
+            <form method="GET" action="{{ route('rechercheGenre') }}">
+                <select name="genre">
+                    <option value="">-- Tous les genres --</option>
+                    @foreach ($genres as $genre)
+                        <option value="{{ $genre->idGenre }}"
+                            {{ request('genre') == $genre->id ? 'selected' : '' }}>
+                            {{ $genre->libGenre }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="submit">Rechercher</button>
+            </form>
         </div>
-    </form>
     <br>
     <div class="toHide">
-        <h2>Résultats de film pour le genre : "nomFilm"</h2>
+        {{--<h2>Résultats de film pour le genre : "nomGenre"</h2>
         <!-- Carousel -->
         <div class="row">
             <div class="col">
@@ -64,7 +68,21 @@
                 <p>"durée"</p>
                 <p>"dispo cinéma"</p>
             </div>
-        </div>
+        </div>--}}
+
+        @if(!$rechercheFaite)
+            <h2>Recherchez votre film selon son genre !</h2>
+        @elseif ($films->isNotEmpty())
+                @foreach ($films as $film)
+                <div class="row">
+                    <div class="col">
+                        <img src="{{asset($film->posterFilm)}}" alt="{{$film->posterFilm}}">
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p>Aucun film trouvé</p>
+        @endif
     </div>
 </main>
 

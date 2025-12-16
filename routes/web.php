@@ -42,8 +42,10 @@ Route::get('/seances/{seance}', [SeanceController::class, 'show']);
 
 Route::get('/', [PageController::class, 'accueil']);
 
-Route::get('/rechercheGenre', [PageController::class, 'genre'])->name('rechercheGenre');
 
-Route::get('/progSemaineCinema', [PageController::class, 'progSemaineCinema'])->name('progSemaineCinema');;
+Route::get('/rechGenre', [PageController::class, 'genre'])->name('rechercheGenre');
+
+
+Route::get('/progSemaine', [PageController::class, 'progSemaineCinema'])->name('progSemaineCinema');;
 
 Route::get('/recherche_film', [PageController::class, 'chercheFilm'])->name('recherchefilm');
