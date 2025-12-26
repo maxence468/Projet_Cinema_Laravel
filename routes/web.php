@@ -46,4 +46,6 @@ Route::get('/rechercheGenre', [PageController::class, 'genre'])->name('recherche
 
 Route::get('/progSemaineCinema', [PageController::class, 'progSemaineCinema'])->name('progSemaineCinema');;
 
-Route::get('/recherche_film', [PageController::class, 'chercheFilm'])->name('recherchefilm');
+Route::get('/rechercheFilm', [PageController::class, 'chercheFilm'])->name('recherchefilm');
+
+Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name('rechercheActeur');

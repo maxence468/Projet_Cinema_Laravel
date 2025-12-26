@@ -7,18 +7,20 @@ use App\Models\Film;
 use App\Models\Genre;
 use App\Models\Salle;
 use App\Models\Seance;
+use App\Models\Personne;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class PageController extends Controller{
-    public function genre(Request $request){
+    public function genre(Request $request)
+    {
         $genres = Genre::all();
         $films = collect();
         $rechercheFaite = false;
 
-        if ($request->has('genre')) {
-            $films = Film::where('idGenre', $request->genre)->get();
+        if ($request->filled('movie')) {
+            $films = Film::where('idGenre', $request->movie)->get();
             $rechercheFaite = true;
         }
 
@@ -27,18 +29,22 @@ class PageController extends Controller{
 
     public function progSemaineCinema(Request $request)
     {
+        Carbon::setLocale('fr');
         $cinemas = Cinema::all();
         $cinemaChoisi = collect();
         if ($request->has('cinema')) {
             $cinemaChoisi = Cinema::where('idCinema', $request->cinema)->get();
         }
 
-        $joursSemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+        $joursSemaine = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
 
         $premierJourSemaine = Carbon::now()->startOfWeek()->format('d');
         $jour = (int)$premierJourSemaine;
+        $mois = Carbon::now()->translatedFormat('F');
+
 
         $seances = collect();
+        $films = collect();
         if ($request->has('jour')) {
             $date = new DateTime();
             $date->setDate(
@@ -51,11 +57,49 @@ class PageController extends Controller{
             foreach ($salles as $salle) {
                 $seances = $salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get();
             }
+
+            foreach($seances as $seance){
+                $films->add($seance->film);
+            }
+            $films = $films->unique('idFilm');
         }
 
 
-        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances'));
+        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances', 'films','mois'));
     }
+
+
+//    public function progSemaineCinema(Request $request)
+//    {
+//        $cinemas = Cinema::all();
+//        $cinemaChoisi = collect();
+//        if ($request->has('cinema')) {
+//            $cinemaChoisi = Cinema::where('idCinema', $request->cinema)->get();
+//        }
+//
+//        $joursSemaine = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
+//
+//        $premierJourSemaine = Carbon::now()->startOfWeek()->format('d');
+//        $jour = (int)$premierJourSemaine;
+//
+//        $seances = collect();
+//        if ($request->has('jour')) {
+//            $date = new DateTime();
+//            $date->setDate(
+//                date('Y'),
+//                date('m'),
+//                $request->jour
+//            );
+//
+//            $salles = $cinemaChoisi[0]->salles()->get();
+//            foreach ($salles as $salle) {
+//                $seances = $salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get();
+//            }
+//        }
+//
+//
+//        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances'));
+//    }
     public function accueil(){
         $dernierMercredi = new DateTime('last wednesday');
 
@@ -84,7 +128,21 @@ class PageController extends Controller{
             $query->where('titreFilm', 'LIKE', '%' . $search . '%');
         })->get();
 
-        return view('recherchefilm', compact('films', 'search'));
+        return view('rechercheFilm', compact('films', 'search'));
 
+    }
+
+    public function rechercheActeur(Request $request){
+        $request->validate([
+            'searchActeur' => 'nullable|string|max:255'
+        ]);
+
+        $search = $request->input('searchActeur');
+
+        $personnes = Personne::when($search, function ($query) use ($search) {
+            $query->where('nomPers', 'LIKE', '%' . $search . '%');
+        })->get();
+
+        return view('rechercheActeur', compact('personnes', 'search'));
     }
 }

@@ -12,6 +12,7 @@ class Salle extends Model
 {
     use HasFactory;
 
+
     public function tarifs() : BelongsToMany{
         return $this->belongsToMany(Tarif::class, 'salle_tarif', 'idSalle', 'idTarif');
     }

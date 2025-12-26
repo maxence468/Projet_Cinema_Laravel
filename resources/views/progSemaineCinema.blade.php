@@ -2,40 +2,44 @@
 use Illuminate\Support\Carbon;
 
 ?>
-    <!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>prog de la Semaine par Cinema</title>
-</head>
-<body>
-{{--Selection d'un cinema dans une liste deroulante--}}
-<form method="GET" action="{{ route('progSemaineCinema') }}">
-    <select name="cinema">
-        <option value="">-- Choisir un cinema --</option>
-        @foreach ($cinemas as $cinema)
-            <option value="{{ $cinema->idCinema }}"
-                {{ request('cinema') == $cinema->idCinema ? 'selected' : '' }}>
-                {{ $cinema->nomCinema }}
-            </option>
-        @endforeach
-    </select>
-    <button type="submit">Rechercher</button>
-</form>
+
+@extends('header')
+
+@section('title', 'Page programme de la semaine')
+
+@section('main')
+<div class="d-flex justify-content-center">
+    {{--Selection d'un cinema dans une liste deroulante--}}
+    <form method="GET" action="{{ route('progSemaineCinema') }}">
+        @csrf
+        <select name="cinema">
+            <option value="">Rechercher un cinéma</option>
+            @foreach ($cinemas as $cinema)
+                <option value="{{ $cinema->idCinema }}"
+                    {{ request('cinema') == $cinema->idCinema ? 'selected' : '' }}>
+                    {{ $cinema->nomCinema }}
+                </option>
+            @endforeach
+        </select>
+        <button type="submit">Rechercher</button>
+    </form>
+</div>
 {{--Quand un cinema est choisi--}}
 @if($cinemaChoisi->isNotEmpty())
-    {{--    on affiche 7 bouton pour chaque jours de la semaine--}}
-    @for ($i = 0; $i <7; $i++)
-        <a href="{{ request()->fullUrlWithQuery(['jour' => $jour + $i ])}}">{{$joursSemaine[$i]}} {{$jour + $i}}</a>
-    @endfor
+    <div class="col d-flex justify-content-around" style="margin-top: 60px">
+        {{-- on affiche 7 bouton pour chaque jours de la semaine --}}
+        @for ($i = 0; $i <7; $i++)
+            <button class="btnChoixJour">
+                <a href="{{ request()->fullUrlWithQuery(['jour' => $jour + $i ])}}">{{$joursSemaine[$i]}} {{$jour + $i}} {{$mois}}</a>
+            </button>
+        @endfor
+    </div>
 @endif
 
 {{--quand un jour est choisi--}}
 @if(request()->has('jour'))
     @if($seances->isNotEmpty())
+        ??
         @foreach($seances as $seance)
             <hr>
             <img src="{{asset($seance->film->posterFilm)}}" alt="{{$seance->film->posterFilm}}">
@@ -48,10 +52,7 @@ use Illuminate\Support\Carbon;
             <hr>
         @endforeach
     @else
-        <p>Aucun film pour ce jour</p>
+        <p class="d-flex justify-content-center">Aucun film pour ce jour</p>
     @endif
 @endif
-
-<a href="progSemaineCinema">Effacer la recherche</a>
-</body>
-</html>
+@endsection
