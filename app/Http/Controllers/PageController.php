@@ -35,12 +35,22 @@ class PageController extends Controller{
             $cinemaChoisi = Cinema::where('idCinema', $request->cinema)->get();
         }
 
-        $joursSemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+        $joursSemaine = ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'];
 
-        $premierJourSemaine = Carbon::now()->startOfWeek()->format('d');
-        $jour = (int)$premierJourSemaine;
-        $mois = Carbon::now()->translatedFormat('F');
+        $jours = [];
 
+        $startOfWeek = Carbon::now()->startOfWeek(); // lundi par défaut
+        $days = [];
+
+
+        for ($i = 0; $i < 7; $i++) {
+            $mois = $startOfWeek->copy()->addDays($i)->translatedFormat('F');
+            $moisCourt = mb_substr($mois,0,3);
+            $stringDate = $joursSemaine[$i] . " " . $startOfWeek->copy()->addDays($i)->translatedFormat('d') . " " . $moisCourt . "." ;
+            $days[] = $stringDate;
+
+            $jours[] = $startOfWeek->copy()->addDays($i)->translatedFormat('d');
+        }
 
         $seances = collect();
         $films = collect();
@@ -60,11 +70,12 @@ class PageController extends Controller{
             foreach($seances as $seance){
                 $films->add($seance->film);
             }
+
             $films = $films->unique('idFilm');
         }
 
 
-        return view('progSemaine', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances', 'films','mois'));
+        return view('progSemaine', compact('cinemas', 'cinemaChoisi', 'jours', 'joursSemaine', 'seances', 'films','mois', 'days'));
     }
     public function accueil(){
         $dernierMercredi = new DateTime('last wednesday');

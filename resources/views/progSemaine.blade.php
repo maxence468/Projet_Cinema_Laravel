@@ -63,7 +63,7 @@ use Illuminate\Support\Carbon;
 
             {{--    on affiche 7 bouton pour chaque jours de la semaine--}}
             @for ($i = 0; $i <7; $i++)
-                <a class="btnChoixJour" href="{{ request()->fullUrlWithQuery(['jour' => $jour + $i ])}}"><button>{{$joursSemaine[$i]}} {{$jour + $i}} {{$mois}}</button></a>
+                <a class="btnChoixJour" href="{{ request()->fullUrlWithQuery(['jour' => $jours[$i] ])}}"><button>{{$days[$i]}}</button></a>
             @endfor
             @endif
         </div>
