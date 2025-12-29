@@ -61,11 +61,12 @@ class PageController extends Controller{
                 date('m'),
                 $request->jour
             );
-
+            
             $salles = $cinemaChoisi[0]->salles()->get();
             foreach ($salles as $salle) {
-                $seances = $salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get();
+                $seances = $seances->merge($salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get());
             }
+
 
             foreach($seances as $seance){
                 $films->add($seance->film);
