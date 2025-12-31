@@ -12,6 +12,7 @@ use App\Http\Controllers\PersonneController;
 </head>
 <body>
 <h1>La personne </h1>
+<img src="{{asset('storage/'.$personne->photoPers)}}" alt="{{$personne->photoPers}}">
 <p>Nom : {{$personne->nomPers}} <br> Nom : {{$personne->prePers}}</p>
 <h3>Film joué</h3>
 @foreach($personne->films as $p)

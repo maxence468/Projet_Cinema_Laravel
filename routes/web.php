@@ -15,26 +15,57 @@ Route::get('/', function () {
 });
 
 Route::get('/personnes', [PersonneController::class, 'index']);
+Route::get('/personnes/create', [PersonneController::class, 'create']);
+Route::post('/personnes', [PersonneController::class, 'store']);
 Route::get('/personnes/{personne}', [PersonneController::class, 'show']);
 
+
+
 Route::get('/genres', [GenreController::class, 'index']);
+Route::get('/genres/create', [GenreController::class, 'create']);
+Route::post('/genres', [GenreController::class, 'store']);
 Route::get('/genres/{genre}', [GenreController::class, 'show']);
 
+
+
+
 Route::get('/cinemas', [CinemaController::class, 'index']);
+Route::get('/cinemas/create', [CinemaController::class, 'create']);
+Route::POST('/cinemas', [CinemaController::class, 'store']);
 Route::get('/cinemas/{cinema}', [CinemaController::class, 'show']);
 
+
+
+
 Route::get('/typesalles', [TypeSalleController::class, 'index']);
+Route::get('/typesalles/create', [TypeSalleController::class, 'create']);
+Route::post('/typesalles', [TypeSalleController::class, 'store']);
 Route::get('/typesalles/{typesalle}', [TypeSalleController::class, 'show']);
 
+
+
 Route::get('/films', [FilmController::class, 'index']);
+Route::get('/films/create', [FilmController::class, 'create']);
+Route::post('/films', [FilmController::class, 'store'])->name('films.store');
 Route::get('/films/{film}', [FilmController::class, 'show']);
+Route::get('/films/edit/{film}', [FilmController::class, 'edit']);
+Route::patch('/films/{film}', [FilmController::class, 'update']);
+Route::delete('/films/{film}', [FilmController::class, 'destroy']);
+
 
 Route::get('/tarifs', [TarifController::class, 'index']);
+Route::get('/tarifs/create', [TarifController::class, 'create']);
+Route::post('/tarifs', [TarifController::class, 'store']);
 Route::get('/tarifs/{tarif}', [TarifController::class, 'show']);
 
+
 Route::get('/salles', [SalleController::class, 'index']);
+Route::get('/salles/create', [SalleController::class, 'create']);
+Route::post('/salles', [SalleController::class, 'store']);
 Route::get('/salles/{salle}', [SalleController::class, 'show']);
 
 
 Route::get('/seances', [SeanceController::class, 'index']);
+Route::get('/seances/create', [SeanceController::class, 'create']);
+Route::post('/seances', [SeanceController::class, 'store']);
 Route::get('/seances/{seance}', [SeanceController::class, 'show']);

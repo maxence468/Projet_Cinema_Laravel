@@ -14,4 +14,21 @@ class TypeSalleController extends Controller
     public function show(TypeSalle $typesalle){
         return view('typesalles.show', compact('typesalle'));
     }
+
+    public function create(){
+        return view('typesalles.create');
+    }
+    public function store(Request $request){
+        $validated = $request->validate([
+            'libTypeSalle' => 'required',
+            'prixTypeSalle' => 'required',
+
+        ]);
+
+        $t = new TypeSalle();
+        $t->libTypeSalle = $validated['libTypeSalle'];
+        $t->prixTypeSalle = $validated['prixTypeSalle'];
+        $t->save();
+        return redirect('/typesalles/'.$t->idTypeSalle);
+    }
 }

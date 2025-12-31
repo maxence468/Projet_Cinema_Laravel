@@ -12,17 +12,31 @@ use App\Http\Controllers\PersonneController;
     <title>Les films</title>
 </head>
 <body>
-<h1>Les films</h1>
-<p>Nom film {{$film->titreFilm}} <br> Description du film <br> {{$film->descFilm}} br Sortie en  {{$film->dateSortieFilm}}
-    <br> Duree :  {{$film->dureeFilm}} minutes <br> {{$film->posterFilm}}</p>
+<h1>Le film : {{$film->titreFilm}}</h1>
+
+<img src="{{ asset('storage/' . $film->posterFilm) }}" alt="{{ $film->posterFilm }}">
+<p>Description du film <br> {{$film->descFilm}} <br> Sortie en  {{$film->dateSortieFilm}}
+    <br> Duree :  {{$film->dureeFilm}} minutes </p>
 
 <p>type genre : {{$film->genre->libGenre}} </p>
 
 
     @foreach($film->casting as $pp)
-        @if() @endif
         <p>{{$pp->pivot->nomJoue}} {{$pp->pivot->preJoue}} ({{$pp->nomPers}})</p>
     @endforeach
+
+<form action="/films/{{$film->idFilm }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button
+        class="bg-red-500 hover:bg-red-600 px-6 py-4 m-2 rounded-lg hover:cursor-pointer shadow-xl">
+        Supprimer
+    </button>
+    </form>
+
+<a href="/films/edit/{{$film->idFilm}}">
+    <button>Modifier</button>
+</a>
 </body>
 </html>
 

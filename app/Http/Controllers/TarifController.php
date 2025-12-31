@@ -14,4 +14,22 @@ class TarifController extends Controller
     public function show(Tarif $tarif){
         return view('tarifs.show',compact('tarif'));
     }
+
+    public function create(){
+        return view('tarifs.create');
+    }
+    public function store(Request $request){
+        $validated = $request->validate([
+            'libTarif' => 'required',
+            'prixTarif' => 'required',
+        ]);
+
+        $t = new Tarif();
+        $t->libTarif = $validated['libTarif'];
+        $t->prixTarif = $validated['prixTarif'];
+
+        $t->save();
+        return redirect('/tarifs/'.$t->idTarif);
+
+    }
 }
