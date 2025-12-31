@@ -50,6 +50,9 @@ Route::get('/typesalles', [TypeSalleController::class, 'index']);
 Route::get('/typesalles/create', [TypeSalleController::class, 'create']);
 Route::post('/typesalles', [TypeSalleController::class, 'store']);
 Route::get('/typesalles/{typesalle}', [TypeSalleController::class, 'show']);
+Route::get('/typesalles/edit/{typesalle}', [TypeSalleController::class, 'edit']);
+Route::patch('/typesalles/{typesalle}', [TypeSalleController::class, 'update']);
+Route::delete('/typesalles/{typesalle}', [TypeSalleController::class, 'destroy']);
 
 
 
@@ -66,6 +69,9 @@ Route::get('/tarifs', [TarifController::class, 'index']);
 Route::get('/tarifs/create', [TarifController::class, 'create']);
 Route::post('/tarifs', [TarifController::class, 'store']);
 Route::get('/tarifs/{tarif}', [TarifController::class, 'show']);
+Route::get('/tarifs/edit/{tarif}', [TarifController::class, 'edit']);
+Route::patch('/tarifs/{tarif}', [TarifController::class, 'update']);
+Route::delete('/tarifs/{tarif}', [TarifController::class, 'destroy']);
 
 
 Route::get('/salles', [SalleController::class, 'index']);
@@ -80,4 +86,7 @@ Route::delete('/salles/{salle}', [SalleController::class, 'destroy']);
 Route::get('/seances', [SeanceController::class, 'index']);
 Route::get('/seances/create', [SeanceController::class, 'create']);
 Route::post('/seances', [SeanceController::class, 'store']);
+Route::get('/seances/edit/{seance}', [SeanceController::class, 'edit']);
+Route::patch('/seances/{seance}', [SeanceController::class, 'update']);
+Route::delete('/seances/{seance}', [SeanceController::class, 'destroy']);
 Route::get('/seances/{seance}', [SeanceController::class, 'show']);

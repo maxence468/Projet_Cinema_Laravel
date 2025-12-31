@@ -16,7 +16,7 @@
         @csrf
         @method('PATCH')
         <label for="">Libellé du tarif</label>
-        <input name="libTarif" type="text" value="{{old('libTarif',$taif->libTarif)}}">
+        <input name="libTarif" type="text" value="{{old('libTarif',$tarif->libTarif)}}">
         <br>
         <label for="">Prix du tarif</label>
         <input name="prixTarif" type="number" value="{{old('prixTarif',$tarif->prixTarif)}}">

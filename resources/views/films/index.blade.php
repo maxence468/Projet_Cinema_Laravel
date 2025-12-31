@@ -39,12 +39,16 @@ use App\Http\Controllers\FilmController;
     @foreach($f->scenariste as $p)
         <p>Nom {{$p->nomPers}}</p>
     @endforeach
-
-
+    <br>
+    <a href="/films/{{$f->idFilm}}">
+        <button>Voir le film</button>
+    </a>
 
 @endforeach
 
-
+<a href="/films/create">
+    <button>Creez un film</button>
+</a>
 </body>
 </html>
 

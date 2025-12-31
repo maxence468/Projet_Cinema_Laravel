@@ -44,4 +44,21 @@ class SeanceController extends Controller
         return redirect('/seances/'.$s->idSeance);
 
     }
+
+    public function edit(Seance $seance){
+        $salles = Salle::all();
+        $films = Film::all();
+        return view('seances.edit', compact('seance','salles','films'));
+    }
+
+    public function update(Request $request, Seance $seance){
+        $date = $request->only(['dateSeance','heureSeance','idSalle','idFilm','dureeSeance']);
+        $seance->update(array_filter($date));
+        return redirect('/seances'.$seance->idSeance);
+    }
+
+    public function destroy(Seance $seance){
+        $seance->delete();
+        return redirect('/seances');
+    }
 }
