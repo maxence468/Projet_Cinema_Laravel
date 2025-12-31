@@ -37,4 +37,25 @@ class CinemaController extends Controller
 
         return redirect('/cinemas/'.$c->idCinema);
     }
+
+    public function edit(Cinema $cinema){
+        return view('cinemas.edit',compact('cinema'));
+    }
+
+    public function update(Request $request, Cinema $cinema){
+        $data = $request->only([
+            'nomCinema',
+            'adresseCinema',
+            'codePostale',
+        ]);
+
+        $cinema->update(array_filter($data));
+
+        return redirect('/cinemas/' . $cinema->idCinema);
+    }
+
+    public function destroy(Cinema $cinema){
+        $cinema->delete();
+        return redirect('/cinemas');
+    }
 }

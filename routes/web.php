@@ -18,6 +18,9 @@ Route::get('/personnes', [PersonneController::class, 'index']);
 Route::get('/personnes/create', [PersonneController::class, 'create']);
 Route::post('/personnes', [PersonneController::class, 'store']);
 Route::get('/personnes/{personne}', [PersonneController::class, 'show']);
+Route::get('/personnes/edit/{personne}', [PersonneController::class, 'edit']);
+Route::patch('/personnes/{personne}', [PersonneController::class, 'update']);
+Route::delete('/personnes/{personne}', [PersonneController::class, 'destroy']);
 
 
 
@@ -25,6 +28,9 @@ Route::get('/genres', [GenreController::class, 'index']);
 Route::get('/genres/create', [GenreController::class, 'create']);
 Route::post('/genres', [GenreController::class, 'store']);
 Route::get('/genres/{genre}', [GenreController::class, 'show']);
+Route::get('/genres/edit/{genre}', [GenreController::class, 'edit']);
+Route::patch('/genres/{genre}', [GenreController::class, 'update']);
+Route::delete('/genres/{genre}', [GenreController::class, 'destroy']);
 
 
 
@@ -33,6 +39,9 @@ Route::get('/cinemas', [CinemaController::class, 'index']);
 Route::get('/cinemas/create', [CinemaController::class, 'create']);
 Route::POST('/cinemas', [CinemaController::class, 'store']);
 Route::get('/cinemas/{cinema}', [CinemaController::class, 'show']);
+Route::get('/cinemas/edit/{cinema}', [CinemaController::class, 'edit']);
+Route::patch('/cinemas/{cinema}', [CinemaController::class, 'update']);
+Route::delete('/cinemas/{cinema}', [CinemaController::class, 'destroy']);
 
 
 
@@ -63,6 +72,9 @@ Route::get('/salles', [SalleController::class, 'index']);
 Route::get('/salles/create', [SalleController::class, 'create']);
 Route::post('/salles', [SalleController::class, 'store']);
 Route::get('/salles/{salle}', [SalleController::class, 'show']);
+Route::get('/salles/edit/{salle}', [SalleController::class, 'edit']);
+Route::patch('/salles/{salle}', [SalleController::class, 'update']);
+Route::delete('/salles/{salle}', [SalleController::class, 'destroy']);
 
 
 Route::get('/seances', [SeanceController::class, 'index']);

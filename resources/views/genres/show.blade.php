@@ -12,6 +12,18 @@
 <body>
 <h1>Le genre</h1>
 <p>Le genre : {{$genre->libGenre}}</p>
+
+<form action="/genres/{{$genre->idGenre }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button
+        class="bg-red-500 hover:bg-red-600 px-6 py-4 m-2 rounded-lg hover:cursor-pointer shadow-xl">
+        Supprimer
+    </button>
+</form>
+
+<a href="/genres/edit/{{$genre->idGenre}}">
+    <button>Modifier</button>
 </body>
 </html>
 

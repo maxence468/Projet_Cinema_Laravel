@@ -32,4 +32,23 @@ class TarifController extends Controller
         return redirect('/tarifs/'.$t->idTarif);
 
     }
+
+    public function edit(Tarif $tarif)
+    {
+    return view('tarifs.edit',compact('tarif'));
+    }
+
+    public function update(Request $request, Tarif $tarif){
+        $data = request()->only([
+                'libTarif','prixTarif'
+            ]
+        );
+        $tarif->update(array_filter($data));
+        return redirect('/tarifs/'.$tarif->idTarif);
+    }
+
+    public function destroy(Tarif $tarif){
+        $tarif->delete();
+        return redirect('/tarifs');
+    }
 }

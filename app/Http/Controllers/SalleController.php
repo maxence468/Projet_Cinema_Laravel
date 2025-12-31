@@ -40,4 +40,27 @@ class SalleController extends Controller
         return redirect('/salles/'.$s->idSalle);
 
     }
+
+    public function edit(Salle $salle){
+        $typesSalle = TypeSalle::all();
+        $cinemas = Cinema::all();
+        return view('salles.edit', compact('salle','typesSalle','cinemas'));
+    }
+
+    public function update(Request $request, Salle $salle){
+        $data = $request->only([
+            'capaciteSal',
+            'idTypeSalle',
+            'idCinema',
+        ]);
+
+        $salle->update(array_filter($data));
+
+        return redirect('/salles/' . $salle->idSalle);
+    }
+
+    public function destroy(Salle $salle){
+        $salle->delete();
+        return redirect('/salles');
+    }
 }

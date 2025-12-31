@@ -14,6 +14,7 @@ use App\Http\Controllers\PersonneController;
 <h1>La personne </h1>
 <img src="{{asset('storage/'.$personne->photoPers)}}" alt="{{$personne->photoPers}}">
 <p>Nom : {{$personne->nomPers}} <br> Nom : {{$personne->prePers}}</p>
+<p>Bibliographie <br> {{$personne->biblio}}</p>
 <h3>Film joué</h3>
 @foreach($personne->films as $p)
     <p>Nom film : {{$p->titreFilm}}</p>
@@ -23,6 +24,18 @@ use App\Http\Controllers\PersonneController;
 @foreach($personne->realiser as $a)
     <p>Nom film : {{$a->titreFilm}}</p>
 @endforeach
+
+<form action="/personnes/{{$personne->idPers }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button
+        class="bg-red-500 hover:bg-red-600 px-6 py-4 m-2 rounded-lg hover:cursor-pointer shadow-xl">
+        Supprimer
+    </button>
+</form>
+
+<a href="/personnes/edit/{{$personne->idPers}}">
+    <button>Modifier</button>
 </body>
 </html>
 

@@ -31,4 +31,23 @@ class GenreController extends Controller
 
         return redirect('/genres/'.$genre->idGenre);
     }
+
+    public function edit(Genre $genre){
+        return view('genres.edit',compact('genre'));
+    }
+
+    public function update(Request $request,Genre $genre){
+        $data = $request->only([
+            'libGenre',
+        ]);
+
+        $genre->update(array_filter($data));
+
+        return redirect('/genres/' . $genre->idGenre);
+    }
+
+    public function destroy(Genre $genre){
+        $genre->delete();
+        return redirect('/genres');
+    }
 }

@@ -34,8 +34,8 @@
         <label for="">Photo de la personne</label>
         <input name="photoPers" type="file">
         <br>
-        <label for="">Bibliographique</label>
-        <textarea name="biblio"></textarea>
+        <label for="biblio">Bibliographique</label>
+        <textarea id="biblio" name="biblio"></textarea>
         <br>
         <button>Creez</button>
     </form>
