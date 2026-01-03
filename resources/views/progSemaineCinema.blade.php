@@ -1,58 +1,70 @@
-<?php
-use Illuminate\Support\Carbon;
+@php
+    use Illuminate\Support\Carbon;
+@endphp
 
-?>
-
-@extends('header')
+@extends('layout')
 
 @section('title', 'Page programme de la semaine')
 
 @section('main')
-<div class="d-flex justify-content-center">
-    {{--Selection d'un cinema dans une liste deroulante--}}
-    <form method="GET" action="{{ route('progSemaineCinema') }}">
-        @csrf
-        <select name="cinema">
-            <option value="">Rechercher un cinéma</option>
-            @foreach ($cinemas as $cinema)
-                <option value="{{ $cinema->idCinema }}"
-                    {{ request('cinema') == $cinema->idCinema ? 'selected' : '' }}>
-                    {{ $cinema->nomCinema }}
-                </option>
-            @endforeach
-        </select>
-        <button type="submit">Rechercher</button>
-    </form>
-</div>
-{{--Quand un cinema est choisi--}}
-@if($cinemaChoisi->isNotEmpty())
-    <div class="col d-flex justify-content-around" style="margin-top: 60px">
-        {{-- on affiche 7 bouton pour chaque jours de la semaine --}}
-        @for ($i = 0; $i <7; $i++)
-            <button class="btnChoixJour">
-                <a href="{{ request()->fullUrlWithQuery(['jour' => $jour + $i ])}}">{{$joursSemaine[$i]}} {{$jour + $i}} {{$mois}}</a>
-            </button>
-        @endfor
+<main>
+    <div class="d-flex justify-content-center">
+        {{--Selection d'un cinema dans une liste deroulante--}}
+        <form class="pt-2" method="GET" action="{{ route('progSemaineCinema') }}">
+            <select name="cinema" onchange="this.form.submit()">
+                <option value="">Rechercher un cinéma</option>
+                @foreach ($cinemas as $cinema)
+                    <option value="{{ $cinema->idCinema }}"
+                        {{ request('cinema') == $cinema->idCinema ? 'selected' : '' }}>
+                        {{ $cinema->nomCinema }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
     </div>
-@endif
 
-{{--quand un jour est choisi--}}
-@if(request()->has('jour'))
-    @if($seances->isNotEmpty())
-        ??
-        @foreach($seances as $seance)
-            <hr>
-            <img src="{{asset($seance->film->posterFilm)}}" alt="{{$seance->film->posterFilm}}">
-            <p>Titre film : {{$seance->film->titreFilm}} </p>
-            <p>genre : {{$seance->film->genre->libGenre}}</p>
-            <p>durée : {{$seance->film->dureeFilm}}</p>
-            <p>numero de la salle : {{$seance->idSalle}} </p>
-            <p>heure debut seance : {{$seance->heureSeance}}</p>
-            <p>heure fin seance : {{Carbon::createFromFormat('H:i', $seance->heureSeance)->addMinutes($seance->film->dureeFilm)->format('H:i')}}</p>
-            <hr>
-        @endforeach
-    @else
-        <p class="d-flex justify-content-center">Aucun film pour ce jour</p>
+    {{--Quand un cinema est choisi--}}
+    @if($cinemaChoisi->isNotEmpty())
+        <h2 class="mt-3">Résultat pour le cinéma :
+            {{ $cinemaChoisi->first()->nomCinema }}
+        </h2>
+        <div class="col-auto d-flex justify-content-around" style="margin-top: 60px">
+            {{-- on affiche 7 bouton pour chaque jours de la semaine --}}
+            @for ($i = 0; $i <7; $i++)
+                <a class="btnChoixJour" href="{{ request()->fullUrlWithQuery(['jour' => $jours[$i] ])}}">{{$days[$i]}}</a>
+            @endfor
+        </div>
     @endif
-@endif
+
+    @if(request()->has('jour'))
+        <!-- Renvoi de l'affiche avec le titre, le genre et la durée -->
+        @if($films->isNotEmpty())
+            @foreach($films as $film)
+                <div class="row d-flex align-items-center" style="margin-top: 50px; margin-left: 20px">
+                    <div class="col-auto">
+                        <img src="{{asset('images/' .$film->posterFilm)}}" alt="{{$film->posterFilm}}" width="100" height="152">
+                    </div>
+                    <div class="col-auto">
+                        <p>{{$film->titreFilm}}</p>
+                        <p>{{$film->genre->libGenre}} ({{$film->dureeFilm}} min)</p>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 15px; margin-left:20px">
+                    @foreach($seances as $seance)
+                        @if($seance->idFilm == $film->idFilm )
+                            <!-- Renvoi de toutes les séances de la journée choisie -->
+                            <div class="col-auto me-5">
+                                <h4>{{Carbon::createFromFormat('H:i:s', $seance->heureSeance)->format('H:i')}} -> {{Carbon::createFromFormat('H:i:s', $seance->heureSeance)->addMinutes($seance->film->dureeFilm)->format('H:i')}}</h4>
+                                <h4 style="margin-top: -10px">Salle {{$seance->idSalle}}</h4>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endforeach
+        @else
+            <p class="d-flex justify-content-center mt-3">Aucun film pour ce jour</p>
+        @endif
+    @endif
+</main>
 @endsection

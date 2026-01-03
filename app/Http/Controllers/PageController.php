@@ -38,10 +38,20 @@ class PageController extends Controller{
 
         $joursSemaine = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
 
-        $premierJourSemaine = Carbon::now()->startOfWeek()->format('d');
-        $jour = (int)$premierJourSemaine;
-        $mois = Carbon::now()->translatedFormat('F');
+        $jours = [];
 
+        $startOfWeek = Carbon::now()->startOfWeek(); // lundi par défaut
+        $days = [];
+
+
+        for ($i = 0; $i < 7; $i++) {
+            $mois = $startOfWeek->copy()->addDays($i)->translatedFormat('F');
+            $moisCourt = mb_substr($mois,0,3);
+            $stringDate = $joursSemaine[$i] . " " . $startOfWeek->copy()->addDays($i)->translatedFormat('d') . " " . $moisCourt . "." ;
+            $days[] = $stringDate;
+
+            $jours[] = $startOfWeek->copy()->addDays($i)->translatedFormat('d');
+        }
 
         $seances = collect();
         $films = collect();
@@ -55,51 +65,21 @@ class PageController extends Controller{
 
             $salles = $cinemaChoisi[0]->salles()->get();
             foreach ($salles as $salle) {
-                $seances = $salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get();
+                $seances = $seances->merge($salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get());
             }
+
 
             foreach($seances as $seance){
                 $films->add($seance->film);
             }
+
             $films = $films->unique('idFilm');
         }
 
 
-        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances', 'films','mois'));
+        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jours', 'joursSemaine', 'seances', 'films','mois', 'days'));
     }
 
-
-//    public function progSemaineCinema(Request $request)
-//    {
-//        $cinemas = Cinema::all();
-//        $cinemaChoisi = collect();
-//        if ($request->has('cinema')) {
-//            $cinemaChoisi = Cinema::where('idCinema', $request->cinema)->get();
-//        }
-//
-//        $joursSemaine = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
-//
-//        $premierJourSemaine = Carbon::now()->startOfWeek()->format('d');
-//        $jour = (int)$premierJourSemaine;
-//
-//        $seances = collect();
-//        if ($request->has('jour')) {
-//            $date = new DateTime();
-//            $date->setDate(
-//                date('Y'),
-//                date('m'),
-//                $request->jour
-//            );
-//
-//            $salles = $cinemaChoisi[0]->salles()->get();
-//            foreach ($salles as $salle) {
-//                $seances = $salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get();
-//            }
-//        }
-//
-//
-//        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jour', 'joursSemaine', 'seances'));
-//    }
     public function accueil(){
         $dernierMercredi = new DateTime('last wednesday');
 

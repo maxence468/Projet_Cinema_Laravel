@@ -11,7 +11,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Film extends Model
 {
     use HasFactory;
-    protected $fillable = ['titreFilm','descFilm','posterFilm','dateSortieFilm','idGenre','dureeFilm'];
+
+    protected $fillable = [
+        'titreFilm',
+        'descFilm',
+        'posterFilm',
+        'dateSortieFilm',
+        'idGenre',
+        'dureeFilm'];
     protected $primaryKey = 'idFilm';
     protected $table = 'films';
 

@@ -1,8 +1,8 @@
-<?php
-use App\Http\Controllers\SeanceController;
-?>
+@php
+    use App\Http\Controllers\SeanceController;
+@endphp
 
-@extends('header')
+@extends('layout')
 
 @section('title', 'Page d\'accueil')
 

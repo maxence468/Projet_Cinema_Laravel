@@ -16,16 +16,17 @@ class Personne extends Model
     public function films(): BelongsToMany{
         return $this->belongsToMany(Film::class, 'caste', 'pers_id', 'film_id'
         )->withPivot('nomJoue','preJoue','principale','secondaire');
-
     }
 
     public function realiser(): BelongsToMany
     {
         return $this->belongsToMany(Film::class, 'realise', 'pers_id', 'film_id');
-
     }
-        public function films_scenariser(): BelongsToMany{
-            return $this->belongsToMany(Film::class, 'film_scenariste', 'pers_id', 'film_id');
+    public function films_scenariser(): BelongsToMany{
+        return $this->belongsToMany(Film::class, 'film_scenariste', 'pers_id', 'film_id');
+    }
 
-        }
+    public function film_realisateur(): BelongsToMany{
+        return $this->belongsToMany(Film::class, 'film_realisateur', 'pers_id', 'film_id');
+    }
 }

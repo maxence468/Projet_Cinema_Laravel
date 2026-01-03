@@ -13,6 +13,7 @@ use App\Http\Controllers\FilmController;
 <body>
 <h1>Les films</h1>
 @foreach($films as $f)
+    <h2>Film numéro : {{$f->idFilm}}</h2>
     <h2>Nom film {{$f->titreFilm}}</h2> <br> Description du film <br> {{$f->descFilm}} <br> Sortie en  {{$f->dateSortieFilm}}
         <br> Duree :  {{$f->dureeFilm}} minutes <br> {{$f->posterFilm}}</p>
 
@@ -38,13 +39,16 @@ use App\Http\Controllers\FilmController;
     @foreach($f->scenariste as $p)
         <p>Nom {{$p->nomPers}}</p>
     @endforeach
-
-    <h3>Seance diffusé</h3>
-    @foreach($f->seances as $seance)
-        <p>Seance {{$seance->idSeance}}</p>
-    @endforeach
+    <br>
+    <a href="/films/{{$f->idFilm}}">
+        <button>Voir le film</button>
+    </a>
 
 @endforeach
+
+<a href="/films/create">
+    <button>Creez un film</button>
+</a>
 </body>
 </html>
 
