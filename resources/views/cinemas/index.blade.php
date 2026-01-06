@@ -14,8 +14,7 @@ use App\Http\Controllers\TypeSalleController;
 <h1>Les cinemas</h1>
 @foreach($cinemas as $c)
     <p>Nom cinema {{$c->nomCinema}}</p>
-    <p>Nom cinema {{$c->adresseCinema}}</p>
-    <p>Nom cinema {{$c->codePostale}}</p>
+    <p>Adresse cinema {{$c->adresseCinema}} <br> Code psotale du cinema {{$c->codePostale}}</p>
 @endforeach
 </body>
 </html>

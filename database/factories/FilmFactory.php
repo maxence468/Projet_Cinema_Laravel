@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Genre;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,8 +23,8 @@ class FilmFactory extends Factory
             'descFilm' => fake()->paragraph(),
             'dateSortieFilm' => fake()->date(),
             'dureeFilm' => fake()->numberBetween(60, 180),
-            'posterFilm' => fake()->imageUrl(400, 600, 'movies', true),
-            'idGenre' => fake()->numberBetween(1, 20),
+            'posterFilm' => fake()->imageUrl(412, 626, 'movies', true),
+            'idGenre' => Genre::factory(),
         ];
     }
 }

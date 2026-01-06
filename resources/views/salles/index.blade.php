@@ -1,3 +1,4 @@
+
 <?php
   use App\Http\Controllers\CinemaController;
   use App\Http\Controllers\SalleController;
@@ -16,10 +17,17 @@
 @foreach($salles as $salle)
     <h2>Salle {{$salle->idSalle}}</h2>
     <p>{{$salle->cinema->nomCinema}} {{$salle->cinema->adresseCinema}} {{$salle->cinema->codePostale}}</p>
+    <a href="/salles/{{$salle->idSalle}}">
+        <button>Voir</button>
+    </a>
     @foreach($salle->tarifs as $g)
        <p>Salle {{$salle->idSalle}}, Type tarif : {{$g->libTarif}} ({{$g->prixTarif}} euros )</p>
     @endforeach
 
 @endforeach
+<br>
+<a href="/salles/create">
+    <button>Creez une salle</button>
+</a>
 </body>
 </html>

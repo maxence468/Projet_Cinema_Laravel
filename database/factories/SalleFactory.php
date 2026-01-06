@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\TypeSalle;
+use App\Models\Cinema;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +21,8 @@ class SalleFactory extends Factory
         return [
             'capaciteSal' => fake()->numberBetween(50, 300),
             'idTypeSalle' => fake()->numberBetween(1, 20),
-            'idCinema' => fake()->numberBetween(1,20)
+            'idCinema' => Cinema::factory(),
+            'idTypeSalle' => TypeSalle::factory(),
         ];
     }
 }

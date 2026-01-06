@@ -15,5 +15,18 @@ use App\Http\Controllers\CinemaController;
 <p>Nom cinema {{$cinema->nomCinema}}</p>
 <p>Nom cinema {{$cinema->adresseCinema}}</p>
 <p>Nom cinema {{$cinema->codePostale}}</p>
+
+
+<form action="/cinemas/{{$cinema->idCinema }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button
+        class="bg-red-500 hover:bg-red-600 px-6 py-4 m-2 rounded-lg hover:cursor-pointer shadow-xl">
+        Supprimer
+    </button>
+</form>
+
+<a href="/cinemas/edit/{{$cinema->idCinema}}">
+    <button>Modifier</button>
 </body>
 </html>

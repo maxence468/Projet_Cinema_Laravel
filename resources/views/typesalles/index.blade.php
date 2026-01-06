@@ -14,6 +14,14 @@ use App\Http\Controllers\TypeSalleController;
 <h1>Les types de salles</h1>
 @foreach($typesalles as $t)
     <p>{{$t->libTypeSalle}}</p>
+    <p>Prix {{$t->prixTypeSalle}}</p>
+    <a href="/typesalles/{{$t->idTypeSalle}}">
+        <button>Voir</button>
+    </a>
 @endforeach
+<br>
+<a href="/typesalles/create">
+    <button>Creez un tarif</button>
+</a>
 </body>
 </html>

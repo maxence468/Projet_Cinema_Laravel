@@ -14,6 +14,7 @@ use App\Http\Controllers\PersonneController;
 <h1>Personnes</h1>
 
 @foreach($personnes as $pers)
+    <p>Numero {{$pers->idPers}}</p>
     <p>Nom personne : {{$pers->nomPers}}</p>
     <p>Prenom personne : {{$pers->prePers}}</p>
 @endforeach
