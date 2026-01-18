@@ -13,7 +13,7 @@
     <!-- Formulaire de recherche -->
     <form class="pt-2" method="GET" action="{{ route('recherchefilm') }}">
         <div class="d-flex justify-content-center">
-            <input class="inputRechFilm"
+            <input class="rech"
                    type="text" name="search"
                    placeholder="Rechercher un film"
                    value="{{ $search ?? '' }}">

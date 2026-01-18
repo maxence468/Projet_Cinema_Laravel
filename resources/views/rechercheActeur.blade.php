@@ -8,7 +8,7 @@
     <!-- Formulaire de recherche -->
     <form class="pt-2" method="GET" action="{{ route('rechercheActeur') }}">
         <div class="d-flex justify-content-center">
-            <input class="inputRechFilm"
+            <input class="rech"
                    type="text"
                    name="searchActeur"
                    placeholder="Rechercher un acteur"
@@ -23,7 +23,7 @@
     <div id="carouselExample" class="carousel slide position-relative" data-bs-ride="carousel">
         <div class="carousel-inner">
             <h2>Résultat pour l'acteur : {{ $search ?? '' }}</h2>
-            @foreach($personnes as $p)
+            @forelse($personnes as $p)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row mt-3">
                     <!-- Actor photo -->
@@ -45,7 +45,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <p class="d-flex justify-content-center">Aucun acteur trouvé</p>
+            @endforelse
         </div>
 
         <!-- Carousel controls -->

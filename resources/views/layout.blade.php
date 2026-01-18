@@ -74,24 +74,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<script>
-    const btn = document.querySelector(".hamburger");
-    const nav = document.querySelector(".hamburgerMenu");
-
-    // Toggle menu
-    btn.addEventListener("click", () => {
-        nav.classList.toggle("active");
-    });
-
-    // Hide menu on click inside menu
-    nav.addEventListener("click", () => {
-        nav.classList.remove("active");
-    });
-
-    // Hide menu on Escape key
-    document.body.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            nav.classList.remove("active");
-        }
-    });
-</script>
+@vite('resources/js/app.js')

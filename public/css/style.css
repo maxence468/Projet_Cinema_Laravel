@@ -77,7 +77,7 @@ ul {
     .nav-links, .nav-buttons {
         flex-direction: column;
         width: 100%;
-        display: none; /* initially hidden */
+        display: none;
     }
 
     .nav-links.active, .nav-buttons.active {
@@ -86,7 +86,7 @@ ul {
 
     .hamburger {
         display: block;
-        position: absolute; /* 🔥 */
+        position: absolute;
         top: 33px;
         right: 20px;
         font-size: 28px;
@@ -144,12 +144,19 @@ main {
     flex: 1;
 }
 
-.inputRechFilm {
+.rech {
     width: 329px;
     height: 53px;
 }
 
-.inputRechFilm::placeholder {
+.rech::placeholder {
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.movie::placeholder {
     color: #1c1c1c;
     font-size: 32px;
     display: flex;
@@ -163,6 +170,10 @@ main {
 select {
     width: 320px;
     height: 53px;
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
 }
 
 #logoDevOreo {

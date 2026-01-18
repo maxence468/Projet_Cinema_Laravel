@@ -1,5 +1,6 @@
 import './bootstrap';
-import Alpine from 'alpine.js';
+import { hamburgerMenu } from './hamburgerMenu.js';
+import { carousel3Items } from './carousel3Items.js';
 
-window.Alpine = Alpine;
-Alpine.start();
+hamburgerMenu();
+carousel3Items();
