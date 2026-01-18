@@ -2,6 +2,7 @@
 
 use App\Models\Film;
 use App\Models\Genre;
+use App\Models\Personne;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Pest\Laravel\get;
@@ -91,73 +92,76 @@ test('Test delete film', function () {
     ]);
 });
 
-test('Test create réalisateur au film', function() {
+test('Test create réalisateur dans un film', function() {
     $film = Film::factory()->create();
     $personne = Personne::factory()->create();
 
-    $film->realisateurs()->attach($personne->idPersonne);
+    $film->realisateurs()->attach($personne->idPers);
 
-    assertDatabaseHas('film_realisateur', [
+    assertDatabaseHas('realise', [
         'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne,
+        'idPers' => $personne->idPers,
     ]);
 });
 
-test('Test create scénariste au film', function() {
+test('Test create scénariste dans un film', function() {
     $film = Film::factory()->create();
     $personne = Personne::factory()->create();
 
-    $film->scenaristes()->attach($personne->idPersonne);
+    $film->scenariste()->attach($personne->idPers);
 
-    assertDatabaseHas('film_scenariste', [
+    assertDatabaseHas('scenarise', [
         'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne
+        'idPers' => $personne->idPers
     ]);
 });
 
-test('Test create caste (acteur) au film', function() {
+test('Test create caste (acteur) dans un film', function() {
     $film = Film::factory()->create();
     $personne = Personne::factory()->create();
 
-    $film->acteurs()->attach($personne->idPersonne, [
-        'nomJoue' => 'James Bond',
-        'preJoue' => '007',
-        'principale' => true
+    $film->casting()->attach($personne->idPers, [
+        'nomJoue' => 'Bond',
+        'preJoue' => 'James',
+        'principale' => true,
+        'secondaire'=> false
     ]);
 
     assertDatabaseHas('caste', [
         'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne,
-        'nomJoue' => 'James Bond',
-        'principale' => 1
+        'idPers' => $personne->idPers,
+        'nomJoue' => 'Bond',
+        'preJoue' => 'James',
+        'principale' => true,
+        'secondaire'=> false,
     ]);
 });
 
-test('Test update caste (acteur)', function() {
+test('Test update caste (acteur) dans un film', function() {
     $film = Film::factory()->create();
     $personne = Personne::factory()->create();
 
-    $film->acteurs()->attach($personne->idPersonne, [
-        'nomJoue' => 'Soldat Inconnu',
-        'principale' => false
+    $film->casting()->attach($personne->idPers, [
+        'nomJoue' => 'Bond',
+        'preJoue' => 'James',
+        'principale' => true,
+        'secondaire'=> false,
     ]);
 
-    $film->acteurs()->updateExistingPivot($personne->idPersonne, [
-        'nomJoue' => 'Héros Principal',
-        'principale' => true
+    $film->casting()->updateExistingPivot($personne->idPers, [
+        'nomJoue' => 'Test update',
+        'preJoue' => 'Test update',
+        'principale' => false,
+        'secondaire'=> true,
     ]);
 
     assertDatabaseHas('caste', [
         'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne,
-        'nomJoue' => 'Héros Principal',
-        'principale' => 1
-    ]);
-
-    assertDatabaseMissing('caste', [
-        'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne,
-        'nomJoue' => 'Soldat Inconnu'
+        'idPers' => $personne->idPers,
+        'nomJoue' => 'Test update',
+        'preJoue' => 'Test update',
+        'principale' => false,
+        'secondaire'=> true,
     ]);
 });
 
@@ -165,13 +169,13 @@ test('Test detach réalisateur d\'un film', function() {
     $film = Film::factory()->create();
     $personne = Personne::factory()->create();
 
-    $film->realisateurs()->attach($personne->idPersonne);
+    $film->realisateurs()->attach($personne->idPers);
 
-    $film->realisateurs()->detach($personne->idPersonne);
+    $film->realisateurs()->detach($personne->idPers);
 
-    assertDatabaseMissing('film_realisateur', [
+    assertDatabaseMissing('realise', [
         'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne
+        'idPers' => $personne->idPers
     ]);
 });
 
@@ -179,12 +183,12 @@ test('Test detach scénariste d\'un film', function() {
     $film = Film::factory()->create();
     $personne = Personne::factory()->create();
 
-    $film->scenaristes()->attach($personne->idPersonne);
-    $film->scenaristes()->detach($personne->idPersonne);
+    $film->scenariste()->attach($personne->idPers);
+    $film->scenariste()->detach($personne->idPers);
 
-    assertDatabaseMissing('film_scenariste', [
+    assertDatabaseMissing('scenarise', [
         'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne
+        'idPers' => $personne->idPers
     ]);
 });
 
@@ -192,12 +196,21 @@ test('Test detach caste (acteur) d\'un film', function() {
     $film = Film::factory()->create();
     $personne = Personne::factory()->create();
 
-    $film->acteurs()->attach($personne->idPersonne, ['nomJoue' => 'Test', 'principale' => true]);
+    $film->casting()->attach($personne->idPers, [
+        'nomJoue' => 'Test',
+        'preJoue' => 'Test',
+        'principale' => true,
+        'secondaire' => false
+    ]);
 
-    $film->acteurs()->detach($personne->idPersonne);
+    $film->casting()->detach($personne->idPers);
 
     assertDatabaseMissing('caste', [
         'idFilm' => $film->idFilm,
-        'idPersonne' => $personne->idPersonne
+        'idPers' => $personne->idPers,
+        'nomJoue' => 'Test',
+        'preJoue' => 'Test',
+        'principale' => true,
+        'secondaire' => false
     ]);
 });

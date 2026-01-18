@@ -14,19 +14,19 @@ class Personne extends Model
     protected $table = 'personnes';
     protected $primaryKey = 'idPers';
     public function films(): BelongsToMany{
-        return $this->belongsToMany(Film::class, 'caste', 'pers_id', 'film_id'
+        return $this->belongsToMany(Film::class, 'caste', 'idPers', 'idFilm'
         )->withPivot('nomJoue','preJoue','principale','secondaire');
     }
 
     public function realiser(): BelongsToMany
     {
-        return $this->belongsToMany(Film::class, 'realise', 'pers_id', 'film_id');
+        return $this->belongsToMany(Film::class, 'realise', 'idPers', 'idFilm');
     }
     public function films_scenariser(): BelongsToMany{
-        return $this->belongsToMany(Film::class, 'film_scenariste', 'pers_id', 'film_id');
+        return $this->belongsToMany(Film::class, 'scenarise', 'idPers', 'idFilm');
     }
 
     public function film_realisateur(): BelongsToMany{
-        return $this->belongsToMany(Film::class, 'film_realisateur', 'pers_id', 'film_id');
+        return $this->belongsToMany(Film::class, 'realise', 'idPers', 'idFilm');
     }
 }
