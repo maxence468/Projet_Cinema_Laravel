@@ -91,3 +91,7 @@ Route::get('/progSemaineCinema', [PageController::class, 'progSemaineCinema'])->
 Route::get('/rechercheFilm', [PageController::class, 'chercheFilm'])->name('recherchefilm');
 
 Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name('rechercheActeur');
+
+Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
+
+Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');

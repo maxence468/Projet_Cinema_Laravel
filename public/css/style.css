@@ -62,6 +62,41 @@ ul {
     cursor: pointer;
 }
 
+.btn-conInc {
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 3px 4px 0px 4px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-validConInc {
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 3px 43px 0px 43px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.input label {
+    margin: 0 auto 0 auto;
+    width: 165px;
+    display: block;
+}
+
+.input input {
+    padding-block: 2px;
+    margin: 0 auto;   /* centers the input */
+    display: block;
+    width: 165px;
+}
+
 .hamburger {
     display: none;
 }

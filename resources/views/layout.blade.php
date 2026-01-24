@@ -32,8 +32,8 @@
                 </div>
 
                 <div class="nav-buttons">
-                    <a href="" class="btn-nav inscription"><span>Inscription</span></a>
-                    <a href="" class="btn-nav connexion"><span>Connexion</span></a>
+                    <a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a>
+                    <a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a>
                 </div>
 
                 <button class="hamburger">&#9776;</button> <!-- for mobile toggle -->
