@@ -16,6 +16,7 @@ class Cinema extends Model
     protected $primaryKey = 'idCinema';
     protected $fillable = ['nomCinema','adresseCinema','codePostale'];
 
+
     public function salles(): hasMany{
         return $this->hasMany(Salle::class, 'idCinema', 'idCinema');
     }

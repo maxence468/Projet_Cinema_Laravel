@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+use App\Http\Controllers\PageController;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,11 +22,11 @@
             <div class="logo-wrapper">
                 <img src="images/logo_CineForAll.png" alt="Logo CinéForAll">
             </div>
-            <a href="pageAccueil.php" class="nav-text accueil">Accueil</a>
-            <a href="rechFilm.php" class="nav-text film">Recherche film</a>
-            <a href="rechActeur.php" class="nav-text acteur">Recherche acteur</a>
-            <a href="rechGenre.php" class="nav-text genre">Recherche genre</a>
-            <a href="progSemaine.php" class="nav-text programme">Programme de la semaine</a>
+            <a href="" class="nav-text accueil">Accueil</a>
+            <a href="/recherche_film" class="nav-text film">Recherche film</a>
+            <a href="/rechercheActeur" class="nav-text acteur">Recherche acteur</a>
+            <a href="/rechercheGenre" class="nav-text genre">Recherche genre</a>
+            <a href="" class="nav-text programme">Programme de la semaine</a>
             <a href="" class="btn-nav inscription">
                 <span>Inscription</span>
             </a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cinema;
 use App\Models\Film;
 use App\Models\Genre;
+use App\Models\Personne;
 use App\Models\Salle;
 use App\Models\Seance;
 use DateTime;
@@ -109,4 +110,27 @@ class PageController extends Controller{
         return view('recherchefilm', compact('films', 'search'));
 
     }
+
+
+    public function rechercheGenre(){
+        $genres = Genre::all();
+        return view('rechGenre',compact('genres'));
+    }
+
+
+    public function rechercheActeur(Request $request){
+        $request->validate([
+            'searchActeur' => 'nullable|string|max:255'
+        ]);
+
+        $search = $request->input('searchActeur');
+
+        $personnes = Personne::when($search, function ($query) use ($search) {
+            $query->where('nomPers', 'LIKE', '%' . $search . '%');
+        })->get();
+
+        return view('rechActeur', compact('personnes', 'search'));
+    }
+
+
 }
