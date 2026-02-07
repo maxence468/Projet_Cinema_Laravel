@@ -29,6 +29,13 @@
                     <a href="/rechercheActeur" class="nav-text">Recherche acteur</a>
                     <a href="/rechercheGenre" class="nav-text">Recherche genre</a>
                     <a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a>
+                    <!-- Si connecté en tant qu'utilisateur -->
+                    <a href="" class="nav-text">Réservation</a>
+                    <a href="/parametres" class="nav-text">Paramètres</a>
+                    <!-- -->
+                    <!-- Si connecté en tant qu'administrateur -->
+                    <a href="/gestionCatalogue" class="nav-text">Gestion catalogue</a>
+                    <!-- -->
                 </div>
 
                 <div class="nav-buttons">
@@ -44,8 +51,15 @@
                         <li><a href="/rechercheActeur" class="nav-text">Recherche acteur</a></li>
                         <li><a href="/rechercheGenre" class="nav-text">Recherche genre</a></li>
                         <li><a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a></li>
-                        <li><a href="" class="btn-nav inscription"><span>Inscription</span></a></li>
-                        <li><a href="" class="btn-nav connexion"><span>Connexion</span></a></li>
+                        <!-- Si connecté en tant qu'utilisateur -->
+                        <li><a href="" class="nav-text">Réservation</a></li>
+                        <li><a href="/parametres" class="nav-text">Paramètres</a></li>
+                        <!-- -->
+                        <!-- Si connecté en tant qu'administrateur -->
+                        <li><a href="/gestionCatalogue" class="nav-text">Gestion catalogue</a></li>
+                        <!-- -->
+                        <li><a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a></li>
+                        <li><a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a></li>
                     </ul>
                 </nav>
             </div>

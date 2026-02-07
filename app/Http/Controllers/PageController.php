@@ -133,4 +133,12 @@ class PageController extends Controller{
     public function connexion() {
         return view('connexion');
     }
+
+    public function parametres() {
+        return view('parametresUtilisateur');
+    }
+
+    public function gestionCatalogue() {
+        return view('gestionFilm');
+    }
 }

@@ -82,6 +82,30 @@ ul {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: white;
+}
+
+.style-equal {
+    width: 165px;      /* Override rules btn-validConInc */
+    padding-left: 0;   /* Override rules btn-validConInc */
+    padding-right: 0;  /* Override rules btn-validConInc */
+    color: white;
+}
+
+.btn-ajoutModifSuppr {
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 3px 20px 0px 20px;
+    margin: 0px 30px 0px 30px;
+    width: 181px;
+    height: 52px;
+    font-size: 32px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
 }
 
 .input label {
@@ -99,42 +123,6 @@ ul {
 
 .hamburger {
     display: none;
-}
-
-/* Responsive: mobile */
-@media (max-width: 768px) {
-    .nav-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-        height: auto;
-    }
-
-    .nav-links, .nav-buttons {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-    }
-
-    .nav-links.active, .nav-buttons.active {
-        display: flex;
-    }
-
-    .hamburger {
-        display: block;
-        position: absolute;
-        top: 33px;
-        right: 20px;
-        font-size: 28px;
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-    }
-
-    .poster {
-        max-width: 33%;
-        height: auto;
-    }
 }
 
 .hamburgerMenu.active {
@@ -339,4 +327,154 @@ body {
 
 section {
     flex: 1;
+}
+
+.inputCatalogue {
+    width: 345px !important;
+    height: 53px !important;
+}
+
+.inputCatalogue::placeholder {
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.textareaCatalogue {
+    width: 345px !important;
+    height: 106px !important;
+}
+
+.textareaCatalogue::placeholder {
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar {
+    width: 130px;
+    flex-shrink: 0; /* permet de ne pas revenir à la ligne */
+}
+
+.choixCatal {
+    width: 345px !important;
+    height: 53px !important;
+}
+
+.espaceSideBar {
+    margin-left: 110px;
+}
+
+/* Responsive: mobile */
+@media (max-width: 768px) {
+    .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .nav-links, .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+    }
+
+    .nav-links.active, .nav-buttons.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 33px;
+        right: 20px;
+        font-size: 28px;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    .poster {
+        max-width: 33%;
+        height: auto;
+    }
+
+}
+
+.sidebar {
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.espaceSideBar {
+    margin-left: 110px;
+}
+
+.inputCatalogue, .choixCatal {
+    width: 345px !important;
+    height: 53px !important;
+}
+
+.textareaCatalogue {
+    width: 345px !important;
+    height: 106px !important;
+}
+
+.btn-ajoutModifSuppr {
+    width: 181px;
+    height: 52px;
+    font-size: 32px;
+
+}
+.sidebar {
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.espaceSideBar {
+    margin-left: 110px;
+}
+
+
+.inputCatalogue, .choixCatal {
+    width: 100%;
+    max-width: 345px;
+    height: 53px !important;
+}
+
+.textareaCatalogue {
+    width: 100%;
+    max-width: 345px;
+    height: 106px !important;
+}
+
+
+@media (max-width: 991px) {
+    .inputCatalogue, .textareaCatalogue, .choixCatal {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 40px;
+    }
+    .btn-ajoutModifSuppr {
+        width: 120px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .inputCatalogue, .choixCatal {
+        width: 200px !important;
+        height: 53px !important;
+    }
+
+    .textareaCatalogue {
+        width: 200px !important;
+        height: 106px !important;
+    }
 }

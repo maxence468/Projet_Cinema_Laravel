@@ -95,3 +95,9 @@ Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
 Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
+
+Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
+
+Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
+
+Route::get('/gestionCatalogue', [PageController::class, 'gestionCatalogue'])->name('gestionCatalogue');
