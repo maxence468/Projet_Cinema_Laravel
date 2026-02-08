@@ -9,13 +9,22 @@ use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TypeSalleController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 Route::get('/personnes', [PersonneController::class, 'index'])->name('personnes.index');
 Route::get('/personnes/create', [PersonneController::class, 'create'])->name('personnes.create');
@@ -96,3 +105,4 @@ Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
 Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
+require __DIR__.'/auth.php';

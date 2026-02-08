@@ -32,8 +32,15 @@
                 </div>
 
                 <div class="nav-buttons">
+                    @auth
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <input type="submit" value="Déconnexion" class="btn-nav deco">
+                        </form>
+                    @else
                     <a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a>
                     <a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a>
+                    @endauth
                 </div>
 
                 <button class="hamburger">&#9776;</button> <!-- for mobile toggle -->
