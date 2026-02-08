@@ -10,5 +10,5 @@ class TypeSalle extends Model
     use HasFactory;
     protected $primaryKey = 'idTypeSalle';
     protected $table = 'typesalles';
-    protected $fillable = ['libTypeSalle'];
+    protected $fillable = ['libTypeSalle', 'prixTypeSalle'];
 }

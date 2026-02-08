@@ -5,26 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Cinema;
 use App\Models\Film;
 use App\Models\Genre;
-use App\Models\Personne;
 use App\Models\Salle;
 use App\Models\Seance;
+use App\Models\Personne;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class PageController extends Controller{
-
-    public function genre(Request $request){
+    public function genre(Request $request)
+    {
         $genres = Genre::all();
         $films = collect();
         $rechercheFaite = false;
 
-        if ($request->has('genre')) {
-            $films = Film::where('idGenre', $request->genre)->get();
+        if ($request->filled('movie')) {
+            $films = Film::where('idGenre', $request->movie)->get();
             $rechercheFaite = true;
         }
 
-        return view('rechGenre', compact('genres', 'films', 'rechercheFaite'));
+        return view('rechercheGenre', compact('genres', 'films', 'rechercheFaite'));
     }
 
     public function progSemaineCinema(Request $request)
@@ -36,7 +36,7 @@ class PageController extends Controller{
             $cinemaChoisi = Cinema::where('idCinema', $request->cinema)->get();
         }
 
-        $joursSemaine = ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'];
+        $joursSemaine = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
 
         $jours = [];
 
@@ -62,7 +62,7 @@ class PageController extends Controller{
                 date('m'),
                 $request->jour
             );
-            
+
             $salles = $cinemaChoisi[0]->salles()->get();
             foreach ($salles as $salle) {
                 $seances = $seances->merge($salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get());
@@ -77,8 +77,9 @@ class PageController extends Controller{
         }
 
 
-        return view('progSemaine', compact('cinemas', 'cinemaChoisi', 'jours', 'joursSemaine', 'seances', 'films','mois', 'days'));
+        return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jours', 'joursSemaine', 'seances', 'films','mois', 'days'));
     }
+
     public function accueil(){
         $dernierMercredi = new DateTime('last wednesday');
 
@@ -107,16 +108,9 @@ class PageController extends Controller{
             $query->where('titreFilm', 'LIKE', '%' . $search . '%');
         })->get();
 
-        return view('recherchefilm', compact('films', 'search'));
+        return view('rechercheFilm', compact('films', 'search'));
 
     }
-
-
-    public function rechercheGenre(){
-        $genres = Genre::all();
-        return view('rechGenre',compact('genres'));
-    }
-
 
     public function rechercheActeur(Request $request){
         $request->validate([
@@ -129,8 +123,14 @@ class PageController extends Controller{
             $query->where('nomPers', 'LIKE', '%' . $search . '%');
         })->get();
 
-        return view('rechActeur', compact('personnes', 'search'));
+        return view('rechercheActeur', compact('personnes', 'search'));
     }
 
+    public function inscription() {
+        return view('inscription');
+    }
 
+    public function connexion() {
+        return view('connexion');
+    }
 }

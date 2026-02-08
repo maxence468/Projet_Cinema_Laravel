@@ -11,7 +11,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Film extends Model
 {
     use HasFactory;
-    protected $fillable = ['titreFilm','descFilm','posterFilm','dateSortieFilm','idGenre','dureeFilm'];
+
+    protected $fillable = [
+        'titreFilm',
+        'descFilm',
+        'posterFilm',
+        'dateSortieFilm',
+        'idGenre',
+        'dureeFilm'
+    ];
     protected $primaryKey = 'idFilm';
     protected $table = 'films';
 
@@ -20,19 +28,19 @@ class Film extends Model
     }
 
     public function casting(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'caste', 'film_id', 'pers_id'
+        return $this->belongsToMany(Personne::class, 'caste', 'idFilm', 'idPers'
         )->withPivot('nomJoue','preJoue','principale','secondaire');
 
     }
     public function realisateurs(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'realise', 'film_id', 'pers_id');
+        return $this->belongsToMany(Personne::class, 'realise', 'idFilm', 'idPers');
     }
 
     public function scenariste(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'scenarise', 'film_id', 'pers_id');
+        return $this->belongsToMany(Personne::class, 'scenarise', 'idFilm', 'idPers');
     }
 
     public function seances(): HasMany{
-        return $this->hasMany(Seance::class, 'idFilm', 'idFilm');
+        return $this->hasMany(Seance::class, 'idFilm', 'idSeance');
     }
 }

@@ -11,7 +11,20 @@ use App\Http\Controllers\TypeSalleController;
     <title>Un type de salle</title>
 </head>
 <body>
-<h1>Type de salle</h1>
+<h1>Type de salle numéro {{$typesalle->idTypeSalle }} </h1>
 <p>{{$typesalle->libTypeSalle}}</p>
+<p>{{$typesalle->prixTypeSalle}}</p>
+
+<form action="/typesalles/{{$typesalle->idTypeSalle }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button
+        class="bg-red-500 hover:bg-red-600 px-6 py-4 m-2 rounded-lg hover:cursor-pointer shadow-xl">
+        Supprimer
+    </button>
+</form>
+
+<a href="/typesalles/edit/{{$typesalle->idTypeSalle}}">
+    <button>Modifier</button>
 </body>
 </html>

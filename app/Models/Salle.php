@@ -12,6 +12,7 @@ class Salle extends Model
 {
     use HasFactory;
 
+
     public function tarifs() : BelongsToMany{
         return $this->belongsToMany(Tarif::class, 'salle_tarif', 'idSalle', 'idTarif');
     }
@@ -22,7 +23,7 @@ class Salle extends Model
     public function cinema(): belongsTo{
         return $this->belongsTo(Cinema::class, 'idCinema','idCinema');
     }
-    
+
     public function seances(): HasMany{
         return $this->HasMany(Seance::class, 'idSalle', 'idSalle');
     }

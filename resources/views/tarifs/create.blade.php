@@ -1,0 +1,27 @@
+<?php
+?>
+    <!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Crez un tarif</h1>
+<div>
+    <form action="/tarifs" method="post">
+        @csrf
+        <label for="">Libellé du tarif</label>
+        <input name="libTarif" type="text">
+        <br>
+        <label for="">Prix du tarif</label>
+        <input name="prixTarif" type="number">
+        <br>
+        <button>Creez le tarif</button>
+    </form>
+</div>
+</body>
+</html>
