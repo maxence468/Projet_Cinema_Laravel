@@ -15,11 +15,14 @@ use App\Http\Controllers\SeanceController;
 @foreach($seances as $s)
 
     <p>ID Seance : {{$s->idSeance}} , heure : {{$s->heureSeance}}, date : {{$s->dateSeance}}, duree {{$s->dureeSeance}} minutes
-        <br> Film : {{$s->film->titreFilm}}</p>
     <p>Salle : {{$s->salle->idSalle}}</p>
-    <p>Cinema : {{$s->salle->cinema->nomCinema}}</p>
-
+    <a href="/seances/{{$s->idSeance}}">
+        <button>Voir</button>
+    </a>
 @endforeach
+<a href="/seances/create">
+    <button>Crez une seance</button>
+</a>
 <p></p>
 <p></p>
 </body>

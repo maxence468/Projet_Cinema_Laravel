@@ -12,7 +12,13 @@
 <body>
 <h1>Les tarifs</h1>
 @foreach($tarifs as $t)
+    <p>Tarif {{$t->idTarif}}</p>
     <p>{{$t->libTarif}} , {{$t->prixTarif}} euros</p>
+    <a href="/tarifs/{{$t->idTarif}}">
+
+        <button>Voir</button>
+    </a>
+
 @endforeach
 </body>
 </html>
