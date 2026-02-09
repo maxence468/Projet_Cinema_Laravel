@@ -29,6 +29,9 @@
                     <a href="/rechercheActeur" class="nav-text">Recherche acteur</a>
                     <a href="/rechercheGenre" class="nav-text">Recherche genre</a>
                     <a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a>
+                    @auth
+                    <a href="/parametreUtilisateur/{{Auth::id()}}/edit" class="nav-text">Paramètre</a>
+                    @endauth
                 </div>
 
                 <div class="nav-buttons">
@@ -51,6 +54,7 @@
                         <li><a href="/rechercheActeur" class="nav-text">Recherche acteur</a></li>
                         <li><a href="/rechercheGenre" class="nav-text">Recherche genre</a></li>
                         <li><a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a></li>
+                        <li><a href="/parametre" class="nav-text">Paramètre</a></li>
                         <li><a href="" class="btn-nav inscription"><span>Inscription</span></a></li>
                         <li><a href="" class="btn-nav connexion"><span>Connexion</span></a></li>
                     </ul>

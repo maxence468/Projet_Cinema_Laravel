@@ -10,6 +10,7 @@ use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TypeSalleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -91,7 +92,7 @@ Route::patch('/seances/{seance}', [SeanceController::class, 'update'])->name('se
 Route::delete('/seances/{seance}', [SeanceController::class, 'destroy'])->name('seances.destroy');
 
 
-Route::get('/', [PageController::class, 'accueil']);
+Route::get('/', [PageController::class, 'accueil'])->name('accueil');
 
 
 Route::get('/rechercheGenre', [PageController::class, 'genre'])->name('rechercheGenre');
@@ -105,4 +106,12 @@ Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
 Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
+
+Route::get('/parametreUtilisateur/{id}/edit', [UserController::class, 'edit'])
+    ->middleware(['auth', 'verified'])->name('parametreUtilisateur');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('userUpdate');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestroy');
+
 require __DIR__.'/auth.php';
+
+
