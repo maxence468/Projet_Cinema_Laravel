@@ -114,4 +114,8 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestr
 
 require __DIR__.'/auth.php';
 
+Route::get('/gestionFilm', function(){
+    return view('gestionFilm');
+});
+
 
