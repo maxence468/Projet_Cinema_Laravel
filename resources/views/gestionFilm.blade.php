@@ -19,11 +19,16 @@
                 <a href="/gestionTarifSalle" class="nav-text pt-3">Gestion tarif salle</a>
             </div>
 
+<<<<<<< HEAD
             <div class="espaceSideBar flex-grow-1 pt-4">
+=======
+            <div class="espaceSideBar flex-grow-1">
+>>>>>>> origin/maxence
                 <div class="container-fluid">
 
                     <form id="myForm" method="post" action="">
                         @csrf
+<<<<<<< HEAD
                         <div class="row align-items-center mb-1">
                             <div class="col-12 col-lg-7 order-1">
                                 <h3 class="mb-3">Ajouter, modifier ou supprimer un film</h3>
@@ -116,6 +121,104 @@
                             <div class="col-12 col-lg-4">
                                 <input class="inputCatalogue" type="text" placeholder="Scénariste film" required>
                             </div>
+=======
+
+                        <div class="row align-items-center gy-2 mb-4">
+                            <div class="col-12 col-lg-8 order-1 order-lg-1">
+                                <h3 class="mb-1">Ajouter, modifier ou supprimer un film</h3>
+                            </div>
+
+                            <div class="col-12 col-lg-4 order-2 order-lg-2 ps-lg-5">
+                                <label class="h3 mb-0" for="listeFilm">Film à modifier</label>
+                            </div>
+
+                            <div class="w-100 d-none d-lg-block order-2 mb-2"></div>
+
+                            <div class="col-12 col-lg-4 order-3 order-lg-5 ps-lg-5">
+                                <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 col-md-5 col-lg-3 order-4 order-lg-3">
+                                <label class="h3 mb-0">Titre film</label>
+                            </div>
+
+                            <div class="col-12 col-md-7 col-lg-5 order-5 order-lg-4">
+                                <input class="inputCatalogue" type="text" placeholder="Titre film" required>
+                            </div>
+
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-md-5 col-lg-3">
+                                <label class="h3 mb-0">Description film</label>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-5">
+                                <textarea class="textareaCatalogue" placeholder="Description film" required></textarea>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-4"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-md-5 col-lg-3">
+                                <label class="h3 mb-0">Date de sortie film</label>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-5">
+                                <input class="inputCatalogue" type="text" placeholder="Date de sortie film" required>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-4"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-md-5 col-lg-3">
+                                <label class="h3 mb-0">Durée film</label>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-5">
+                                <input class="inputCatalogue" type="text" placeholder="Durée film" required>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-4"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-md-5 col-lg-3">
+                                <label class="h3 mb-0">Poster film</label>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-5">
+                                <input class="inputCatalogue" type="text" placeholder="Poster film" required>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-4"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-md-5 col-lg-3">
+                                <label class="h3 mb-0">Genre film</label>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-5">
+                                <input class="inputCatalogue" type="text" placeholder="Genre film" required>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-4"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-md-5 col-lg-3">
+                                <label class="h3 mb-0">Réalisateur film</label>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-5">
+                                <input class="inputCatalogue" type="text" placeholder="Réalisateur film" required>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-4"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-md-5 col-lg-3">
+                                <label class="h3 mb-0">Scénariste film</label>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-5">
+                                <input class="inputCatalogue" type="text" placeholder="Scénariste film" required>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-4"></div>
+>>>>>>> origin/maxence
                         </div>
 
                     </form>
