@@ -141,4 +141,43 @@ class PageController extends Controller{
     public function gestionCatalogue() {
         return view('gestionFilm');
     }
+
+    public function gestionFilm() {
+        return view('gestionFilm');
+    }
+
+    public function gestionGenre() {
+        return view('gestionGenre');
+    }
+    public function gestionPersonne() {
+        return view('gestionPersonne');
+    }
+
+    public function gestionCasting() {
+        return view('gestionCasting');
+    }
+
+    public function gestionCinema() {
+        return view('gestionCinema');
+    }
+
+    public function gestionSalle() {
+        return view('gestionSalle');
+    }
+
+    public function gestionSeance() {
+        return view('gestionSeance');
+    }
+
+    public function gestionTarif() {
+        return view('gestionTarif');
+    }
+
+    public function gestionTypeSalle() {
+        return view('gestionTypeSalle');
+    }
+
+    public function gestionTarifSalle() {
+        return view('gestionTarifSalle');
+    }
 }

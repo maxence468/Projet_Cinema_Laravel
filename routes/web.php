@@ -101,3 +101,23 @@ Route::get('/parametres', [PageController::class, 'parametres'])->name('parametr
 Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
 
 Route::get('/gestionCatalogue', [PageController::class, 'gestionCatalogue'])->name('gestionCatalogue');
+
+Route::get('/gestionFilm', [PageController::class, 'gestionFilm'])->name('gestionFilm');
+
+Route::get('/gestionGenre', [PageController::class, 'gestionGenre'])->name('gestionGenre');
+
+Route::get('/gestionPersonne', [PageController::class, 'gestionPersonne'])->name('gestionPersonne');
+
+Route::get('/gestionCasting', [PageController::class, 'gestionCasting'])->name('gestionCasting');
+
+Route::get('/gestionCinema', [PageController::class, 'gestionCinema'])->name('gestionCinema');
+
+Route::get('/gestionSalle', [PageController::class, 'gestionSalle'])->name('gestionSalle');
+
+Route::get('/gestionSeance', [PageController::class, 'gestionSeance'])->name('gestionSeance');
+
+Route::get('/gestionTarif', [PageController::class, 'gestionTarif'])->name('gestionTarif');
+
+Route::get('/gestionTypeSalle', [PageController::class, 'gestionTypeSalle'])->name('gestionTypeSalle');
+
+Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle');
