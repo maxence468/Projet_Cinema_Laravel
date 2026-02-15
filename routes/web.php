@@ -15,7 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 Route::get('/personnes', [PersonneController::class, 'index'])->name('personnes.index');
 Route::get('/personnes/create', [PersonneController::class, 'create'])->name('personnes.create');
@@ -82,7 +90,7 @@ Route::patch('/seances/{seance}', [SeanceController::class, 'update'])->name('se
 Route::delete('/seances/{seance}', [SeanceController::class, 'destroy'])->name('seances.destroy');
 
 
-Route::get('/', [PageController::class, 'accueil']);
+Route::get('/', [PageController::class, 'accueil'])->name('accueil');
 
 Route::get('/rechercheGenre', [PageController::class, 'genre'])->name('rechercheGenre');
 
@@ -91,12 +99,6 @@ Route::get('/progSemaineCinema', [PageController::class, 'progSemaineCinema'])->
 Route::get('/rechercheFilm', [PageController::class, 'chercheFilm'])->name('recherchefilm');
 
 Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name('rechercheActeur');
-
-Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
-
-Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
-
-Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
 
 Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
 
@@ -121,3 +123,14 @@ Route::get('/gestionTarif', [PageController::class, 'gestionTarif'])->name('gest
 Route::get('/gestionTypeSalle', [PageController::class, 'gestionTypeSalle'])->name('gestionTypeSalle');
 
 Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle');
+
+Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
+
+Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
+
+Route::get('/parametreUtilisateur/{id}/edit', [UserController::class, 'edit'])
+    ->middleware(['auth', 'verified'])->name('parametreUtilisateur');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('userUpdate');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestroy');
+
+require __DIR__.'/auth.php';

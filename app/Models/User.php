@@ -18,19 +18,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-<<<<<<< HEAD
         'name',
         'surname',
         'email',
         'password',
         'admin',
-=======
-        'nomUser',
-        'preUser',
-        'email',
-        'password',
-        'admin'
->>>>>>> origin/maxence
     ];
 
     /**
@@ -54,5 +46,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->admin === 1;
     }
 }

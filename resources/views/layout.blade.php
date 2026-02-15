@@ -29,22 +29,13 @@
                     <a href="/rechercheActeur" class="nav-text">Recherche acteur</a>
                     <a href="/rechercheGenre" class="nav-text">Recherche genre</a>
                     <a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a>
-<<<<<<< HEAD
-                    <!-- Si connecté en tant qu'utilisateur -->
-                    <a href="" class="nav-text">Réservation</a>
-                    <a href="/parametres" class="nav-text">Paramètres</a>
-                    <!-- -->
-                    <!-- Si connecté en tant qu'administrateur -->
-                    <a href="/gestionCatalogue" class="nav-text">Gestion catalogue</a>
-                    <!-- -->
-                </div>
-
-                <div class="nav-buttons">
-                    <a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a>
-                    <a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a>
-=======
                     @auth
-                    <a href="/parametreUtilisateur/{{Auth::id()}}/edit" class="nav-text">Paramètre</a>
+                        @if(Auth::user()->isAdmin())
+                            <a href="/gestionCatalogue" class="nav-text">Gestion catalogue</a>
+                        @else
+                            <a href="" class="nav-text">Réservation</a>
+                            <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
+                        @endif
                     @endauth
                 </div>
 
@@ -55,10 +46,9 @@
                             <input type="submit" value="Déconnexion" class="btn-nav deco">
                         </form>
                     @else
-                    <a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a>
-                    <a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a>
+                        <a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a>
+                        <a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a>
                     @endauth
->>>>>>> origin/maxence
                 </div>
 
                 <button class="hamburger">&#9776;</button> <!-- for mobile toggle -->
@@ -69,7 +59,7 @@
                         <li><a href="/rechercheActeur" class="nav-text">Recherche acteur</a></li>
                         <li><a href="/rechercheGenre" class="nav-text">Recherche genre</a></li>
                         <li><a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a></li>
-<<<<<<< HEAD
+
                         <!-- Si connecté en tant qu'utilisateur -->
                         <li><a href="" class="nav-text">Réservation</a></li>
                         <li><a href="/parametres" class="nav-text">Paramètres</a></li>
@@ -77,13 +67,21 @@
                         <!-- Si connecté en tant qu'administrateur -->
                         <li><a href="/gestionCatalogue" class="nav-text">Gestion catalogue</a></li>
                         <!-- -->
-                        <li><a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a></li>
-                        <li><a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a></li>
-=======
-                        <li><a href="/parametre" class="nav-text">Paramètre</a></li>
-                        <li><a href="" class="btn-nav inscription"><span>Inscription</span></a></li>
-                        <li><a href="" class="btn-nav connexion"><span>Connexion</span></a></li>
->>>>>>> origin/maxence
+
+                        @auth
+                            <li><a href="/parametreUtilisateur/{{Auth::id()}}/edit" class="nav-text">Paramètre</a></li>
+                        @endauth
+                        @auth
+                            <form method="POST" action="/logout">
+                                @csrf
+                                <li>
+                                    <input type="submit" class="btn-nav" value="Déconnexion">
+                                </li>
+                            </form>
+                        @else
+                            <li><a href="/inscription" class="btn-nav"><span>Inscription</span></a></li>
+                            <li><a href="/connexion" class="btn-nav"><span>Connexion</span></a></li>
+                        @endauth
                     </ul>
                 </nav>
             </div>

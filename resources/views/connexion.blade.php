@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-@php
-    //use App\Http\Controllers\SeanceController;
-@endphp
-
->>>>>>> origin/maxence
 @extends('layout')
 
 @section('title', 'Page de connexion')
@@ -15,35 +8,6 @@
             <a href="/inscription" class="btn-conInc inscription"><span>Inscription</span></a>
             <a href="/connexion" class="btn-conInc connexion"><span>Connexion</span></a>
         </div>
-<<<<<<< HEAD
-        <form action="/users" method="POST">
-            <div class="input d-flex flex-column align-items-start pt-4">
-                <label for="email">Email</label>
-                <input type="text" placeholder="Entrer votre email">
-            </div>
-            <div class="input d-flex flex-column align-items-start pt-3">
-                <label for="email">Mot de passe</label>
-                <input placeholder="........">
-            </div>
-            <div class="row-auto d-flex justify-content-center pt-4">
-                <button class="btn-validConInc" name="btnCon" type="submit">
-                    <a href="/" ><span>Connexion</span></a>
-                </button>
-=======
-{{--
-        <div class="input d-flex flex-column align-items-start pt-4">
-            <label for="email">Email</label>
-            <input type="text" placeholder="Entrer votre email">
-        </div>
-        <div class="input d-flex flex-column align-items-start pt-3">
-            <label for="email">Mot de passe</label>
-            <input placeholder="........">
-        </div>
-        <div class="row-auto d-flex justify-content-center pt-4">
-            <a href="inscription.blade.php" class="btn-validConInc inscription"><span>Connexion</span></a>
-        </div>
---}}
-
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -69,10 +33,10 @@
             </div>
 
             <div class="row-auto d-flex justify-content-center pt-4">
-                <x-primary-button class="btn-validConInc inscription">
-                    {{ __('Log in') }}
+                <x-primary-button class="btn-validConInc">
+                    {{ __('Connexion') }}
                 </x-primary-button>
->>>>>>> origin/maxence
+
             </div>
         </form>
     </main>
