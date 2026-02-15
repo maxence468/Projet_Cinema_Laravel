@@ -100,7 +100,7 @@ Route::get('/rechercheFilm', [PageController::class, 'chercheFilm'])->name('rech
 
 Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name('rechercheActeur');
 
-Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
+Route::get('/parametresUtilisateur', [PageController::class, 'parametresUtilisateur'])->name('parametresUtilisateur');
 
 Route::get('/gestionCatalogue', [PageController::class, 'gestionCatalogue'])->name('gestionCatalogue');
 

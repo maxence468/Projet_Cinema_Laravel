@@ -29,13 +29,12 @@
                     <a href="/rechercheActeur" class="nav-text">Recherche acteur</a>
                     <a href="/rechercheGenre" class="nav-text">Recherche genre</a>
                     <a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a>
-                    <a href="/gestionFilm" class="nav-text">Gestion catalogue</a>
                     @auth
                         @if(Auth::user()->isAdmin())
                             <a href="/gestionFilm" class="nav-text">Gestion catalogue</a>
                         @else
                             <a href="" class="nav-text">Réservation</a>
-                            <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
+                            <a href="/parametresUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                         @endif
                     @endauth
                 </div>
