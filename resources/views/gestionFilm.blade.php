@@ -50,9 +50,11 @@
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
-                                        <option value=""></option>
-                                    </select>
+                                    <form method="GET" action="{{ route('gestionFilm') }}">
+                                        <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                            <option value=""></option>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
                         </div>

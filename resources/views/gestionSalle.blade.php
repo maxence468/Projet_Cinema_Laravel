@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="col-12 col-lg-5 order-2 d-lg-flex justify-content-center mt-5">
-                                <div class="alignment-wrapper mt-4">
+                                <div class="alignment-wrapper mt-4/">
                                     <label class="h3" for="listeSalle">Salle à modifier</label>
                                 </div>
                             </div>
