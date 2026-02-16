@@ -25,14 +25,14 @@
                     <!-- Name -->
                     <div class="input d-flex flex-column align-items-start pt-2">
                         <x-input-label for="name" :value="__('Nom')" />
-                        <x-text-input placeholder="Entrer votre Nom" id="name" class="block mt-1 w-full" type="text" name="name" value="{{old('name', $user->nomUser)}}" required autofocus autocomplete="name" />
+                        <x-text-input placeholder="Entrer votre Nom" id="name" class="block mt-1 w-full" type="text" name="name" value="{{old('name', $user->name)}}" required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
                     <!-- Prenom -->
                     <div class="input d-flex flex-column align-items-start pt-2">
                         <x-input-label for="prenom" :value="__('Prénom')" />
-                        <x-text-input placeholder="Entrer votre Prénom" id="prenom" class="block mt-1 w-full" type="text" name="prenom" value="{{old('prenom', $user->preUser)}}" required autofocus autocomplete="prenom" />
+                        <x-text-input placeholder="Entrer votre Prénom" id="prenom" class="block mt-1 w-full" type="text" name="prenom" value="{{old('prenom', $user->surname)}}" required autofocus autocomplete="prenom" />
                         <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
                     </div>
 

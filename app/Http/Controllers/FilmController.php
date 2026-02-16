@@ -39,37 +39,52 @@ class FilmController extends Controller
         $f->idGenre = request('idGenre');
         $f->save();
 
-        return redirect()->route('films.index');
+        return response()->json([
+           'titreFilm'=> request('titreFilm'),
+        ]);
+    }
+
+    public function editFilm(Request $request){
+        $id = $request->idFilm;
+        $film = Film::find($id);
+
+        return response()->json([
+            'film'=> $film,
+        ]);
     }
 
     public function edit(Film $film) {
         return view('films.edit', compact('film'));
     }
 
-    public function update(Film $film) {
-        request()->validate([
-            'titreFilm' => 'required|string|max:255',
-            'descFilm' => 'nullable|string',
-            'dateSortieFilm' => 'required|date',
-            'dureeFilm' => 'required|integer',
-            'posterFilm' => 'nullable|string',
-            'idGenre' => 'required|exists:genres,idGenre',
+    public function update(Request $request, $id)
+    {
+        $film = Film::findOrFail($id);
+
+        $film->update([
+            'titreFilm' => $request->titreFilm,
+            'descFilm' => $request->descFilm,
+            'dateSortieFilm' => $request->dateSortieFilm,
+            'dureeFilm' => $request->dureeFilm,
+            'posterFilm' => $request->posterFilm,
+            'idGenre' => $request->idGenre,
         ]);
 
-        $film->titreFilm = request('titreFilm');
-        $film->descFilm = request('descFilm');
-        $film->dateSortieFilm = request('dateSortieFilm');
-        $film->dureeFilm = request('dureeFilm');
-        $film->posterFilm = request('posterFilm');
-        $film->idGenre = request('idGenre');
-        $film->save();
-
-        return redirect()->route('films.index');
+        return response()->json([
+            'message' => 'Film mis à jour !',
+            'film' => $film
+        ]);
     }
 
-    public function destroy(Film $film) {
+    public function destroy($id)
+    {
+        $film = Film::findOrFail($id);
         $film->delete();
-        return redirect()->route('films.index');
+
+        return response()->json([
+            'message' => 'Film supprimé avec succès !'
+        ]);
     }
+
 
 }

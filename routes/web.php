@@ -9,6 +9,7 @@ use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TypeSalleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,6 +65,7 @@ Route::get('/films/{film}', [FilmController::class, 'show'])->name('films.show')
 Route::get('/films/edit/{film}', [FilmController::class, 'edit'])->name('films.edit');
 Route::patch('/films/{film}', [FilmController::class, 'update'])->name('films.update');
 Route::delete('/films/{film}', [FilmController::class, 'destroy'])->name('films.destroy');
+Route::post('/editFilm', [FilmController::class, 'editFilm'])->name('editFilm');
 
 Route::get('/tarifs', [TarifController::class, 'index'])->name('tarifs.index');
 Route::get('/tarifs/create', [TarifController::class, 'create'])->name('tarifs.create');
