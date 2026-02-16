@@ -28,8 +28,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $data = [
-            'nomUser' => $request->name,
-            'preUser' => $request->prenom,
+            'name' => $request->name,
+            'surname' => $request->prenom,
             'email' => $request->email,
         ];
 

@@ -139,7 +139,12 @@ class PageController extends Controller{
     }
 
     public function gestionFilm() {
-        return view('gestionFilm');
+        $genres = Genre::all();
+        $films = Film::all();
+        return view('gestionFilm', [
+            'genres' => $genres,
+            'films' => $films
+        ]);
     }
 
     public function gestionGenre() {
