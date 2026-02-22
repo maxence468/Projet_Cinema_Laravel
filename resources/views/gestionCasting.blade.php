@@ -35,7 +35,12 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Titre film" required>
+                                <select id="" class="choixCatal" onchange="">
+                                    <option value="">Titre film</option>
+                                    @foreach($films as $film)
+                                        <option value="{{$film->idFilm}}">{{$film->titreFilm}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -44,7 +49,12 @@
                                 <label class="h3 mb-0">Personne</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Personne" required>
+                                <select id="" class="choixCatal" onchange="">
+                                    <option value="">Personne</option>
+                                    @foreach($personnes as $personne)
+                                        <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
@@ -72,7 +82,11 @@
                                 <label class="h3 mb-0">Principal ou secondaire</label>
                             </div>
                             <div class="col-12 col-lg-4 pb-5">
-                                <input class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
+                                <select id="" class="choixCatal" onchange="">
+                                    <option value="">Principal ou secondaire</option>
+                                    <option value="1">Principal</option>
+                                    <option value="1">Secondaire</option>
+                                </select>
                             </div>
                         </div>
 
@@ -82,9 +96,9 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
     </main>
     <script>
@@ -117,4 +131,5 @@
             }
         }*/
     </script>
+    @vite('resources/js/gestionCasting.js')
 @endsection

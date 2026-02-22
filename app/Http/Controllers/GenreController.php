@@ -37,19 +37,35 @@ class GenreController extends Controller
         return view('genres.edit', compact('genre'));
     }
 
-    public function update(Request $request, Genre $genre){
-        request()->validate([
-            'libGenre' => 'required|string',
+    public function update(Request $request, $id)
+    {
+        $genre = Genre::findOrFail($id);
+
+        $genre->update([
+            'libGenre' => $request->libGenre,
         ]);
 
-        $genre->libGenre = request('libGenre');
-        $genre->save();
-
-        return redirect()->route('genres.index');
+        return response()->json([
+            'message' => 'Film mis à jour !',
+            'genre' => $genre
+        ]);
     }
-
-    public function destroy(Genre $genre){
+    public function destroy($id)
+    {
+        $genre = Genre::findOrFail($id);
         $genre->delete();
-        return redirect()->route('genres.index');
+
+        return response()->json([
+            'message' => 'Film supprimé avec succès !'
+        ]);
     }
+
+    public function editGenre(Request $request){
+        $id = $request->idGenre;
+        $genre = Genre::find($id);
+
+        return response()->json([
+            'genre'=> $genre,
+        ]);
+}
 }

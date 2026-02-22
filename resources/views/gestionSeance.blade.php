@@ -42,13 +42,16 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Heure séance" required>
+                                <input id="heureSeance" class="inputCatalogue" type="time" placeholder="Heure séance" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                    <select id="seanceModif" name="movie" class="choixCatal" onchange="">
                                         <option value=""></option>
+                                        @foreach($seances as $seance)
+                                            <option value="{{$seance->idSeance}}">{{$seance->idSeance}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -59,7 +62,7 @@
                                 <label class="h3 mb-0">Date séance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Date séance" required>
+                                <input id="dateSeance" class="inputCatalogue" type="date" placeholder="Date séance" required>
                             </div>
                         </div>
 
@@ -68,7 +71,7 @@
                                 <label class="h3 mb-0">Durée séance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Durée séance" required>
+                                <input id="dureeSeance" class="inputCatalogue" type="number" placeholder="Durée séance" required>
                             </div>
                         </div>
 
@@ -77,7 +80,12 @@
                                 <label class="h3 mb-0">Titre film</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Titre film" required>
+                                <select id="idFilm" class="choixCatal" onchange="">
+                                    <option value="">Titre film</option>
+                                        @foreach($films as $film)
+                                            <option value="{{$film->idFilm}}">{{$film->titreFilm}}</option>
+                                        @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -86,7 +94,13 @@
                                 <label class="h3 mb-0">Numéro de salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Numéro de salle" required>
+                                <select id="idSalle" class="choixCatal" onchange="">
+                                    <option value="">Numéro de salle</option>
+                                        @foreach($salles as $salle)
+                                            <option value="{{$salle->idSalle}}">{{$salle->idSalle}}</option>
+                                        @endforeach
+                                </select>
+
                             </div>
                         </div>
                     </form>
@@ -95,9 +109,9 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
     </main>
     <script>
@@ -130,4 +144,5 @@
             }
         }*/
     </script>
+    @vite('resources/js/gestionSeance.js')
 @endsection

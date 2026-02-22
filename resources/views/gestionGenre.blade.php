@@ -22,7 +22,7 @@
             <div class="espaceSideBar flex-grow-1">
                 <div class="container-fluid">
 
-                    <form id="myForm" method="post" action="">
+                    <form id="myForm">
                         @csrf
                         <div class="row align-items-center mb-1">
                             <div class="col-12 col-lg-7 order-1">
@@ -42,13 +42,16 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Libelle genre" required>
+                                <input class="inputCatalogue" id="libGenre" type="text" placeholder="Libelle genre" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                    <select name="movie" id="genreModif" class="choixCatal" onchange="">
                                         <option value=""></option>
+                                        @foreach($genres as $genre)
+                                            <option value="{{$genre->idGenre}}">{{$genre->libGenre}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -60,9 +63,9 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
     </main>
     <script>
@@ -95,4 +98,5 @@
             }
         }*/
     </script>
+    @vite('resources/js/gestionGenre.js')
 @endsection

@@ -33,6 +33,9 @@ Route::get('/personnes/{personne}', [PersonneController::class, 'show'])->name('
 Route::get('/personnes/edit/{personne}', [PersonneController::class, 'edit'])->name('personnes.edit');
 Route::patch('/personnes/{personne}', [PersonneController::class, 'update'])->name('personnes.update');
 Route::delete('/personnes/{personne}', [PersonneController::class, 'destroy'])->name('personnes.destroy');
+Route::post('/editPersonne', [PersonneController::class, 'editPersonne'])->name('editPersonne');
+
+
 
 Route::get('/genres', [GenreController::class, 'index'])->name('genres.index');
 Route::get('/genres/create', [GenreController::class, 'create'])->name('genres.create');
@@ -41,6 +44,8 @@ Route::get('/genres/{genre}', [GenreController::class, 'show'])->name('genres.sh
 Route::get('/genres/edit/{genre}', [GenreController::class, 'edit'])->name('genres.edit');
 Route::patch('/genres/{genre}', [GenreController::class, 'update'])->name('genres.update');
 Route::delete('/genres/{genre}', [GenreController::class, 'destroy'])->name('genres.destroy');
+Route::post('/editGenre', [GenreController::class, 'editGenre'])->name('editFilm');
+
 
 Route::get('/cinemas', [CinemaController::class, 'index'])->name('cinemas.index');
 Route::get('/cinemas/create', [CinemaController::class, 'create'])->name('cinemas.create');
@@ -49,6 +54,8 @@ Route::get('/cinemas/{cinema}', [CinemaController::class, 'show'])->name('cinema
 Route::get('/cinemas/edit/{cinema}', [CinemaController::class, 'edit'])->name('cinemas.edit');
 Route::patch('/cinemas/{cinema}', [CinemaController::class, 'update'])->name('cinemas.update');
 Route::delete('/cinemas/{cinema}', [CinemaController::class, 'destroy'])->name('cinemas.destroy');
+Route::post('/editCinema', [CinemaController::class, 'editCinema'])->name('editFilm');
+
 
 Route::get('/typesalles', [TypeSalleController::class, 'index'])->name('typesalles.index');
 Route::get('/typesalles/create', [TypeSalleController::class, 'create'])->name('typesalles.create');
@@ -57,6 +64,7 @@ Route::get('/typesalles/{typesalle}', [TypeSalleController::class, 'show'])->nam
 Route::get('/typesalles/edit/{typesalle}', [TypeSalleController::class, 'edit'])->name('typesalles.edit');
 Route::patch('/typesalles/{typesalle}', [TypeSalleController::class, 'update'])->name('typesalles.update');
 Route::delete('/typesalles/{typeSalle}', [TypeSalleController::class, 'destroy'])->name('typesalles.destroy');
+Route::post('/edittypesalle', [TypeSalleController::class, 'edittypesalles'])->name('edittypesalles');
 
 Route::get('/films', [FilmController::class, 'index'])->name('films.index');
 Route::get('/films/create', [FilmController::class, 'create'])->name('films.create');
@@ -73,7 +81,8 @@ Route::post('/tarifs', [TarifController::class, 'store'])->name('tarifs.store');
 Route::get('/tarifs/{tarif}', [TarifController::class, 'show'])->name('tarifs.show');
 Route::get('/tarifs/edit/{tarif}', [TarifController::class, 'edit'])->name('tarifs.edit');
 Route::patch('/tarifs/{tarif}', [TarifController::class, 'update'])->name('tarifs.update');
-Route::delete('/tarifs/delete/{tarif}', [TarifController::class, 'destroy'])->name('tarifs.destroy');
+Route::delete('/tarifs/{tarif}', [TarifController::class, 'destroy'])->name('tarifs.destroy');
+Route::post('/editTarif', [TarifController::class, 'editTarif'])->name('editTarif');
 
 Route::get('/salles', [SalleController::class, 'index'])->name('salles.index');
 Route::get('/salles/create', [SalleController::class, 'create'])->name('salles.create');
@@ -82,6 +91,7 @@ Route::get('/salles/{salle}', [SalleController::class, 'show'])->name('salles.sh
 Route::get('/salles/edit/{salle}', [SalleController::class, 'edit'])->name('salles.edit');
 Route::patch('/salles/{salle}', [SalleController::class, 'update'])->name('salles.update');
 Route::delete('/salles/{salle}', [SalleController::class, 'destroy'])->name('salles.destroy');
+Route::post('/editSalle', [SalleController::class, 'editSalle'])->name('editSalle');
 
 Route::get('/seances', [SeanceController::class, 'index'])->name('seances.index');
 Route::get('/seances/create', [SeanceController::class, 'create'])->name('seances.create');
@@ -90,7 +100,7 @@ Route::get('/seances/{seance}', [SeanceController::class, 'show'])->name('seance
 Route::get('/seances/{seance}/edit', [SeanceController::class, 'edit'])->name('seances.edit');
 Route::patch('/seances/{seance}', [SeanceController::class, 'update'])->name('seances.update');
 Route::delete('/seances/{seance}', [SeanceController::class, 'destroy'])->name('seances.destroy');
-
+Route::post('/editSeance', [SeanceController::class, 'editSeance'])->name('editSeance');
 
 Route::get('/', [PageController::class, 'accueil'])->name('accueil');
 

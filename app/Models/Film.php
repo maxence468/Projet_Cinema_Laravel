@@ -32,6 +32,7 @@ class Film extends Model
         )->withPivot('nomJoue','preJoue','principale','secondaire');
 
     }
+
     public function realisateurs(): BelongsToMany{
         return $this->belongsToMany(Personne::class, 'realise', 'idFilm', 'idPers');
     }

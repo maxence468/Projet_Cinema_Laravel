@@ -42,13 +42,16 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Nom personne" required>
+                                <input id="nomPers" class="inputCatalogue" type="text" placeholder="Nom personne" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                    <select name="movie" id="personneModif" class="choixCatal" onchange="">
                                         <option value=""></option>
+                                        @foreach($personnes as $personne)
+                                            <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -59,7 +62,7 @@
                                 <label class="h3 mb-0">Prenom personne</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Prenom personne" required>
+                                <input id="prePers" class="inputCatalogue" type="text" placeholder="Prenom personne" required>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
@@ -69,7 +72,7 @@
                                 <label class="h3 mb-0">Date de naissance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Date de naissance" required>
+                                <input id="dateNaissPers" class="inputCatalogue" type="date" placeholder="Date de naissance" required>
                             </div>
                         </div>
 
@@ -78,7 +81,7 @@
                                 <label class="h3 mb-0">Lieu de naissance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Lieu de naissance" required>
+                                <input id="lieuNaissPers" class="inputCatalogue" type="text" placeholder="Lieu de naissance" required>
                             </div>
                         </div>
 
@@ -87,7 +90,7 @@
                                 <label class="h3 mb-0">Photo personne</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Photo personne" required>
+                                <input id="photoPers" class="inputCatalogue" type="text" placeholder="Photo personne" required>
                             </div>
                         </div>
 
@@ -96,7 +99,7 @@
                                 <label class="h3 mb-0">Bibliographie</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <textarea class="textareaCatalogue" placeholder="Bibliographie" required></textarea>
+                                <textarea id="biblio" class="textareaCatalogue" placeholder="Bibliographie" required></textarea>
                             </div>
                         </div>
 
@@ -106,9 +109,9 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
     </main>
     <script>
@@ -141,4 +144,5 @@
             }
         }*/
     </script>
+    @vite('resources/js/gestionPersonne.js')
 @endsection

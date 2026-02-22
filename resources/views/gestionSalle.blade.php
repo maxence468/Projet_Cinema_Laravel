@@ -42,13 +42,16 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Capacité salle" required>
+                                <input id="capaciteSal" class="inputCatalogue" type="number" placeholder="Capacité salle" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                    <select id="salleModif" name="movie" class="choixCatal" onchange="">
                                         <option value=""></option>
+                                        @foreach($salles as $salle)
+                                            <option value="{{$salle->idSalle}}">{{$salle->idSalle}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -56,10 +59,16 @@
 
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
-                                <label class="h3 mb-0">Type de salle</label>
+                                <label id="" class="h3 mb-0">Type de salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Type de salle" required>                            </div>
+                                <select id="idTypeSalle" class="choixCatal" onchange="">
+                                    <option value="">Type de salle</option>
+                                    @foreach($typeSalles as $typeSalle)
+                                        <option value="{{$typeSalle->idTypeSalle}}">{{$typeSalle->libTypeSalle}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
 
@@ -69,9 +78,9 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
     </main>
     <script>
@@ -104,4 +113,5 @@
             }
         }*/
     </script>
+    @vite('resources/js/gestionSalle.js')
 @endsection

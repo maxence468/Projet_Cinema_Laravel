@@ -40,23 +40,42 @@ class CinemaController extends Controller
         return view('cinemas.edit', compact('cinema'));
     }
 
-    public function update(Cinema $cinema) {
+    public function update(Request $request, $id)
+    {
         request()->validate([
-            'nomCinema' => 'required|string',
-            'adresseCinema' => 'required|string',
-            'codePostale' => 'required|string',
+
         ]);
 
-        $cinema->nomCinema = request('nomCinema');
-        $cinema->adresseCinema = request('adresseCinema');
-        $cinema->codePostale = request('codePostale');
-        $cinema->save();
+        $cinema = Cinema::findOrFail($id);
 
-        return redirect()->route('cinemas.index');
+        $cinema->update([
+            'nomCinema' => $request->nomCinema,
+            'adresseCinema' => $request->adresseCinema,
+            'codePostale' => $request->codePostale,
+        ]);
+
+        return response()->json([
+            'message' => 'Cinema mis à jour !',
+            'cinema' => $cinema
+        ]);
     }
 
-    public function destroy(Cinema $cinema) {
+    public function destroy($id)
+    {
+        $cinema = Cinema::findOrFail($id);
         $cinema->delete();
-        return redirect()->route('cinemas.index');
+
+        return response()->json([
+            'message' => 'Cinema supprimé avec succès !'
+        ]);
+    }
+
+    public function editCinema(Request $request){
+        $id = $request->idCinema;
+        $cinema = Cinema::find($id);
+
+        return response()->json([
+            'cinema'=> $cinema,
+        ]);
     }
 }

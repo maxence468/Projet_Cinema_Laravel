@@ -8,6 +8,8 @@ use App\Models\Genre;
 use App\Models\Salle;
 use App\Models\Seance;
 use App\Models\Personne;
+use App\Models\Tarif;
+use App\Models\TypeSalle;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -148,34 +150,70 @@ class PageController extends Controller{
     }
 
     public function gestionGenre() {
-        return view('gestionGenre');
+        $genres = Genre::all();
+        return view('gestionGenre', [
+            'genres' => $genres
+        ]);
     }
     public function gestionPersonne() {
-        return view('gestionPersonne');
+        $personnes = Personne::all();
+        return view('gestionPersonne', [
+            'personnes' => $personnes
+        ]);
     }
 
     public function gestionCasting() {
-        return view('gestionCasting');
+        $films = Film::all();
+        $personnes = Personne::all();
+        return view('gestionCasting', [
+            'films' => $films,
+            'personnes' => $personnes
+        ]);
     }
 
     public function gestionCinema() {
-        return view('gestionCinema');
+        $cinemas = Cinema::all();
+        return view('gestionCinema', [
+            'cinemas' => $cinemas
+        ]);
     }
 
     public function gestionSalle() {
-        return view('gestionSalle');
+        $typeSalles = TypeSalle::all();
+        $salles = Salle::all();
+
+        return view('gestionSalle', [
+            'typeSalles' => $typeSalles,
+            'salles' => $salles
+        ]);
     }
 
     public function gestionSeance() {
-        return view('gestionSeance');
+        $films = Film::all();
+        $salles = Salle::all();
+        $seances = Seance::all();
+
+        return view('gestionSeance', [
+            'films' => $films,
+            'salles' => $salles,
+            'seances' => $seances
+        ]);
     }
 
     public function gestionTarif() {
-        return view('gestionTarif');
+        $tarifs = Tarif::all();
+
+        return view('gestionTarif', [
+            'tarifs' => $tarifs,
+        ]);
     }
 
     public function gestionTypeSalle() {
-        return view('gestionTypeSalle');
+        $typeSalles = TypeSalle::all();
+
+        return view('gestionTypeSalle', [
+            'typeSalles' => $typeSalles,
+        ]);
     }
 
     public function gestionTarifSalle() {

@@ -43,7 +43,8 @@ class SeanceController extends Controller
         return view('seances.edit', compact('seance'));
     }
 
-    public function update(Request $request, Seance $seance){
+    public function update(Request $request, $id)
+    {
         request()->validate([
             'heureSeance' => 'required|date_format:H:i',
             'dateSeance' => 'required|date',
@@ -52,18 +53,38 @@ class SeanceController extends Controller
             'idSalle' => 'required|exists:salles,idSalle',
         ]);
 
-        $seance->heureSeance = request('heureSeance');
-        $seance->dateSeance = request('dateSeance');
-        $seance->dureeSeance = request('dureeSeance');
-        $seance->idFilm = request('idFilm');
-        $seance->idSalle = request('idSalle');
-        $seance->save();
+        $seance = Seance::findOrFail($id);
 
-        return redirect()->route('seances.index');
+        $seance->update([
+            'heureSeance' => $request->heureSeance,
+            'dateSeance' => $request->dateSeance,
+            'dureeSeance' => $request->dureeSeance,
+            'idFilm' => $request->idFilm,
+            'idSalle' => $request->idSalle,
+        ]);
+
+        return response()->json([
+            'message' => 'Seance mis à jour !',
+            'seance' => $seance
+        ]);
     }
 
-    public function destroy(Seance $seance){
+    public function destroy($id)
+    {
+        $seance = Seance::findOrFail($id);
         $seance->delete();
-        return redirect()->route('seances.index');
+
+        return response()->json([
+            'message' => 'Seance supprimée avec succès !'
+        ]);
+    }
+
+    public function editSeance(Request $request){
+        $id = $request->idSeance;
+        $seance = Seance::find($id);
+
+        return response()->json([
+            'seance'=> $seance,
+        ]);
     }
 }
