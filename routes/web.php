@@ -114,27 +114,17 @@ Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name
 
 Route::get('/parametresUtilisateur', [PageController::class, 'parametresUtilisateur'])->name('parametresUtilisateur');
 
-Route::get('/gestionCatalogue', [PageController::class, 'gestionCatalogue'])->name('gestionCatalogue');
-
-Route::get('/gestionFilm', [PageController::class, 'gestionFilm'])->name('gestionFilm');
-
-Route::get('/gestionGenre', [PageController::class, 'gestionGenre'])->name('gestionGenre');
-
-Route::get('/gestionPersonne', [PageController::class, 'gestionPersonne'])->name('gestionPersonne');
-
-Route::get('/gestionCasting', [PageController::class, 'gestionCasting'])->name('gestionCasting');
-
-Route::get('/gestionCinema', [PageController::class, 'gestionCinema'])->name('gestionCinema');
-
-Route::get('/gestionSalle', [PageController::class, 'gestionSalle'])->name('gestionSalle');
-
-Route::get('/gestionSeance', [PageController::class, 'gestionSeance'])->name('gestionSeance');
-
-Route::get('/gestionTarif', [PageController::class, 'gestionTarif'])->name('gestionTarif');
-
-Route::get('/gestionTypeSalle', [PageController::class, 'gestionTypeSalle'])->name('gestionTypeSalle');
-
-Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle');
+Route::get('/gestionCatalogue', [PageController::class, 'gestionCatalogue'])->name('gestionCatalogue')->middleware('admin');;
+Route::get('/gestionFilm', [PageController::class, 'gestionFilm'])->name('gestionFilm')->middleware('admin');;
+Route::get('/gestionGenre', [PageController::class, 'gestionGenre'])->name('gestionGenre')->middleware('admin');;
+Route::get('/gestionPersonne', [PageController::class, 'gestionPersonne'])->name('gestionPersonne')->middleware('admin');;
+Route::get('/gestionCasting', [PageController::class, 'gestionCasting'])->name('gestionCasting')->middleware('admin');;
+Route::get('/gestionCinema', [PageController::class, 'gestionCinema'])->name('gestionCinema')->middleware('admin');;
+Route::get('/gestionSalle', [PageController::class, 'gestionSalle'])->name('gestionSalle')->middleware('admin');;
+Route::get('/gestionSeance', [PageController::class, 'gestionSeance'])->name('gestionSeance')->middleware('admin');;
+Route::get('/gestionTarif', [PageController::class, 'gestionTarif'])->name('gestionTarif')->middleware('admin');;
+Route::get('/gestionTypeSalle', [PageController::class, 'gestionTypeSalle'])->name('gestionTypeSalle')->middleware('admin');;
+Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle')->middleware('admin');;
 
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
