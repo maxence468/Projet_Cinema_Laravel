@@ -24,51 +24,45 @@
 
                     <form id="myForm" method="post" action="">
                         @csrf
-                        <div class="row mb-1">
-                            <div class="col-12 col-lg-7 order-1">
-                                <h3 class="mb-3 pt-4 pb-4">Ajouter, modifier ou supprimer une salle</h3>
+                        <div class="row align-items-center mb-1">
+                            <div class="col-12 col-lg-7 order-1 pb-5 pt-4">
+                                <h3 class="mb-3">Ajouter, modifier ou supprimer une salle</h3>
                             </div>
 
-                            <div class="col-12 col-lg-5 order-2 d-lg-flex justify-content-center mt-5">
-                                <div class="alignment-wrapper mt-4">
-                                    <label class="h3" for="listeSalle">Salle à modifier</label>
+                            <div class="col-12 col-lg-5 order-2 d-lg-flex justify-content-center pt-5">
+                                <div class="alignment-wrapper">
+                                    <label class="h3 mb-3 labelFilm" for="listeSalle">Salle à modifier</label>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row align-items-center mb-4 pt-3">
+                        <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3 order-4 order-lg-3">
                                 <label class="h3 mb-0">Capacité salle</label>
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input id="capaciteSal" class="inputCatalogue" type="number" placeholder="Capacité salle" required>
+                                <input class="inputCatalogue" type="text" placeholder="Capacité salle" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select id="salleModif" name="movie" class="choixCatal" onchange="">
+                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
                                         <option value=""></option>
-                                        @foreach($salles as $salle)
-                                            <option value="{{$salle->idSalle}}">{{$salle->idSalle}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
 
+
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
-                                <label id="" class="h3 mb-0">Type de salle</label>
+                                <label class="h3 mb-0">Type de salle</label>
                             </div>
+
                             <div class="col-12 col-lg-4">
-                                <select id="idTypeSalle" class="choixCatal" onchange="">
-                                    <option value="">Type de salle</option>
-                                    @foreach($typeSalles as $typeSalle)
-                                        <option value="{{$typeSalle->idTypeSalle}}">{{$typeSalle->libTypeSalle}}</option>
-                                    @endforeach
-                                </select>
+                                <input class="inputCatalogue" type="text" placeholder="Type de salle" required>
                             </div>
+
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
 
