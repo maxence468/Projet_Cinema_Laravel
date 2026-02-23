@@ -60,9 +60,13 @@ ul {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: white;
 }
 
 .btn-conInc {
+    width: 164px;
+    height: 52px;
+    font-size: 32px;
     background-color: #991917;
     border: 1px solid white;
     padding: 3px 4px 0px 4px;
@@ -74,6 +78,9 @@ ul {
 }
 
 .btn-validConInc {
+    width: 329px;
+    height: 52px;
+    font-size: 32px;
     background-color: #991917;
     border: 1px solid white;
     padding: 3px 43px 0px 43px;
@@ -83,6 +90,20 @@ ul {
     justify-content: center;
     cursor: pointer;
     color: white;
+}
+
+.inputConInc label {
+    margin: 0 auto;
+    width: 165px;
+    display: block;
+}
+
+.inputConInc input {
+    padding-block: 2px;
+    margin: 0 auto;   /* centers the input */
+    display: block;
+    width: 329px;
+    height: 52px;
 }
 
 .style-equal {
@@ -212,7 +233,6 @@ select {
     flex-shrink: 0;
 }
 
-/* Text cleanup */
 .footer-text {
     flex: 1;
     text-align: center;
@@ -280,7 +300,7 @@ a {
     transform: translateX(0);
 }
 
-/* mobile screen */
+
 @media(max-width:767px) {
     .carousel-item .carousel-item > div {
         display: none;
@@ -345,7 +365,6 @@ section {
     margin-left: 110px;
 }
 
-/* Responsive: mobile */
 @media (max-width: 768px) {
     .nav-wrapper {
         flex-direction: column;
@@ -394,19 +413,18 @@ section {
 
 /* New rule to sync the label and select position */
 .alignment-wrapper {
-    width: 345px; /* Matches your .choixCatal width */
+    width: 345px;
     max-width: 100%;
     display: flex;
-    justify-content: flex-start; /* Aligns text/box to the left of this 345px area */
+    justify-content: flex-start;
 }
 
-/* --- 1. THE INPUT/SELECT/TEXTAREA FIX --- */
 .inputCatalogue,
 .choixCatal,
 .textareaCatalogue {
     display: block !important;       /* Forces select to behave like a box */
-    width: 100% !important;          /* Takes up the space of the column... */
-    max-width: 345px !important;     /* ...but never bigger than 345px */
+    width: 100% !important;
+    max-width: 345px !important;
     height: 53px !important;
     color: #1c1c1c;
     font-size: 32px;
@@ -445,33 +463,32 @@ section {
 }
 
 @media (max-width: 991px) {
-    /* 1. Reset the margin-left from desktop so it doesn't push the form too far */
+    /*  Reset the margin-left from desktop so it doesn't push the form too far */
     .espaceSideBar {
         margin-left: 0 !important;
-        flex-grow: 1; /* Occupies all space to the right of the sidebar */
+        flex-grow: 1;
     }
 
-    /* 2. Create a "centered column" for the form */
+    /* Create a "centered column" for the form */
     #myForm {
         max-width: 345px;   /* This matches the width of your inputs */
         margin-left: auto;  /* Equal margins on both sides centers the form */
         margin-right: auto;
     }
 
-    /* 3. Ensure labels stay aligned to the left of this 345px column */
+    /* Ensure labels stay aligned to the left of this 345px column */
     .row label {
         text-align: left;
         display: block;
         width: 100%;
     }
 
-    /* 4. Center the main Title above the form block */
+    /* Center the main Title above the form block */
     h3 {
         text-align: left; /* Keep left-aligned within the 345px column */
         margin-bottom: 20px;
     }
 
-    /* 5. Ensure the alignment-wrapper doesn't try to center its internal content */
     .alignment-wrapper {
         justify-content: flex-start !important;
     }
@@ -485,21 +502,19 @@ section {
     }
 }
 
-/* --- TABLET & MOBILE VIEW (Side-by-Side) --- */
+
 @media (max-width: 480px) {
-    /* 1. Ensure the container stays side-by-side and doesn't stack */
+
     .d-flex.flex-row.align-items-start {
         flex-direction: row !important;
         display: flex !important;
     }
 
-    /* 2. Narrower Sidebar for small screens */
     .sidebar {
         width: 100px !important; /* Shrunk from 130px to save space */
         font-size: 14px;
     }
 
-    /* 3. The Form Container */
     .espaceSideBar {
         margin-left: 10px !important; /* Small gap between sidebar and form */
         flex-grow: 1;
@@ -508,23 +523,23 @@ section {
 
     #myForm {
         width: 100%;
-        max-width: 100%; /* Let it shrink below 345px */
+        max-width: 100%;
     }
 
-    /* 4. FORCE inputs to fit the remaining space */
     .inputCatalogue,
     .choixCatal,
     .textareaCatalogue,
     .alignment-wrapper {
         width: 100% !important; /* Take up all space right of the sidebar */
-        max-width: 345px !important; /* But still cap at 345px on larger tablets */
-        font-size: 20px !important; /* 32px is too big for small phones */
+        max-width: 345px !important;
+        font-size: 20px !important; /* 20 small phones */
     }
 
-    /* 5. Adjust labels so they don't take up too much vertical space */
+    /* Adjust labels so they don't take up too much vertical space */
     .h3, h3 {
         font-size: 22px !important;
     }
+
 }
 
 /* MOBILE SLIDER (Under 480px) */
@@ -546,19 +561,14 @@ section {
         padding-bottom: 15px;
         margin-bottom: 20px;
         border-bottom: 1px solid #991917;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    }
-
-    .top-slider {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -webkit-overflow-scrolling: touch;
     }
 
     .top-slider a {
         padding-top: 0 !important; /* Remove the vertical padding from desktop */
         padding-right: 20px; /* Space between sliding options */
         display: inline-block;
-        font-size: 18px; /* Slightly smaller for mobile */
+        font-size: 18px;
     }
 
     .espaceSideBar {
@@ -566,16 +576,15 @@ section {
     }
 }
 
-/* --- SPECIFIC SMALL PHONE TWEAKS (Under 380px) --- */
 @media (max-width: 380px) {
     .sidebar {
-        width: 80px !important; /* Even smaller sidebar for tiny phones */
+        width: 80px !important;
     }
     .sidebar a {
         font-size: 12px;
     }
     .inputCatalogue, .choixCatal, .textareaCatalogue {
-        height: 40px !important; /* Slimmer inputs for height issues */
+        height: 40px !important;
     }
 }
 
@@ -585,4 +594,67 @@ section {
 
 .espaceTopGestCast {
     padding-top: 50px;
+}
+
+/* Connexion / Inscription form block */
+.inputConInc{
+    width: 329px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.inputConInc label{
+    width: 100%;
+    text-align: left;
+    margin: 0 0 6px 0;
+    font-size: 32px;
+    color: white;
+}
+
+
+.inputConInc input{
+    width: 100%;
+    height: 52px;
+    margin: 0;
+    padding: 0 12px;
+    font-size: 32px;
+    color: #1c1c1c;
+}
+
+
+.inputConInc input::placeholder{
+    font-size: 32px;
+    color: #1c1c1c;
+}
+
+.sizeTitleSettingAccount {
+    font-size: 32px;
+}
+
+@media (min-width: 992px) {
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-7.order-1.pb-5 {
+        padding-bottom: 40px !important;
+    }
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-5.order-2 {
+        align-self: stretch !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;    /* push down near the select */
+        align-items: center !important;
+        padding-top: 0 !important;
+    }
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-5.order-2 .alignment-wrapper {
+        justify-content: flex-start !important;  /* label starts at left of the 345px box */
+    }
+
+    /* Tighten label spacing */
+    #myForm .row.align-items-center.mb-1 .labelFilm {
+        margin-bottom: 6px !important;
+        white-space: nowrap;
+        line-height: 1;
+    }
 }
