@@ -13,14 +13,14 @@
             @csrf
 
             <!-- Email Address -->
-            <div class="input d-flex flex-column align-items-start pt-4">
+            <div class="inputConInc d-flex flex-column align-items-start pt-4">
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input placeholder="Entrer votre email" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Password -->
-            <div class="input d-flex flex-column align-items-start pt-3">
+            <div class="inputConInc d-flex flex-column align-items-start pt-3">
                 <x-input-label for="password" :value="__('Password')" />
 
                 <x-text-input placeholder="........"
@@ -31,7 +31,7 @@
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
-            <div class="input d-flex flex-column align-items-center pt-3">
+            <div class="inputConInc d-flex flex-column align-items-center pt-3">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
