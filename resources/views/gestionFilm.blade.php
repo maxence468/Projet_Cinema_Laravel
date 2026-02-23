@@ -60,7 +60,7 @@
                             </div>
                         </div>
 
-                        <div class="row align-items-center mb-4">
+                        <div class="row align-items-start mb-4">
                             <div class="col-12 col-lg-3">
                                 <label class="h3 mb-0">Description film</label>
                             </div>
@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-12 col-lg-4">
                                 <select name="genre" class="choixCatal" id="idGenre">
-                                    <option value="">-- Genres film --</option>
+                                    <option value="">Genre film</option>
                                     @foreach($genres as $genre)
                                         <option value="{{$genre->idGenre}}">{{$genre->libGenre}}</option>
                                     @endforeach
@@ -147,35 +147,5 @@
 
         </div>
     </main>
-    <script>
-        /*function submitForm(action) {
-            const form = document.getElementById('');
-            const methodInput = document.getElementById('');
-            const actionInput = document.getElementBydId('');
-
-            actionInput.value = action;
-
-            switch (action) {
-                case 'create':
-                    form.action = "<route('posts.store')";
-                    methodInput.value = 'POST';
-                    break;
-
-                case 'update';
-                    form.action = " route('posts.update'), $post->id ?? 0"
-                    methodInput.value = 'PATCH';
-                    break;
-
-                case 'delete':
-                    if(!confirm('Êtes vous sure ?')) {
-                        event.preventDefault();
-                        return;
-                    }
-                    form.action = "route('posts.destroy', $post->id ?? 0)"
-                    methodInput.value = 'DELETE';
-                    break;
-            }
-        }*/
-    </script>
     @vite('resources/js/gestionFilm.js')
 @endsection

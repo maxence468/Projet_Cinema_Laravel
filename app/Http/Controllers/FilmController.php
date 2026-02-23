@@ -40,7 +40,7 @@ class FilmController extends Controller
         $f->save();
 
         return response()->json([
-           'titreFilm'=> request('titreFilm'),
+            'titreFilm'=> request('titreFilm'),
         ]);
     }
 

@@ -69,7 +69,7 @@
                                 <label class="h3 mb-0">Date de naissance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Date de naissance" required>
+                                <input class="inputCatalogue" type="date" placeholder="Date de naissance" required>
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                             </div>
                         </div>
 
-                        <div class="row align-items-center mb-4">
+                        <div class="row align-items-start mb-4">
                             <div class="col-12 col-lg-3">
                                 <label class="h3 mb-0">Bibliographie</label>
                             </div>
@@ -111,34 +111,4 @@
             <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
         </div>
     </main>
-    <script>
-        /*function submitForm(action) {
-            const form = document.getElementById('');
-            const methodInput = document.getElementById('');
-            const actionInput = document.getElementBydId('');
-
-            actionInput.value = action;
-
-            switch (action) {
-                case 'create':
-                    form.action = "<route('posts.store')";
-                    methodInput.value = 'POST';
-                    break;
-
-                case 'update';
-                    form.action = " route('posts.update'), $post->id ?? 0"
-                    methodInput.value = 'PATCH';
-                    break;
-
-                case 'delete':
-                    if(!confirm('Êtes vous sure ?')) {
-                        event.preventDefault();
-                        return;
-                    }
-                    form.action = "route('posts.destroy', $post->id ?? 0)"
-                    methodInput.value = 'DELETE';
-                    break;
-            }
-        }*/
-    </script>
 @endsection

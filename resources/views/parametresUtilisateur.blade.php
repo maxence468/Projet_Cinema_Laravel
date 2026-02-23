@@ -30,7 +30,7 @@
                     <input placeholder="........">
                 </div>
 
-                <div class="input d-flex flex-column align-items-start pt-2">
+                <div class="inputConInc d-flex flex-column align-items-start pt-2">
                     <label class="label" for="confirm_password">Retaper le mot de passe</label>
                     <input placeholder="........">
                 </div>

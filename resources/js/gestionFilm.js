@@ -1,5 +1,3 @@
-
-
 $('#btnAjt').click(function(){
     let titreFilm = $('#titreFilm').val()
     let descFilm = $('#descFilm').val()
