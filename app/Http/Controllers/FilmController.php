@@ -30,6 +30,7 @@ class FilmController extends Controller
             'idGenre' => 'required|exists:genres,idGenre',
         ]);
 
+        //film
         $f = new Film();
         $f->titreFilm = request('titreFilm');
         $f->descFilm = request('descFilm');
@@ -37,7 +38,23 @@ class FilmController extends Controller
         $f->dureeFilm = request('dureeFilm');
         $f->posterFilm = request('posterFilm');
         $f->idGenre = request('idGenre');
+
         $f->save();
+
+        //realisateur
+        $f->realisateurs()->sync(request('idRealisateurs'));
+        //scenariste
+        $f->scenariste()->sync(request('idScenaristes'));
+        //acteur
+        $data = [];
+        foreach (request('idActeurs') as $i => $id) {
+            if (!$id) continue;
+            $data[$id] = [
+                'nomJoue' => request('nomJoue')[$i] ?? null,
+            ];
+        }
+        $f->casting()->sync($data);
+
 
         return response()->json([
            'titreFilm'=> request('titreFilm'),
@@ -47,9 +64,16 @@ class FilmController extends Controller
     public function editFilm(Request $request){
         $id = $request->idFilm;
         $film = Film::find($id);
+        $realisateurs = $film->realisateurs;
+        $scenaristes = $film->scenariste;
+        $acteurs = $film->casting;
+
 
         return response()->json([
             'film'=> $film,
+            'realisateurs' => $realisateurs,
+            'scenaristes' => $scenaristes,
+            'acteurs' => $acteurs,
         ]);
     }
 
@@ -61,6 +85,7 @@ class FilmController extends Controller
     {
         $film = Film::findOrFail($id);
 
+
         $film->update([
             'titreFilm' => $request->titreFilm,
             'descFilm' => $request->descFilm,
@@ -69,16 +94,28 @@ class FilmController extends Controller
             'posterFilm' => $request->posterFilm,
             'idGenre' => $request->idGenre,
         ]);
+        //realisateur
+        $film->realisateurs()->sync(request('idRealisateurs'));
+        //scenariste
+        $film->scenariste()->sync(request('idScenaristes'));
+        //acteur
+        $film->casting()->sync(request('idActeurs'));
+
 
         return response()->json([
             'message' => 'Film mis à jour !',
-            'film' => $film
+            'film' => $film,
         ]);
     }
 
     public function destroy($id)
     {
         $film = Film::findOrFail($id);
+
+        $film->realisateurs()->detach();
+        $film->scenariste()->detach();
+        $film->casting()->detach();
+
         $film->delete();
 
         return response()->json([

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('caste', function (Blueprint $table) {
             $table->unsignedBigInteger('idFilm');
             $table->unsignedBigInteger('idPers');
-            $table->string('nomJoue');
-            $table->string('preJoue');
-            $table->boolean('principale');
-            $table->boolean('secondaire');
+            $table->string('nomJoue')->nullable();
+            $table->string('preJoue')->nullable();
+            $table->boolean('principale')->nullable();
+            $table->boolean('secondaire')->nullable();
 
             $table->foreign('idFilm')->references('idFilm')->on('films');
             $table->foreign('idPers')->references('idPers')->on('personnes');

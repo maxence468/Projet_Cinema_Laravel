@@ -18,10 +18,6 @@ class Personne extends Model
         )->withPivot('nomJoue','preJoue','principale','secondaire');
     }
 
-    public function realiser(): BelongsToMany
-    {
-        return $this->belongsToMany(Film::class, 'realise', 'idPers', 'idFilm');
-    }
     public function films_scenariser(): BelongsToMany{
         return $this->belongsToMany(Film::class, 'scenarise', 'idPers', 'idFilm');
     }
