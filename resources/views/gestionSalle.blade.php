@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        {{-- ROW 2 --}}
+
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
                                 <label class="h3 mb-0">Type de salle</label>
