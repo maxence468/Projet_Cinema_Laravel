@@ -1,29 +1,21 @@
 
-
 $('#btnAjt').click(function(){
-    let titreFilm = $('#titreFilm').val()
-    let descFilm = $('#descFilm').val()
-    let dateSortieFilm = $('#dateSortieFilm').val()
-    let dureeFilm = $('#dureeFilm').val()
-    let posterFilm = $('#posterFilm').val()
-    let idGenre = $('#idGenre').val()
+    let libTarif = $('#libTarif').val()
+    let prixTarif = $('#prixTarif').val()
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre){
+
+    if(libTarif && prixTarif){
         $.ajax({
-            url: "/films",
+            url: "/tarifs",
             type: "post",
             data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idGenre: idGenre,
+                libTarif: libTarif,
+                prixTarif: prixTarif,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
                 $('#myForm')[0].reset();
-                alert('Film créé avec succès !');
+                alert('Tarif créé avec succès !');
             },
             error: function(error){
                 if(error.responseJSON) {
@@ -45,24 +37,19 @@ $('#btnAjt').click(function(){
     }
 });
 
-$('#filmModif').change(function(e){
-    let idFilm = $('#filmModif').val()
+$('#tarifModif').change(function(e){
+    let idTarif = $('#tarifModif').val()
 
     $.ajax({
-        url: "/editFilm",
+        url: "/editTarif",
         type: "post",
         data:{
-            idFilm: idFilm,
+            idTarif: idTarif,
             _token: $('input[name="_token"]').val(),
         },
         success: function(result){
-            console.log(result['film'])
-            $('#titreFilm').val(result['film']['titreFilm'])
-            $('#descFilm').val(result['film']['descFilm'])
-            $('#dateSortieFilm').val(result['film']['dateSortieFilm'])
-            $('#dureeFilm').val(result['film']['dureeFilm'])
-            $('#posterFilm').val(result['film']['posterFilm'])
-            $('#idGenre').val(result['film']['idGenre'])
+            $('#libTarif').val(result['tarif']['libTarif'])
+            $('#prixTarif').val(result['tarif']['prixTarif'])
         },
         error: function(error){
             console.log(error)
@@ -73,31 +60,24 @@ $('#filmModif').change(function(e){
 })
 
 $('#btnModif').click(function(){
-    let titreFilm = $('#titreFilm').val()
-    let descFilm = $('#descFilm').val()
-    let dateSortieFilm = $('#dateSortieFilm').val()
-    let dureeFilm = $('#dureeFilm').val()
-    let posterFilm = $('#posterFilm').val()
-    let idGenre = $('#idGenre').val()
+    let libTarif = $('#libTarif').val()
+    let prixTarif = $('#prixTarif').val()
 
-    let idFilm = $('#filmModif').val();
+    let idTarif = $('#tarifModif').val()
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre){
+
+    if(libTarif && prixTarif){
         $.ajax({
-            url: `/films/${idFilm}`,
+            url: `/tarifs/${idTarif}`,
             type: "patch",
             data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idGenre: idGenre,
+                libTarif: libTarif,
+                prixTarif: prixTarif,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
                 $('#myForm')[0].reset();
-                alert('Film modifié avec succès !');
+                alert('Tarifs modifié avec succès !');
             },
             error: function(error){
                 if(error.responseJSON) {
@@ -120,10 +100,10 @@ $('#btnModif').click(function(){
 });
 
 $('#btnSuppr').click(function(){
-    let idFilm = $('#filmModif').val();
+    let idTarif = $('#tarifModif').val()
 
-    if(!idFilm){
-        alert('Sélectionne un film à supprimer !');
+    if(!idTarif){
+        alert('Sélectionne un tarif à supprimer !');
         return;
     }
 
@@ -131,7 +111,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/films/${idFilm}`,
+        url: `/tarifs/${idTarif}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()
@@ -139,7 +119,6 @@ $('#btnSuppr').click(function(){
         success: function(result){
             alert(result.message);
             $('#myForm')[0].reset();
-
         },
         error: function(error){
             console.log(error);

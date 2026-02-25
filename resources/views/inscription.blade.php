@@ -57,6 +57,18 @@
 
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
+            <div class="input d-flex flex-column align-items-center pt-3">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            </div>
+
 
             <div class="row-auto d-flex justify-content-center pt-4">
                 <x-primary-button class="btn-validConInc inscription">

@@ -38,21 +38,42 @@ class TarifController extends Controller
         return view('tarifs.edit', compact('tarif'));
     }
 
-    public function update(Request $request, Tarif $tarif){
+    public function update(Request $request, $id)
+    {
         request()->validate([
             'libTarif' => 'required|string',
             'prixTarif' => 'required|numeric',
         ]);
 
-        $tarif->libTarif = request('libTarif');
-        $tarif->prixTarif = request('prixTarif');
-        $tarif->save();
+        $tarif = Tarif::findOrFail($id);
 
-        return redirect()->route('tarifs.index');
+        $tarif->update([
+            'libTarif' => $request->libTarif,
+            'prixTarif' => $request->prixTarif,
+        ]);
+
+        return response()->json([
+            'message' => 'tarif mis à jour !',
+            'tarif' => $tarif
+        ]);
     }
 
-    public function destroy(Tarif $tarif){
+    public function destroy($id)
+    {
+        $tarif = Tarif::findOrFail($id);
         $tarif->delete();
-        return redirect()->route('tarifs.index');
+
+        return response()->json([
+            'message' => 'Tarif supprimé avec succès !'
+        ]);
+    }
+
+    public function editTarif(Request $request){
+        $id = $request->idTarif;
+        $tarif = Tarif::find($id);
+
+        return response()->json([
+            'tarif'=> $tarif,
+        ]);
     }
 }

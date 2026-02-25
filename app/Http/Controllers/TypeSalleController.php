@@ -37,21 +37,42 @@ class TypeSalleController extends Controller
         return view('typesalles.edit', compact('typeSalle'));
     }
 
-    public function update(Request $request, TypeSalle $typeSalle){
+    public function update(Request $request, $id)
+    {
         request()->validate([
             'libTypeSalle' => 'required|string',
             'prixTypeSalle' => 'required|numeric'
         ]);
 
-        $typeSalle->libTypeSalle = request('libTypeSalle');
-        $typeSalle->prixTypeSalle = request('prixTypeSalle');
-        $typeSalle->save();
+        $typeSalle = TypeSalle::findOrFail($id);
 
-        return redirect()->route('typesalles.index');
+        $typeSalle->update([
+            'libTypeSalle' => $request->libTypeSalle,
+            'prixTypeSalle' => $request->prixTypeSalle,
+        ]);
+
+        return response()->json([
+            'message' => 'type salle mis à jour !',
+            'typeSalle' => $typeSalle
+        ]);
     }
 
-    public function destroy(TypeSalle $typeSalle){
+    public function destroy($id)
+    {
+        $typeSalle = TypeSalle::findOrFail($id);
         $typeSalle->delete();
-        return redirect()->route('typesalles.index');
+
+        return response()->json([
+            'message' => 'Type salle supprimé avec succès !'
+        ]);
+    }
+
+    public function edittypesalles(Request $request){
+        $id = $request->idTypeSalle;
+        $typeSalle = TypeSalle::find($id);
+
+        return response()->json([
+            'typeSalle'=> $typeSalle,
+        ]);
     }
 }

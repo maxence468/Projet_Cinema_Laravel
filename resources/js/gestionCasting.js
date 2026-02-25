@@ -1,29 +1,28 @@
 
-
 $('#btnAjt').click(function(){
-    let titreFilm = $('#titreFilm').val()
-    let descFilm = $('#descFilm').val()
-    let dateSortieFilm = $('#dateSortieFilm').val()
-    let dureeFilm = $('#dureeFilm').val()
-    let posterFilm = $('#posterFilm').val()
-    let idGenre = $('#idGenre').val()
+    let nomPers = $('#nomPers').val()
+    let prePers = $('#prePers').val()
+    let dateNaissPers = $('#dateNaissPers').val()
+    let lieuNaissPers = $('#lieuNaissPers').val()
+    let photoPers = $('#photoPers').val()
+    let biblio = $('#biblio').val()
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre){
+    if(nomPers && prePers && dateNaissPers && lieuNaissPers && photoPers && biblio){
         $.ajax({
-            url: "/films",
+            url: "/personnes",
             type: "post",
             data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idGenre: idGenre,
+                nomPers: nomPers,
+                prePers: prePers,
+                dateNaissPers: dateNaissPers,
+                lieuNaissPers: lieuNaissPers,
+                photoPers: photoPers,
+                biblio: biblio,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
                 $('#myForm')[0].reset();
-                alert('Film créé avec succès !');
+                alert('Personne créé avec succès !');
             },
             error: function(error){
                 if(error.responseJSON) {
@@ -45,24 +44,24 @@ $('#btnAjt').click(function(){
     }
 });
 
-$('#filmModif').change(function(e){
-    let idFilm = $('#filmModif').val()
+$('#personneModif').change(function(e){
+    let idPers = $('#personneModif').val()
 
     $.ajax({
-        url: "/editFilm",
+        url: "/editPersonne",
         type: "post",
         data:{
-            idFilm: idFilm,
+            idPers: idPers,
             _token: $('input[name="_token"]').val(),
         },
         success: function(result){
-            console.log(result['film'])
-            $('#titreFilm').val(result['film']['titreFilm'])
-            $('#descFilm').val(result['film']['descFilm'])
-            $('#dateSortieFilm').val(result['film']['dateSortieFilm'])
-            $('#dureeFilm').val(result['film']['dureeFilm'])
-            $('#posterFilm').val(result['film']['posterFilm'])
-            $('#idGenre').val(result['film']['idGenre'])
+            console.log(result['personne'])
+            $('#nomPers').val(result['personne']['nomPers'])
+            $('#prePers').val(result['personne']['prePers'])
+            $('#dateNaissPers').val(result['personne']['dateNaissPers'])
+            $('#lieuNaissPers').val(result['personne']['lieuNaissPers'])
+            $('#photoPers').val(result['personne']['photoPers'])
+            $('#biblio').val(result['personne']['biblio'])
         },
         error: function(error){
             console.log(error)
@@ -73,31 +72,31 @@ $('#filmModif').change(function(e){
 })
 
 $('#btnModif').click(function(){
-    let titreFilm = $('#titreFilm').val()
-    let descFilm = $('#descFilm').val()
-    let dateSortieFilm = $('#dateSortieFilm').val()
-    let dureeFilm = $('#dureeFilm').val()
-    let posterFilm = $('#posterFilm').val()
-    let idGenre = $('#idGenre').val()
+    let nomPers = $('#nomPers').val()
+    let prePers = $('#prePers').val()
+    let dateNaissPers = $('#dateNaissPers').val()
+    let lieuNaissPers = $('#lieuNaissPers').val()
+    let photoPers = $('#photoPers').val()
+    let biblio = $('#biblio').val()
 
-    let idFilm = $('#filmModif').val();
+    let idPers = $('#personneModif').val()
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre){
+    if(nomPers && prePers && dateNaissPers && lieuNaissPers && photoPers && biblio){
         $.ajax({
-            url: `/films/${idFilm}`,
+            url: `/personnes/${idPers}`,
             type: "patch",
             data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idGenre: idGenre,
+                nomPers: nomPers,
+                prePers: prePers,
+                dateNaissPers: dateNaissPers,
+                lieuNaissPers: lieuNaissPers,
+                photoPers: photoPers,
+                biblio: biblio,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
                 $('#myForm')[0].reset();
-                alert('Film modifié avec succès !');
+                alert('Personne modifié avec succès !');
             },
             error: function(error){
                 if(error.responseJSON) {
@@ -120,10 +119,10 @@ $('#btnModif').click(function(){
 });
 
 $('#btnSuppr').click(function(){
-    let idFilm = $('#filmModif').val();
+    let idPers = $('#personneModif').val()
 
-    if(!idFilm){
-        alert('Sélectionne un film à supprimer !');
+    if(!idPers){
+        alert('Sélectionne une personne à supprimer !');
         return;
     }
 
@@ -131,7 +130,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/films/${idFilm}`,
+        url: `/personnes/${idPers}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

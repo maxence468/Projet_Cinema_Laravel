@@ -1,29 +1,18 @@
 
-
 $('#btnAjt').click(function(){
-    let titreFilm = $('#titreFilm').val()
-    let descFilm = $('#descFilm').val()
-    let dateSortieFilm = $('#dateSortieFilm').val()
-    let dureeFilm = $('#dureeFilm').val()
-    let posterFilm = $('#posterFilm').val()
-    let idGenre = $('#idGenre').val()
+    let libGenre = $('#libGenre').val()
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre){
+    if(libGenre){
         $.ajax({
-            url: "/films",
+            url: "/genres",
             type: "post",
             data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idGenre: idGenre,
+                libGenre: libGenre,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
                 $('#myForm')[0].reset();
-                alert('Film créé avec succès !');
+                alert('Genre créé avec succès !');
             },
             error: function(error){
                 if(error.responseJSON) {
@@ -45,24 +34,19 @@ $('#btnAjt').click(function(){
     }
 });
 
-$('#filmModif').change(function(e){
-    let idFilm = $('#filmModif').val()
+$('#genreModif').change(function(e){
+    let idGenre = $('#genreModif').val()
 
     $.ajax({
-        url: "/editFilm",
+        url: "/editGenre",
         type: "post",
         data:{
-            idFilm: idFilm,
+            idGenre: idGenre,
             _token: $('input[name="_token"]').val(),
         },
         success: function(result){
             console.log(result['film'])
-            $('#titreFilm').val(result['film']['titreFilm'])
-            $('#descFilm').val(result['film']['descFilm'])
-            $('#dateSortieFilm').val(result['film']['dateSortieFilm'])
-            $('#dureeFilm').val(result['film']['dureeFilm'])
-            $('#posterFilm').val(result['film']['posterFilm'])
-            $('#idGenre').val(result['film']['idGenre'])
+            $('#libGenre').val(result['genre']['libGenre'])
         },
         error: function(error){
             console.log(error)
@@ -73,31 +57,21 @@ $('#filmModif').change(function(e){
 })
 
 $('#btnModif').click(function(){
-    let titreFilm = $('#titreFilm').val()
-    let descFilm = $('#descFilm').val()
-    let dateSortieFilm = $('#dateSortieFilm').val()
-    let dureeFilm = $('#dureeFilm').val()
-    let posterFilm = $('#posterFilm').val()
-    let idGenre = $('#idGenre').val()
+    let libGenre = $('#libGenre').val()
 
-    let idFilm = $('#filmModif').val();
+    let idGenre = $('#genreModif').val()
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre){
+    if(libGenre){
         $.ajax({
-            url: `/films/${idFilm}`,
+            url: `/genres/${idGenre}`,
             type: "patch",
             data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idGenre: idGenre,
+                libGenre: libGenre,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
                 $('#myForm')[0].reset();
-                alert('Film modifié avec succès !');
+                alert('Genre modifié avec succès !');
             },
             error: function(error){
                 if(error.responseJSON) {
@@ -120,10 +94,10 @@ $('#btnModif').click(function(){
 });
 
 $('#btnSuppr').click(function(){
-    let idFilm = $('#filmModif').val();
+    let idGenre = $('#genreModif').val()
 
-    if(!idFilm){
-        alert('Sélectionne un film à supprimer !');
+    if(!idGenre){
+        alert('Sélectionne un Genre à supprimer !');
         return;
     }
 
@@ -131,7 +105,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/films/${idFilm}`,
+        url: `/genres/${idGenre}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

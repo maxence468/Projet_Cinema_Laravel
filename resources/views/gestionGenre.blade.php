@@ -65,4 +65,34 @@
             <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
         </div>
     </main>
+    <script>
+        /*function submitForm(action) {
+            const form = document.getElementById('');
+            const methodInput = document.getElementById('');
+            const actionInput = document.getElementBydId('');
+
+            actionInput.value = action;
+
+            switch (action) {
+                case 'create':
+                    form.action = "<route('posts.store')";
+                    methodInput.value = 'POST';
+                    break;
+
+                case 'update';
+                    form.action = " route('posts.update'), $post->id ?? 0"
+                    methodInput.value = 'PATCH';
+                    break;
+
+                case 'delete':
+                    if(!confirm('Êtes vous sure ?')) {
+                        event.preventDefault();
+                        return;
+                    }
+                    form.action = "route('posts.destroy', $post->id ?? 0)"
+                    methodInput.value = 'DELETE';
+                    break;
+            }
+        }*/
+    </script>
 @endsection
