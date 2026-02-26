@@ -82,7 +82,7 @@
 
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
-                                <label class="h3 mb-0">Durée film</label>
+                                <label class="h3 mb-0">Due film</label>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <input class="inputCatalogue" id="dureeFilm" type="number" placeholder="Durée film" required>
@@ -111,9 +111,12 @@
                                         <option value="{{$genre->idGenre}}">{{$genre->libGenre}}</option>
                                     @endforeach
                                 </select>
+                                <button type="button" onclick="showFormGenre()">Créer un genre</button>
                             </div>
                         </div>
 
+                        <div id="divIdGenre">
+                        </div>
 
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
@@ -121,19 +124,23 @@
                             </div>
                             <div class="col-12 col-lg-4" id="realisateurs-container">
                                 <select name="idRealisateur[]" class="inputCatalogue choixCatal idRealisateur">
-                                    <option value="">-- Réalisateur film --</option>
+                                    <option value="">Réalisateur film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
                                     @endforeach
                                 </select>
+                                <button id="addRealisateur">Ajouter un realisateur</button>
+                                <button type="button" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
-                            <button id="addRealisateur">Ajouter un realisateur</button>
+                        </div>
+
+                        <div id="divIdPersonne">
                         </div>
 
                         <div id="realisateur-template" class="d-none">
                             <div class="realisateur-row mb-2 d-flex">
                                 <select name="idRealisateur[]" class="inputCatalogue choixCatal idRealisateur">
-                                    <option value="">-- Réalisateur film --</option>
+                                    <option value="">Réalisateur film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{ $personne->idPers }}">
                                             {{ $personne->nomPers }} - {{ $personne->prePers }}
@@ -150,19 +157,20 @@
                             </div>
                             <div class="col-12 col-lg-4" id="scenariste-container">
                                 <select name="idRealisateur[]" class="inputCatalogue choixCatal idScenariste">
-                                    <option value="">-- Scénariste film --</option>
+                                    <option value="">Scénariste film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
                                     @endforeach
                                 </select>
+                                <button id="addScenariste">Ajouter un Scénariste</button>
+                                <button type="button" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
-                            <button id="addScenariste">Ajouter un Scénariste</button>
                         </div>
 
                         <div id="scenariste-template" class="d-none">
                             <div class="scenariste-row mb-2 d-flex">
                                 <select name="idScenariste[]" class="inputCatalogue choixCatal idScenariste">
-                                    <option value="">-- Scénariste film --</option>
+                                    <option value="">Scénariste film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{ $personne->idPers }}">
                                             {{ $personne->nomPers }} - {{ $personne->prePers }}
@@ -179,7 +187,7 @@
                             </div>
                             <div class="acteur-row-champsActeur col-12 col-lg-4" id="acteur-container">
                                 <select name="idActeur[]" class="inputCatalogue choixCatal idActeur">
-                                    <option value="">-- Acteur film --</option>
+                                    <option value="">Acteur film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
                                     @endforeach
@@ -198,14 +206,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <button id="addActeur">Ajouter un acteur</button>
+                                <button type="button" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
-                            <button id="addActeur">Ajouter un acteur</button>
+
                         </div>
 
                         <div id="acteur-template" class="d-none">
                             <div class="acteur-row-champsActeur acteur-row mb-2 d-flex">
                                 <select name="idActeur[]" class="inputCatalogue choixCatal idActeur">
-                                    <option value="">-- Acteur film --</option>
+                                    <option value="">Acteur film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{ $personne->idPers }}">
                                             {{ $personne->nomPers }} - {{ $personne->prePers }}
@@ -241,5 +251,153 @@
 
         </div>
     </main>
+    <template id="tplGenre">
+        <form id="formAjoutGenre" method="post" action="">
+            @csrf
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3 order-4 order-lg-3">
+                    <label class="h3 mb-0"></label>
+                </div>
+
+                <div class="col-12 col-lg-4 order-5 order-lg-4">
+                    <label class="h3 mb-0">Ajouter un genre</label>
+                </div>
+            </div>
+
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3 order-4 order-lg-3">
+                    <label class="h3 mb-0">Libelle genre</label>
+                </div>
+
+                <div class="col-12 col-lg-4 order-5 order-lg-4">
+                    <input form="formAjoutGenre" class="inputCatalogue" type="text" placeholder="Libelle genre" required>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3 order-4 order-lg-3">
+                    <label class="h3 mb-0"></label>
+                </div>
+                <div class="col-12 col-lg-4 order-5 order-lg-4">
+                    <button form="formAjoutGenre" name="btnAjout" class="btnTemplate" type="button">
+                        <span>Ajouter</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </template>
+    <template id="tplPersonne">
+        <form form="formAjoutPersonne" id="myForm" method="post" action="">
+            @csrf
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3 order-4 order-lg-3">
+                    <label class="h3 mb-0"></label>
+                </div>
+
+                <div class="col-12 col-lg-4 order-5 order-lg-4">
+                    <label class="h3 mb-0">Ajouter une personne</label>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3 order-4 order-lg-3">
+                    <label class="h3 mb-0">Nom personne</label>
+                </div>
+
+                <div class="col-12 col-lg-4 order-5 order-lg-4">
+                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" placeholder="Nom personne" required>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3">
+                    <label class="h3 mb-0">Prenom personne</label>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" placeholder="Prenom personne" required>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block"></div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3">
+                    <label class="h3 mb-0">Date de naissance</label>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" placeholder="Date de naissance" required>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3">
+                    <label class="h3 mb-0">Lieu de naissance</label>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" placeholder="Lieu de naissance" required>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3">
+                    <label class="h3 mb-0">Photo personne</label>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" placeholder="Photo personne" required>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3">
+                    <label class="h3 mb-0">Bibliographie</label>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <textarea form="formAjoutPersonne" class="textareaCatalogue" placeholder="Bibliographie" required></textarea>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-12 col-lg-3 order-4 order-lg-3">
+                    <label class="h3 mb-0"></label>
+                </div>
+                <div class="col-12 col-lg-4 order-5 order-lg-4">
+                    <button form="formAjoutPersonne" name="btnAjout" class="btnTemplate" type="button">
+                        <span>Ajouter</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </template>
+    <script>
+        var countFormGenre = 0;
+        var countFormPersonne = 0;
+
+        function showFormGenre() {
+            if (countFormGenre == 0) {
+                var template = document.querySelector("#tplGenre");
+
+                var divIdGenre = document.getElementById('divIdGenre');
+                var clone = document.importNode(template.content, true);
+
+                divIdGenre.appendChild(clone);
+                countFormGenre++;
+            }
+        }
+
+        function showFormPersonne() {
+            if(countFormPersonne == 0) {
+                var template = document.querySelector("#tplPersonne");
+
+                var divIdPersonne = document.getElementById('divIdPersonne');
+                var clone = document.importNode(template.content, true);
+
+                divIdPersonne.appendChild(clone);
+                countFormPersonne++;
+            }
+        }
+    </script>
     @vite('resources/js/gestionFilm.js')
 @endsection
