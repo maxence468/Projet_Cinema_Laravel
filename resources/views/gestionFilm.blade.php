@@ -43,9 +43,9 @@
                             <div class="col-12 col-lg-3 order-4 order-lg-3">
                                 <label class="h3 mb-0">Titre film</label>
                             </div>
-
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" id="titreFilm" type="text" placeholder="Titre film" required>
+                                <input class="inputCatalogue" name="titreFilm" id="titreFilm" type="text" value="{{ old('titreFilm') }}" placeholder="Titre film" required>
+
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
@@ -189,11 +189,11 @@
                                     <input class="inputCatalogue preJoue" type="text" placeholder="preJoue" required>
                                     <div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue principale" id="principale" type="radio" required>
+                                            <input name="typeActeur_1" class="inputCatalogue principale" id="principale" type="radio" required>
                                             <label for="principale">Principale</label>
                                         </div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue secondaire" id="secondaire" type="radio" required>
+                                            <input name="typeActeur_1" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                             <label for="secondaire">Secondaire</label>
                                         </div>
                                     </div>
@@ -217,11 +217,11 @@
                                     <input class="inputCatalogue preJoue" type="text" placeholder="preJoue" required>
                                     <div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue principale" id="principale" type="radio" required>
+                                            <input name="typeActeur_" class="inputCatalogue principale" id="principale" type="radio" required>
                                             <label for="principale">Principale</label>
                                         </div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue secondaire" id="secondaire" type="radio" required>
+                                            <input name="typeActeur_" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                             <label for="secondaire">Secondaire</label>
                                         </div>
                                     </div>

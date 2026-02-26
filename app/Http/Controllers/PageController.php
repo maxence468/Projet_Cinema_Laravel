@@ -144,7 +144,7 @@ class PageController extends Controller{
         $genres = Genre::all();
         $films = Film::all();
         $personnes = Personne::all();
-
+        
         return view('gestionFilm', [
             'genres' => $genres,
             'films' => $films,

@@ -34,8 +34,8 @@
                             <a href="/gestionFilm" class="nav-text">Gestion catalogue</a>
                         @else
                             <a href="" class="nav-text">Réservation</a>
-                            <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                         @endif
+                            <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                     @endauth
                 </div>
 
