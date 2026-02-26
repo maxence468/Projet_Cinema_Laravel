@@ -17,37 +17,55 @@ class GenreController extends Controller
         return view('genres.show',compact('genre'));
     }
 
-    public function create(){
+    public function create() {
         return view('genres.create');
     }
-    public function store(Request $request){
-        $vali = request()->validate([
-          'libGenre'=>'required',
+
+    public function store(Request $request) {
+        request()->validate([
+            'libGenre' => 'required|string',
         ]);
-        $genre = new Genre();
-        $genre->libGenre = $vali['libGenre'];
 
-        $genre->save();
+        $g = new Genre();
+        $g->libGenre = request('libGenre');
+        $g->save();
 
-        return redirect('/genres/'.$genre->idGenre);
+        return redirect()->route('genres.index');
     }
 
     public function edit(Genre $genre){
-        return view('genres.edit',compact('genre'));
+        return view('genres.edit', compact('genre'));
     }
 
-    public function update(Request $request,Genre $genre){
-        $data = $request->only([
-            'libGenre',
+    public function update(Request $request, $id)
+    {
+        $genre = Genre::findOrFail($id);
+
+        $genre->update([
+            'libGenre' => $request->libGenre,
         ]);
 
-        $genre->update(array_filter($data));
-
-        return redirect('/genres/' . $genre->idGenre);
+        return response()->json([
+            'message' => 'Film mis à jour !',
+            'genre' => $genre
+        ]);
     }
-
-    public function destroy(Genre $genre){
+    public function destroy($id)
+    {
+        $genre = Genre::findOrFail($id);
         $genre->delete();
-        return redirect('/genres');
+
+        return response()->json([
+            'message' => 'Film supprimé avec succès !'
+        ]);
     }
+
+    public function editGenre(Request $request){
+        $id = $request->idGenre;
+        $genre = Genre::find($id);
+
+        return response()->json([
+            'genre'=> $genre,
+        ]);
+}
 }

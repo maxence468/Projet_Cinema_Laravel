@@ -15,41 +15,64 @@ class TypeSalleController extends Controller
         return view('typesalles.show', compact('typesalle'));
     }
 
-    public function create(){
+    public function create() {
         return view('typesalles.create');
     }
-    public function store(Request $request){
-        $validated = $request->validate([
-            'libTypeSalle' => 'required',
-            'prixTypeSalle' => 'required',
 
+    public function store(Request $request) {
+        request()->validate([
+            'libTypeSalle' => 'required|string',
+            'prixTypeSalle' => 'required|numeric'
         ]);
 
         $t = new TypeSalle();
-        $t->libTypeSalle = $validated['libTypeSalle'];
-        $t->prixTypeSalle = $validated['prixTypeSalle'];
+        $t->libTypeSalle = request('libTypeSalle');
+        $t->prixTypeSalle = request('prixTypeSalle');
         $t->save();
-        return redirect('/typesalles/'.$t->idTypeSalle);
+
+        return redirect()->route('typesalles.index');
     }
 
-    public function edit(TypeSalle $typesalle){
-        return view('typesalles.edit', compact('typesalle'));
+    public function edit(TypeSalle $typeSalle){
+        return view('typesalles.edit', compact('typeSalle'));
     }
 
-    public function update(Request $request, TypeSalle $typesalle){
-        $validated = $request->validate([
-            'libTypeSalle' => 'sometimes|required',
-            'prixTypeSalle' => 'sometimes|required|numeric',
+    public function update(Request $request, $id)
+    {
+        request()->validate([
+            'libTypeSalle' => 'required|string',
+            'prixTypeSalle' => 'required|numeric'
         ]);
 
-        $typesalle->update($validated);
+        $typeSalle = TypeSalle::findOrFail($id);
 
-        return redirect('/typesalles/'.$typesalle->idTypeSalle);
+        $typeSalle->update([
+            'libTypeSalle' => $request->libTypeSalle,
+            'prixTypeSalle' => $request->prixTypeSalle,
+        ]);
+
+        return response()->json([
+            'message' => 'type salle mis à jour !',
+            'typeSalle' => $typeSalle
+        ]);
     }
 
+    public function destroy($id)
+    {
+        $typeSalle = TypeSalle::findOrFail($id);
+        $typeSalle->delete();
 
-public function destroy(TypeSalle $typesalle){
-        $typesalle->delete();
-        return redirect('/typesalles');
-}
+        return response()->json([
+            'message' => 'Type salle supprimé avec succès !'
+        ]);
+    }
+
+    public function edittypesalles(Request $request){
+        $id = $request->idTypeSalle;
+        $typeSalle = TypeSalle::find($id);
+
+        return response()->json([
+            'typeSalle'=> $typeSalle,
+        ]);
+    }
 }

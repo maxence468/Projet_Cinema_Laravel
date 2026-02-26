@@ -1,0 +1,660 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lilita One', sans-serif;
+}
+
+html, body {
+    color: white;
+    height: 100%;
+    background-color: #1c1c1c;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 5px;
+    padding-right: 30px;
+}
+
+.logo-wrapper {
+    flex-shrink: 0;
+    height: 100%;
+    aspect-ratio: 579/521;
+}
+
+.nav-links {
+    padding-left: 30px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 25px;
+    margin-left: auto;
+}
+
+/* Buttons */
+.btn-nav {
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-conInc {
+    width: 164px;
+    height: 52px;
+    font-size: 32px;
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 3px 4px 0px 4px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-validConInc {
+    width: 329px;
+    height: 52px;
+    font-size: 32px;
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 3px 43px 0px 43px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+}
+
+.inputConInc label {
+    margin: 0 auto;
+    width: 165px;
+    display: block;
+}
+
+.inputConInc input {
+    padding-block: 2px;
+    margin: 0 auto;   /* centers the input */
+    display: block;
+    width: 329px;
+    height: 52px;
+}
+
+.style-equal {
+    width: 165px;      /* Override rules btn-validConInc */
+    padding-left: 0;   /* Override rules btn-validConInc */
+    padding-right: 0;  /* Override rules btn-validConInc */
+    color: white;
+}
+
+.btn-ajoutModifSuppr {
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 3px 20px 0px 20px;
+    margin: 0px 30px 0px 30px;
+    width: 181px;
+    height: 52px;
+    font-size: 32px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+}
+
+.input label {
+    margin: 0 auto 0 auto;
+    width: 165px;
+    display: block;
+}
+
+.input input {
+    padding-block: 2px;
+    margin: 0 auto;   /* centers the input */
+    display: block;
+    width: 165px;
+}
+
+.hamburger {
+    display: none;
+}
+
+.hamburgerMenu.active {
+    position: fixed;
+    inset: 0; /* top:0 right:0 bottom:0 left:0 */
+    background-color: rgba(28, 28, 28, 0.95);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburgerMenu {
+    display: none;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.hamburgerMenu li {
+    width: 100%;
+    text-align: center;
+}
+
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+}
+
+.mainAccueil {
+    flex: 1;
+    margin-top: 3rem;
+    padding: 10px;
+}
+
+main {
+    flex: 1;
+}
+
+.rech {
+    width: 329px;
+    height: 53px;
+}
+
+.rech::placeholder {
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.movie::placeholder {
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.poster {
+    width: 412px;
+}
+
+select {
+    width: 320px;
+    height: 53px;
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+#logoDevOreo {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+/* Footer container */
+.site-footer {
+    background-color: #991917;
+    padding: 0 20px; /* horizontal only */
+    flex-shrink: 0;
+}
+
+.footer-text {
+    flex: 1;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+    line-height: 1;
+    color: white;
+}
+
+footer {
+    background-color: #991917;
+}
+
+.btnChoixJour {
+    color: #FFFFFF;
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btnChoixJour:focus {
+    color: #1c1c1c;
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.carousel-col {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+}
+
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+
+@media(min-width:768px) {
+    .carousel-item-next,
+    .carousel-item-end.active {
+        transform: translateX(33.333%);
+    }
+    .carousel-item-prev,
+    .carousel-item-start.active {
+        transform: translateX(-33.333%);
+    }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start {
+    transform: translateX(0);
+}
+
+
+@media(max-width:767px) {
+    .carousel-item .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+
+    .btnChoixJour {
+        color: #FFFFFF;
+        background-color: #991917;
+        border: 1px solid white;
+        padding: 3px 6px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btnChoixJour:focus {
+        color: #1c1c1c;
+        background-color: #991917;
+        border: 1px solid white;
+        padding: 3px 6px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .smd {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+}
+
+.carousel-item {
+    align-items: stretch;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+section {
+    flex: 1;
+}
+
+.inputCatalogue::placeholder, .textareaCatalogue::placeholder, .choixCatal::placeholder{
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar {
+    width: 130px;
+    flex-shrink: 0; /* permet de ne pas revenir à la ligne */
+}
+
+.espaceSideBar {
+    margin-left: 110px;
+}
+
+@media (max-width: 768px) {
+    .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .nav-links, .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+    }
+
+    .nav-links.active, .nav-buttons.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 33px;
+        right: 20px;
+        font-size: 28px;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    .poster {
+        max-width: 33%;
+        height: auto;
+    }
+}
+
+.btn-ajoutModifSuppr {
+    width: 181px;
+    height: 52px;
+    font-size: 32px;
+
+}
+.sidebar {
+    width: 130px;
+    flex-shrink: 0;
+}
+
+/* New rule to sync the label and select position */
+.alignment-wrapper {
+    width: 345px;
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.inputCatalogue,
+.choixCatal,
+.textareaCatalogue {
+    display: block !important;       /* Forces select to behave like a box */
+    width: 100% !important;
+    max-width: 345px !important;
+    height: 53px !important;
+    color: #1c1c1c;
+    font-size: 32px;
+}
+
+.textareaCatalogue {
+    height: 106px !important;
+}
+
+@media (max-width: 768px) {
+    .btn-ajoutModifSuppr {
+        width: 120px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 620px) {
+    .espaceSideBar {
+        margin-left: 0 !important;
+    }
+    .btn-ajoutModifSuppr {
+        margin-bottom: 20px;
+    }
+
+}
+
+@media (max-width: 540px) {
+    .inputCatalogue,
+    .choixCatal,
+    .textareaCatalogue {
+        max-width: 330px !important;
+    }
+
+
+}
+
+@media (max-width: 991px) {
+    /*  Reset the margin-left from desktop so it doesn't push the form too far */
+    .espaceSideBar {
+        margin-left: 0 !important;
+        flex-grow: 1;
+    }
+
+    /* Create a "centered column" for the form */
+    #myForm {
+        max-width: 345px;   /* This matches the width of your inputs */
+        margin-left: auto;  /* Equal margins on both sides centers the form */
+        margin-right: auto;
+    }
+
+    /* Ensure labels stay aligned to the left of this 345px column */
+    .row label {
+        text-align: left;
+        display: block;
+        width: 100%;
+    }
+
+    /* Center the main Title above the form block */
+    h3 {
+        text-align: left; /* Keep left-aligned within the 345px column */
+        margin-bottom: 20px;
+    }
+
+    .alignment-wrapper {
+        justify-content: flex-start !important;
+    }
+
+    .choixCatal {
+        margin-bottom: 20px;
+    }
+
+    .labelFilm {
+        margin-bottom: 0px !important;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .d-flex.flex-row.align-items-start {
+        flex-direction: row !important;
+        display: flex !important;
+    }
+
+    .sidebar {
+        width: 100px !important; /* Shrunk from 130px to save space */
+        font-size: 14px;
+    }
+
+    .espaceSideBar {
+        margin-left: 10px !important; /* Small gap between sidebar and form */
+        flex-grow: 1;
+        width: calc(100% - 110px); /* Fill the rest of the screen */
+    }
+
+    #myForm {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .inputCatalogue,
+    .choixCatal,
+    .textareaCatalogue,
+    .alignment-wrapper {
+        width: 100% !important; /* Take up all space right of the sidebar */
+        max-width: 345px !important;
+        font-size: 20px !important; /* 20 small phones */
+    }
+
+    /* Adjust labels so they don't take up too much vertical space */
+    .h3, h3 {
+        font-size: 22px !important;
+    }
+
+}
+
+/* MOBILE SLIDER (Under 480px) */
+@media (max-width: 480px) {
+
+    .alignment-wrapper {
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 0px;
+    }
+
+    .top-slider {
+        flex-direction: row !important; /* Side-by-side links */
+        width: 100%;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent links from wrapping to next line */
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #991917;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .top-slider a {
+        padding-top: 0 !important; /* Remove the vertical padding from desktop */
+        padding-right: 20px; /* Space between sliding options */
+        display: inline-block;
+        font-size: 18px;
+    }
+
+    .espaceSideBar {
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .sidebar {
+        width: 80px !important;
+    }
+    .sidebar a {
+        font-size: 12px;
+    }
+    .inputCatalogue, .choixCatal, .textareaCatalogue {
+        height: 40px !important;
+    }
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.espaceTopGestCast {
+    padding-top: 50px;
+}
+
+/* Connexion / Inscription form block */
+.inputConInc{
+    width: 329px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.inputConInc label{
+    width: 100%;
+    text-align: left;
+    margin: 0 0 6px 0;
+    font-size: 32px;
+    color: white;
+}
+
+
+.inputConInc input{
+    width: 100%;
+    height: 52px;
+    margin: 0;
+    padding: 0 12px;
+    font-size: 32px;
+    color: #1c1c1c;
+}
+
+
+.inputConInc input::placeholder{
+    font-size: 32px;
+    color: #1c1c1c;
+}
+
+.sizeTitleSettingAccount {
+    font-size: 32px;
+}
+
+@media (min-width: 992px) {
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-7.order-1.pb-5 {
+        padding-bottom: 40px !important;
+    }
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-5.order-2 {
+        align-self: stretch !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;    /* push down near the select */
+        align-items: center !important;
+        padding-top: 0 !important;
+    }
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-5.order-2 .alignment-wrapper {
+        justify-content: flex-start !important;  /* label starts at left of the 345px box */
+    }
+
+    /* Tighten label spacing */
+    #myForm .row.align-items-center.mb-1 .labelFilm {
+        margin-bottom: 6px !important;
+        white-space: nowrap;
+        line-height: 1;
+    }
+}

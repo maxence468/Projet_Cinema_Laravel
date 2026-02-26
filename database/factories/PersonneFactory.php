@@ -21,8 +21,8 @@ class PersonneFactory extends Factory
             'prePers' => fake()->name(),
             'dateNaissPers' => fake()->dateTimeBetween('-30 years', 'now'),
             'lieuNaissPers' => fake()->city(),
-            'photoPers' => fake()->imageUrl(640, 480, 'movies', true),
-            'biblio' => fake()->sentence()
+            'photoPers' => fake()->imageUrl(412, 626, 'movies', true),
+            'biblio' => fake()->sentence(),
         ];
     }
 }

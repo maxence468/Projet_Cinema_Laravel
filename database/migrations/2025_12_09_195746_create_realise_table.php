@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('realise', function (Blueprint $table) {
-            $table->unsignedBigInteger('film_id');
-            $table->unsignedBigInteger('pers_id');
+            $table->unsignedBigInteger('idFilm');
+            $table->unsignedBigInteger('idPers');
 
-            $table->foreign('film_id')->references('idFilm')->on('films');
-            $table->foreign('pers_id')->references('idPers')->on('personnes');
+            $table->foreign('idFilm')->references('idFilm')->on('films');
+            $table->foreign('idPers')->references('idPers')->on('personnes');
 
-            $table->primary(['film_id', 'pers_id']);
+            $table->primary(['idFilm', 'idPers']);
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('film_realisateur');
+        Schema::dropIfExists('realise');
     }
 };

@@ -17,50 +17,64 @@ class SalleController extends Controller
         return view('salles.show', compact('salle'));
     }
 
-    public function create(){
-        $typesSalle = TypeSalle::all();
-        $cinemas = Cinema::all();
-        return view('salles.create', compact('cinemas','typesSalle'));
+    public function create() {
+        return view('salles.create');
     }
 
-    public function store(Request $request){
-        $vali = request()->validate([
-            'capaciteSal' => 'required',
-            'idCinema' => 'required',
-            'idTypeSalle' => 'required',
+    public function store(Request $request) {
+        request()->validate([
+            'capaciteSal' => 'required|integer',
+            'idTypeSalle' => 'required|exists:typesalles,idTypeSalle',
+            'idCinema' => 'required|exists:cinemas,idCinema',
         ]);
 
         $s = new Salle();
-        $s->capaciteSal = $vali['capaciteSal'];
-        $s->idCinema = $vali['idCinema'];
-        $s->idTypeSalle = $vali['idTypeSalle'];
-
+        $s->capaciteSal = request('capaciteSal');
+        $s->idTypeSalle = request('idTypeSalle');
+        $s->idCinema = request('idCinema');
         $s->save();
 
-        return redirect('/salles/'.$s->idSalle);
-
+        return redirect()->route('salles.index');
     }
 
-    public function edit(Salle $salle){
-        $typesSalle = TypeSalle::all();
-        $cinemas = Cinema::all();
-        return view('salles.edit', compact('salle','typesSalle','cinemas'));
+    public function edit(Salle $salle) {
+        return view('salles.edit', compact('salle'));
     }
+    public function update(Request $request, $id)
+    {
+        request()->validate([
 
-    public function update(Request $request, Salle $salle){
-        $data = $request->only([
-            'capaciteSal',
-            'idTypeSalle',
-            'idCinema',
         ]);
 
-        $salle->update(array_filter($data));
+        $salle = Salle::findOrFail($id);
 
-        return redirect('/salles/' . $salle->idSalle);
+        $salle->update([
+            'capaciteSal' => $request->capaciteSal,
+            'idTypeSalle' => $request->idTypeSalle,
+            'idCinema' => $request->idCinema,
+        ]);
+
+        return response()->json([
+            'message' => 'Salle mis à jour !',
+            'salle' => $salle
+        ]);
     }
 
-    public function destroy(Salle $salle){
+    public function destroy($id)
+    {
+        $salle = Salle::findOrFail($id);
         $salle->delete();
-        return redirect('/salles');
+
+        return response()->json([
+            'message' => 'Salle supprimée avec succès !'
+        ]);
+    }
+    public function editSalle(Request $request){
+        $id = $request->idSalle;
+        $salle = Salle::find($id);
+
+        return response()->json([
+            'salle'=> $salle,
+        ]);
     }
 }

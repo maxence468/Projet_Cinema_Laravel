@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Seance extends Model
 {
+    use HasFactory;
 
     public function film(): BelongsTo{
         return $this->belongsTo(Film::class, 'idFilm','idFilm');
@@ -17,7 +19,7 @@ class Seance extends Model
     }
     protected $table = 'seances';
     protected $primaryKey = 'idSeance';
-    protected $fillable = ['heureSeance', 'dateSeance', 'dureeSeance','idFilm'];
+    protected $fillable = ['heureSeance', 'dateSeance', 'dureeSeance','idFilm','idSalle'];
 
     protected $foreignKey = 'idFilm';
 }

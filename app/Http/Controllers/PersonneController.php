@@ -16,70 +16,73 @@ class PersonneController extends Controller
         return view('personnes.show',compact('personne'));
     }
 
-    public function create(){
+    public function create() {
         return view('personnes.create');
     }
 
-    public function store(Request $request){
-        $validated = $request->validate([
-            'nomPers' => 'required',
-            'prePers' => 'required',
-            'dateNaissPers' => 'required',
-            'lieuNaissPers' => 'required',
-            'photoPers' => 'required',
-            'biblio' => 'required',
+    public function store(Request $request) {
+        request()->validate([
+            'nomPers' => 'required|string',
+            'prePers' => 'required|string',
+            'dateNaissPers' => 'required|date',
+            'lieuNaissPers' => 'required|string',
+            'photoPers' => 'required|string',
+            'biblio' => 'required|string',
         ]);
-
-        $photoPath = $request->file('photoPers')->store('photo', 'public');
 
         $p = new Personne();
-        $p->nomPers = $validated['nomPers'];
-        $p->prePers = $validated['prePers'];
-        $p->dateNaissPers = $validated['dateNaissPers'];
-        $p->LieuNaissPers = $validated['lieuNaissPers'];
-        $p->photoPers = $photoPath;
-        $p->biblio = $validated['biblio'];
-
+        $p->nomPers = request('nomPers');
+        $p->prePers = request('prePers');
+        $p->dateNaissPers = request('dateNaissPers');
+        $p->lieuNaissPers = request('lieuNaissPers');
+        $p->photoPers = request('photoPers');
+        $p->biblio = request('biblio');
         $p->save();
 
-        return redirect('/personnes/'.$p->idPers);
+        return redirect()->route('personnes.index');
     }
 
-    public function edit(Personne $personne){
-        return view('personnes.edit',compact('personne'));
+    public function edit(Personne $personne) {
+        return view('personnes.edit', compact('personne'));
     }
-
-    public function update(Request $request,Personne $personne){
-
+    public function update(Request $request, $id)
+    {
         request()->validate([
-            'nomPers',
-            'prePers',
-            'dateNaissPers',
-            'lieuNaissPers',
-            'photoPers',
-            'biblio',
+
         ]);
 
-        $photoPath = $request->file('photoPers')->store('photo', 'public');
+        $personne = Personne::findOrFail($id);
 
-        $personne->nomPers = request('nomPers');
-        $personne->prePers = request('prePers');
-        $personne->dateNaissPers = request('dateNaissPers');
-        $personne->lieuNaissPers = request('lieuNaissPers');
-        $personne->photoPers = $photoPath;
-        $personne->biblio = request('biblio');
+        $personne->update([
+            'nomPers' => $request->nomPers,
+            'prePers' => $request->prePers,
+            'dateNaissPers' => $request->dateNaissPers,
+            'lieuNaissPers' => $request->lieuNaissPers,
+            'photoPers' => $request->photoPers,
+            'biblio' => $request->biblio,
+        ]);
 
-        $personne->save();
+        return response()->json([
+            'message' => 'Personne mise à jour !',
+            'personne' => $personne
+        ]);
+    }
+    public function destroy($id)
+    {
+        $personne = Personne::findOrFail($id);
+        $personne->delete();
 
-
-        return redirect('/personnes/' . $personne->idPers);
-
-
-
+        return response()->json([
+            'message' => 'Personne supprimé avec succès !'
+        ]);
     }
 
-    public function destroy(Personne $personne){
-        $personne->delete();
-        return redirect('/personnes');
+    public function editPersonne(Request $request){
+        $id = $request->idPers;
+        $personne = Personne::find($id);
+
+        return response()->json([
+            'personne'=> $personne,
+        ]);
     }
 }

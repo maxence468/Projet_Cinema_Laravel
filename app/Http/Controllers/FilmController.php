@@ -13,65 +13,116 @@ class FilmController extends Controller
         return view('films.index', compact('films'));
     }
 
+    public function create(){
+        return view('films.create');
+    }
+
     public function show(Film $film){
         return view('films.show', compact('film'));
     }
 
-    public function create(){
-        $genres = Genre::all();
-        return view('films.create', compact('genres'));
-    }
-
-    public function store(Request $request){
-        $validated = $request->validate([
-            'titreFilm' => 'required',
-            'descFilm' => 'required',
-            'dateSortieFilm' => ['required','date'],
+    public function store() {
+        request()->validate([
+            'titreFilm' => 'required|string|max:255',
+            'descFilm' => 'nullable|string',
+            'dateSortieFilm' => 'required|date',
             'dureeFilm' => 'required|integer',
-            'posterFilm' => ['required','image'],
+            'posterFilm' => 'nullable|string',
             'idGenre' => 'required|exists:genres,idGenre',
         ]);
 
-        $posterPath = $request->file('posterFilm')->store('posters', 'public');
-
+        //film
         $f = new Film();
-        $f->titreFilm = $validated['titreFilm'];
-        $f->descFilm = $validated['descFilm'];
-        $f->dateSortieFilm = $validated['dateSortieFilm'];
-        $f->dureeFilm = $validated['dureeFilm'];
-        $f->posterFilm = $posterPath;
-        $f->idGenre = $validated['idGenre'];
+        $f->titreFilm = request('titreFilm');
+        $f->descFilm = request('descFilm');
+        $f->dateSortieFilm = request('dateSortieFilm');
+        $f->dureeFilm = request('dureeFilm');
+        $f->posterFilm = request('posterFilm');
+        $f->idGenre = request('idGenre');
 
         $f->save();
 
-        return redirect('/films/'.$f->idFilm)->with('success', 'Film créé avec succès !');
-    }
+        //realisateur
+        $f->realisateurs()->sync(request('idRealisateurs'));
+        //scenariste
+        $f->scenariste()->sync(request('idScenaristes'));
+        //acteur
+        $data = [];
+        foreach (request('idActeurs') as $i => $id) {
+            if (!$id) continue;
+            $data[$id] = [
+                'nomJoue' => request('nomJoue')[$i] ?? null,
+            ];
+        }
+        $f->casting()->sync($data);
 
-    public function edit(Film $film){
-        $genres = Genre::all();
-        return view('films.edit', compact('film', 'genres'));
-    }
 
-    public function update(Request $request, Film $film)
-    {
-        $data = $request->only([
-            'titreFilm',
-            'descFilm',
-            'dateSortieFilm',
-            'dureeFilm',
-            'idGenre'
+        return response()->json([
+            'titreFilm'=> request('titreFilm'),
         ]);
-
-        $film->update(array_filter($data));
-
-        return redirect('/films/' . $film->idFilm);
     }
 
-    public function destroy(Film $film){
+    public function editFilm(Request $request){
+        $id = $request->idFilm;
+        $film = Film::find($id);
+        $realisateurs = $film->realisateurs;
+        $scenaristes = $film->scenariste;
+        $acteurs = $film->casting;
+
+
+        return response()->json([
+            'film'=> $film,
+            'realisateurs' => $realisateurs,
+            'scenaristes' => $scenaristes,
+            'acteurs' => $acteurs,
+        ]);
+    }
+
+    public function edit(Film $film) {
+        return view('films.edit', compact('film'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $film = Film::findOrFail($id);
+
+
+        $film->update([
+            'titreFilm' => $request->titreFilm,
+            'descFilm' => $request->descFilm,
+            'dateSortieFilm' => $request->dateSortieFilm,
+            'dureeFilm' => $request->dureeFilm,
+            'posterFilm' => $request->posterFilm,
+            'idGenre' => $request->idGenre,
+        ]);
+        //realisateur
+        $film->realisateurs()->sync(request('idRealisateurs'));
+        //scenariste
+        $film->scenariste()->sync(request('idScenaristes'));
+        //acteur
+        $film->casting()->sync(request('idActeurs'));
+
+
+        return response()->json([
+            'message' => 'Film mis à jour !',
+            'film' => $film,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $film = Film::findOrFail($id);
+
+        $film->realisateurs()->detach();
+        $film->scenariste()->detach();
+        $film->casting()->detach();
+
         $film->delete();
-        return redirect('/films');
-    }
 
+        return response()->json([
+            'message' => 'Film supprimé avec succès !'
+        ]);
+    }
 
 
 }
