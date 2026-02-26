@@ -70,11 +70,12 @@
                             </p>
                             <p class="pt-3">Durée : {{$film->dureeFilm}} minutes</p>
                             @if($film->seances->isEmpty())
+                                <p>Aucune seance disponible</p>
                             @else
-                                <p class="pt-3">Disponible au cinema :
+                                <p class="pt-3">Disponible au cinema : <br>
                                 @foreach($film->seances as $s)
-                                        le {{ $s->dateSeance }} au cinéma {{ $s->salle->cinema->nomCinema }} à {{ Carbon::createFromFormat('H:i:s', $s->heureSeance)->format('H:i') }}
-                                        {{ $loop->last ? '' : ',' }}
+                                        le {{ $s->dateSeance }} au cinéma {{ $s->salle->cinema->nomCinema }} à {{$s->heureSeance->format('H:i')}}
+                                        {{ $loop->last ? '' : ',' }}  <br>
                                 @endforeach
                                 </p>
                             @endif

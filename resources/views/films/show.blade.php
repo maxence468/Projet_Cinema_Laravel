@@ -25,6 +25,11 @@ use App\Http\Controllers\PersonneController;
         <p>{{$pp->pivot->nomJoue}} {{$pp->pivot->preJoue}} ({{$pp->nomPers}})</p>
     @endforeach
 
+<h3>Les seances</h3>
+@foreach($film->seances as $s)
+    <p>{{$s->idSeance}}</p>
+@endforeach
+
 <form action="/films/{{$film->idFilm }}" method="POST">
     @csrf
     @method('DELETE')

@@ -3,6 +3,29 @@
 @section('title', 'Page recherche de film par genre')
 
 @section('main')
+    <style>
+        .recherche-genre-poster {
+            min-height: 480px;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            overflow: hidden;
+        }
+        .recherche-genre-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+        .carousel-3-per-3 .carousel-inner {
+            padding: 0.5rem 0;
+        }
+        .carousel-3-per-3 .carousel-col {
+            min-height: 500px;
+        }
+    </style>
     <main>
         <form class="pt-2" method="GET" action="{{ route('rechercheGenre') }}">
             <div class="d-flex justify-content-center">
@@ -26,12 +49,33 @@
 
             <div id="carouselExample" class="carousel slide carousel-3-per-3" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    @foreach ($films as $film)
+                    @foreach ($films->chunk(3) as $chunk)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <div class="carousel-col px-1">
-                                <img src="{{ asset('images/' . $film->posterFilm) }}"
-                                     class="img-fluid w-100"
-                                     alt="{{ $film->titreFilm }}">
+                            <div class="row g-2 justify-content-center">
+                                @foreach ($chunk as $film)
+                                    <div class="col-4 col-md-4 carousel-col px-3">
+                                        <div class="recherche-genre-poster">
+
+                                            @if(File::exists(public_path('images/' . $film->posterFilm)))
+                                                <img src="{{ asset('images/' . ($film->posterFilm ?? 'img.png')) }}"
+                                                     class="recherche-genre-img"
+                                                     alt="">
+
+                                            @else
+
+                                                <html>
+                                                <img src="{{ asset('images/img.png')}}"
+                                                     alt=""
+                                                     class="recherche-genre-img">
+                                                </html>
+
+                                            @endif
+
+
+                                        </div>
+                                        <p class="small text-center mt-1 mb-0">{{ $film->titreFilm }}</p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     @endforeach
