@@ -31,11 +31,26 @@
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row align-items-start">
                         <div class="col-auto">
-                            <img src="{{ asset('images/' . $film->posterFilm) }}"
-                                 width="412"
-                                 height="626"
-                                 alt="{{ $film->titreFilm }}"
-                                 class="smd">
+                            @if(File::exists(public_path('images/' . $film->posterFilm)))
+                                <html>
+                                <img src="{{ asset('images/' . $film->posterFilm) }}"
+                                     width="412"
+                                     height="626"
+                                     alt="{{ $film->titreFilm }}"
+                                     class="smd">
+                                </html>
+
+                            @else
+
+                                <html>
+                                <img src="{{ asset('images/img.png')}}"
+                                     width="412"
+                                     height="626"
+                                     alt="{{ $film->titreFilm }}"
+                                     class="smd">
+                                </html>
+
+                            @endif
                         </div>
 
                         <div class="col">

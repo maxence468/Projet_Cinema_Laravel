@@ -28,13 +28,13 @@ class Film extends Model
     }
 
     public function casting(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'caste', 'idFilm', 'idPers'
+        return $this->belongsToMany(Personne::class, 'caste', 'film_id', 'pers_id'
         )->withPivot('nomJoue','preJoue','principale','secondaire');
 
     }
 
     public function realisateurs(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'realise', 'idFilm', 'idPers');
+        return $this->belongsToMany(Personne::class, 'realise', 'film_id', 'pers_id');
     }
 
     public function scenariste(): BelongsToMany{
