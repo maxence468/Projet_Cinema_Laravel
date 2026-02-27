@@ -82,7 +82,7 @@
 
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
-                                <label class="h3 mb-0">Due film</label>
+                                <label class="h3 mb-0">Durée film</label>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <input class="inputCatalogue" id="dureeFilm" type="number" placeholder="Durée film" required>
@@ -105,13 +105,14 @@
                                 <label class="h3 mb-0">Genre film</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <select name="genre" class="choixCatal" id="idGenre">
+                                <select name="genre" class="c
+                                hoixCatal" id="idGenre">
                                     <option value="">Genre film</option>
                                     @foreach($genres as $genre)
                                         <option value="{{$genre->idGenre}}">{{$genre->libGenre}}</option>
                                     @endforeach
                                 </select>
-                                <button type="button" onclick="showFormGenre()">Créer un genre</button>
+                                <button type="button" id="btnAjoutFormGenre" name="btnAjoutFormGenre" class="btnAjoutFormGenre" onclick="showFormGenre()">Créer un genre</button>
                             </div>
                         </div>
 
@@ -130,11 +131,8 @@
                                     @endforeach
                                 </select>
                                 <button id="addRealisateur">Ajouter un realisateur</button>
-                                <button type="button" onclick="showFormPersonne()">Créer une personne</button>
+                                <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
-                        </div>
-
-                        <div id="divIdPersonne">
                         </div>
 
                         <div id="realisateur-template" class="d-none">
@@ -163,7 +161,7 @@
                                     @endforeach
                                 </select>
                                 <button id="addScenariste">Ajouter un Scénariste</button>
-                                <button type="button" onclick="showFormPersonne()">Créer une personne</button>
+                                <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
                         </div>
 
@@ -207,9 +205,12 @@
                                     </div>
                                 </div>
                                 <button id="addActeur">Ajouter un acteur</button>
-                                <button type="button" onclick="showFormPersonne()">Créer une personne</button>
+                                <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
 
+                        </div>
+
+                        <div id="divIdPersonne">
                         </div>
 
                         <div id="acteur-template" class="d-none">
@@ -227,12 +228,13 @@
                                     <input class="inputCatalogue preJoue" type="text" placeholder="preJoue" required>
                                     <div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue principale" id="principale" type="radio" required>
-                                            <label for="principale">Principale</label>
-                                        </div>
-                                        <div>
-                                            <input name="typeActeur" class="inputCatalogue secondaire" id="secondaire" type="radio" required>
-                                            <label for="secondaire">Secondaire</label>
+                                            <div class="col-12 col-lg-4 pb-5">
+                                                <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
+                                                    <option>Principal ou secondaire</option>
+                                                    <option>Principal</option>
+                                                    <option>Secondaire</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -252,7 +254,7 @@
         </div>
     </main>
     <template id="tplGenre">
-        <form id="formAjoutGenre" method="post" action="">
+        <form form="formAjoutGenre" id="formAjoutGenre" class="formAjoutGenre" name="formAjoutGenre" method="post" action="">
             @csrf
             <div class="row align-items-center mb-4">
                 <div class="col-12 col-lg-3 order-4 order-lg-3">
@@ -271,7 +273,7 @@
                 </div>
 
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <input form="formAjoutGenre" class="inputCatalogue" type="text" placeholder="Libelle genre" required>
+                    <input form="formAjoutGenre" id="inputGenre" class="inputCatalogue" type="text" placeholder="Libelle genre" required>
                 </div>
             </div>
 
@@ -280,7 +282,7 @@
                     <label class="h3 mb-0"></label>
                 </div>
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <button form="formAjoutGenre" name="btnAjout" class="btnTemplate" type="button">
+                    <button form="formAjoutGenre" id="btnSubmitFormGenre" class="btnTemplate" type="button">
                         <span>Ajouter</span>
                     </button>
                 </div>
@@ -289,7 +291,7 @@
         </form>
     </template>
     <template id="tplPersonne">
-        <form form="formAjoutPersonne" id="myForm" method="post" action="">
+        <form form="formAjoutPersonne" class="formAjoutPersonne" id="formAjoutPersonne" method="post" action="">
             @csrf
 
             <div class="row align-items-center mb-4">
@@ -363,7 +365,7 @@
                     <label class="h3 mb-0"></label>
                 </div>
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <button form="formAjoutPersonne" name="btnAjout" class="btnTemplate" type="button">
+                    <button form="formAjoutPersonne" name="btnAjout" id="btnAjtPers" class="btnTemplate" type="button">
                         <span>Ajouter</span>
                     </button>
                 </div>
