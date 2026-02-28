@@ -52,14 +52,18 @@ class FilmController extends Controller
             if (!$id) continue;
             $data[$id] = [
                 'nomJoue' => request('nomJoue')[$i] ?? null,
+                'preJoue' => request('preJoue')[$i] ?? null,
+                'principale' => request('principale')[$i] ?? null,
+                'secondaire' => request('secondaire')[$i] ?? null,
             ];
         }
         $f->casting()->sync($data);
 
 
-        return response()->json([
-            'titreFilm'=> request('titreFilm'),
-        ]);
+        //return response()->json([
+        //   'titreFilm'=> request('titreFilm'),
+        //]);
+        return redirect()->back()->with('success', 'Film ajouté');
     }
 
     public function editFilm(Request $request){
@@ -100,12 +104,22 @@ class FilmController extends Controller
         //scenariste
         $film->scenariste()->sync(request('idScenaristes'));
         //acteur
-        $film->casting()->sync(request('idActeurs'));
-
+        $data = [];
+        foreach (request('idActeurs') as $i => $id) {
+            if (!$id) continue;
+            $data[$id] = [
+                'nomJoue' => request('nomJoue')[$i] ?? null,
+                'preJoue' => request('preJoue')[$i] ?? null,
+                'principale' => request('principale')[$i] ?? null,
+                'secondaire' => request('secondaire')[$i] ?? null,
+            ];
+        }
+        $film->casting()->sync($data);
 
         return response()->json([
             'message' => 'Film mis à jour !',
             'film' => $film,
+            'request' => $request->all()
         ]);
     }
 

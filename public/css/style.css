@@ -535,6 +535,16 @@ section {
         font-size: 20px !important; /* 20 small phones */
     }
 
+    .btnTemplate {      /* Forces select to behave like a box */
+        width: 100% !important;
+        max-width: 345px !important;
+        color: white;
+        font-size: 20px;
+        background: #991917;
+        text-decoration: none;
+        border: 1px solid white;
+    }
+
     /* Adjust labels so they don't take up too much vertical space */
     .h3, h3 {
         font-size: 22px !important;
@@ -657,4 +667,17 @@ section {
         white-space: nowrap;
         line-height: 1;
     }
+}
+
+.btnTemplate {
+    display: block !important;       /* Forces select to behave like a box */
+    width: 100% !important;
+    max-width: 345px !important;
+    height: 53px !important;
+    cursor: pointer;
+    color: white;
+    font-size: 32px;
+    background: #991917;
+    text-decoration: none;
+    border: 1px solid white;
 }

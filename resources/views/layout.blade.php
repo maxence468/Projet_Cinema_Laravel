@@ -34,8 +34,8 @@
                         <a href="/gestionFilm" class="nav-text">Gestion catalogue</a>
                     @else
                         <a href="" class="nav-text">Réservation</a>
-                        <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                     @endif
+                    <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                 @endauth
             </div>
 
@@ -43,11 +43,11 @@
                 @auth
                     <form method="POST" action="/logout">
                         @csrf
-                        <input type="submit" value="Déconnexion" class="btn-nav">
+                        <input type="submit" value="Déconnexion" class="btn-nav deco">
                     </form>
                 @else
-                    <a href="/inscription" class="btn-nav"><span>Inscription</span></a>
-                    <a href="/connexion" class="btn-nav"><span>Connexion</span></a>
+                    <a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a>
+                    <a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a>
                 @endauth
             </div>
 
@@ -60,15 +60,17 @@
                     <li><a href="/rechercheGenre" class="nav-text">Recherche genre</a></li>
                     <li><a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a></li>
 
-                    @auth
-                        @if(Auth::user()->isAdmin())
-                            <li><a href="/gestionFilm" class="nav-text">Gestion catalogue</a></li>
-                        @else
-                            <li><a href="" class="nav-text">Réservation</a></li>
-                            <li><a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a></li>
-                        @endif
-                    @endauth
+                    <!-- Si connecté en tant qu'utilisateur -->
+                    <li><a href="" class="nav-text">Réservation</a></li>
+                    <li><a href="/parametres" class="nav-text">Paramètres</a></li>
+                    <!-- -->
+                    <!-- Si connecté en tant qu'administrateur -->
+                    <li><a href="/gestionCatalogue" class="nav-text">Gestion catalogue</a></li>
+                    <!-- -->
 
+                    @auth
+                        <li><a href="/parametreUtilisateur/{{Auth::id()}}/edit" class="nav-text">Paramètre</a></li>
+                    @endauth
                     @auth
                         <form method="POST" action="/logout">
                             @csrf
