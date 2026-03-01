@@ -1,4 +1,23 @@
-
+function getFilmData(forUpdate) {
+    let data = {
+        _token: $('input[name="_token"]').val(),
+        titreFilm: $('#titreFilm').val(),
+        descFilm: $('#descFilm').val(),
+        dateSortieFilm: $('#dateSortieFilm').val(),
+        dureeFilm: $('#dureeFilm').val(),
+        posterFilm: $('#posterFilm').val(),
+        idGenre: $('#idGenre').val(),
+        idRealisateurs: $('.idRealisateur').map(function () { let v = $(this).val(); return v ? v : null; }).get(),
+        idScenaristes: $('.idScenariste').map(function () { let v = $(this).val(); return v ? v : null; }).get(),
+        idActeurs: $('.idActeur').map(function () { let v = $(this).val(); return v ? v : null; }).get(),
+        nomJoue: $('.nomJoue').map(function () { return $(this).val(); }).get(),
+        preJoue: $('.preJoue').map(function () { return $(this).val(); }).get(),
+        principale: $('.principale').map(function () { return $(this).is(':checked') ? 1 : 0; }).get(),
+        secondaire: $('.secondaire').map(function () { return $(this).is(':checked') ? 1 : 0; }).get(),
+    };
+    if (forUpdate) data._method = 'PATCH';
+    return data;
+}
 
 $('#btnAjt').click(function(){
     let titreFilm = $('#titreFilm').val()
@@ -44,26 +63,11 @@ $('#btnAjt').click(function(){
         return 0;
     }).get();
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs && idScenaristes && idActeurs){
+    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length){
         $.ajax({
             url: "/films",
             type: "post",
-            data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idGenre: idGenre,
-                idRealisateurs: idRealisateurs,
-                idScenaristes: idScenaristes,
-                idActeurs: idActeurs,
-                nomJoue: nomJoue,
-                preJoue: preJoue,
-                principale: principale,
-                secondaire: secondaire,
-                _token: $('input[name="_token"]').val(),
-            },
+            data: getFilmData(false),
             success: function(result){
                 $('#myForm')[0].reset();
                 supprimerRealScenariste();
@@ -85,7 +89,7 @@ $('#btnAjt').click(function(){
             }
         });
     }else{
-        alert('Tous les champs doivent etre remplis');
+        alert('Tous les champs doivent être remplis.');
     }
 });
 
@@ -100,13 +104,12 @@ $('#filmModif').change(function(e){
             _token: $('input[name="_token"]').val(),
         },
         success: function(result){
-
-            $('#titreFilm').val(result['film']['titreFilm'])
-            $('#descFilm').val(result['film']['descFilm'])
-            $('#dateSortieFilm').val(result['film']['dateSortieFilm'])
-            $('#dureeFilm').val(result['film']['dureeFilm'])
-            $('#posterFilm').val(result['film']['posterFilm'])
-            $('#idGenre').val(result['film']['idGenre'])
+            $('#titreFilm').val(result['film']['titreFilm']);
+            $('#descFilm').val(result['film']['descFilm']);
+            $('#dateSortieFilm').val(result['film']['dateSortieFilm']);
+            $('#dureeFilm').val(result['film']['dureeFilm']);
+            $('#posterFilm').val(result['film']['posterFilm']);
+            $('#idGenre').val(result['film']['idGenre']);
 
             supprimerRealScenariste()
             let realisateurs = result['realisateurs']
@@ -172,7 +175,6 @@ $('#btnModif').click(function(){
     let descFilm = $('#descFilm').val()
     let dateSortieFilm = $('#dateSortieFilm').val()
     let dureeFilm = $('#dureeFilm').val()
-    let posterFilm = $('#posterFilm').val()
     let idGenre = $('#idGenre').val()
 
     let idRealisateurs = $('.idRealisateur').map(function () {
@@ -214,30 +216,14 @@ $('#btnModif').click(function(){
 
     let idFilm = $('#filmModif').val();
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs && idScenaristes && idActeurs){
+    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length){
         $.ajax({
             url: `/films/${idFilm}`,
-            type: "patch",
-            data:{
-                titreFilm: titreFilm,
-                descFilm: descFilm,
-                dateSortieFilm: dateSortieFilm,
-                dureeFilm: dureeFilm,
-                posterFilm: posterFilm,
-                idRealisateurs: idRealisateurs,
-                idScenaristes: idScenaristes,
-                idActeurs: idActeurs,
-                idGenre: idGenre,
-                nomJoue: nomJoue,
-                preJoue: preJoue,
-                principale: principale,
-                secondaire: secondaire,
-                _token: $('input[name="_token"]').val(),
-            },
+            type: "post",
+            data: getFilmData(true),
             success: function(result){
-                console.log(result['request'])
                 $('#myForm')[0].reset();
-                supprimerRealScenariste()
+                supprimerRealScenariste();
                 alert('Film modifié avec succès !');
             },
             error: function(error){
@@ -256,7 +242,7 @@ $('#btnModif').click(function(){
             }
         });
     }else{
-        alert('Tous les champs doivent etre remplis');
+        alert('Tous les champs doivent être remplis.');
     }
 });
 
@@ -350,24 +336,70 @@ $(document).on('change','.idActeur', function(e){
     }
 })
 
+// Empêcher la soumission classique du formulaire genre (pour tout envoyer en AJAX vers la BDD)
+$(document).on('submit', '#formAjoutGenre', function(e) {
+    e.preventDefault();
+});
+
 $(document).on('click','#btnSubmitFormGenre', function(e){
     e.preventDefault();
 
     const newGenre = $('#inputGenre').val().trim();
+    var storeUrl = $('#myForm').data('genres-store-url') || '/genres';
 
     if (newGenre !== '') {
-        $('#idGenre').append(
-            $('<option>', {
-                value: newGenre,
-                text: newGenre,
-                selected: true
-            })
-        );
+        $.ajax({
+            url: storeUrl,
+            type: 'post',
+            headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+            data: {
+                libGenre: newGenre,
+                _token: $('input[name="_token"]').val(),
+            },
+            dataType: 'json',
+            success: function(result) {
+                var g = result.genre;
+                if (!g || !g.idGenre) {
+                    alert('Erreur : la réponse du serveur est invalide.');
+                    return;
+                }
+                // Valider l'insertion en BDD : le serveur a renvoyé le genre créé
+                alert('Genre « ' + g.libGenre + ' » enregistré en base de données. Insertion validée.');
 
-        $('#inputGenre').val('');
+                // Réactualiser la liste des genres avec les données du serveur
+                $.ajax({
+                    url: '/genres',
+                    type: 'get',
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+                    dataType: 'json',
+                    success: function(listResult) {
+                        var genres = listResult.genres || [];
+                        var $select = $('#idGenre');
+                        var firstOption = $select.find('option:first').clone();
+                        $select.empty().append(firstOption);
+                        genres.forEach(function(genre) {
+                            $select.append(
+                                $('<option>', {
+                                    value: genre.idGenre,
+                                    text: genre.libGenre,
+                                    selected: (genre.idGenre == g.idGenre)
+                                })
+                            );
+                        });
+                    }
+                });
 
-        $('.formAjoutGenre').hide();
-        $('.btnAjoutFormGenre').show();
+                $('#inputGenre').val('');
+                $('.formAjoutGenre').hide();
+                $('.btnAjoutFormGenre').show();
+            },
+            error: function(xhr) {
+                var msg = (xhr.responseJSON && xhr.responseJSON.errors) ? Object.values(xhr.responseJSON.errors)[0][0] : 'Erreur lors de la création du genre.';
+                alert(msg);
+            }
+        });
+    } else {
+        alert('Veuillez saisir un libellé pour le genre.');
     }
 });
 

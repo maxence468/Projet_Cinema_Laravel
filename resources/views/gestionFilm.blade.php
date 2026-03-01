@@ -23,7 +23,7 @@
 
                 <div class="container-fluid">
 
-                    <form id="myForm">
+                    <form id="myForm" data-genres-store-url="{{ route('genres.store') }}">
                         @csrf
                         <div class="row align-items-center mb-1">
                             <div class="col-12 col-lg-7 order-1">
@@ -95,7 +95,7 @@
                                 <label class="h3 mb-0">Poster film</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" id="posterFilm" type="text" placeholder="Poster film" required>
+                                <input class="inputCatalogue" id="posterFilm" name="posterFilm" type="text" placeholder="Nom du fichier image (ex: affiche.jpg)">
                             </div>
 
                         </div>
@@ -254,40 +254,35 @@
         </div>
     </main>
     <template id="tplGenre">
-        <form form="formAjoutGenre" id="formAjoutGenre" class="formAjoutGenre" name="formAjoutGenre" method="post" action="">
+        {{-- Même formulaire que /genres/create : action POST vers genres.store --}}
+        <form id="formAjoutGenre" class="formAjoutGenre" method="post" action="/genres">
             @csrf
             <div class="row align-items-center mb-4">
                 <div class="col-12 col-lg-3 order-4 order-lg-3">
                     <label class="h3 mb-0"></label>
                 </div>
-
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <label class="h3 mb-0">Ajouter un genre</label>
+                    <label class="h3 mb-0">Créez un genre</label>
                 </div>
             </div>
-
-
             <div class="row align-items-center mb-4">
                 <div class="col-12 col-lg-3 order-4 order-lg-3">
-                    <label class="h3 mb-0">Libelle genre</label>
+                    <label class="h3 mb-0" for="inputGenre">Libellé du genre</label>
                 </div>
-
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <input form="formAjoutGenre" id="inputGenre" class="inputCatalogue" type="text" placeholder="Libelle genre" required>
+                    <input id="inputGenre" class="inputCatalogue" type="text" name="libGenre" placeholder="Libellé du genre" required>
                 </div>
             </div>
-
             <div class="row align-items-center mb-4">
                 <div class="col-12 col-lg-3 order-4 order-lg-3">
                     <label class="h3 mb-0"></label>
                 </div>
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <button form="formAjoutGenre" id="btnSubmitFormGenre" class="btnTemplate" type="button">
-                        <span>Ajouter</span>
+                    <button id="btnSubmitFormGenre" class="btnTemplate" type="submit">
+                        <span>Créez le genre</span>
                     </button>
                 </div>
             </div>
-
         </form>
     </template>
     <template id="tplPersonne">

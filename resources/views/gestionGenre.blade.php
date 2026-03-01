@@ -42,13 +42,16 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Libelle genre" required>
+                                <input class="inputCatalogue" id="libGenre" name="libGenre" type="text" placeholder="Libelle genre" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
-                                        <option value=""></option>
+                                    <select id="genreModif" name="genreModif" class="choixCatal">
+                                        <option value="">Genre à modifier</option>
+                                        @foreach($genres as $genre)
+                                            <option value="{{ $genre->idGenre }}">{{ $genre->libGenre }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -60,9 +63,9 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button id="btnAjt" form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="button"><span>Ajouter</span></button>
+            <button id="btnModif" form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="button"><span>Modifier</span></button>
+            <button id="btnSuppr" form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="button"><span>Supprimer</span></button>
         </div>
     </main>
     <script>
@@ -95,4 +98,5 @@
             }
         }*/
     </script>
+    @vite('resources/js/gestionGenre.js')
 @endsection

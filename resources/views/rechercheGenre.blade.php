@@ -49,18 +49,15 @@
 
             <div id="carouselExample" class="carousel slide carousel-3-per-3" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    @foreach ($films->chunk(3) as $chunk)
+                    @foreach ($films as $film)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="row g-2 justify-content-center">
-                                @foreach ($chunk as $film)
                                     <div class="col-4 col-md-4 carousel-col px-3">
                                         <div class="recherche-genre-poster">
-
                                             @if(File::exists(public_path('images/' . $film->posterFilm)))
                                                 <img src="{{ asset('images/' . ($film->posterFilm ?? 'img.png')) }}"
                                                      class="recherche-genre-img"
                                                      alt="">
-
                                             @else
 
                                                 <html>
@@ -75,7 +72,6 @@
                                         </div>
                                         <p class="small text-center mt-1 mb-0">{{ $film->titreFilm }}</p>
                                     </div>
-                                @endforeach
                             </div>
                         </div>
                     @endforeach
