@@ -135,4 +135,6 @@ Route::get('/parametreUtilisateur/{id}/edit', [UserController::class, 'edit'])
 Route::put('/user/{id}', [UserController::class, 'update'])->name('userUpdate');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestroy');
 
+Route::get('/mesReservations', [PageController::class, 'mesReservations'])->name('mesReservations');
+
 require __DIR__.'/auth.php';

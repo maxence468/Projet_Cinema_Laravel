@@ -439,3 +439,30 @@ $(document).on('click', '#formAjoutPersonne',function(e) {
     $(this).hide();
     $('.btnDeployFormPers').show();
 });
+
+var countFormGenre = 0;
+var countFormPersonne = 0;
+
+function showFormGenre() {
+    if (countFormGenre == 0) {
+        var template = document.querySelector("#tplGenre");
+
+        var divIdGenre = document.getElementById('divIdGenre');
+        var clone = document.importNode(template.content, true);
+
+        divIdGenre.appendChild(clone);
+        countFormGenre++;
+    }
+}
+
+function showFormPersonne() {
+    if(countFormPersonne == 0) {
+        var template = document.querySelector("#tplPersonne");
+
+        var divIdPersonne = document.getElementById('divIdPersonne');
+        var clone = document.importNode(template.content, true);
+
+        divIdPersonne.appendChild(clone);
+        countFormPersonne++;
+    }
+}
