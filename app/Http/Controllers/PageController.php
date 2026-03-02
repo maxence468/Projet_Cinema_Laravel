@@ -230,4 +230,8 @@ class PageController extends Controller{
     public function mesReservations() {
         return view('reservation');
     }
+
+    public function effectuerReservation() {
+        return view('effectuerReservation');
+    }
 }
