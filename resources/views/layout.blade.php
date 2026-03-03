@@ -33,7 +33,7 @@
                     @if(Auth::user()->isAdmin())
                         <a href="/gestionFilm" class="nav-text">Gestion catalogue</a>
                     @else
-                        <a href="" class="nav-text">Réservation</a>
+                        <a href="/mesReservations" class="nav-text">Réservation</a>
                     @endif
                     <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                 @endauth
@@ -60,17 +60,15 @@
                     <li><a href="/rechercheGenre" class="nav-text">Recherche genre</a></li>
                     <li><a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a></li>
 
-                    <!-- Si connecté en tant qu'utilisateur -->
-                    <li><a href="" class="nav-text">Réservation</a></li>
-                    <li><a href="/parametres" class="nav-text">Paramètres</a></li>
-                    <!-- -->
-                    <!-- Si connecté en tant qu'administrateur -->
-                    <li><a href="/gestionCatalogue" class="nav-text">Gestion catalogue</a></li>
-                    <!-- -->
-
                     @auth
-                        <li><a href="/parametreUtilisateur/{{Auth::id()}}/edit" class="nav-text">Paramètre</a></li>
+                        @if(Auth::user()->isAdmin())
+                            <li><a href="/gestionFilm" class="nav-text">Gestion catalogue</a></li>
+                        @else
+                            <li><a href="/mesReservations" class="nav-text">Réservation</a></li>
+                        @endif
+                        <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                     @endauth
+
                     @auth
                         <form method="POST" action="/logout">
                             @csrf

@@ -226,4 +226,12 @@ class PageController extends Controller{
     public function parametresUtilisateur() {
         return view('parametresUtilisateur');
     }
+
+    public function mesReservations() {
+        return view('reservation');
+    }
+
+    public function effectuerReservation() {
+        return view('effectuerReservation');
+    }
 }

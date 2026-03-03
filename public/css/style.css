@@ -681,3 +681,29 @@ section {
     text-decoration: none;
     border: 1px solid white;
 }
+
+.btnChoixVisionReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 28px 0px 28px;
+    padding: 0px 10px 0px 10px;
+}
+
+.btnOptionMesReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 21px 0px 21px;
+    padding: 0px 25px 0px 25px;
+}
+
+.infoReservation {
+    margin-right: 225px;
+}
+
+.btnReservation {
+    margin-right: 57px;
+}

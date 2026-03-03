@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Page gestion film')
+@section('title', 'Page gestion tarifSalle')
 
 @section('main')
     <main class="container-fluid pt-3">
