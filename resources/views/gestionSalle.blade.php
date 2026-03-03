@@ -59,7 +59,20 @@
                                 <label class="h3 mb-0">Type de salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Type de salle" required>                            </div>
+                                <input class="inputCatalogue" type="text" placeholder="Type de salle" required>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3">
+                                <label class="h3 mb-0">Cinéma</label>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <select name="cinema" class="choixCatal">
+                                    <option value=""></option>
+                                </select>
+                            </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
 
