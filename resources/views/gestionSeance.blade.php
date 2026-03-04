@@ -144,5 +144,6 @@
             }
         }*/
     </script>
+    @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionSeance.js')
 @endsection

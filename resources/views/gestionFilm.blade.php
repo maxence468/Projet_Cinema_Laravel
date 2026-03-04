@@ -271,5 +271,6 @@
             }
         }*/
     </script>
+    @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionFilm.js')
 @endsection

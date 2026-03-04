@@ -98,5 +98,6 @@
             }
         }*/
     </script>
+    @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionGenre.js')
 @endsection
