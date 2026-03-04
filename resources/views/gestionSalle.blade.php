@@ -42,7 +42,8 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Capacité salle" required>
+                                <input class="inputCatalogue" type="number" min="1" max="1000" step="1"
+                                       title="La capacité de la salle doit être entre 1 et 1000" placeholder="Capacité salle" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
@@ -59,7 +60,9 @@
                                 <label class="h3 mb-0">Type de salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Type de salle" required>
+                                <select name="typeSalle" class="choixCatal" required>
+                                    <option value=""></option>
+                                </select>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
