@@ -42,7 +42,9 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Nom cinéma" required>
+                                <input class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ0-9'’&().,\-\s]{2,100}$"
+                                       title="2 à 100 caractères. Lettres, chiffres, espaces et ponctuation simple"
+                                       placeholder="Nom cinéma" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
@@ -59,7 +61,9 @@
                                 <label class="h3 mb-0">Adresse cinéma</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Adresse cinéma" required>
+                                <input class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ0-9'’°\/.,\-\s]{5,150}$"
+                                       title="5 à 150 caractères. Adresse valide avec chiffres, lettres et ponctuation simple"
+                                       placeholder="Adresse cinéma" required>
                             </div>
                         </div>
 
@@ -68,7 +72,9 @@
                                 <label class="h3 mb-0">Code postal cinéma</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Code postal cinéma" required>
+                                <input class="inputCatalogue" type="text" pattern="^[0-9]{5}$" inputmode="numeric"
+                                       maxlength="5" title="Le code postal doit contenir exactement 5 chiffres"
+                                       placeholder="Code postal cinéma" required>
                             </div>
                         </div>
 
