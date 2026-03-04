@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Heure séance" required>
+                                <input class="inputCatalogue" type="time" placeholder="Heure séance" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
@@ -59,7 +59,7 @@
                                 <label class="h3 mb-0">Date séance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Date séance" required>
+                                <input class="inputCatalogue" type="date" placeholder="Date séance" required>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
                                 <label class="h3 mb-0">Durée séance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Durée séance" required>
+                                <input class="inputCatalogue" type="number" min="30" max="300" step="1" placeholder="Durée séance" required>
                             </div>
                         </div>
 
@@ -77,7 +77,20 @@
                                 <label class="h3 mb-0">Titre film</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Titre film" required>
+                                <select name="film" class="choixCatal" required>
+                                    <option value="">Titre film</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3">
+                                <label class="h3 mb-0">Cinéma</label>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <select name="cinema" class="choixCatal" required>
+                                    <option value="">Cinéma</option>
+                                </select>
                             </div>
                         </div>
 
@@ -86,7 +99,9 @@
                                 <label class="h3 mb-0">Numéro de salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Numéro de salle" required>
+                                <input class="inputCatalogue" type="number" min="1" max="999" step="1"
+                                       title="Le numéro de salle doit être entre 1 et 999"
+                                       placeholder="Numéro de salle" required>
                             </div>
                         </div>
                     </form>
