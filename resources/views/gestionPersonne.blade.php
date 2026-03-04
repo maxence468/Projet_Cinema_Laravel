@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Nom personne" required>
+                                <input class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Nom personne" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
@@ -59,7 +59,7 @@
                                 <label class="h3 mb-0">Prenom personne</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Prenom personne" required>
+                                <input class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Prenom personne" required>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
@@ -69,7 +69,7 @@
                                 <label class="h3 mb-0">Date de naissance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Date de naissance" required>
+                                <input class="inputCatalogue" type="date" placeholder="Date de naissance" required>
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@
                                 <label class="h3 mb-0">Lieu de naissance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Lieu de naissance" required>
+                                <input class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,100}$" placeholder="Lieu de naissance" required>
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                                 <label class="h3 mb-0">Photo personne</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Photo personne" required>
+                                <input class="inputCatalogue" type="text" pattern="^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$" placeholder="Photo personne" required>
                             </div>
                         </div>
 
