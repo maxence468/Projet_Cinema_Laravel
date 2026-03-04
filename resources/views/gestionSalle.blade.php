@@ -69,7 +69,7 @@
                                 <label class="h3 mb-0">Cinéma</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <select name="cinema" class="choixCatal">
+                                <select name="cinema" class="choixCatal" required>
                                     <option value=""></option>
                                 </select>
                             </div>

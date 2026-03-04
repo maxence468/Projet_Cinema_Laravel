@@ -33,7 +33,7 @@
                     @if(Auth::user()->isAdmin())
                         <a href="/gestionFilm" class="nav-text">Gestion catalogue</a>
                     @else
-                        <a href="/mesReservations" class="nav-text">Réservation</a>
+                        <a href="/effectuerReservation" class="nav-text">Réservation</a>
                     @endif
                     <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
                 @endauth
