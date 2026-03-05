@@ -102,8 +102,7 @@
                                 <label class="h3 mb-0">Genre film</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <select name="genre" class="c
-                                hoixCatal" id="idGenre">
+                                <select name="genre" class="choixCatal" id="idGenre">
                                     <option value="">Genre film</option>
                                     @foreach($genres as $genre)
                                         <option value="{{$genre->idGenre}}">{{$genre->libGenre}}</option>

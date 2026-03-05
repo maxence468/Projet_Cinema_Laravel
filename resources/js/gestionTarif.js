@@ -7,7 +7,7 @@ $('#btnAjt').click(function(){
     if(libTarif && prixTarif){
         $.ajax({
             url: "/tarifs",
-            type: "post",
+            type: "POST",
             data:{
                 libTarif: libTarif,
                 prixTarif: prixTarif,
@@ -39,6 +39,9 @@ $('#btnAjt').click(function(){
 
 $('#tarifModif').change(function(e){
     let idTarif = $('#tarifModif').val()
+    if(!idTarif){
+        return;
+    }
 
     $.ajax({
         url: "/editTarif",

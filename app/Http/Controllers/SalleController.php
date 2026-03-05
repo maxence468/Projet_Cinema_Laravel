@@ -24,6 +24,7 @@ class SalleController extends Controller
             'capaciteSal' => 'required|integer',
             'idTypeSalle' => 'required|exists:typesalles,idTypeSalle',
             'idCinema' => 'required|exists:cinemas,idCinema',
+            'idTarif' => 'required',
         ]);
 
         $s = new Salle();
@@ -31,6 +32,8 @@ class SalleController extends Controller
         $s->idTypeSalle = request('idTypeSalle');
         $s->idCinema = request('idCinema');
         $s->save();
+
+        $s->tarifs()->sync(request('idTarif'));
 
         return redirect()->route('salles.index');
     }
@@ -41,7 +44,10 @@ class SalleController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-
+            'capaciteSal' => 'required|integer',
+            'idTypeSalle' => 'required|exists:typesalles,idTypeSalle',
+            'idCinema' => 'required|exists:cinemas,idCinema',
+            'idTarif' => 'required',
         ]);
 
         $salle = Salle::findOrFail($id);
@@ -52,6 +58,9 @@ class SalleController extends Controller
             'idCinema' => $request->idCinema,
         ]);
 
+        $salle->tarifs()->sync(request('idTarif'));
+
+
         return response()->json([
             'message' => 'Salle mis à jour !',
             'salle' => $salle
@@ -61,6 +70,9 @@ class SalleController extends Controller
     public function destroy($id)
     {
         $salle = Salle::findOrFail($id);
+
+        $salle->tarifs()->detach();
+
         $salle->delete();
 
         return response()->json([
@@ -69,7 +81,7 @@ class SalleController extends Controller
     }
     public function editSalle(Request $request){
         $id = $request->idSalle;
-        $salle = Salle::find($id);
+        $salle = Salle::with('tarifs')->find($id);
 
         return response()->json([
             'salle'=> $salle,

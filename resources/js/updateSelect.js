@@ -1,8 +1,13 @@
 
-$(document).ready(function(){
-    $('#btnAjt, #btnModif, #btnSuppr').click(function(){
-        updateAllSelect();
-    });
+// $(document).ready(function(){
+//     $('#btnAjt, #btnModif, #btnSuppr').click(function(){
+//         updateAllSelect();
+//     });
+// });
+
+$(document).ajaxSuccess(function(event, xhr, settings) {
+    updateAllSelect();
+    console.log('requete ajax reussie')
 });
 
 $(document).on('click','#btnSubmitFormGenre', function(e){
@@ -31,6 +36,7 @@ function updateSelectGenre(){
     $.ajax({
         url: '/getAllGenre',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },
@@ -52,6 +58,7 @@ function updateSelectPersonne(){
     $.ajax({
         url: '/getAllPersonne',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },
@@ -88,6 +95,7 @@ function updateSelectFilm(){
     $.ajax({
         url: '/getAllFilm',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },
@@ -109,6 +117,7 @@ function updateSelectCinema(){
     $.ajax({
         url: '/getAllCinema',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },
@@ -130,6 +139,7 @@ function updateSelectSalle(){
     $.ajax({
         url: '/getAllSalle',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },
@@ -152,6 +162,7 @@ function updateSelectSeance(){
     $.ajax({
         url: '/getAllSeance',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },
@@ -160,7 +171,7 @@ function updateSelectSeance(){
             select.empty();
             select.append('<option value=""> </option>')
             $.each(result['seances'], function(index, seance){
-                select.append('<option value="'+ seance.idSeance +'"> Seance '+ seance.heureSeance +', Film : '+ seance.film.titreFilm +', Cinema : '+ seance.salle.cinema.nomCinema +'</option>')
+                select.append('<option value="'+ seance.idSeance +'"> Seance '+ seance.heureSeance +', Film : '+ seance.film.titreFilm +', Cinema : '+ seance +'</option>')
             });
         },
         error: function (error) {
@@ -173,6 +184,7 @@ function updateSelectTarif(){
     $.ajax({
         url: '/getAllTarif',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },
@@ -194,6 +206,7 @@ function updateSelectTypeSalle(){
     $.ajax({
         url: '/getAllTypeSalle',
         type: "post",
+        global: false,
         data:{
             _token: $('input[name="_token"]').val(),
         },

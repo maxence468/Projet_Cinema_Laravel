@@ -41,7 +41,7 @@ class TypeSalleController extends Controller
     {
         request()->validate([
             'libTypeSalle' => 'required|string',
-            'prixTypeSalle' => 'required|numeric'
+            'prixTypeSalle' => 'required|numeric|max:999999.99'
         ]);
 
         $typeSalle = TypeSalle::findOrFail($id);

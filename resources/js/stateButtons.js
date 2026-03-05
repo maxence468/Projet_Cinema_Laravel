@@ -1,10 +1,31 @@
+let ajaxErrorOccured = false;
+
+//debut toutes requetes ajax
 $(document).ajaxStart(function () {
+    //desactive tous les boutons
     stateButtons('off');
-    console.log('off');
+    //remet à 0 les erreurs
+    ajaxErrorOccured = false;
 })
+$(document).ajaxError(function(event, xhr, settings) {
+    // ignorer requete post
+    if (settings.type.toUpperCase() === 'POST') {
+        return;
+    }
+    //si une erreur
+    ajaxErrorOccured = true;
+});
+//fin toutes requete ajax
 $(document).ajaxStop(function () {
-    stateButtons('base');
-    console.log('base');
+    //si erreur sur une requete de modif ou suppression
+    if(ajaxErrorOccured){
+        stateButtons('modifier-supprimer');
+        console.log('base');
+    }
+    else{
+        stateButtons('base');
+    }
+
 });
 
 $('#filmModif, #genreModif, #personneModif, #castingModif, #cinemaModif, #salleModif, #seanceModif, #tarifModif, #typeSalleModif').change(function(e){

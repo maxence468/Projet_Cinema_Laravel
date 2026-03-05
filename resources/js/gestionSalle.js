@@ -1,10 +1,12 @@
 
 $('#btnAjt').click(function(){
-    let capaciteSal = $('#capaciteSal').val()
+    let idCinema = $('#idCinema').val()
     let idTypeSalle = $('#idTypeSalle').val()
-    let idCinema = 1
+    let numeroSalle = $('#numeroSalle').val()
+    let capaciteSal = $('#capaciteSal').val()
+    let idTarif = $('#idTarif').val()
 
-    if(capaciteSal && idTypeSalle && idCinema){
+    if(capaciteSal && idTypeSalle && idCinema && numeroSalle && idTarif){
         $.ajax({
             url: "/salles",
             type: "post",
@@ -12,6 +14,8 @@ $('#btnAjt').click(function(){
                 capaciteSal: capaciteSal,
                 idTypeSalle: idTypeSalle,
                 idCinema: idCinema,
+                idTarif: idTarif,
+                numeroSalle: numeroSalle,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
@@ -40,7 +44,9 @@ $('#btnAjt').click(function(){
 
 $('#salleModif').change(function(e){
     let idSalle = $('#salleModif').val()
-
+    if(!idSalle){
+        return;
+    }
     $.ajax({
         url: "/editSalle",
         type: "post",
@@ -52,6 +58,11 @@ $('#salleModif').change(function(e){
         success: function(result){
             $('#capaciteSal').val(result['salle']['capaciteSal'])
             $('#idTypeSalle').val(result['salle']['idTypeSalle'])
+            $('#idCinema').val(result['salle']['idCinema'])
+            $('#numeroSalle').val(result['salle']['idSalle'])
+            $('#idTarif').val(result['salle']['idTarif'])
+
+            console.log(result['salle'])
         },
         error: function(error){
             console.log(error)
@@ -62,14 +73,15 @@ $('#salleModif').change(function(e){
 })
 
 $('#btnModif').click(function(){
-    let capaciteSal = $('#capaciteSal').val()
+    let idCinema = $('#idCinema').val()
     let idTypeSalle = $('#idTypeSalle').val()
-    let idCinema = 1
+    let numeroSalle = $('#numeroSalle').val()
+    let capaciteSal = $('#capaciteSal').val()
+    let idTarif = $('#idTarif').val()
 
     let idSalle = $('#salleModif').val()
 
-
-    if(capaciteSal && idTypeSalle && idCinema){
+    if(capaciteSal && idTypeSalle && idCinema && numeroSalle && idTarif){
         $.ajax({
             url: `/salles/${idSalle}`,
             type: "patch",
@@ -77,6 +89,8 @@ $('#btnModif').click(function(){
                 capaciteSal: capaciteSal,
                 idTypeSalle: idTypeSalle,
                 idCinema: idCinema,
+                numeroSalle: numeroSalle,
+                idTarif: idTarif,
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
@@ -111,9 +125,6 @@ $('#btnSuppr').click(function(){
         return;
     }
 
-    // désactive le bouton pour éviter double clic
-    $(this).prop('disabled', true);
-
     $.ajax({
         url: `/salles/${idSalle}`,
         type: 'DELETE',
@@ -128,9 +139,6 @@ $('#btnSuppr').click(function(){
         error: function(error){
             console.log(error);
         },
-        complete: function(){
-            $('#btnSuppr').prop('disabled', false); // réactive le bouton
-        }
     });
 });
 

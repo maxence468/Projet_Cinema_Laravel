@@ -183,13 +183,15 @@ class PageController extends Controller{
     }
 
     public function gestionSalle() {
-        $typeSalles = TypeSalle::all();
-        $salles = Salle::all();
         $cinemas = Cinema::all();
+        $typeSalles = TypeSalle::all();
+        $tarifs = Tarif::all();
+        $salles = Salle::all();
         return view('gestionSalle', [
-            'typeSalles' => $typeSalles,
-            'salles' => $salles,
             'cinemas' => $cinemas,
+            'typeSalles' => $typeSalles,
+            'tarifs' => $tarifs,
+            'salles' => $salles,
         ]);
     }
 

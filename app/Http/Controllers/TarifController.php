@@ -23,7 +23,7 @@ class TarifController extends Controller
     public function store(Request $request) {
         request()->validate([
             'libTarif' => 'required|string',
-            'prixTarif' => 'required|numeric',
+            'prixTarif' => 'required|numeric|max:999999.99',
         ]);
 
         $t = new Tarif();
@@ -42,7 +42,7 @@ class TarifController extends Controller
     {
         request()->validate([
             'libTarif' => 'required|string',
-            'prixTarif' => 'required|numeric',
+            'prixTarif' => 'required|numeric|max:999999.99',
         ]);
 
         $tarif = Tarif::findOrFail($id);
