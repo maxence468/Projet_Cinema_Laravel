@@ -44,6 +44,7 @@ $('#cinemaModif').change(function(e){
     $.ajax({
         url: "/editCinema",
         type: "post",
+        global:false,
         data:{
             idCinema: idCinema,
             _token: $('input[name="_token"]').val(),

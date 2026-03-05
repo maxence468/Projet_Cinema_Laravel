@@ -44,6 +44,7 @@ $('#salleModif').change(function(e){
     $.ajax({
         url: "/editSalle",
         type: "post",
+        global:false,
         data:{
             idSalle: idSalle,
             _token: $('input[name="_token"]').val(),

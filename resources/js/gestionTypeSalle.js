@@ -14,7 +14,7 @@ $('#btnAjt').click(function(){
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
-                $('#myForm')[0].reset();typeSalleModif
+                $('#myForm')[0].reset()
                 alert('type salle créé avec succès !');
             },
             error: function(error){
@@ -43,6 +43,7 @@ $('#typeSalleModif').change(function(e){
     $.ajax({
         url: "/edittypesalle",
         type: "post",
+        global:false,
         data:{
             idTypeSalle: idTypeSalle,
             _token: $('input[name="_token"]').val(),

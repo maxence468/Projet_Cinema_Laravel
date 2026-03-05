@@ -49,6 +49,7 @@ $('#seanceModif').change(function(e){
     $.ajax({
         url: "/editSeance",
         type: "post",
+        global:false,
         data:{
             idSeance: idSeance,
             _token: $('input[name="_token"]').val(),

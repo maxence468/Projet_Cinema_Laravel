@@ -44,7 +44,25 @@ $('#btnAjt').click(function(){
         return 0;
     }).get();
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs && idScenaristes && idActeurs){
+    let preJoue = $('.preJoue').map(function(){
+        return $(this).val();
+    }).get();
+
+    let principale = $('.principale').map(function(){
+        if($(this).is(':checked')){
+            return 1;
+        }
+        return 0;
+    }).get();
+
+    let secondaire = $('.secondaire').map(function(){
+        if($(this).is(':checked')){
+            return 1;
+        }
+        return 0;
+    }).get();
+
+    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length && nomJoue.length && preJoue.length && principale.length && secondaire.length){
         $.ajax({
             url: "/films",
             type: "post",
@@ -66,7 +84,7 @@ $('#btnAjt').click(function(){
             },
             success: function(result){
                 $('#myForm')[0].reset();
-                supprimerRealScenariste();
+                supprimerRealScenaristeActeur();
                 alert('Film créé avec succès !');
             },
             error: function(error){
@@ -82,7 +100,7 @@ $('#btnAjt').click(function(){
                 } else {
                     console.log("Erreur inconnue !");
                 }
-            }
+            },
         });
     }else{
         alert('Tous les champs doivent etre remplis');
@@ -91,10 +109,15 @@ $('#btnAjt').click(function(){
 
 $('#filmModif').change(function(e){
     let idFilm = $('#filmModif').val()
+    if(!idFilm){
+        supprimerRealScenaristeActeur()
+        return;
+    }
 
     $.ajax({
         url: "/editFilm",
         type: "post",
+        global:false,
         data:{
             idFilm: idFilm,
             _token: $('input[name="_token"]').val(),
@@ -108,7 +131,7 @@ $('#filmModif').change(function(e){
             $('#posterFilm').val(result['film']['posterFilm'])
             $('#idGenre').val(result['film']['idGenre'])
 
-            supprimerRealScenariste()
+            supprimerRealScenaristeActeur()
             let realisateurs = result['realisateurs']
             if(realisateurs.length > 0){
                 $('#realisateurs-container .idRealisateur:first').val(realisateurs[0]['idPers']);
@@ -160,6 +183,11 @@ $('#filmModif').change(function(e){
                     $row.find('.principale').prop('checked', true);
                 }
             });
+
+            blockOptionSelect(scenariste)
+            blockOptionSelect(acteur)
+            blockOptionSelect(realisateur)
+
         },
         error: function(error){
             console.log(error)
@@ -214,7 +242,7 @@ $('#btnModif').click(function(){
 
     let idFilm = $('#filmModif').val();
 
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs && idScenaristes && idActeurs){
+    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length && nomJoue.length && preJoue.length && principale.length && secondaire.length){
         $.ajax({
             url: `/films/${idFilm}`,
             type: "patch",
@@ -237,7 +265,7 @@ $('#btnModif').click(function(){
             success: function(result){
                 console.log(result['request'])
                 $('#myForm')[0].reset();
-                supprimerRealScenariste()
+                supprimerRealScenaristeActeur()
                 alert('Film modifié avec succès !');
             },
             error: function(error){
@@ -248,12 +276,11 @@ $('#btnModif').click(function(){
                     // Exemple : récupérer le premier message d’erreur
                     let firstError = Object.values(errors)[0][0];
 
-                    console.log(firstError);
                     alert(firstError);
                 } else {
                     console.log("Erreur inconnue !");
                 }
-            }
+            },
         });
     }else{
         alert('Tous les champs doivent etre remplis');
@@ -267,10 +294,6 @@ $('#btnSuppr').click(function(){
         alert('Sélectionne un film à supprimer !');
         return;
     }
-
-    // désactive le bouton pour éviter double clic
-    $(this).prop('disabled', true);
-
     $.ajax({
         url: `/films/${idFilm}`,
         type: 'DELETE',
@@ -280,14 +303,12 @@ $('#btnSuppr').click(function(){
         success: function(result){
             alert(result.message);
             $('#myForm')[0].reset();
-            supprimerRealScenariste()
+            supprimerRealScenaristeActeur()
+            stateButtons('base')
         },
         error: function(error){
             console.log(error);
         },
-        complete: function(){
-            $('#btnSuppr').prop('disabled', false); // réactive le bouton
-        }
     });
 });
 
@@ -329,7 +350,7 @@ $(document).on('click', '.remove', function () {
     blockOptionSelect();
 });
 
-function supprimerRealScenariste(){
+function supprimerRealScenaristeActeur(){
     $('.realisateur-row').not('#realisateur-template .realisateur-row ').remove();
     $('.scenariste-row').not('#scenariste-template .scenariste-row ').remove();
     $('.acteur-row').not('#acteur-template .acteur-row ').remove();
@@ -377,45 +398,35 @@ $(document).on('click', '.btnAjoutFormGenre', function(e) {
 });
 
 //desactiver les options deja selectionnés des select
-
-//rendre la fonction generale et passer en parametre le type de personne voulu
 let scenariste = '.idScenariste'
 let acteur = '.idActeur'
 let realisateur = '.idRealisateur'
-let selectedScenariste = [];
-let selectedActeur = [];
-let selectedRealisateur = [];
-
 $(document).on('change', '.idScenariste', function(){
-    blockOptionSelect(scenariste, selectedScenariste)
+    blockOptionSelect(scenariste)
 });
 $(document).on('change', '.idActeur', function(){
-    blockOptionSelect(acteur, selectedActeur)
+    blockOptionSelect(acteur)
 });
 $(document).on('change', '.idRealisateur', function(){
-    blockOptionSelect(realisateur, selectedRealisateur)
+    blockOptionSelect(realisateur)
 });
 
-function blockOptionSelect(typePersonne, tab){
-    console.log('test')
+function blockOptionSelect(typePersonne){
     // Réactiver toutes les options
-    $(" option").prop("disabled", false);
+    $(typePersonne + " option").prop("disabled", false);
 
-    tab = []
-
+    let selected = [];
     // Récupérer toutes les valeurs choisies
     $(typePersonne).each(function () {
-        console.log($(this).val())
         let v = $(this).val();
-        if (v) tab.push(v);
+        if (v) {
+            selected.push(v);
+        }
     });
-
     // Désactiver les valeurs déjà prises
     $(typePersonne).each(function () {
-
         let select = $(this);
-
-        tab.forEach(function (val) {
+        selected.forEach(function (val) {
             if (select.val() !== val) {
                 select.find(`option[value="${val}"]`).prop("disabled", true);
             }
@@ -423,10 +434,6 @@ function blockOptionSelect(typePersonne, tab){
     });
 }
 
-//sauvegarder dans le localStorage les input
-$("input, textarea").on("change", function () {
-    localStorage.setItem(this.id, $(this).val());
-});
 
 $(document).on('click', '.btnDeployFormPers',function(e) {
     e.preventDefault;

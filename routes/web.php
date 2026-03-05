@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SeanceController;
+use App\Http\Controllers\SelectController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TypeSalleController;
 use App\Http\Controllers\UserController;
@@ -124,7 +125,7 @@ Route::get('/gestionSalle', [PageController::class, 'gestionSalle'])->name('gest
 Route::get('/gestionSeance', [PageController::class, 'gestionSeance'])->name('gestionSeance')->middleware('admin');;
 Route::get('/gestionTarif', [PageController::class, 'gestionTarif'])->name('gestionTarif')->middleware('admin');;
 Route::get('/gestionTypeSalle', [PageController::class, 'gestionTypeSalle'])->name('gestionTypeSalle')->middleware('admin');;
-Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle')->middleware('admin');;
+Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle')->middleware('admin');
 
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
@@ -136,7 +137,16 @@ Route::put('/user/{id}', [UserController::class, 'update'])->name('userUpdate');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestroy');
 
 Route::get('/mesReservations', [PageController::class, 'mesReservations'])->name('mesReservations');
-
 Route::get('/effectuerReservation', [PageController::class, 'effectuerReservation'])->name('effectuerReservation');
+
+Route::post('/getAllGenre', [SelectController::class, 'getAllGenre'])->middleware('admin');
+Route::post('/getAllPersonne', [SelectController::class, 'getAllPersonne'])->middleware('admin');
+Route::post('/getAllFilm', [SelectController::class, 'getAllFilm'])->middleware('admin');
+Route::post('/getAllCinema', [SelectController::class, 'getAllCinema'])->middleware('admin');
+Route::post('/getAllSalle', [SelectController::class, 'getAllSalle'])->middleware('admin');
+Route::post('/getAllSeance', [SelectController::class, 'getAllSeance'])->middleware('admin');
+Route::post('/getAllTarif', [SelectController::class, 'getAllTarif'])->middleware('admin');
+Route::post('/getAllTypeSalle', [SelectController::class, 'getAllTypeSalle'])->middleware('admin');
+
 
 require __DIR__.'/auth.php';

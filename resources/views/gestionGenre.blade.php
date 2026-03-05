@@ -65,4 +65,7 @@
             <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
         </div>
     </main>
+    @vite('resources/js/stateButtons.js')
+    @vite('resources/js/gestionGenre.js')
+    @vite('resources/js/updateSelect.js')
 @endsection

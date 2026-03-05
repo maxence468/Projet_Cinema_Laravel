@@ -43,7 +43,6 @@
                             <div class="col-12 col-lg-3 order-4 order-lg-3">
                                 <label class="h3 mb-0">Titre film</label>
                             </div>
-
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
                                 <input class="inputCatalogue" id="titreFilm" type="text" pattern="^[A-Za-zÀ-ÿ0-9'’\-\s.,:!?()]{2,100}$" placeholder="Titre film" required>
                             </div>
@@ -195,11 +194,11 @@
                                     <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
                                     <div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue principale" id="principale" type="radio" required>
+                                            <input name="typeActeur_1" class="inputCatalogue principale" id="principale" type="radio" required>
                                             <label for="principale">Principale</label>
                                         </div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue secondaire" id="secondaire" type="radio" required>
+                                            <input name="typeActeur_1" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                             <label for="secondaire">Secondaire</label>
                                         </div>
                                     </div>
@@ -401,5 +400,7 @@
             }
         }
     </script>
+    @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionFilm.js')
+    @vite('resources/js/updateSelect.js')
 @endsection

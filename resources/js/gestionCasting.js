@@ -50,6 +50,7 @@ $('#personneModif').change(function(e){
     $.ajax({
         url: "/editPersonne",
         type: "post",
+        global:false,
         data:{
             idPers: idPers,
             _token: $('input[name="_token"]').val(),
