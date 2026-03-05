@@ -1,4 +1,5 @@
 
+
 $('#btnAjt').click(function(){
     let titreFilm = $('#titreFilm').val()
     let descFilm = $('#descFilm').val()
@@ -23,6 +24,24 @@ $('#btnAjt').click(function(){
 
     let nomJoue = $('.nomJoue').map(function(){
         return $(this).val();
+    }).get();
+
+    let preJoue = $('.preJoue').map(function(){
+        return $(this).val();
+    }).get();
+
+    let principale = $('.principale').map(function(){
+        if($(this).is(':checked')){
+            return 1;
+        }
+        return 0;
+    }).get();
+
+    let secondaire = $('.secondaire').map(function(){
+        if($(this).is(':checked')){
+            return 1;
+        }
+        return 0;
     }).get();
 
     let preJoue = $('.preJoue').map(function(){
@@ -244,6 +263,7 @@ $('#btnModif').click(function(){
                 _token: $('input[name="_token"]').val(),
             },
             success: function(result){
+                console.log(result['request'])
                 $('#myForm')[0].reset();
                 supprimerRealScenaristeActeur()
                 alert('Film modifié avec succès !');
@@ -351,6 +371,32 @@ $(document).on('change','.idActeur', function(e){
     }
 })
 
+$(document).on('click','#btnSubmitFormGenre', function(e){
+    e.preventDefault();
+
+    const newGenre = $('#inputGenre').val().trim();
+
+    if (newGenre !== '') {
+        $('#idGenre').append(
+            $('<option>', {
+                value: newGenre,
+                text: newGenre,
+                selected: true
+            })
+        );
+
+        $('#inputGenre').val('');
+
+        $('.formAjoutGenre').hide();
+        $('.btnAjoutFormGenre').show();
+    }
+});
+
+$(document).on('click', '.btnAjoutFormGenre', function(e) {
+    $(this).hide();
+    $('.formAjoutGenre').show();
+});
+
 //desactiver les options deja selectionnés des select
 let scenariste = '.idScenariste'
 let acteur = '.idActeur'
@@ -388,9 +434,42 @@ function blockOptionSelect(typePersonne){
     });
 }
 
-//sauvegarder dans le localStorage les input
-$("input, textarea").on("change", function () {
-    localStorage.setItem(this.id, $(this).val());
+
+$(document).on('click', '.btnDeployFormPers',function(e) {
+    e.preventDefault;
+    $('.btnDeployFormPers').hide();
+    $('#formAjoutPersonne').show();
 });
 
+$(document).on('click', '#formAjoutPersonne',function(e) {
+    e.preventDefault;
+    $(this).hide();
+    $('.btnDeployFormPers').show();
+});
 
+var countFormGenre = 0;
+var countFormPersonne = 0;
+
+function showFormGenre() {
+    if (countFormGenre == 0) {
+        var template = document.querySelector("#tplGenre");
+
+        var divIdGenre = document.getElementById('divIdGenre');
+        var clone = document.importNode(template.content, true);
+
+        divIdGenre.appendChild(clone);
+        countFormGenre++;
+    }
+}
+
+function showFormPersonne() {
+    if(countFormPersonne == 0) {
+        var template = document.querySelector("#tplPersonne");
+
+        var divIdPersonne = document.getElementById('divIdPersonne');
+        var clone = document.importNode(template.content, true);
+
+        divIdPersonne.appendChild(clone);
+        countFormPersonne++;
+    }
+}

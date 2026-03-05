@@ -70,7 +70,7 @@
             </div>
 
 
-            <div class="row-auto d-flex justify-content-center pt-3">
+            <div class="row-auto d-flex justify-content-center pt-4">
                 <x-primary-button class="btn-validConInc inscription">
                     {{ ('Inscription') }}
                 </x-primary-button>

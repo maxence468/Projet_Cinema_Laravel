@@ -5,8 +5,8 @@
 @section('main')
     <main class="pt-3">
         <div class="d-flex flex-column align-items-center">
-            <div class="gap-0 d-flex justify-content-start pb-2">
-                <p class="m-0">Paramètres du compte</p>
+            <div class="inputConInc gap-0 d-flex justify-content-start pb-2">
+                <p class="sizeTitleSettingAccount m-0">Paramètres du compte</p>
             </div>
             @if(session('success'))
                 {{session('success')}}
@@ -62,13 +62,13 @@
                     </div>
 
 
-                    <div class="row-auto d-flex justify-content-center pt-3">
+                    <div class="row-auto d-flex justify-content-center pt-4">
                         <x-primary-button class="btn-validConInc">
                             {{ __('Modifier') }}
                         </x-primary-button>
                     </div>
                 </form>
-                <div class="row-auto d-flex justify-content-center pt-3">
+                <div class="row-auto d-flex justify-content-center pt-4">
                     <form action="{{ route('userDestroy', $user->id) }}" method="POST" onsubmit="return confirm('Confirmer la suppression ?')">
                         @csrf
                         @method('DELETE')

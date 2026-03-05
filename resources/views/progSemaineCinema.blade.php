@@ -42,7 +42,12 @@
             @foreach($films as $film)
                 <div class="row d-flex align-items-center" style="margin-top: 50px; margin-left: 20px">
                     <div class="col-auto">
-                        <img src="{{asset('images/' .$film->posterFilm)}}" alt="{{$film->posterFilm}}" width="100" height="152">
+                        <form method="GET" action="{{ route('recherchefilm') }}">
+                            <input type="hidden" value="{{ $film->titreFilm }}">
+                            <button type="submit">
+                                <img src="{{asset('images/' .$film->posterFilm)}}" alt="{{$film->posterFilm}}" width="100" height="152">
+                            </button>
+                        </form>
                     </div>
                     <div class="col-auto">
                         <p>{{$film->titreFilm}}</p>
