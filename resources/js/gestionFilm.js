@@ -44,24 +44,6 @@ $('#btnAjt').click(function(){
         return 0;
     }).get();
 
-    let preJoue = $('.preJoue').map(function(){
-        return $(this).val();
-    }).get();
-
-    let principale = $('.principale').map(function(){
-        if($(this).is(':checked')){
-            return 1;
-        }
-        return 0;
-    }).get();
-
-    let secondaire = $('.secondaire').map(function(){
-        if($(this).is(':checked')){
-            return 1;
-        }
-        return 0;
-    }).get();
-
     if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length && nomJoue.length && preJoue.length && principale.length && secondaire.length){
         $.ajax({
             url: "/films",
@@ -371,31 +353,6 @@ $(document).on('change','.idActeur', function(e){
     }
 })
 
-$(document).on('click','#btnSubmitFormGenre', function(e){
-    e.preventDefault();
-
-    const newGenre = $('#inputGenre').val().trim();
-
-    if (newGenre !== '') {
-        $('#idGenre').append(
-            $('<option>', {
-                value: newGenre,
-                text: newGenre,
-                selected: true
-            })
-        );
-
-        $('#inputGenre').val('');
-
-        $('.formAjoutGenre').hide();
-        $('.btnAjoutFormGenre').show();
-    }
-});
-
-$(document).on('click', '.btnAjoutFormGenre', function(e) {
-    $(this).hide();
-    $('.formAjoutGenre').show();
-});
 
 //desactiver les options deja selectionnés des select
 let scenariste = '.idScenariste'
@@ -435,16 +392,87 @@ function blockOptionSelect(typePersonne){
 }
 
 
+$(document).on('click','#btnSubmitFormGenre', function(e){
+    e.preventDefault();
+
+    const libGenre = $('#inputGenre').val().trim();
+    //
+    //     if (newGenre !== '') {
+    //         $('#idGenre').append(
+    //             $('<option>', {
+    //                 value: newGenre,
+    //                 text: newGenre,
+    //                 selected: true
+    //             })
+    //         );
+    $.ajax({
+        url: `/genres`,
+        type: 'POST',
+        data: {
+            libGenre: libGenre,
+            _token: $('input[name="_token"]').val()
+        },
+        success: function(result){
+            alert('Le genre a été crée');
+            $('#inputGenre').val('');
+
+            $('.formAjoutGenre').hide();
+            $('.btnAjoutFormGenre').show();
+        },
+        error: function(error){
+            console.log(error);
+            alert('Le champs doit être rempli');
+        },
+    });
+});
+
+$(document).on('click', '.btnAjoutFormGenre', function(e) {
+    $(this).hide();
+    $('.formAjoutGenre').show();
+});
+
 $(document).on('click', '.btnDeployFormPers',function(e) {
     e.preventDefault;
     $('.btnDeployFormPers').hide();
     $('#formAjoutPersonne').show();
 });
 
-$(document).on('click', '#formAjoutPersonne',function(e) {
+$(document).on('click', '#btnAjtPers',function(e) {
     e.preventDefault;
-    $(this).hide();
-    $('.btnDeployFormPers').show();
+
+    const nomPers = $('#nomPers').val();
+    const prePers = $('#prePers').val();
+    const dateNaissPers = $('#dateNaissPers').val();
+    const lieuNaissPers = $('#lieuNaissPers').val();
+    const photoPers = $('#photoPers').val();
+    const biblio = $('#biblio').val();
+
+    $.ajax({
+        url: `/personnes`,
+        type: 'POST',
+        data: {
+            nomPers: nomPers,
+            prePers: prePers,
+            dateNaissPers: dateNaissPers,
+            lieuNaissPers: lieuNaissPers,
+            photoPers: photoPers,
+            biblio: biblio,
+            _token: $('input[name="_token"]').val()
+        },
+        success: function(result){
+            alert('La personne a été crée');
+            $("#formAjoutPersonne")[0].reset();
+            $('#formAjoutPersonne').hide();
+            $('.btnDeployFormPers').show();
+        },
+        error: function(error){
+            console.log(error);
+            alert('Le champs doit être rempli');
+        },
+    });
+
+
+
 });
 
 var countFormGenre = 0;

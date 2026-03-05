@@ -5,6 +5,17 @@ $(document).ready(function(){
     });
 });
 
+$(document).on('click','#btnSubmitFormGenre', function(e){
+    updateSelectGenre();
+});
+
+$(document).on('click', '#btnAjtPers',function(e) {
+    updateSelectPersonne();
+});
+
+
+
+
 function updateAllSelect(){
     updateSelectGenre();
     updateSelectPersonne();
@@ -57,9 +68,9 @@ function updateSelectPersonne(){
 
             let selects = [selectReal, selectScenar, selectActeur, selectPersonne]
 
-            selectReal.append('<option value="">-- Réalisateur film --</option>')
-            selectScenar.append('<option value="">-- Scénariste film --</option>')
-            selectActeur.append('<option value="">-- Acteur film --</option>')
+            selectReal.append('<option value="">Réalisateur film</option>')
+            selectScenar.append('<option value="">Scénariste film</option>')
+            selectActeur.append('<option value="">Acteur film</option>')
             selectPersonne.append('<option value=""></option>')
             $.each(result['personnes'], function(index, personne){
                 selects.forEach(function(select){

@@ -226,15 +226,14 @@
                                     <input class="inputCatalogue nomJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Nom Joué" required>
                                     <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
                                     <div>
-                                        <div>
-                                            <div class="col-12 col-lg-4 pb-5">
-                                                <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
-                                                    <option>Principal ou secondaire</option>
-                                                    <option>Principal</option>
-                                                    <option>Secondaire</option>
-                                                </select>
+                                            <div>
+                                                <input name="typeActeur_" class="inputCatalogue principale" id="principale" type="radio" required>
+                                                <label>Principale</label>
                                             </div>
-                                        </div>
+                                            <div>
+                                                <input name="typeActeur_" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
+                                                <label>Secondaire</label>
+                                            </div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-danger remove">X</button>
@@ -309,7 +308,7 @@
                 </div>
 
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Nom personne" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="nomPers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Nom personne" required>
                 </div>
             </div>
 
@@ -318,7 +317,7 @@
                     <label class="h3 mb-0">Prenom personne</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Prenom personne" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="prePers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Prenom personne" required>
                 </div>
                 <div class="col-lg-5 d-none d-lg-block"></div>
             </div>
@@ -328,7 +327,7 @@
                     <label class="h3 mb-0">Date de naissance</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="date" placeholder="Date de naissance" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="dateNaissPers" type="date" placeholder="Date de naissance" required>
                 </div>
             </div>
 
@@ -337,7 +336,7 @@
                     <label class="h3 mb-0">Lieu de naissance</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,100}$" placeholder="Lieu de naissance" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="lieuNaissPers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,100}$" placeholder="Lieu de naissance" required>
                 </div>
             </div>
 
@@ -346,7 +345,7 @@
                     <label class="h3 mb-0">Photo personne</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$" placeholder="Photo personne" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="photoPers" type="text" pattern="^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$" placeholder="Photo personne" required>
                 </div>
             </div>
 
@@ -355,7 +354,7 @@
                     <label class="h3 mb-0">Bibliographie</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <textarea form="formAjoutPersonne" class="textareaCatalogue" placeholder="Bibliographie" required></textarea>
+                    <textarea form="formAjoutPersonne" class="textareaCatalogue" id="biblio" placeholder="Bibliographie" required></textarea>
                 </div>
             </div>
 
