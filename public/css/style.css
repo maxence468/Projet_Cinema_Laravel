@@ -707,3 +707,45 @@ section {
 .btnReservation {
     margin-right: 57px;
 }
+
+.btnRemove {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    padding: 3px 15px 3px 15px;
+}
+
+.btnAjoutPersReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 32px;
+    padding: 0px 17px 0px 17px;
+}
+
+.btnReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 32px;
+    padding: 0px 103px 0px 103px;
+    margin-right: 37px;
+}
+
+.selectTarif {
+    width: 329px;
+    height: 53px;
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.totalPrice {
+    margin-right: 37px;
+}
+
+.contentPageReserv {
+    margin-left: 264px;
+}
