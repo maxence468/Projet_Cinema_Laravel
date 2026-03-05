@@ -77,36 +77,7 @@
             <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
     </main>
-    <script>
-        /*function submitForm(action) {
-            const form = document.getElementById('');
-            const methodInput = document.getElementById('');
-            const actionInput = document.getElementBydId('');
-
-            actionInput.value = action;
-
-            switch (action) {
-                case 'create':
-                    form.action = "<route('posts.store')";
-                    methodInput.value = 'POST';
-                    break;
-
-                case 'update';
-                    form.action = " route('posts.update'), $post->id ?? 0"
-                    methodInput.value = 'PATCH';
-                    break;
-
-                case 'delete':
-                    if(!confirm('Êtes vous sure ?')) {
-                        event.preventDefault();
-                        return;
-                    }
-                    form.action = "route('posts.destroy', $post->id ?? 0)"
-                    methodInput.value = 'DELETE';
-                    break;
-            }
-        }*/
-    </script>
     @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionTypeSalle.js')
+    @vite('resources/js/updateSelect.js')
 @endsection

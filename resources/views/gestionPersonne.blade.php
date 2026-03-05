@@ -146,4 +146,5 @@
     </script>
     @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionPersonne.js')
+    @vite('resources/js/updateSelect.js')
 @endsection

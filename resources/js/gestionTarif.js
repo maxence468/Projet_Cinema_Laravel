@@ -43,6 +43,7 @@ $('#tarifModif').change(function(e){
     $.ajax({
         url: "/editTarif",
         type: "post",
+        global:false,
         data:{
             idTarif: idTarif,
             _token: $('input[name="_token"]').val(),

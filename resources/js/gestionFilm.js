@@ -90,10 +90,15 @@ $('#btnAjt').click(function(){
 
 $('#filmModif').change(function(e){
     let idFilm = $('#filmModif').val()
+    if(!idFilm){
+        supprimerRealScenaristeActeur()
+        return;
+    }
 
     $.ajax({
         url: "/editFilm",
         type: "post",
+        global:false,
         data:{
             idFilm: idFilm,
             _token: $('input[name="_token"]').val(),
@@ -368,7 +373,9 @@ function blockOptionSelect(typePersonne){
     // Récupérer toutes les valeurs choisies
     $(typePersonne).each(function () {
         let v = $(this).val();
-        if (v) selected.push(v);
+        if (v) {
+            selected.push(v);
+        }
     });
     // Désactiver les valeurs déjà prises
     $(typePersonne).each(function () {
@@ -385,3 +392,5 @@ function blockOptionSelect(typePersonne){
 $("input, textarea").on("change", function () {
     localStorage.setItem(this.id, $(this).val());
 });
+
+

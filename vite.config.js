@@ -17,6 +17,7 @@ export default defineConfig({
                 'ressource/js/gestionTarif.js',
                 'ressource/js/gestionTypeSale.js',
                 'ressource/js/stateButtoons.js',
+                'ressource/js/updateSelect.js'
             ],
             refresh: true,
         }),

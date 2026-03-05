@@ -1,15 +1,11 @@
-//à l'appui btn pour créer desactive tous les boutons et les reactive une fois la requete ajax complété
-$('#btnAjt').click(function() {
-    $.ajax({
-        beforeSend: function () {
-            stateButtons('off');
-        },
-        complete: function () {
-            stateButtons('base');
-        }
-    });
+$(document).ajaxStart(function () {
+    stateButtons('off');
+    console.log('off');
+})
+$(document).ajaxStop(function () {
+    stateButtons('base');
+    console.log('base');
 });
-
 
 $('#filmModif, #genreModif, #personneModif, #castingModif, #cinemaModif, #salleModif, #seanceModif, #tarifModif, #typeSalleModif').change(function(e){
     let idPers = $('#filmModif, #genreModif, #personneModif, #cinemaModif, #salleModif, #seanceModif, #tarifModif, #typeSalleModif').val()
@@ -21,32 +17,6 @@ $('#filmModif, #genreModif, #personneModif, #castingModif, #cinemaModif, #salleM
     stateButtons('modifier-supprimer')
 
 });
-
-$('#btnModif').click(function(){
-        $.ajax({
-            beforeSend:function(){
-                stateButtons('off');
-            },
-            complete: function(){
-                stateButtons('base');
-            }
-        });
-});
-
-$('#btnSuppr').click(function(){
-    $.ajax({
-        beforeSend:function(){
-            stateButtons('off');
-        },
-        complete: function(){
-            stateButtons('base');
-        }
-    });
-});
-
-
-
-
 
 stateButtons('base');
 function stateButtons(state){
