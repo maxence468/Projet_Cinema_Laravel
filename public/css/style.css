@@ -143,6 +143,15 @@ ul {
     color: white;
 }
 
+.btnOptionMesReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 21px 0px 21px;
+    padding: 0px 25px 0px 25px;
+}
+
 .input label {
     margin: 0 auto 0 auto;
     width: 165px;
@@ -315,12 +324,9 @@ a {
 }
 
 
-@media(max-width:767px) {
+@media(max-width:768px) {
     .carousel-item .carousel-item > div {
         display: none;
-    }
-    .carousel-inner .carousel-item > div:first-child {
-        display: block;
     }
 
     .btnChoixJour {
@@ -346,6 +352,14 @@ a {
         object-fit: cover;
         width: 100%;
     }
+
+    .btnOptionMesReserv {
+        font-size: 20px;
+        margin: 0px 21px 0px 21px;
+        padding: 0px 25px 0px 25px;
+    }
+
+
 }
 
 .carousel-item {
@@ -448,11 +462,26 @@ section {
     height: 106px !important;
 }
 
+.btnChoixVisionReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 28px 0px 28px;
+    padding: 0px 10px 0px 10px;
+}
+
 @media (max-width: 768px) {
     .btn-ajoutModifSuppr {
         width: 120px;
         height: 40px;
         font-size: 18px;
+    }
+
+    .btnChoixVisionReserv {
+        font-size: 20px;
+        margin: 0px 20px 0px 20px;
+        padding: 0px 7px 0px 7px;
     }
 }
 
@@ -465,6 +494,7 @@ section {
     }
 
 }
+
 
 @media (max-width: 540px) {
     .inputCatalogue,
@@ -564,6 +594,11 @@ section {
         font-size: 22px !important;
     }
 
+    .btnChoixVisionReserv {
+        font-size: 20px;
+        margin: 0px 20px 0px 20px;
+        padding: 0px 7px 0px 7px;
+    }
 }
 
 /* MOBILE SLIDER (Under 480px) */
@@ -694,24 +729,6 @@ section {
     background: #991917;
     text-decoration: none;
     border: 1px solid white;
-}
-
-.btnChoixVisionReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
-    font-size: 30px;
-    margin: 0px 28px 0px 28px;
-    padding: 0px 10px 0px 10px;
-}
-
-.btnOptionMesReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
-    font-size: 30px;
-    margin: 0px 21px 0px 21px;
-    padding: 0px 25px 0px 25px;
 }
 
 .infoReservation {
@@ -918,15 +935,22 @@ section {
     }
 }
 
-@media (max-width: 480px) {
-    .contentPageReserv > .row:last-of-type > .col-auto.colAutoRemove {
-        flex: 1 1 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
+.btnReservation .col-auto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .btnReservation .col-auto {
+        gap: 6px;
     }
 
-    .btnAjoutPersReserv {
-        font-size: 32px !important;
-        padding: 0 17px !important;
+    .btnOptionMesReserv {
+        font-size: 20px;
+        padding: 0 12px;
+        margin: 0;
     }
 }
