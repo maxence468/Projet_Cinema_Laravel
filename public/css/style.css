@@ -5,6 +5,20 @@
     font-family: 'Lilita One', sans-serif;
 }
 
+/* remove the classic appearance of a button */
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
 html, body {
     color: white;
     height: 100%;
@@ -748,4 +762,100 @@ section {
 
 .contentPageReserv {
     margin-left: 264px;
+}
+
+.participant-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* same vertical spacing in every column */
+}
+
+.participant-slot {
+    min-height: 38px; /* close to select height */
+    display: flex;
+    align-items: center;
+}
+
+.participant-text {
+    min-width: 80px;
+}
+
+.reserverSmallScreen {
+    justify-content: end;
+}
+
+@media (max-width: 820px) {
+    .reserverSmallScreen {
+        justify-content: center;
+    }
+    .totalPrice {
+        margin-right: 0px;
+    }
+    .btnReserv {
+        margin-right: 0px;
+    }
+}
+
+
+/* Problems from here */
+/* Participants row */
+.contentPageReserv > .row:last-of-type {
+    align-items: flex-start;
+    column-gap: 20px;
+}
+
+/* keep the title on a full line */
+.contentPageReserv > .row:last-of-type > h3 {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* keep the 3 columns side by side */
+.contentPageReserv > .row:last-of-type > .col-auto {
+    flex: 0 0 auto;
+}
+
+/* remove Bootstrap side offsets only in this row */
+.contentPageReserv > .row:last-of-type > .col-auto.ms-5,
+.contentPageReserv > .row:last-of-type > .col-auto.ms-4 {
+    margin-left: 0 !important;
+}
+
+/* same vertical rhythm */
+#divIdChampsSelect,
+#divIdPrixTarif,
+#divIdBtnSuppr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#divIdChampsSelect .participant-slot,
+#divIdPrixTarif .participant-slot,
+#divIdBtnSuppr .participant-slot {
+    min-height: 53px;
+    display: flex;
+    align-items: center;
+}
+
+.btnSuppr {
+    padding-top: 45px;
+}
+
+.selectTarif {
+    width: 329px;
+    max-width: 100%;
+}
+
+/* small screens */
+@media (max-width: 992px) {
+    .contentPageReserv {
+        margin-left: 0;
+    }
+
+    .contentPageReserv > .row:last-of-type {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
 }
