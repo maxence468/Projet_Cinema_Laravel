@@ -1,10 +1,10 @@
 @extends('layout')
 
-@section('title', 'Page modifier une réservation')
+@section('title', 'Page effectuer une réservation')
 
 @section('main')
-    <main id="pageModifierReservation">
-        <h2 class="d-flex justify-content-center pt-3">Modifier une réservation</h2>
+    <main id="pageEffectuerReservation">
+        <h2 class="d-flex justify-content-center pt-3">Effectuer une réservation</h2>
 
         <div class="contentPageReserv">
             <div class="row pt-5">
@@ -25,7 +25,7 @@
             <div class="row">
                 <h3 class="pt-4">Participants</h3>
 
-                <div class="col-auto">
+                <div class="col-auto colAutoRemove">
                     <h3 class="pt-1">Tarif</h3>
 
                     <div id="divIdChampsSelect" class="participant-stack">
@@ -42,7 +42,7 @@
                     </button>
                 </div>
 
-                <div class="col-auto ms-5">
+                <div class="col-auto">
                     <h3>Prix</h3>
 
                     <div id="divIdPrixTarif" class="participant-stack">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="col-auto ms-4 btnSuppr">
+                <div class="col-auto btnSuppr">
                     <div id="divIdBtnSuppr" class="participant-stack">
                         <div class="participant-slot">
                             <button type="button" class="btnSupprParticipant">

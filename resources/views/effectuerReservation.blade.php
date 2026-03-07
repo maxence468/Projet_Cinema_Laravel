@@ -25,7 +25,7 @@
             <div class="row">
                 <h3 class="pt-4">Participants</h3>
 
-                <div class="col-auto">
+                <div class="col-auto colAutoRemove">
                     <h3 class="pt-1">Tarif</h3>
 
                     <div id="divIdChampsSelect" class="participant-stack">
@@ -42,7 +42,7 @@
                     </button>
                 </div>
 
-                <div class="col-auto ms-5">
+                <div class="col-auto">
                     <h3>Prix</h3>
 
                     <div id="divIdPrixTarif" class="participant-stack">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="col-auto ms-4 btnSuppr">
+                <div class="col-auto btnSuppr">
                     <div id="divIdBtnSuppr" class="participant-stack">
                         <div class="participant-slot">
                             <button type="button" class="btnSupprParticipant">

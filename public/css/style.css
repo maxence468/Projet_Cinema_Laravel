@@ -5,7 +5,7 @@
     font-family: 'Lilita One', sans-serif;
 }
 
-/* remove the classic appearance of a button */
+/* enlève l'apparence classique des boutons */
 button {
     appearance: none;
     -webkit-appearance: none;
@@ -851,11 +851,82 @@ section {
 /* small screens */
 @media (max-width: 992px) {
     .contentPageReserv {
-        margin-left: 0;
+        margin-left: 10px;
     }
 
-    .contentPageReserv > .row:last-of-type {
-        flex-wrap: nowrap;
-        overflow-x: auto;
+    .btnSuppr {
+        padding-top: 65px;
+    }
+
+    .prixParTarif {
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 550px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnAjoutPersReserv {
+        font-size: 32px;
+        padding: 0px 2px 0px 2px;
+    }
+
+    .btnSuppr {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .prixParTarif {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .selectTarif {
+        width: 300px;
+    }
+
+    .participant-text {
+        min-width: 0px;
+    }
+}
+
+@media (max-width : 480px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnAjoutPersReserv {
+        font-size: 32px;
+        padding: 0px 2px 0px 2px;
+    }
+
+    .btnSuppr {
+        margin-left: 0px;
+        padding-left: 0px;
+        padding-top: 60px;
+    }
+
+    .prixParTarif {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .selectTarif {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contentPageReserv > .row:last-of-type > .col-auto.colAutoRemove {
+        flex: 1 1 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .btnAjoutPersReserv {
+        font-size: 32px !important;
+        padding: 0 17px !important;
     }
 }
