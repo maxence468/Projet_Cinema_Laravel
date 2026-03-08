@@ -150,7 +150,7 @@
                                 <label class="h3 mb-0">Scénariste film</label>
                             </div>
                             <div class="col-12 col-lg-4" id="scenariste-container">
-                                <select name="idRealisateur[]" class="inputCatalogue choixCatal idScenariste">
+                                <select name="idScenariste[]" class="inputCatalogue choixCatal idScenariste">
                                     <option value="">Scénariste film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
@@ -198,11 +198,6 @@
                                             <input name="typeActeur_1" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                             <label for="secondaire">Secondaire</label>
                                         </div>
-                                        <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
-                                            <option>Principal ou secondaire</option>
-                                            <option name="typeActeur_1" id="principale" class="principale">Principal</option>
-                                            <option name="typeActeur_1" id="secondaire" class="inputCatalogue secondaire">Secondaire</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <button id="addActeur">Ajouter un acteur</button>
@@ -236,11 +231,6 @@
                                                 <input name="typeActeur_" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                                 <label>Secondaire</label>
                                             </div>
-                                            <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
-                                                <option>Principal ou secondaire</option>
-                                                <option>Principal</option>
-                                                <option>Secondaire</option>
-                                            </select>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-danger remove">X</button>

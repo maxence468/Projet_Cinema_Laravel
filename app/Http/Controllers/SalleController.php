@@ -27,12 +27,14 @@ class SalleController extends Controller
             'idTypeSalle' => 'required|exists:typesalles,idTypeSalle',
             'idCinema' => 'required|exists:cinemas,idCinema',
             'idTarif' => 'required',
+            'numeroSalle' => 'required|integer'
         ]);
 
         $s = new Salle();
         $s->capaciteSal = request('capaciteSal');
         $s->idTypeSalle = request('idTypeSalle');
         $s->idCinema = request('idCinema');
+        $s->numeroSalle = request('numeroSalle');
         $s->save();
 
         $s->tarifs()->sync(request('idTarif'));
@@ -50,6 +52,8 @@ class SalleController extends Controller
             'idTypeSalle' => 'required|exists:typesalles,idTypeSalle',
             'idCinema' => 'required|exists:cinemas,idCinema',
             'idTarif' => 'required',
+            'numeroSalle' => 'required|integer'
+
         ]);
 
         $salle = Salle::findOrFail($id);
@@ -58,7 +62,8 @@ class SalleController extends Controller
             'capaciteSal' => $request->capaciteSal,
             'idTypeSalle' => $request->idTypeSalle,
             'idCinema' => $request->idCinema,
-        ]);
+            'numeroSalle' => $request->numeroSalle
+            ]);
 
         $salle->tarifs()->sync(request('idTarif'));
 
