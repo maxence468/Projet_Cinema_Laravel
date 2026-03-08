@@ -60,6 +60,8 @@ class CinemaController extends Controller
             'message' => 'Cinema mis à jour !',
             'cinema' => $cinema
         ]);
+
+        return redirect()->route('cinemas.index');
     }
 
     public function destroy($id)

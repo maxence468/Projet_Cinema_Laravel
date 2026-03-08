@@ -13,6 +13,7 @@ use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TypeSalleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
