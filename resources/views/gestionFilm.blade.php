@@ -186,7 +186,7 @@
                                         <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
                                     @endforeach
                                 </select>
-                                <div class="champsActeur" style="display:none">
+                                <div class="champsActeur">
                                     <input class="inputCatalogue nomJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Nom Joué" required>
                                     <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
                                     <div>
@@ -198,6 +198,11 @@
                                             <input name="typeActeur_1" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                             <label for="secondaire">Secondaire</label>
                                         </div>
+                                        <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
+                                            <option>Principal ou secondaire</option>
+                                            <option name="typeActeur_1" id="principale" class="principale">Principal</option>
+                                            <option name="typeActeur_1" id="secondaire" class="inputCatalogue secondaire">Secondaire</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <button id="addActeur">Ajouter un acteur</button>
@@ -219,7 +224,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <div class="champsActeur" style="display:none">
+                                <div class="champsActeur">
                                     <input class="inputCatalogue nomJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Nom Joué" required>
                                     <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
                                     <div>
@@ -231,6 +236,11 @@
                                                 <input name="typeActeur_" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                                 <label>Secondaire</label>
                                             </div>
+                                            <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
+                                                <option>Principal ou secondaire</option>
+                                                <option>Principal</option>
+                                                <option>Secondaire</option>
+                                            </select>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-danger remove">X</button>
@@ -248,6 +258,10 @@
 
         </div>
     </main>
+
+
+
+
     <template id="tplGenre">
         <form form="formAjoutGenre" id="formAjoutGenre" class="formAjoutGenre" name="formAjoutGenre" method="post" action="">
             @csrf
@@ -285,6 +299,9 @@
 
         </form>
     </template>
+
+
+
     <template id="tplPersonne">
         <form form="formAjoutPersonne" class="formAjoutPersonne" id="formAjoutPersonne" method="post" action="">
             @csrf
@@ -369,15 +386,15 @@
         </form>
     </template>
     <script>
-        var countFormGenre = 0;
-        var countFormPersonne = 0;
+        let countFormGenre = 0;
+        let countFormPersonne = 0;
 
         function showFormGenre() {
             if (countFormGenre == 0) {
-                var template = document.querySelector("#tplGenre");
+                const template = document.querySelector("#tplGenre");
 
-                var divIdGenre = document.getElementById('divIdGenre');
-                var clone = document.importNode(template.content, true);
+                const divIdGenre = document.getElementById('divIdGenre');
+                const clone = document.importNode(template.content, true);
 
                 divIdGenre.appendChild(clone);
                 countFormGenre++;
@@ -386,10 +403,10 @@
 
         function showFormPersonne() {
             if(countFormPersonne == 0) {
-                var template = document.querySelector("#tplPersonne");
+                const template = document.querySelector("#tplPersonne");
 
-                var divIdPersonne = document.getElementById('divIdPersonne');
-                var clone = document.importNode(template.content, true);
+                const divIdPersonne = document.getElementById('divIdPersonne');
+                const clone = document.importNode(template.content, true);
 
                 divIdPersonne.appendChild(clone);
                 countFormPersonne++;

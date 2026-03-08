@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace config\database\factories;
 
 use App\Models\Genre;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

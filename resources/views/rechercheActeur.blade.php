@@ -28,11 +28,26 @@
                     <div class="row mt-3">
                     <!-- Actor photo -->
                         <div class="col-auto align-items-start">
-                            <img src="{{ asset('images/' . $p->photoPers) }}"
-                                 alt="{{ $p->nomPers }}"
-                                 width="412"
-                                 height="626"
-                                 class="smd">
+                            @if(File::exists(public_path('images/' . $p->photoPers)))
+                                <html>
+                                <img src="{{ asset('images/' . $p->photoPers) }}"
+                                     width="412"
+                                     height="626"
+                                     alt="{{ $p->nomPers }}"
+                                     class="smd">
+                                </html>
+
+                            @else
+
+                                <html>
+                                <img src="{{ asset('images/img.png')}}"
+                                     width="412"
+                                     height="626"
+                                     alt="{{ $p->nomPers }}"
+                                     class="smd">
+                                </html>
+
+                            @endif
                         </div>
 
                         <!-- Actor details -->

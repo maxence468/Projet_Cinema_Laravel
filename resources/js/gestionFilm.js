@@ -475,15 +475,15 @@ $(document).on('click', '#btnAjtPers',function(e) {
 
 });
 
-var countFormGenre = 0;
-var countFormPersonne = 0;
+let countFormGenre = 0;
+let countFormPersonne = 0;
 
 function showFormGenre() {
     if (countFormGenre == 0) {
-        var template = document.querySelector("#tplGenre");
+        const template = document.querySelector("#tplGenre");
 
-        var divIdGenre = document.getElementById('divIdGenre');
-        var clone = document.importNode(template.content, true);
+        const divIdGenre = document.getElementById('divIdGenre');
+        const clone = document.importNode(template.content, true);
 
         divIdGenre.appendChild(clone);
         countFormGenre++;
@@ -492,10 +492,10 @@ function showFormGenre() {
 
 function showFormPersonne() {
     if(countFormPersonne == 0) {
-        var template = document.querySelector("#tplPersonne");
+        const template = document.querySelector("#tplPersonne");
 
-        var divIdPersonne = document.getElementById('divIdPersonne');
-        var clone = document.importNode(template.content, true);
+        const divIdPersonne = document.getElementById('divIdPersonne');
+        const clone = document.importNode(template.content, true);
 
         divIdPersonne.appendChild(clone);
         countFormPersonne++;

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
+use App\Models\Genre;
 use Illuminate\Http\Request;
-
 class FilmController extends Controller
 {
     public function index(){
@@ -20,49 +20,45 @@ class FilmController extends Controller
         return view('films.show', compact('film'));
     }
 
-    public function store() {
-        request()->validate([
+    public function store(Request $request) {
+        $request->validate([
             'titreFilm' => 'required|string|max:255',
             'descFilm' => 'nullable|string',
             'dateSortieFilm' => 'required|date',
             'dureeFilm' => 'required|integer',
-            'posterFilm' => 'nullable|string',
+            'posterFilm' => 'required|string|max:255',
             'idGenre' => 'required|exists:genres,idGenre',
         ]);
 
         //film
         $f = new Film();
-        $f->titreFilm = request('titreFilm');
-        $f->descFilm = request('descFilm');
-        $f->dateSortieFilm = request('dateSortieFilm');
-        $f->dureeFilm = request('dureeFilm');
-        $f->posterFilm = request('posterFilm');
-        $f->idGenre = request('idGenre');
+        $f->titreFilm = $request->titreFilm;
+        $f->descFilm = $request->descFilm;
+        $f->dateSortieFilm = $request->dateSortieFilm;
+        $f->dureeFilm = $request->dureeFilm;
+        $f->posterFilm = $request->posterFilm;
+        $f->idGenre = $request->idGenre;
 
         $f->save();
 
         //realisateur
-        $f->realisateurs()->sync(request('idRealisateurs'));
+        $f->realisateurs()->sync($request->idRealisateurs ?? []);
         //scenariste
-        $f->scenariste()->sync(request('idScenaristes'));
+        $f->scenariste()->sync($request->idScenaristes ?? []);
         //acteur
         $data = [];
-        foreach (request('idActeurs') as $i => $id) {
+        foreach ($request->idActeurs ?? [] as $i => $id) {
             if (!$id) continue;
             $data[$id] = [
-                'nomJoue' => request('nomJoue')[$i] ?? null,
-                'preJoue' => request('preJoue')[$i] ?? null,
-                'principale' => request('principale')[$i] ?? null,
-                'secondaire' => request('secondaire')[$i] ?? null,
+                'nomJoue' => ($request->nomJoue)[$i] ?? null,
+                'preJoue' => ($request->preJoue)[$i] ?? null,
+                'principale' => ($request->principale)[$i] ?? null,
+                'secondaire' => ($request->secondaire)[$i] ?? null,
             ];
         }
         $f->casting()->sync($data);
 
-
-        //return response()->json([
-        //   'titreFilm'=> request('titreFilm'),
-        //]);
-        return redirect()->back()->with('success', 'Film ajouté');
+        return response()->json(['message' => 'Film ajouté', 'film' => $f]);
     }
 
     public function editFilm(Request $request){
@@ -87,30 +83,38 @@ class FilmController extends Controller
 
     public function update(Request $request, $id)
     {
-        $film = Film::findOrFail($id);
+        $request->validate([
+            'titreFilm' => 'required|string|max:255',
+            'descFilm' => 'nullable|string',
+            'dateSortieFilm' => 'required|date',
+            'dureeFilm' => 'required|integer',
+            'posterFilm' => 'nullable|string|max:255',
+            'idGenre' => 'required|exists:genres,idGenre',
+        ]);
 
+        $film = Film::findOrFail($id);
 
         $film->update([
             'titreFilm' => $request->titreFilm,
             'descFilm' => $request->descFilm,
             'dateSortieFilm' => $request->dateSortieFilm,
             'dureeFilm' => $request->dureeFilm,
-            'posterFilm' => $request->posterFilm,
+            'posterFilm' => $request->posterFilm ?? $film->posterFilm,
             'idGenre' => $request->idGenre,
         ]);
         //realisateur
-        $film->realisateurs()->sync(request('idRealisateurs'));
+        $film->realisateurs()->sync($request->idRealisateurs ?? []);
         //scenariste
-        $film->scenariste()->sync(request('idScenaristes'));
+        $film->scenariste()->sync($request->idScenaristes ?? []);
         //acteur
         $data = [];
-        foreach (request('idActeurs') as $i => $id) {
-            if (!$id) continue;
-            $data[$id] = [
-                'nomJoue' => request('nomJoue')[$i] ?? null,
-                'preJoue' => request('preJoue')[$i] ?? null,
-                'principale' => request('principale')[$i] ?? null,
-                'secondaire' => request('secondaire')[$i] ?? null,
+        foreach ($request->idActeurs ?? [] as $i => $idActeur) {
+            if (!$idActeur) continue;
+            $data[$idActeur] = [
+                'nomJoue' => ($request->nomJoue)[$i] ?? null,
+                'preJoue' => ($request->preJoue)[$i] ?? null,
+                'principale' => ($request->principale)[$i] ?? null,
+                'secondaire' => ($request->secondaire)[$i] ?? null,
             ];
         }
         $film->casting()->sync($data);
@@ -118,7 +122,6 @@ class FilmController extends Controller
         return response()->json([
             'message' => 'Film mis à jour !',
             'film' => $film,
-            'request' => $request->all()
         ]);
     }
 

@@ -5,6 +5,20 @@
     font-family: 'Lilita One', sans-serif;
 }
 
+/* enlève l'apparence classique des boutons */
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
 html, body {
     color: white;
     height: 100%;
@@ -129,6 +143,15 @@ ul {
     color: white;
 }
 
+.btnOptionMesReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 21px 0px 21px;
+    padding: 0px 25px 0px 25px;
+}
+
 .input label {
     margin: 0 auto 0 auto;
     width: 165px;
@@ -170,6 +193,10 @@ ul {
 .hamburgerMenu li {
     width: 100%;
     text-align: center;
+}
+
+.champsActeur {
+    display : none;
 }
 
 @media (min-width: 769px) {
@@ -301,12 +328,9 @@ a {
 }
 
 
-@media(max-width:767px) {
+@media(max-width:768px) {
     .carousel-item .carousel-item > div {
         display: none;
-    }
-    .carousel-inner .carousel-item > div:first-child {
-        display: block;
     }
 
     .btnChoixJour {
@@ -332,6 +356,14 @@ a {
         object-fit: cover;
         width: 100%;
     }
+
+    .btnOptionMesReserv {
+        font-size: 20px;
+        margin: 0px 21px 0px 21px;
+        padding: 0px 25px 0px 25px;
+    }
+
+
 }
 
 .carousel-item {
@@ -434,11 +466,48 @@ section {
     height: 106px !important;
 }
 
+.btnChoixVisionReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 28px 0px 28px;
+    padding: 0px 10px 0px 10px;
+}
+
+.recherche-genre-poster {
+    min-height: 480px;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    overflow: hidden;
+}
+.recherche-genre-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+.carousel-3-per-3 .carousel-inner {
+    padding: 0.5rem 0;
+}
+.carousel-3-per-3 .carousel-col {
+    min-height: 500px;
+}
+
 @media (max-width: 768px) {
     .btn-ajoutModifSuppr {
         width: 120px;
         height: 40px;
         font-size: 18px;
+    }
+
+    .btnChoixVisionReserv {
+        font-size: 20px;
+        margin: 0px 20px 0px 20px;
+        padding: 0px 7px 0px 7px;
     }
 }
 
@@ -451,6 +520,7 @@ section {
     }
 
 }
+
 
 @media (max-width: 540px) {
     .inputCatalogue,
@@ -550,6 +620,11 @@ section {
         font-size: 22px !important;
     }
 
+    .btnChoixVisionReserv {
+        font-size: 20px;
+        margin: 0px 20px 0px 20px;
+        padding: 0px 7px 0px 7px;
+    }
 }
 
 /* MOBILE SLIDER (Under 480px) */
@@ -682,28 +757,259 @@ section {
     border: 1px solid white;
 }
 
-.btnChoixVisionReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
-    font-size: 30px;
-    margin: 0px 28px 0px 28px;
-    padding: 0px 10px 0px 10px;
-}
-
-.btnOptionMesReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
-    font-size: 30px;
-    margin: 0px 21px 0px 21px;
-    padding: 0px 25px 0px 25px;
-}
-
 .infoReservation {
     margin-right: 225px;
 }
 
 .btnReservation {
     margin-right: 57px;
+}
+
+.btnRemove {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    padding: 3px 15px 3px 15px;
+}
+
+.btnAjoutPersReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 32px;
+    padding: 0px 17px 0px 17px;
+}
+
+.btnReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 32px;
+    padding: 0px 103px 0px 103px;
+    margin-right: 37px;
+}
+
+.btnReservProgSemaineCinema {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    padding: 0px 5px;
+}
+
+.affichageBtnPageProgSemaine {
+    margin-top: 60px;
+}
+
+.affichageFilmPageProgSemaine {
+    margin-top: 50px;
+    margin-left: 20px
+}
+
+.affichageSeancePageProgSemaine {
+    margin-top: 15px;
+    margin-left:20px
+}
+
+.affichageSalleProgSemaine {
+    margin-top: -10px;
+}
+
+    .btnReservRechFilm {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    padding: 0px 5px;
+    font-size: 22px;
+}
+
+.selectTarif {
+    width: 329px;
+    height: 53px;
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.totalPrice {
+    margin-right: 37px;
+}
+
+.contentPageReserv {
+    margin-left: 264px;
+}
+
+.participant-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* same vertical spacing in every column */
+}
+
+.participant-slot {
+    min-height: 38px; /* close to select height */
+    display: flex;
+    align-items: center;
+}
+
+.participant-text {
+    min-width: 80px;
+}
+
+.reserverSmallScreen {
+    justify-content: end;
+}
+
+@media (max-width: 820px) {
+    .reserverSmallScreen {
+        justify-content: center;
+    }
+    .totalPrice {
+        margin-right: 0px;
+    }
+    .btnReserv {
+        margin-right: 0px;
+    }
+}
+
+
+/* Problems from here */
+/* Participants row */
+.contentPageReserv > .row:last-of-type {
+    align-items: flex-start;
+    column-gap: 20px;
+}
+
+/* keep the title on a full line */
+.contentPageReserv > .row:last-of-type > h3 {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* keep the 3 columns side by side */
+.contentPageReserv > .row:last-of-type > .col-auto {
+    flex: 0 0 auto;
+}
+
+/* remove Bootstrap side offsets only in this row */
+.contentPageReserv > .row:last-of-type > .col-auto.ms-5,
+.contentPageReserv > .row:last-of-type > .col-auto.ms-4 {
+    margin-left: 0 !important;
+}
+
+/* same vertical rhythm */
+#divIdChampsSelect,
+#divIdPrixTarif,
+#divIdBtnSuppr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#divIdChampsSelect .participant-slot,
+#divIdPrixTarif .participant-slot,
+#divIdBtnSuppr .participant-slot {
+    min-height: 53px;
+    display: flex;
+    align-items: center;
+}
+
+.btnSuppr {
+    padding-top: 45px;
+}
+
+.selectTarif {
+    width: 329px;
+    max-width: 100%;
+}
+
+/* small screens */
+@media (max-width: 992px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnSuppr {
+        padding-top: 65px;
+    }
+
+    .prixParTarif {
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 550px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnAjoutPersReserv {
+        font-size: 32px;
+        padding: 0px 2px 0px 2px;
+    }
+
+    .btnSuppr {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .prixParTarif {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .selectTarif {
+        width: 300px;
+    }
+
+    .participant-text {
+        min-width: 0px;
+    }
+}
+
+@media (max-width : 480px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnAjoutPersReserv {
+        font-size: 32px;
+        padding: 0px 2px 0px 2px;
+    }
+
+    .btnSuppr {
+        margin-left: 0px;
+        padding-left: 0px;
+        padding-top: 60px;
+    }
+
+    .prixParTarif {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .selectTarif {
+        width: 200px;
+    }
+}
+
+.btnReservation .col-auto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .btnReservation .col-auto {
+        gap: 6px;
+    }
+
+    .btnOptionMesReserv {
+        font-size: 20px;
+        padding: 0 12px;
+        margin: 0;
+    }
 }

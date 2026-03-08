@@ -86,8 +86,8 @@
                             <div class="col-auto">
                                 <p class="pt-5 mt-5 ms-4">Prix</p>
                             </div>
-                            <div class="row pt-5 d-flex justify-content-center btnReservation">
-                                <div class="col-auto ms-2">
+                            <div class="col-12 pt-5">
+                                <div class="btnReservation d-flex justify-content-center gap-3 flex-wrap">
                                     <button class="btnOptionMesReserv">Modifier</button>
                                     <button class="btnOptionMesReserv">Annuler</button>
                                 </div>
