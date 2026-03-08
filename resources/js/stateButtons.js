@@ -67,6 +67,6 @@ function activerBtn(selector) {
 function desactiverBtn(selector) {
     $(selector)
         .prop('disabled', true)
-        .css('background-color', 'black')
+        .css('background-color', '#1c1c1c')
         .css("pointer-events", "none");
 }
