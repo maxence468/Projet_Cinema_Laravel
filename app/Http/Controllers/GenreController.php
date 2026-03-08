@@ -52,7 +52,7 @@ class GenreController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Film mis à jour !',
+            'message' => 'Genre mis à jour !',
             'genre' => $genre
         ]);
     }
@@ -62,7 +62,7 @@ class GenreController extends Controller
         $genre->delete();
 
         return response()->json([
-            'message' => 'Film supprimé avec succès !'
+            'message' => 'Genre supprimé avec succès !'
         ]);
     }
 

@@ -195,14 +195,17 @@ ul {
     text-align: center;
 }
 
-.champsActeur {
-    display : none;
-}
-
 @media (min-width: 769px) {
     .hamburger {
         display: none;
     }
+}
+
+.btnRemove {
+    background-color: #991917;
+    border: 1px solid white;
+    padding: 3px 20px 0px 20px;
+    color: white;
 }
 
 .mainAccueil {
@@ -1013,3 +1016,5 @@ section {
         margin: 0;
     }
 }
+
+
