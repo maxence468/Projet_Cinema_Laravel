@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace config\database\seeders;
 $faker = \Faker\Factory::create('fr_FR'); // 'fr_FR' pour français, 'en_US' pour anglai
 
 use App\Models\Cinema;

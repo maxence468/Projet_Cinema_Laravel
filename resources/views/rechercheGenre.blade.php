@@ -28,10 +28,27 @@
                 <div class="carousel-inner">
                     @foreach ($films as $film)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <div class="carousel-col px-1">
-                                <img src="{{ asset('images/' . $film->posterFilm) }}"
-                                     class="img-fluid w-100"
-                                     alt="{{ $film->titreFilm }}">
+                            <div class="row g-2 justify-content-center">
+                                    <div class="col-4 col-md-4 carousel-col px-3">
+                                        <div class="recherche-genre-poster">
+                                            @if(File::exists(public_path('images/' . $film->posterFilm)))
+                                                <img src="{{ asset('images/' . ($film->posterFilm ?? 'img.png')) }}"
+                                                     class="recherche-genre-img"
+                                                     alt="">
+                                            @else
+
+                                                <html>
+                                                <img src="{{ asset('images/img.png')}}"
+                                                     alt=""
+                                                     class="recherche-genre-img">
+                                                </html>
+
+                                            @endif
+
+
+                                        </div>
+                                        <p class="small text-center mt-1 mb-0">{{ $film->titreFilm }}</p>
+                                    </div>
                             </div>
                         </div>
                     @endforeach

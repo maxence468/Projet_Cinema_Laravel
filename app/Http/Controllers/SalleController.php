@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cinema;
 use App\Models\Salle;
+use App\Models\TypeSalle;
 use Illuminate\Http\Request;
 
 class SalleController extends Controller

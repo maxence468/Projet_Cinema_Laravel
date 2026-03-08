@@ -1,10 +1,3 @@
-
-// $(document).ready(function(){
-//     $('#btnAjt, #btnModif, #btnSuppr').click(function(){
-//         updateAllSelect();
-//     });
-// });
-
 $(document).ajaxSuccess(function(event, xhr, settings) {
     updateAllSelect();
     console.log('requete ajax reussie')

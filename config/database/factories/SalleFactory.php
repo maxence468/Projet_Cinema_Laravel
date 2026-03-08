@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace config\database\factories;
 
-use App\Models\TypeSalle;
 use App\Models\Cinema;
+use App\Models\TypeSalle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
