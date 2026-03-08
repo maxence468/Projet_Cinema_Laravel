@@ -475,6 +475,28 @@ section {
     padding: 0px 10px 0px 10px;
 }
 
+.recherche-genre-poster {
+    min-height: 480px;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    overflow: hidden;
+}
+.recherche-genre-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+.carousel-3-per-3 .carousel-inner {
+    padding: 0.5rem 0;
+}
+.carousel-3-per-3 .carousel-col {
+    min-height: 500px;
+}
+
 @media (max-width: 768px) {
     .btn-ajoutModifSuppr {
         width: 120px;
@@ -766,6 +788,39 @@ section {
     font-size: 32px;
     padding: 0px 103px 0px 103px;
     margin-right: 37px;
+}
+
+.btnReservProgSemaineCinema {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    padding: 0px 5px;
+}
+
+.affichageBtnPageProgSemaine {
+    margin-top: 60px;
+}
+
+.affichageFilmPageProgSemaine {
+    margin-top: 50px;
+    margin-left: 20px
+}
+
+.affichageSeancePageProgSemaine {
+    margin-top: 15px;
+    margin-left:20px
+}
+
+.affichageSalleProgSemaine {
+    margin-top: -10px;
+}
+
+    .btnReservRechFilm {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    padding: 0px 5px;
+    font-size: 22px;
 }
 
 .selectTarif {

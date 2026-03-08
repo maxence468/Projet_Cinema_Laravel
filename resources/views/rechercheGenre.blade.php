@@ -3,29 +3,6 @@
 @section('title', 'Page recherche de film par genre')
 
 @section('main')
-    <style>
-        .recherche-genre-poster {
-            min-height: 480px;
-            height: 480px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #1a1a1a;
-            overflow: hidden;
-        }
-        .recherche-genre-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-        }
-        .carousel-3-per-3 .carousel-inner {
-            padding: 0.5rem 0;
-        }
-        .carousel-3-per-3 .carousel-col {
-            min-height: 500px;
-        }
-    </style>
     <main>
         <form class="pt-2" method="GET" action="{{ route('rechercheGenre') }}">
             <div class="d-flex justify-content-center">

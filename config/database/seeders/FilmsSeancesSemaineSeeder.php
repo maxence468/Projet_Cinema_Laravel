@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace config\database\seeders;
 
 use App\Models\Film;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class FilmsSeancesSemaineSeeder extends Seeder
 {
