@@ -26,7 +26,12 @@ class PersonneController extends Controller
             'prePers' => 'required|string',
             'dateNaissPers' => 'required|date',
             'lieuNaissPers' => 'required|string',
-            'photoPers' => 'required|string',
+            'photoPers' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
             'biblio' => 'required|string',
         ]);
 
@@ -48,7 +53,17 @@ class PersonneController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-
+            'nomPers' => 'required|string',
+            'prePers' => 'required|string',
+            'dateNaissPers' => 'required|date',
+            'lieuNaissPers' => 'required|string',
+            'photoPers' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
+            'biblio' => 'required|string',
         ]);
 
         $personne = Personne::findOrFail($id);

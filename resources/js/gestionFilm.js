@@ -464,7 +464,7 @@ $(document).on('click', '#btnAjtPers',function(e) {
         },
         error: function(error){
             console.log(error);
-            alert('Le champs doit être rempli');
+            alert(error.responseJSON.message);
         },
     });
 

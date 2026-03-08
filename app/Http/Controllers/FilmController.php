@@ -23,12 +23,27 @@ class FilmController extends Controller
     public function store(Request $request) {
         $request->validate([
             'titreFilm' => 'required|string|max:255',
-            'descFilm' => 'nullable|string',
+            'descFilm' => 'string',
             'dateSortieFilm' => 'required|date',
             'dureeFilm' => 'required|integer',
-            'posterFilm' => 'required|string|max:255',
+            'posterFilm' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
             'idGenre' => 'required|exists:genres,idGenre',
+
+            'idRealisateurs' => 'required',
+            'idRealisateurs.*' => 'exists:personnes,idPers',
+
+            'idScenaristes' => 'required',
+            'idScenaristes.*' => 'exists:personnes,idPers',
+
+            'idActeurs' => 'required',
+            'idActeurs.*' => 'exists:personnes,idPers',
         ]);
+
 
         //film
         $f = new Film();
@@ -83,13 +98,26 @@ class FilmController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        request()->validate([
             'titreFilm' => 'required|string|max:255',
-            'descFilm' => 'nullable|string',
+            'descFilm' => 'string',
             'dateSortieFilm' => 'required|date',
             'dureeFilm' => 'required|integer',
-            'posterFilm' => 'nullable|string|max:255',
+            'posterFilm' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
             'idGenre' => 'required|exists:genres,idGenre',
+            'idRealisateurs' => 'required|array',
+            'idRealisateurs.*' => 'exists:personnes,idPers',
+
+            'idScenaristes' => 'required|array',
+            'idScenaristes.*' => 'exists:personnes,idPers',
+
+            'idActeurs' => 'required|array',
+            'idActeurs.*' => 'exists:personnes,idPers',
         ]);
 
         $film = Film::findOrFail($id);

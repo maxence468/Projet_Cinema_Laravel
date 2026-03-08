@@ -43,7 +43,9 @@ class CinemaController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-
+            'nomCinema' => 'required|string',
+            'adresseCinema' => 'required|string',
+            'codePostale' => 'required|string',
         ]);
 
         $cinema = Cinema::findOrFail($id);
