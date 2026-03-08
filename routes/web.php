@@ -5,6 +5,7 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PersonneController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\SelectController;
@@ -103,6 +104,14 @@ Route::patch('/seances/{seance}', [SeanceController::class, 'update'])->name('se
 Route::delete('/seances/{seance}', [SeanceController::class, 'destroy'])->name('seances.destroy');
 Route::post('/editSeance', [SeanceController::class, 'editSeance'])->name('editSeance');
 
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
+Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
+Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+
 Route::get('/', [PageController::class, 'accueil'])->name('accueil');
 
 Route::get('/rechercheGenre', [PageController::class, 'genre'])->name('rechercheGenre');
@@ -137,7 +146,7 @@ Route::put('/user/{id}', [UserController::class, 'update'])->name('userUpdate');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestroy');
 
 Route::get('/mesReservations', [PageController::class, 'mesReservations'])->name('mesReservations');
-Route::get('/effectuerReservation', [PageController::class, 'effectuerReservation'])->name('effectuerReservation');
+Route::get('/effectuerReservation/{id}', [PageController::class, 'effectuerReservation'])->name('effectuerReservation');
 
 Route::post('/getAllGenre', [SelectController::class, 'getAllGenre'])->middleware('admin');
 Route::post('/getAllPersonne', [SelectController::class, 'getAllPersonne'])->middleware('admin');
