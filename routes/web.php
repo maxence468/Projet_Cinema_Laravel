@@ -146,8 +146,8 @@ Route::get('/parametreUtilisateur/{id}/edit', [UserController::class, 'edit'])
 Route::put('/user/{id}', [UserController::class, 'update'])->name('userUpdate');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestroy');
 
-Route::get('/mesReservations', [PageController::class, 'mesReservations'])->name('mesReservations');
-Route::get('/effectuerReservation/{id}', [PageController::class, 'effectuerReservation'])->name('effectuerReservation');
+Route::get('/mesReservations', [PageController::class, 'mesReservations'])->name('mesReservations')->middleware('notAdmin');
+Route::get('/effectuerReservation/{id}', [PageController::class, 'effectuerReservation'])->name('effectuerReservation')->middleware('notAdmin');
 
 Route::post('/getAllGenre', [SelectController::class, 'getAllGenre'])->middleware('admin');
 Route::post('/getAllPersonne', [SelectController::class, 'getAllPersonne'])->middleware('admin');
