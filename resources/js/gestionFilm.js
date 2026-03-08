@@ -327,7 +327,6 @@ $(document).on('click', '.remove', function () {
     blockOptionSelect();
 
 });
-
 $(document).on('click', '.remove', function () {
     $(this).closest('.scenariste-row').remove();
     blockOptionSelect();
@@ -338,7 +337,21 @@ function supprimerRealScenaristeActeur(){
     $('.scenariste-row').not('#scenariste-template .scenariste-row ').remove();
     $('.acteur-row').not('#acteur-template .acteur-row ').remove();
     blockOptionSelect();
+
+    $('.champsActeur').hide();
 }
+$(document).on('change','.idActeur', function(e){
+    let valeur = $(this).val();
+
+    let $row = $(this).closest('.acteur-row-champsActeur');
+    let $champs = $row.find('.champsActeur');
+
+    if(valeur){
+        $champs.show();
+    }else{
+        $champs.hide();
+    }
+})
 
 
 //desactiver les options deja selectionnés des select
@@ -414,7 +427,7 @@ $(document).on('click','#btnSubmitFormGenre', function(e){
 });
 
 $(document).on('click', '.btnAjoutFormGenre', function(e) {
-    $('.btnAjoutFormGenre').hide();
+    $(this).hide();
     $('.formAjoutGenre').show();
 });
 
@@ -422,16 +435,6 @@ $(document).on('click', '.btnDeployFormPers',function(e) {
     e.preventDefault;
     $('.btnDeployFormPers').hide();
     $('#formAjoutPersonne').show();
-});
-
-$(document).on('click', '#removePersonne', function () {
-    $('#formAjoutPersonne').hide();
-    $('.btnDeployFormPers').show();
-});
-
-$(document).on('click', '#removeGenre', function () {
-    $('#formAjoutGenre').hide();
-    $('.btnAjoutFormGenre').show();
 });
 
 $(document).on('click', '#btnAjtPers',function(e) {
