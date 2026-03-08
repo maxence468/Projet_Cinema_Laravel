@@ -33,9 +33,15 @@ class FilmController extends Controller
                 'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
             ],
             'idGenre' => 'required|exists:genres,idGenre',
-            'idRealisateurs' => 'required|exists:personnes,idPers',
-            'idScenaristes' => 'required|exists:personnes,idPers',
-            'idActeurs' => 'required|exists:personnes,idPers',
+
+            'idRealisateurs' => 'required',
+            'idRealisateurs.*' => 'exists:personnes,idPers',
+
+            'idScenaristes' => 'required',
+            'idScenaristes.*' => 'exists:personnes,idPers',
+
+            'idActeurs' => 'required',
+            'idActeurs.*' => 'exists:personnes,idPers',
         ]);
 
 
@@ -104,9 +110,14 @@ class FilmController extends Controller
                 'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
             ],
             'idGenre' => 'required|exists:genres,idGenre',
-            'idRealisateurs' => 'required|exists:personnes,idPers',
-            'idScenaristes' => 'required|exists:personnes,idPers',
-            'idActeurs' => 'required|exists:personnes,idPers',
+            'idRealisateurs' => 'required|array',
+            'idRealisateurs.*' => 'exists:personnes,idPers',
+
+            'idScenaristes' => 'required|array',
+            'idScenaristes.*' => 'exists:personnes,idPers',
+
+            'idActeurs' => 'required|array',
+            'idActeurs.*' => 'exists:personnes,idPers',
         ]);
 
         $film = Film::findOrFail($id);

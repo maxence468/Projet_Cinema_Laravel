@@ -53,7 +53,7 @@
                                     <select id="salleModif" name="movie" class="choixCatal" onchange="">
                                         <option value=""></option>
                                         @foreach($salles as $salle)
-                                            <option value="{{$salle->idSalle}}">{{$salle}}</option>
+                                            <option value="{{$salle->idSalle}}">Salle numero {{$salle->numeroSalle}} du cinéma {{$salle->cinema->nomCinema}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -16,7 +16,7 @@
                 <div class="col-auto ps-4 mt-4 pt-3">
                     <h3>{{$seance->film->titreFilm}}</h3>
                     <p>{{$seance->salle->cinema->nomCinema}}, {{$seance->salle->cinema->adresseCinema}} {{$seance->salle->cinema->codePostale}}</p>
-                    <p>Numero de salle : {{$seance->salle->idSalle}} (a changer)</p>
+                    <p>Numero de salle : {{$seance->salle->numeroSalle}}</p>
                     <p>{{$seance->heureSeance}}</p>
                     <p>{{$placeRestant}} places restantes</p>
                 </div>
