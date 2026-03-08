@@ -28,9 +28,9 @@
                     <div class="row mt-3">
                     <!-- Actor photo -->
                         <div class="col-auto align-items-start">
-                            @if(File::exists(public_path('images/' . $p->photoPers)))
+                            @if($p->photoPers)
                                 <html>
-                                <img src="{{ asset('images/' . $p->photoPers) }}"
+                                <img src="{{$p->photoPers }}"
                                      width="412"
                                      height="626"
                                      alt="{{ $p->nomPers }}"

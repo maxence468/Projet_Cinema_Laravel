@@ -31,9 +31,9 @@
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row align-items-start">
                         <div class="col-auto">
-                            @if(File::exists(public_path('images/' . $film->posterFilm)))
+                            @if($film->posterFilm)
                                 <html>
-                                <img src="{{ asset('images/' . $film->posterFilm) }}"
+                                <img src="{{ $film->posterFilm }}"
                                      width="412"
                                      height="626"
                                      alt="{{ $film->titreFilm }}"

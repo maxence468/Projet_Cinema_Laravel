@@ -31,8 +31,8 @@
                             <div class="row g-2 justify-content-center">
                                     <div class="col-4 col-md-4 carousel-col px-3">
                                         <div class="recherche-genre-poster">
-                                            @if(File::exists(public_path('images/' . $film->posterFilm)))
-                                                <img src="{{ asset('images/' . ($film->posterFilm ?? 'img.png')) }}"
+                                            @if($film->posterFilm)
+                                                <img src="{{ $film->posterFilm }}"
                                                      class="recherche-genre-img"
                                                      alt="">
                                             @else
