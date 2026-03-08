@@ -20,19 +20,22 @@ class CinemaController extends Controller
         return view('cinemas.show',compact('cinema'));
     }
 
-    public function store() {
-        request()->validate([
+    public function store(Request $request) {
+        $request->validate([
             'nomCinema' => 'required|string',
             'adresseCinema' => 'required|string',
             'codePostale' => 'required|string',
         ]);
 
         $c = new Cinema();
-        $c->nomCinema = request('nomCinema');
-        $c->adresseCinema = request('adresseCinema');
-        $c->codePostale = request('codePostale');
+        $c->nomCinema = $request->nomCinema;
+        $c->adresseCinema = $request->adresseCinema;
+        $c->codePostale = $request->codePostale;
         $c->save();
 
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['message' => 'Cinéma créé avec succès !', 'cinema' => $c]);
+        }
         return redirect()->route('cinemas.index');
     }
 
@@ -42,8 +45,10 @@ class CinemaController extends Controller
 
     public function update(Request $request, $id)
     {
-        request()->validate([
-
+        $request->validate([
+            'nomCinema' => 'required|string',
+            'adresseCinema' => 'required|string',
+            'codePostale' => 'required|string',
         ]);
 
         $cinema = Cinema::findOrFail($id);

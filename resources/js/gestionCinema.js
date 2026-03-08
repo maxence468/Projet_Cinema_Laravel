@@ -8,6 +8,7 @@ $('#btnAjt').click(function(){
         $.ajax({
             url: "/cinemas",
             type: "post",
+            headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
             data:{
                 nomCinema: nomCinema,
                 adresseCinema: adresseCinema,
@@ -68,7 +69,10 @@ $('#btnModif').click(function(){
 
     let idCinema = $('#cinemaModif').val()
 
-
+    if(!idCinema){
+        alert('Sélectionne un cinéma à modifier.');
+        return;
+    }
     if(nomCinema && adresseCinema && codePostale){
         $.ajax({
             url: `/cinemas/${idCinema}`,

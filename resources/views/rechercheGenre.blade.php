@@ -54,21 +54,9 @@
                             <div class="row g-2 justify-content-center">
                                     <div class="col-4 col-md-4 carousel-col px-3">
                                         <div class="recherche-genre-poster">
-                                            @if(File::exists(public_path('images/' . $film->posterFilm)))
-                                                <img src="{{ asset('images/' . ($film->posterFilm ?? 'img.png')) }}"
+                                                <img src="https://m.media-amazon.com/images/I/714Mwnmg2mL._AC_UF1000,1000_QL80_.jpg"
                                                      class="recherche-genre-img"
                                                      alt="">
-                                            @else
-
-                                                <html>
-                                                <img src="{{ asset('images/img.png')}}"
-                                                     alt=""
-                                                     class="recherche-genre-img">
-                                                </html>
-
-                                            @endif
-
-
                                         </div>
                                         <p class="small text-center mt-1 mb-0">{{ $film->titreFilm }}</p>
                                     </div>

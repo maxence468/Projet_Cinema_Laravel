@@ -1,6 +1,6 @@
 
 $('#btnAjt').click(function(){
-    let heureSeance = $('#heureSeance   ').val()
+    let heureSeance = $('#heureSeance').val()
     let dateSeance = $('#dateSeance').val()
     let dureeSeance = $('#dureeSeance').val()
     let idFilm = $('#idFilm').val()
@@ -11,6 +11,7 @@ $('#btnAjt').click(function(){
         $.ajax({
             url: "/seances",
             type: "post",
+            headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
             data:{
                 heureSeance: heureSeance,
                 dateSeance: dateSeance,
@@ -54,11 +55,16 @@ $('#seanceModif').change(function(e){
             _token: $('input[name="_token"]').val(),
         },
         success: function(result){
-            $('#heureSeance').val(result['seance']['heureSeance'])
-            $('#dateSeance').val(result['seance']['dateSeance'])
-            $('#dureeSeance').val(result['seance']['dureeSeance'])
-            $('#idFilm').val(result['seance']['idFilm'])
-            $('#idSalle').val(result['seance']['idSalle'])
+            var s = result['seance'];
+            var heure = s['heureSeance'];
+            var date = s['dateSeance'];
+            if (heure && heure.length > 5) heure = heure.substring(0, 5);
+            if (date && date.length > 10) date = date.substring(0, 10);
+            $('#heureSeance').val(heure || '');
+            $('#dateSeance').val(date || '');
+            $('#dureeSeance').val(s['dureeSeance'] || '');
+            $('#idFilm').val(s['idFilm'] || '');
+            $('#idSalle').val(s['idSalle'] || '');
         },
         error: function(error){
             console.log(error)
@@ -77,8 +83,11 @@ $('#btnModif').click(function(){
 
     let idSeance = $('#seanceModif').val()
 
-
-    if(heureSeance && dateSeance && dureeSeance && idFilm && idSalle && idSeance){
+    if(!idSeance){
+        alert('Sélectionne une séance à modifier.');
+        return;
+    }
+    if(heureSeance && dateSeance && dureeSeance && idFilm && idSalle){
         $.ajax({
             url: `/seances/${idSeance}`,
             type: "patch",

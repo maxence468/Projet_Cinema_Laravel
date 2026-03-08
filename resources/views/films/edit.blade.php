@@ -37,6 +37,10 @@
                value="{{ old('dureeFilm', $film->dureeFilm) }}">
         <br>
 
+        <label for="posterFilm">Poster du film</label>
+        <input type="text" id="posterFilm" name="posterFilm"
+               value="{{ old('posterFilm', $film->posterFilm) }}">
+        <br>
         <label for="idGenre">ID Genre</label>
         <input type="number" id="idGenre" name="idGenre"
                value="{{ old('idGenre', $film->idGenre) }}">

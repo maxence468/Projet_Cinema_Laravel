@@ -22,7 +22,7 @@ class SeanceController extends Controller
     }
 
     public function store(Request $request) {
-        request()->validate([
+        $request->validate([
             'heureSeance' => 'required|date_format:H:i',
             'dateSeance' => 'required|date',
             'dureeSeance' => 'required|integer',
@@ -31,13 +31,16 @@ class SeanceController extends Controller
         ]);
 
         $s = new Seance();
-        $s->heureSeance = request('heureSeance');
-        $s->dateSeance = request('dateSeance');
-        $s->dureeSeance = request('dureeSeance');
-        $s->idFilm = request('idFilm');
-        $s->idSalle = request('idSalle');
+        $s->heureSeance = $request->heureSeance;
+        $s->dateSeance = $request->dateSeance;
+        $s->dureeSeance = $request->dureeSeance;
+        $s->idFilm = $request->idFilm;
+        $s->idSalle = $request->idSalle;
         $s->save();
 
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['message' => 'Séance créée avec succès !', 'seance' => $s]);
+        }
         return redirect()->route('seances.index');
     }
 
@@ -88,49 +91,5 @@ class SeanceController extends Controller
         return response()->json([
             'seance'=> $seance,
         ]);
-    }
-
-    public function create(){
-        $salles = Salle::all();
-        $films = Film::all();
-        return view('seances.create',compact('salles','films'));
-    }
-
-    public function store(Request $request){
-        $validated = $request->validate([
-            'dateSeance' => 'required',
-            'heureSeance' => 'required',
-            'idSalle' => 'required',
-            'idFilm' => 'required',
-            'dureeSeance' => 'required',
-        ]);
-
-        $s = new Seance();
-        $s->dateSeance = $validated['dateSeance'];
-        $s->heureSeance = $validated['heureSeance'];
-        $s->idSalle = $validated['idSalle'];
-        $s->idFilm = $validated['idFilm'];
-        $s->dureeSeance = $validated['dureeSeance'];
-        $s->save();
-
-        return redirect('/seances/'.$s->idSeance);
-
-    }
-
-    public function edit(Seance $seance){
-        $salles = Salle::all();
-        $films = Film::all();
-        return view('seances.edit', compact('seance','salles','films'));
-    }
-
-    public function update(Request $request, Seance $seance){
-        $date = $request->only(['dateSeance','heureSeance','idSalle','idFilm','dureeSeance']);
-        $seance->update(array_filter($date));
-        return redirect('/seances'.$seance->idSeance);
-    }
-
-    public function destroy(Seance $seance){
-        $seance->delete();
-        return redirect('/seances');
     }
 }

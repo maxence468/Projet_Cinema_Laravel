@@ -14,10 +14,11 @@ use App\Http\Controllers\FilmController;
 <h1>Les films</h1>
 @foreach($films as $f)
     <h2>Film numéro : {{$f->idFilm}}</h2>
-    <h2>Nom film {{$f->titreFilm}}</h2> <br> Description du film <br> {{$f->descFilm}} <br> Sortie en  {{$f->dateSortieFilm}}
+    <h2>Nom film {{$f->titreFilm}}</h2> <br>
+    <p>Description du film <br> {{$f->descFilm}} <br> Sortie en  {{$f->dateSortieFilm}}
         <br> Duree :  {{$f->dureeFilm}} minutes <br> {{$f->posterFilm}}</p>
 
-    <p>type genre : {{$f->genre->libGenre}} </p>
+    <p>Lib genre : {{ $f->genre?->libGenre }}</p>
 
     <h2>Les acteurs principales</h2>
     @foreach($f->casting as $p)

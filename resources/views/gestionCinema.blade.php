@@ -42,13 +42,16 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Nom cinéma" required>
+                                <input class="inputCatalogue" id="nomCinema" name="nomCinema" type="text" placeholder="Nom cinéma" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
-                                        <option value=""></option>
+                                    <select id="cinemaModif" name="cinemaModif" class="choixCatal">
+                                        <option value="">Cinéma à modifier</option>
+                                        @foreach($cinemas as $c)
+                                            <option value="{{ $c->idCinema }}">{{ $c->nomCinema }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -59,7 +62,7 @@
                                 <label class="h3 mb-0">Adresse cinéma</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Adresse cinéma" required>
+                                <input class="inputCatalogue" id="adresseCinema" name="adresseCinema" type="text" placeholder="Adresse cinéma" required>
                             </div>
                         </div>
 
@@ -68,7 +71,7 @@
                                 <label class="h3 mb-0">Code postal cinéma</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Code postal cinéma" required>
+                                <input class="inputCatalogue" id="codePostale" name="codePostale" type="text" placeholder="Code postal cinéma" required>
                             </div>
                         </div>
 
@@ -78,9 +81,10 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button id="btnAjt" form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="button"><span>Ajouter</span></button>
+            <button id="btnModif" form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="button"><span>Modifier</span></button>
+            <button id="btnSuppr" form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="button"><span>Supprimer</span></button>
         </div>
     </main>
+    @vite('resources/js/gestionCinema.js')
 @endsection

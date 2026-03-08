@@ -192,19 +192,14 @@
                                 </select>
                                 <div class="champsActeur" style="display:none">
                                     <input class="inputCatalogue nomJoue" type="text" placeholder="Nom Joué" required>
-                                    <input class="inputCatalogue preJoue" type="text" placeholder="preJoue" required>
-                                    <div>
-                                        <div>
-                                            <input name="typeActeur" class="inputCatalogue principale" id="principale" type="radio" required>
-                                            <label for="principale">Principale</label>
-                                        </div>
-                                        <div>
-                                            <input name="typeActeur" class="inputCatalogue secondaire" id="secondaire" type="radio" required>
-                                            <label for="secondaire">Secondaire</label>
-                                        </div>
-                                    </div>
+                                    <input class="inputCatalogue preJoue" type="text" placeholder="Prénom joué" required>
+                                    <select class="inputCatalogue typeActeurSelect" name="typeActeur[]" required>
+                                        <option value="">Principal ou secondaire</option>
+                                        <option value="1">Principal</option>
+                                        <option value="0">Secondaire</option>
+                                    </select>
                                 </div>
-                                <button id="addActeur">Ajouter un acteur</button>
+                                <button type="button" id="addActeur">Ajouter un acteur</button>
                                 <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
 
@@ -225,20 +220,14 @@
                                 </select>
                                 <div class="champsActeur" style="display:none">
                                     <input class="inputCatalogue nomJoue" type="text" placeholder="Nom Joué" required>
-                                    <input class="inputCatalogue preJoue" type="text" placeholder="preJoue" required>
-                                    <div>
-                                        <div>
-                                            <div class="col-12 col-lg-4 pb-5">
-                                                <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
-                                                    <option>Principal ou secondaire</option>
-                                                    <option>Principal</option>
-                                                    <option>Secondaire</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <input class="inputCatalogue preJoue" type="text" placeholder="Prénom joué" required>
+                                    <select class="inputCatalogue typeActeurSelect" name="typeActeur[]" required>
+                                        <option value="">Principal ou secondaire</option>
+                                        <option value="1">Principal</option>
+                                        <option value="0">Secondaire</option>
+                                    </select>
                                 </div>
-                                <button type="button" class="btn btn-danger remove">X</button>
+                                <button type="button" class="btn btn-danger remove" title="Supprimer cet acteur">X</button>
                             </div>
                         </div>
                     </form>

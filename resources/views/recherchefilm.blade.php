@@ -31,32 +31,15 @@
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row align-items-start">
                         <div class="col-auto">
-                            @if(File::exists(public_path('images/' . $film->posterFilm)))
-                                <html>
-                                <img src="{{ asset('images/' . $film->posterFilm) }}"
-                                     width="412"
-                                     height="626"
-                                     alt="{{ $film->titreFilm }}"
-                                     class="smd">
-                                </html>
-
-                            @else
-
-                                <html>
-                                <img src="{{ asset('images/img.png')}}"
-                                     width="412"
-                                     height="626"
-                                     alt="{{ $film->titreFilm }}"
-                                     class="smd">
-                                </html>
-
-                            @endif
+                            <a href="/effectuerReservation/{{$film->idFilm}}">
+                                <img src="{{$film->posterFilm}}" width="412" height="626" alt="{{ $film->titreFilm }}" class="smd">
+                            </a>
                         </div>
 
                         <div class="col">
                             <p>Titre : {{$film->titreFilm}}</p>
                             <p class="pt-3">Description : {{$film->descFilm}}</p>
-                            <p class="pt-3">Genre : {{$film->genre->libGenre}}</p>
+                            <p class="pt-3">Genre : {{$film->genre->libGenre ?? '--'}}</p>
                             <p class="pt-3">Réalisateurs :
                                 @foreach($film->realisateurs as $r)
                                     {{$r->nomPers}} {{$r->prePers}}{{ $loop->last ? '' : ',' }}

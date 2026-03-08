@@ -42,13 +42,16 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Nom personne" required>
+                                <input class="inputCatalogue" id="nomPers" name="nomPers" type="text" placeholder="Nom personne" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
-                                        <option value=""></option>
+                                    <select id="personneModif" name="personneModif" class="choixCatal">
+                                        <option value="">Personne à modifier</option>
+                                        @foreach($personnes as $p)
+                                            <option value="{{$p->idPers}}">{{$p->nomPers}} {{$p->prePers}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -59,7 +62,7 @@
                                 <label class="h3 mb-0">Prenom personne</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Prenom personne" required>
+                                <input class="inputCatalogue" id="prePers" name="prePers" type="text" placeholder="Prenom personne" required>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
                         </div>
@@ -69,7 +72,7 @@
                                 <label class="h3 mb-0">Date de naissance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Date de naissance" required>
+                                <input class="inputCatalogue" id="dateNaissPers" name="dateNaissPers" type="text" placeholder="Date de naissance" required>
                             </div>
                         </div>
 
@@ -78,7 +81,7 @@
                                 <label class="h3 mb-0">Lieu de naissance</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Lieu de naissance" required>
+                                <input class="inputCatalogue" id="lieuNaissPers" name="lieuNaissPers" type="text" placeholder="Lieu de naissance" required>
                             </div>
                         </div>
 
@@ -87,7 +90,7 @@
                                 <label class="h3 mb-0">Photo personne</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Photo personne" required>
+                                <input class="inputCatalogue" id="photoPers" name="photoPers" type="text" placeholder="Photo personne" required>
                             </div>
                         </div>
 
@@ -96,7 +99,7 @@
                                 <label class="h3 mb-0">Bibliographie</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <textarea class="textareaCatalogue" placeholder="Bibliographie" required></textarea>
+                                <textarea class="textareaCatalogue" id="biblio" name="biblio" placeholder="Bibliographie" required></textarea>
                             </div>
                         </div>
 
@@ -106,9 +109,10 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button id="btnAjt" form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="button"><span>Ajouter</span></button>
+            <button id="btnModif" form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="button"><span>Modifier</span></button>
+            <button id="btnSuppr" form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="button"><span>Supprimer</span></button>
         </div>
     </main>
+    @vite('resources/js/gestionPersonne.js')
 @endsection

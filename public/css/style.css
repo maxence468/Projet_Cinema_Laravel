@@ -707,3 +707,101 @@ section {
 .btnReservation {
     margin-right: 57px;
 }
+
+/* ========== Gestion film : Réalisateur / Scénariste / Acteur ========== */
+.realisateur-row,
+.scenariste-row,
+.acteur-row {
+    display: flex !important;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.realisateur-row .choixCatal,
+.scenariste-row .choixCatal,
+.acteur-row .choixCatal {
+    flex: 1 1 auto;
+    min-width: 200px;
+    max-width: 345px !important;
+}
+
+/* Bouton supprimer (X) : petit carré, ne pas étirer */
+.realisateur-row .btn.remove,
+.scenariste-row .btn.remove,
+.acteur-row .btn.remove {
+    flex: 0 0 auto;
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* Boutons "Ajouter un..." et "Créer une personne" */
+#realisateurs-container > button,
+#scenariste-container > button,
+#acteur-container > button {
+    margin-right: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 8px 14px;
+    font-size: 16px;
+    background-color: #991917;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+#realisateurs-container > button:hover,
+#scenariste-container > button:hover,
+#acteur-container > button:hover {
+    opacity: 0.9;
+}
+
+/* Bloc Nom Joué / preJoue / Principal-secondaire (quand visible) */
+.champsActeur.visible {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.champsActeur.visible .inputCatalogue.nomJoue,
+.champsActeur.visible .inputCatalogue.preJoue {
+    max-width: 180px !important;
+    height: 42px !important;
+    font-size: 18px !important;
+}
+
+.champsActeur.visible .principale,
+.champsActeur.visible .secondaire {
+    width: auto;
+    height: auto;
+    margin-right: 4px;
+}
+
+.champsActeur.visible label {
+    color: white;
+    font-size: 18px;
+    margin-right: 12px;
+    margin-bottom: 0;
+}
+
+/* Conteneur acteur : empiler select puis champs puis boutons */
+.acteur-row-champsActeur {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#acteur-container .acteur-row-champsActeur {
+    margin-bottom: 12px;
+}

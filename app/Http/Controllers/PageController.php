@@ -107,10 +107,11 @@ class PageController extends Controller{
         $search = $request->input('search');
 
         $films = Film::when($search, function ($query) use ($search) {
-            $query->where('titreFilm', 'LIKE', '%' . $search . '%');
-        })->get();
+            $query->where('titreFilm', 'LIKE', '%' . $search . '%');})->get();
+        $genre = Genre::all();
+        $cinema = Cinema::all();
 
-        return view('rechercheFilm', compact('films', 'search'));
+        return view('rechercheFilm', compact('films', 'search','genre','cinema'));
 
     }
 
@@ -231,7 +232,8 @@ class PageController extends Controller{
         return view('reservation');
     }
 
-    public function effectuerReservation() {
-        return view('effectuerReservation');
+    public function effectuerReservation(Seance $seance) {
+        return view('effectuerReservation', compact('seance'));
     }
+
 }

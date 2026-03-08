@@ -137,6 +137,6 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestr
 
 Route::get('/mesReservations', [PageController::class, 'mesReservations'])->name('mesReservations');
 
-Route::get('/effectuerReservation', [PageController::class, 'effectuerReservation'])->name('effectuerReservation');
+Route::get('/effectuerReservation/{seance}', [PageController::class, 'effectuerReservation'])->name('effectuerReservation');
 
 require __DIR__.'/auth.php';

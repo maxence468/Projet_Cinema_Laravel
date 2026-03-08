@@ -11,6 +11,7 @@ $('#btnAjt').click(function(){
         $.ajax({
             url: "/personnes",
             type: "post",
+            headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
             data:{
                 nomPers: nomPers,
                 prePers: prePers,
@@ -78,9 +79,12 @@ $('#btnModif').click(function(){
     let lieuNaissPers = $('#lieuNaissPers').val()
     let photoPers = $('#photoPers').val()
     let biblio = $('#biblio').val()
-
     let idPers = $('#personneModif').val()
 
+    if(!idPers){
+        alert('Sélectionne une personne à modifier.');
+        return;
+    }
     if(nomPers && prePers && dateNaissPers && lieuNaissPers && photoPers && biblio){
         $.ajax({
             url: `/personnes/${idPers}`,

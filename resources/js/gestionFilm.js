@@ -12,14 +12,14 @@ function getFilmData(forUpdate) {
         idActeurs: $('.idActeur').map(function () { let v = $(this).val(); return v ? v : null; }).get(),
         nomJoue: $('.nomJoue').map(function () { return $(this).val(); }).get(),
         preJoue: $('.preJoue').map(function () { return $(this).val(); }).get(),
-        principale: $('.principale').map(function () { return $(this).is(':checked') ? 1 : 0; }).get(),
-        secondaire: $('.secondaire').map(function () { return $(this).is(':checked') ? 1 : 0; }).get(),
+        principale: $('.typeActeurSelect').map(function () { var v = $(this).val(); return v === '1' ? 1 : 0; }).get(),
+        secondaire: $('.typeActeurSelect').map(function () { var v = $(this).val(); return v === '0' ? 1 : 0; }).get(),
     };
     if (forUpdate) data._method = 'PATCH';
     return data;
 }
 
-$('#btnAjt').click(function(){
+$(document).on('click', '#btnAjt', function(){
     let titreFilm = $('#titreFilm').val()
     let descFilm = $('#descFilm').val()
     let dateSortieFilm = $('#dateSortieFilm').val()
@@ -29,42 +29,27 @@ $('#btnAjt').click(function(){
     let idRealisateurs = $('.idRealisateur').map(function () {
         let val = $(this).val();
         return val !== "" ? val : null;
-    }).get();
-
+    }).get().filter(Boolean);
     let idScenaristes = $('.idScenariste').map(function () {
         let val = $(this).val();
         return val !== "" ? val : null;
-    }).get();
-
+    }).get().filter(Boolean);
     let idActeurs = $('.idActeur').map(function(){
         let val = $(this).val();
         return val !== "" ? val : null;
-    }).get();
+    }).get().filter(Boolean);
 
-    let nomJoue = $('.nomJoue').map(function(){
-        return $(this).val();
-    }).get();
+    if(!titreFilm){ alert('Remplis le titre du film.'); return; }
+    if(!descFilm){ alert('Remplis la description du film.'); return; }
+    if(!dateSortieFilm){ alert('Remplis la date de sortie.'); return; }
+    if(!dureeFilm){ alert('Remplis la durée du film.'); return; }
+    if(!posterFilm){ alert('Remplis le poster (nom du fichier image).'); return; }
+    if(!idGenre){ alert('Choisis un genre.'); return; }
+    if(idRealisateurs.length === 0){ alert('Choisis au moins un réalisateur.'); return; }
+    if(idScenaristes.length === 0){ alert('Choisis au moins un scénariste.'); return; }
+    if(idActeurs.length === 0){ alert('Choisis au moins un acteur.'); return; }
 
-    let preJoue = $('.preJoue').map(function(){
-        return $(this).val();
-    }).get();
-
-    let principale = $('.principale').map(function(){
-        if($(this).is(':checked')){
-            return 1;
-        }
-        return 0;
-    }).get();
-
-    let secondaire = $('.secondaire').map(function(){
-        if($(this).is(':checked')){
-            return 1;
-        }
-        return 0;
-    }).get();
-
-    if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length){
-        $.ajax({
+    $.ajax({
             url: "/films",
             type: "post",
             data: getFilmData(false),
@@ -88,12 +73,9 @@ $('#btnAjt').click(function(){
                 }
             }
         });
-    }else{
-        alert('Tous les champs doivent être remplis.');
-    }
 });
 
-$('#filmModif').change(function(e){
+$(document).on('change', '#filmModif', function(e){
     let idFilm = $('#filmModif').val()
 
     $.ajax({
@@ -141,27 +123,18 @@ $('#filmModif').change(function(e){
                 $('.nomJoue:first').val(acteurs[0]['pivot']['nomJoue'])
                 $('.preJoue:first').val(acteurs[0]['pivot']['preJoue'])
 
-                if(acteurs[0]['pivot']['principale'] === 1){
-                    $('.principale:first').prop('checked', true);
-                }
+                $('.typeActeurSelect:first').val(acteurs[0]['pivot']['principale'] === 1 ? '1' : '0');
             }
             acteurs.slice(1).forEach(function(acteur){
                 let html = $('#acteur-template').html();
                 let $row = $(html);
-                let newName = 'typeActeur_' + index;
                 index++
-                $row.find('.principale, .secondaire').attr('name', newName);
                 $('#acteur-container').append($row);
 
-
-                $row.find('select').val(acteur['idPers']).trigger('change');
-
+                $row.find('select.idActeur').val(acteur['idPers']).trigger('change');
                 $row.find('.nomJoue').val(acteur['pivot']['nomJoue'])
                 $row.find('.preJoue').val(acteur['pivot']['preJoue'])
-
-                if(acteur['pivot']['principale'] === 1){
-                    $row.find('.principale').prop('checked', true);
-                }
+                $row.find('.typeActeurSelect').val(acteur['pivot']['principale'] === 1 ? '1' : '0')
             });
         },
         error: function(error){
@@ -198,20 +171,6 @@ $('#btnModif').click(function(){
 
     let preJoue = $('.preJoue').map(function(){
         return $(this).val();
-    }).get();
-
-    let principale = $('.principale').map(function(){
-        if($(this).is(':checked')){
-            return 1;
-        }
-        return 0;
-    }).get();
-
-    let secondaire = $('.secondaire').map(function(){
-        if($(this).is(':checked')){
-            return 1;
-        }
-        return 0;
     }).get();
 
     let idFilm = $('#filmModif').val();
@@ -284,15 +243,10 @@ $('#addScenariste').click(function(e){
 })
 
 let index = 2
-$('#addActeur').click(function(e){
+$(document).on('click', '#addActeur', function(e){
     e.preventDefault()
     let $html = $($('#acteur-template').html());
-
-    let newName = 'typeActeur_' + index;
-    $html.find('.principale, .secondaire').attr('name', newName);
-
     $('#acteur-container').append($html);
-
     index++
 })
 $('#addRealisateur').click(function (e) {
@@ -321,7 +275,7 @@ function supprimerRealScenariste(){
     $('.acteur-row').not('#acteur-template .acteur-row ').remove();
     blockOptionSelect();
 
-    $('.champsActeur').hide();
+    $('.champsActeur').hide().removeClass('visible');
 }
 $(document).on('change','.idActeur', function(e){
     let valeur = $(this).val();
@@ -330,9 +284,9 @@ $(document).on('change','.idActeur', function(e){
     let $champs = $row.find('.champsActeur');
 
     if(valeur){
-        $champs.show();
+        $champs.show().addClass('visible');
     }else{
-        $champs.hide();
+        $champs.hide().removeClass('visible');
     }
 })
 

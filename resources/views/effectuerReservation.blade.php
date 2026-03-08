@@ -9,13 +9,13 @@
         <div class="row">
 
             <div class="col-auto d-flex justify-content-center">
-                <img src="images/interstellar.jpg" width="170" height="259" alt="test">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/image_9e35a739.jpeg" width="170" height="259" alt="test">
             </div>
 
             <div class="col-auto">
-                <h3>Nom du film</h3>
-                <p>Nom du cinéma</p>
-                <p>Salle</p>
+                <h3>{{$seance->film->titreFilm}}</h3>
+                <p>{{$seance->salle->cinema->nomCinema}}</p>
+                <p>ID SALLE {{$seance->salle->idSalle}}</p>
                 <p>Date et heure</p>
                 <p>Nombre de places restantes</p>
             </div>

@@ -14,7 +14,7 @@ use App\Http\Controllers\PersonneController;
 <body>
 <h1>Le film : {{$film->titreFilm}}</h1>
 
-<img src="{{ asset('images/' . $film->posterFilm) }}" alt="{{ $film->posterFilm }}">
+<img src="{{$film->posterFilm}}" alt="{{ $film->posterFilm }}">
 <p>Description du film <br> {{$film->descFilm}} <br> Sortie en  {{$film->dateSortieFilm}}
     <br> Duree :  {{$film->dureeFilm}} minutes </p>
 

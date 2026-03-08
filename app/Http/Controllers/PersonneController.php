@@ -21,7 +21,7 @@ class PersonneController extends Controller
     }
 
     public function store(Request $request) {
-        request()->validate([
+        $request->validate([
             'nomPers' => 'required|string',
             'prePers' => 'required|string',
             'dateNaissPers' => 'required|date',
@@ -31,14 +31,17 @@ class PersonneController extends Controller
         ]);
 
         $p = new Personne();
-        $p->nomPers = request('nomPers');
-        $p->prePers = request('prePers');
-        $p->dateNaissPers = request('dateNaissPers');
-        $p->lieuNaissPers = request('lieuNaissPers');
-        $p->photoPers = request('photoPers');
-        $p->biblio = request('biblio');
+        $p->nomPers = $request->nomPers;
+        $p->prePers = $request->prePers;
+        $p->dateNaissPers = $request->dateNaissPers;
+        $p->lieuNaissPers = $request->lieuNaissPers;
+        $p->photoPers = $request->photoPers;
+        $p->biblio = $request->biblio;
         $p->save();
 
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['message' => 'Personne créée avec succès !', 'personne' => $p]);
+        }
         return redirect()->route('personnes.index');
     }
 
