@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cinema;
 use App\Models\Salle;
+use App\Models\TypeSalle;
 use Illuminate\Http\Request;
 
 class SalleController extends Controller
@@ -24,6 +26,7 @@ class SalleController extends Controller
             'capaciteSal' => 'required|integer',
             'idTypeSalle' => 'required|exists:typesalles,idTypeSalle',
             'idCinema' => 'required|exists:cinemas,idCinema',
+            'idTarif' => 'required',
         ]);
 
         $s = new Salle();
@@ -32,30 +35,58 @@ class SalleController extends Controller
         $s->idCinema = request('idCinema');
         $s->save();
 
+        $s->tarifs()->sync(request('idTarif'));
+
         return redirect()->route('salles.index');
     }
 
     public function edit(Salle $salle) {
         return view('salles.edit', compact('salle'));
     }
-
-    public function update(Request $request, Salle $salle) {
+    public function update(Request $request, $id)
+    {
         request()->validate([
             'capaciteSal' => 'required|integer',
             'idTypeSalle' => 'required|exists:typesalles,idTypeSalle',
             'idCinema' => 'required|exists:cinemas,idCinema',
+            'idTarif' => 'required',
         ]);
 
-        $salle->capaciteSal = request('capaciteSal');
-        $salle->idTypeSalle = request('idTypeSalle');
-        $salle->idCinema = request('idCinema');
-        $salle->save();
+        $salle = Salle::findOrFail($id);
 
-        return redirect()->route('salles.index');
+        $salle->update([
+            'capaciteSal' => $request->capaciteSal,
+            'idTypeSalle' => $request->idTypeSalle,
+            'idCinema' => $request->idCinema,
+        ]);
+
+        $salle->tarifs()->sync(request('idTarif'));
+
+
+        return response()->json([
+            'message' => 'Salle mis à jour !',
+            'salle' => $salle
+        ]);
     }
 
-    public function destroy(Salle $salle) {
+    public function destroy($id)
+    {
+        $salle = Salle::findOrFail($id);
+
+        $salle->tarifs()->detach();
+
         $salle->delete();
-        return redirect()->route('salles.index');
+
+        return response()->json([
+            'message' => 'Salle supprimée avec succès !'
+        ]);
+    }
+    public function editSalle(Request $request){
+        $id = $request->idSalle;
+        $salle = Salle::with('tarifs')->find($id);
+
+        return response()->json([
+            'salle'=> $salle,
+        ]);
     }
 }

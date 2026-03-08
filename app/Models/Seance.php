@@ -22,4 +22,6 @@ class Seance extends Model
     protected $fillable = ['heureSeance', 'dateSeance', 'dureeSeance','idFilm','idSalle'];
 
     protected $foreignKey = 'idFilm';
+
+    protected $casts = ['heureSeance' => 'datetime', 'dateSeance' => 'datetime'];
 }

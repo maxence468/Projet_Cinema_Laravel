@@ -23,7 +23,7 @@ class TarifController extends Controller
     public function store(Request $request) {
         request()->validate([
             'libTarif' => 'required|string',
-            'prixTarif' => 'required|numeric',
+            'prixTarif' => 'required|numeric|max:999999.99',
         ]);
 
         $t = new Tarif();
@@ -38,21 +38,79 @@ class TarifController extends Controller
         return view('tarifs.edit', compact('tarif'));
     }
 
-    public function update(Request $request, Tarif $tarif){
+    public function update(Request $request, $id)
+    {
         request()->validate([
             'libTarif' => 'required|string',
-            'prixTarif' => 'required|numeric',
+            'prixTarif' => 'required|numeric|max:999999.99',
         ]);
 
-        $tarif->libTarif = request('libTarif');
-        $tarif->prixTarif = request('prixTarif');
-        $tarif->save();
+        $tarif = Tarif::findOrFail($id);
 
-        return redirect()->route('tarifs.index');
+        $tarif->update([
+            'libTarif' => $request->libTarif,
+            'prixTarif' => $request->prixTarif,
+        ]);
+
+        return response()->json([
+            'message' => 'tarif mis à jour !',
+            'tarif' => $tarif
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $tarif = Tarif::findOrFail($id);
+        $tarif->delete();
+
+        return response()->json([
+            'message' => 'Tarif supprimé avec succès !'
+        ]);
+    }
+
+    public function editTarif(Request $request){
+        $id = $request->idTarif;
+        $tarif = Tarif::find($id);
+
+        return response()->json([
+            'tarif'=> $tarif,
+        ]);
+    }
+
+    public function create(){
+        return view('tarifs.create');
+    }
+    public function store(Request $request){
+        $validated = $request->validate([
+            'libTarif' => 'required',
+            'prixTarif' => 'required',
+        ]);
+
+        $t = new Tarif();
+        $t->libTarif = $validated['libTarif'];
+        $t->prixTarif = $validated['prixTarif'];
+
+        $t->save();
+        return redirect('/tarifs/'.$t->idTarif);
+
+    }
+
+    public function edit(Tarif $tarif)
+    {
+    return view('tarifs.edit',compact('tarif'));
+    }
+
+    public function update(Request $request, Tarif $tarif){
+        $data = request()->only([
+                'libTarif','prixTarif'
+            ]
+        );
+        $tarif->update(array_filter($data));
+        return redirect('/tarifs/'.$tarif->idTarif);
     }
 
     public function destroy(Tarif $tarif){
         $tarif->delete();
-        return redirect()->route('tarifs.index');
+        return redirect('/tarifs');
     }
 }

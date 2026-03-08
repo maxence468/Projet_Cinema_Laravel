@@ -5,17 +5,28 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PersonneController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SeanceController;
+use App\Http\Controllers\SelectController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TypeSalleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 Route::get('/personnes', [PersonneController::class, 'index'])->name('personnes.index');
 Route::get('/personnes/create', [PersonneController::class, 'create'])->name('personnes.create');
@@ -24,6 +35,9 @@ Route::get('/personnes/{personne}', [PersonneController::class, 'show'])->name('
 Route::get('/personnes/edit/{personne}', [PersonneController::class, 'edit'])->name('personnes.edit');
 Route::patch('/personnes/{personne}', [PersonneController::class, 'update'])->name('personnes.update');
 Route::delete('/personnes/{personne}', [PersonneController::class, 'destroy'])->name('personnes.destroy');
+Route::post('/editPersonne', [PersonneController::class, 'editPersonne'])->name('editPersonne');
+
+
 
 Route::get('/genres', [GenreController::class, 'index'])->name('genres.index');
 Route::get('/genres/create', [GenreController::class, 'create'])->name('genres.create');
@@ -32,6 +46,8 @@ Route::get('/genres/{genre}', [GenreController::class, 'show'])->name('genres.sh
 Route::get('/genres/edit/{genre}', [GenreController::class, 'edit'])->name('genres.edit');
 Route::patch('/genres/{genre}', [GenreController::class, 'update'])->name('genres.update');
 Route::delete('/genres/{genre}', [GenreController::class, 'destroy'])->name('genres.destroy');
+Route::post('/editGenre', [GenreController::class, 'editGenre'])->name('editFilm');
+
 
 Route::get('/cinemas', [CinemaController::class, 'index'])->name('cinemas.index');
 Route::get('/cinemas/create', [CinemaController::class, 'create'])->name('cinemas.create');
@@ -40,6 +56,8 @@ Route::get('/cinemas/{cinema}', [CinemaController::class, 'show'])->name('cinema
 Route::get('/cinemas/edit/{cinema}', [CinemaController::class, 'edit'])->name('cinemas.edit');
 Route::patch('/cinemas/{cinema}', [CinemaController::class, 'update'])->name('cinemas.update');
 Route::delete('/cinemas/{cinema}', [CinemaController::class, 'destroy'])->name('cinemas.destroy');
+Route::post('/editCinema', [CinemaController::class, 'editCinema'])->name('editFilm');
+
 
 Route::get('/typesalles', [TypeSalleController::class, 'index'])->name('typesalles.index');
 Route::get('/typesalles/create', [TypeSalleController::class, 'create'])->name('typesalles.create');
@@ -48,6 +66,7 @@ Route::get('/typesalles/{typesalle}', [TypeSalleController::class, 'show'])->nam
 Route::get('/typesalles/edit/{typesalle}', [TypeSalleController::class, 'edit'])->name('typesalles.edit');
 Route::patch('/typesalles/{typesalle}', [TypeSalleController::class, 'update'])->name('typesalles.update');
 Route::delete('/typesalles/{typeSalle}', [TypeSalleController::class, 'destroy'])->name('typesalles.destroy');
+Route::post('/edittypesalle', [TypeSalleController::class, 'edittypesalles'])->name('edittypesalles');
 
 Route::get('/films', [FilmController::class, 'index'])->name('films.index');
 Route::get('/films/create', [FilmController::class, 'create'])->name('films.create');
@@ -56,6 +75,7 @@ Route::get('/films/{film}', [FilmController::class, 'show'])->name('films.show')
 Route::get('/films/edit/{film}', [FilmController::class, 'edit'])->name('films.edit');
 Route::patch('/films/{film}', [FilmController::class, 'update'])->name('films.update');
 Route::delete('/films/{film}', [FilmController::class, 'destroy'])->name('films.destroy');
+Route::post('/editFilm', [FilmController::class, 'editFilm'])->name('editFilm');
 
 Route::get('/tarifs', [TarifController::class, 'index'])->name('tarifs.index');
 Route::get('/tarifs/create', [TarifController::class, 'create'])->name('tarifs.create');
@@ -63,7 +83,8 @@ Route::post('/tarifs', [TarifController::class, 'store'])->name('tarifs.store');
 Route::get('/tarifs/{tarif}', [TarifController::class, 'show'])->name('tarifs.show');
 Route::get('/tarifs/edit/{tarif}', [TarifController::class, 'edit'])->name('tarifs.edit');
 Route::patch('/tarifs/{tarif}', [TarifController::class, 'update'])->name('tarifs.update');
-Route::delete('/tarifs/delete/{tarif}', [TarifController::class, 'destroy'])->name('tarifs.destroy');
+Route::delete('/tarifs/{tarif}', [TarifController::class, 'destroy'])->name('tarifs.destroy');
+Route::post('/editTarif', [TarifController::class, 'editTarif'])->name('editTarif');
 
 Route::get('/salles', [SalleController::class, 'index'])->name('salles.index');
 Route::get('/salles/create', [SalleController::class, 'create'])->name('salles.create');
@@ -72,6 +93,7 @@ Route::get('/salles/{salle}', [SalleController::class, 'show'])->name('salles.sh
 Route::get('/salles/edit/{salle}', [SalleController::class, 'edit'])->name('salles.edit');
 Route::patch('/salles/{salle}', [SalleController::class, 'update'])->name('salles.update');
 Route::delete('/salles/{salle}', [SalleController::class, 'destroy'])->name('salles.destroy');
+Route::post('/editSalle', [SalleController::class, 'editSalle'])->name('editSalle');
 
 Route::get('/seances', [SeanceController::class, 'index'])->name('seances.index');
 Route::get('/seances/create', [SeanceController::class, 'create'])->name('seances.create');
@@ -80,9 +102,17 @@ Route::get('/seances/{seance}', [SeanceController::class, 'show'])->name('seance
 Route::get('/seances/{seance}/edit', [SeanceController::class, 'edit'])->name('seances.edit');
 Route::patch('/seances/{seance}', [SeanceController::class, 'update'])->name('seances.update');
 Route::delete('/seances/{seance}', [SeanceController::class, 'destroy'])->name('seances.destroy');
+Route::post('/editSeance', [SeanceController::class, 'editSeance'])->name('editSeance');
 
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
+Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
+Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 
-Route::get('/', [PageController::class, 'accueil']);
+Route::get('/', [PageController::class, 'accueil'])->name('accueil');
 
 Route::get('/rechercheGenre', [PageController::class, 'genre'])->name('rechercheGenre');
 
@@ -92,12 +122,40 @@ Route::get('/rechercheFilm', [PageController::class, 'chercheFilm'])->name('rech
 
 Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name('rechercheActeur');
 
+Route::get('/parametresUtilisateur', [PageController::class, 'parametresUtilisateur'])->name('parametresUtilisateur');
+
+Route::get('/gestionCatalogue', [PageController::class, 'gestionCatalogue'])->name('gestionCatalogue')->middleware('admin');;
+Route::get('/gestionFilm', [PageController::class, 'gestionFilm'])->name('gestionFilm')->middleware('admin');;
+Route::get('/gestionGenre', [PageController::class, 'gestionGenre'])->name('gestionGenre')->middleware('admin');;
+Route::get('/gestionPersonne', [PageController::class, 'gestionPersonne'])->name('gestionPersonne')->middleware('admin');;
+Route::get('/gestionCasting', [PageController::class, 'gestionCasting'])->name('gestionCasting')->middleware('admin');;
+Route::get('/gestionCinema', [PageController::class, 'gestionCinema'])->name('gestionCinema')->middleware('admin');;
+Route::get('/gestionSalle', [PageController::class, 'gestionSalle'])->name('gestionSalle')->middleware('admin');;
+Route::get('/gestionSeance', [PageController::class, 'gestionSeance'])->name('gestionSeance')->middleware('admin');;
+Route::get('/gestionTarif', [PageController::class, 'gestionTarif'])->name('gestionTarif')->middleware('admin');;
+Route::get('/gestionTypeSalle', [PageController::class, 'gestionTypeSalle'])->name('gestionTypeSalle')->middleware('admin');;
+Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle')->middleware('admin');
+
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
-Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
+Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion')->middleware('guest');;
 
-Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
+Route::get('/parametreUtilisateur/{id}/edit', [UserController::class, 'edit'])
+    ->middleware(['auth', 'verified'])->name('parametreUtilisateur');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('userUpdate');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('userDestroy');
 
-Route::get('/parametres', [PageController::class, 'parametres'])->name('parametres');
+Route::get('/mesReservations', [PageController::class, 'mesReservations'])->name('mesReservations');
+Route::get('/effectuerReservation/{id}', [PageController::class, 'effectuerReservation'])->name('effectuerReservation');
 
-Route::get('/gestionCatalogue', [PageController::class, 'gestionCatalogue'])->name('gestionCatalogue');
+Route::post('/getAllGenre', [SelectController::class, 'getAllGenre'])->middleware('admin');
+Route::post('/getAllPersonne', [SelectController::class, 'getAllPersonne'])->middleware('admin');
+Route::post('/getAllFilm', [SelectController::class, 'getAllFilm'])->middleware('admin');
+Route::post('/getAllCinema', [SelectController::class, 'getAllCinema'])->middleware('admin');
+Route::post('/getAllSalle', [SelectController::class, 'getAllSalle'])->middleware('admin');
+Route::post('/getAllSeance', [SelectController::class, 'getAllSeance'])->middleware('admin');
+Route::post('/getAllTarif', [SelectController::class, 'getAllTarif'])->middleware('admin');
+Route::post('/getAllTypeSalle', [SelectController::class, 'getAllTypeSalle'])->middleware('admin');
+
+
+require __DIR__.'/auth.php';

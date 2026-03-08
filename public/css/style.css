@@ -5,6 +5,20 @@
     font-family: 'Lilita One', sans-serif;
 }
 
+/* enlève l'apparence classique des boutons */
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
 html, body {
     color: white;
     height: 100%;
@@ -60,9 +74,13 @@ ul {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: white;
 }
 
 .btn-conInc {
+    width: 164px;
+    height: 52px;
+    font-size: 32px;
     background-color: #991917;
     border: 1px solid white;
     padding: 3px 4px 0px 4px;
@@ -74,6 +92,9 @@ ul {
 }
 
 .btn-validConInc {
+    width: 329px;
+    height: 52px;
+    font-size: 32px;
     background-color: #991917;
     border: 1px solid white;
     padding: 3px 43px 0px 43px;
@@ -83,6 +104,20 @@ ul {
     justify-content: center;
     cursor: pointer;
     color: white;
+}
+
+.inputConInc label {
+    margin: 0 auto;
+    width: 165px;
+    display: block;
+}
+
+.inputConInc input {
+    padding-block: 2px;
+    margin: 0 auto;   /* centers the input */
+    display: block;
+    width: 329px;
+    height: 52px;
 }
 
 .style-equal {
@@ -106,6 +141,15 @@ ul {
     justify-content: center;
     cursor: pointer;
     color: white;
+}
+
+.btnOptionMesReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 21px 0px 21px;
+    padding: 0px 25px 0px 25px;
 }
 
 .input label {
@@ -149,6 +193,10 @@ ul {
 .hamburgerMenu li {
     width: 100%;
     text-align: center;
+}
+
+.champsActeur {
+    display : none;
 }
 
 @media (min-width: 769px) {
@@ -212,7 +260,6 @@ select {
     flex-shrink: 0;
 }
 
-/* Text cleanup */
 .footer-text {
     flex: 1;
     text-align: center;
@@ -280,13 +327,10 @@ a {
     transform: translateX(0);
 }
 
-/* mobile screen */
-@media(max-width:767px) {
+
+@media(max-width:768px) {
     .carousel-item .carousel-item > div {
         display: none;
-    }
-    .carousel-inner .carousel-item > div:first-child {
-        display: block;
     }
 
     .btnChoixJour {
@@ -312,6 +356,14 @@ a {
         object-fit: cover;
         width: 100%;
     }
+
+    .btnOptionMesReserv {
+        font-size: 20px;
+        margin: 0px 21px 0px 21px;
+        padding: 0px 25px 0px 25px;
+    }
+
+
 }
 
 .carousel-item {
@@ -329,24 +381,7 @@ section {
     flex: 1;
 }
 
-.inputCatalogue {
-    width: 345px !important;
-    height: 53px !important;
-}
-
-.inputCatalogue::placeholder {
-    color: #1c1c1c;
-    font-size: 32px;
-    display: flex;
-    justify-content: center;
-}
-
-.textareaCatalogue {
-    width: 345px !important;
-    height: 106px !important;
-}
-
-.textareaCatalogue::placeholder {
+.inputCatalogue::placeholder, .textareaCatalogue::placeholder, .choixCatal::placeholder{
     color: #1c1c1c;
     font-size: 32px;
     display: flex;
@@ -358,16 +393,10 @@ section {
     flex-shrink: 0; /* permet de ne pas revenir à la ligne */
 }
 
-.choixCatal {
-    width: 345px !important;
-    height: 53px !important;
-}
-
 .espaceSideBar {
     margin-left: 110px;
 }
 
-/* Responsive: mobile */
 @media (max-width: 768px) {
     .nav-wrapper {
         flex-direction: column;
@@ -401,26 +430,6 @@ section {
         max-width: 33%;
         height: auto;
     }
-
-}
-
-.sidebar {
-    width: 130px;
-    flex-shrink: 0;
-}
-
-.espaceSideBar {
-    margin-left: 110px;
-}
-
-.inputCatalogue, .choixCatal {
-    width: 345px !important;
-    height: 53px !important;
-}
-
-.textareaCatalogue {
-    width: 345px !important;
-    height: 106px !important;
 }
 
 .btn-ajoutModifSuppr {
@@ -434,47 +443,573 @@ section {
     flex-shrink: 0;
 }
 
-.espaceSideBar {
-    margin-left: 110px;
+/* New rule to sync the label and select position */
+.alignment-wrapper {
+    width: 345px;
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 
-
-.inputCatalogue, .choixCatal {
-    width: 100%;
-    max-width: 345px;
+.inputCatalogue,
+.choixCatal,
+.textareaCatalogue {
+    display: block !important;       /* Forces select to behave like a box */
+    width: 100% !important;
+    max-width: 345px !important;
     height: 53px !important;
+    color: #1c1c1c;
+    font-size: 32px;
 }
 
 .textareaCatalogue {
-    width: 100%;
-    max-width: 345px;
     height: 106px !important;
 }
 
+.btnChoixVisionReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    margin: 0px 28px 0px 28px;
+    padding: 0px 10px 0px 10px;
+}
 
-@media (max-width: 991px) {
-    .inputCatalogue, .textareaCatalogue, .choixCatal {
-        max-width: 100%;
-    }
+.recherche-genre-poster {
+    min-height: 480px;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    overflow: hidden;
+}
+.recherche-genre-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+.carousel-3-per-3 .carousel-inner {
+    padding: 0.5rem 0;
+}
+.carousel-3-per-3 .carousel-col {
+    min-height: 500px;
 }
 
 @media (max-width: 768px) {
-    .sidebar {
-        width: 40px;
-    }
     .btn-ajoutModifSuppr {
         width: 120px;
         height: 40px;
         font-size: 18px;
     }
 
-    .inputCatalogue, .choixCatal {
-        width: 200px !important;
-        height: 53px !important;
+    .btnChoixVisionReserv {
+        font-size: 20px;
+        margin: 0px 20px 0px 20px;
+        padding: 0px 7px 0px 7px;
+    }
+}
+
+@media (max-width: 620px) {
+    .espaceSideBar {
+        margin-left: 0 !important;
+    }
+    .btn-ajoutModifSuppr {
+        margin-bottom: 20px;
     }
 
+}
+
+
+@media (max-width: 540px) {
+    .inputCatalogue,
+    .choixCatal,
     .textareaCatalogue {
-        width: 200px !important;
-        height: 106px !important;
+        max-width: 330px !important;
+    }
+
+
+}
+
+@media (max-width: 991px) {
+    /*  Reset the margin-left from desktop so it doesn't push the form too far */
+    .espaceSideBar {
+        margin-left: 0 !important;
+        flex-grow: 1;
+    }
+
+    /* Create a "centered column" for the form */
+    #myForm {
+        max-width: 345px;   /* This matches the width of your inputs */
+        margin-left: auto;  /* Equal margins on both sides centers the form */
+        margin-right: auto;
+    }
+
+    /* Ensure labels stay aligned to the left of this 345px column */
+    .row label {
+        text-align: left;
+        display: block;
+        width: 100%;
+    }
+
+    /* Center the main Title above the form block */
+    h3 {
+        text-align: left; /* Keep left-aligned within the 345px column */
+        margin-bottom: 20px;
+    }
+
+    .alignment-wrapper {
+        justify-content: flex-start !important;
+    }
+
+    .choixCatal {
+        margin-bottom: 20px;
+    }
+
+    .labelFilm {
+        margin-bottom: 0px !important;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .d-flex.flex-row.align-items-start {
+        flex-direction: row !important;
+        display: flex !important;
+    }
+
+    .sidebar {
+        width: 100px !important; /* Shrunk from 130px to save space */
+        font-size: 14px;
+    }
+
+    .espaceSideBar {
+        margin-left: 10px !important; /* Small gap between sidebar and form */
+        flex-grow: 1;
+        width: calc(100% - 110px); /* Fill the rest of the screen */
+    }
+
+    #myForm {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .inputCatalogue,
+    .choixCatal,
+    .textareaCatalogue,
+    .alignment-wrapper {
+        width: 100% !important; /* Take up all space right of the sidebar */
+        max-width: 345px !important;
+        font-size: 20px !important; /* 20 small phones */
+    }
+
+    .btnTemplate {      /* Forces select to behave like a box */
+        width: 100% !important;
+        max-width: 345px !important;
+        color: white;
+        font-size: 20px;
+        background: #991917;
+        text-decoration: none;
+        border: 1px solid white;
+    }
+
+    /* Adjust labels so they don't take up too much vertical space */
+    .h3, h3 {
+        font-size: 22px !important;
+    }
+
+    .btnChoixVisionReserv {
+        font-size: 20px;
+        margin: 0px 20px 0px 20px;
+        padding: 0px 7px 0px 7px;
+    }
+}
+
+/* MOBILE SLIDER (Under 480px) */
+@media (max-width: 480px) {
+
+    .alignment-wrapper {
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 0px;
+    }
+
+    .top-slider {
+        flex-direction: row !important; /* Side-by-side links */
+        width: 100%;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent links from wrapping to next line */
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #991917;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .top-slider a {
+        padding-top: 0 !important; /* Remove the vertical padding from desktop */
+        padding-right: 20px; /* Space between sliding options */
+        display: inline-block;
+        font-size: 18px;
+    }
+
+    .espaceSideBar {
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .sidebar {
+        width: 80px !important;
+    }
+    .sidebar a {
+        font-size: 12px;
+    }
+    .inputCatalogue, .choixCatal, .textareaCatalogue {
+        height: 40px !important;
+    }
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.espaceTopGestCast {
+    padding-top: 50px;
+}
+
+/* Connexion / Inscription form block */
+.inputConInc{
+    width: 329px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.inputConInc label{
+    width: 100%;
+    text-align: left;
+    margin: 0 0 6px 0;
+    font-size: 32px;
+    color: white;
+}
+
+
+.inputConInc input{
+    width: 100%;
+    height: 52px;
+    margin: 0;
+    padding: 0 12px;
+    font-size: 32px;
+    color: #1c1c1c;
+}
+
+
+.inputConInc input::placeholder{
+    font-size: 32px;
+    color: #1c1c1c;
+}
+
+.sizeTitleSettingAccount {
+    font-size: 32px;
+}
+
+@media (min-width: 992px) {
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-7.order-1.pb-5 {
+        padding-bottom: 40px !important;
+    }
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-5.order-2 {
+        align-self: stretch !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;    /* push down near the select */
+        align-items: center !important;
+        padding-top: 0 !important;
+    }
+
+    #myForm .row.align-items-center.mb-1 > .col-12.col-lg-5.order-2 .alignment-wrapper {
+        justify-content: flex-start !important;  /* label starts at left of the 345px box */
+    }
+
+    /* Tighten label spacing */
+    #myForm .row.align-items-center.mb-1 .labelFilm {
+        margin-bottom: 6px !important;
+        white-space: nowrap;
+        line-height: 1;
+    }
+}
+
+.btnTemplate {
+    display: block !important;       /* Forces select to behave like a box */
+    width: 100% !important;
+    max-width: 345px !important;
+    height: 53px !important;
+    cursor: pointer;
+    color: white;
+    font-size: 32px;
+    background: #991917;
+    text-decoration: none;
+    border: 1px solid white;
+}
+
+.infoReservation {
+    margin-right: 225px;
+}
+
+.btnReservation {
+    margin-right: 57px;
+}
+
+.btnRemove {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 30px;
+    padding: 3px 15px 3px 15px;
+}
+
+.btnAjoutPersReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 32px;
+    padding: 0px 17px 0px 17px;
+}
+
+.btnReserv {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    font-size: 32px;
+    padding: 0px 103px 0px 103px;
+    margin-right: 37px;
+}
+
+.btnReservProgSemaineCinema {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    padding: 0px 5px;
+}
+
+.affichageBtnPageProgSemaine {
+    margin-top: 60px;
+}
+
+.affichageFilmPageProgSemaine {
+    margin-top: 50px;
+    margin-left: 20px
+}
+
+.affichageSeancePageProgSemaine {
+    margin-top: 15px;
+    margin-left:20px
+}
+
+.affichageSalleProgSemaine {
+    margin-top: -10px;
+}
+
+    .btnReservRechFilm {
+    color: white;
+    background: #991917;
+    border: 1px solid white;
+    padding: 0px 5px;
+    font-size: 22px;
+}
+
+.selectTarif {
+    width: 329px;
+    height: 53px;
+    color: #1c1c1c;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.totalPrice {
+    margin-right: 37px;
+}
+
+.contentPageReserv {
+    margin-left: 264px;
+}
+
+.participant-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* same vertical spacing in every column */
+}
+
+.participant-slot {
+    min-height: 38px; /* close to select height */
+    display: flex;
+    align-items: center;
+}
+
+.participant-text {
+    min-width: 80px;
+}
+
+.reserverSmallScreen {
+    justify-content: end;
+}
+
+@media (max-width: 820px) {
+    .reserverSmallScreen {
+        justify-content: center;
+    }
+    .totalPrice {
+        margin-right: 0px;
+    }
+    .btnReserv {
+        margin-right: 0px;
+    }
+}
+
+
+/* Problems from here */
+/* Participants row */
+.contentPageReserv > .row:last-of-type {
+    align-items: flex-start;
+    column-gap: 20px;
+}
+
+/* keep the title on a full line */
+.contentPageReserv > .row:last-of-type > h3 {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* keep the 3 columns side by side */
+.contentPageReserv > .row:last-of-type > .col-auto {
+    flex: 0 0 auto;
+}
+
+/* remove Bootstrap side offsets only in this row */
+.contentPageReserv > .row:last-of-type > .col-auto.ms-5,
+.contentPageReserv > .row:last-of-type > .col-auto.ms-4 {
+    margin-left: 0 !important;
+}
+
+/* same vertical rhythm */
+#divIdChampsSelect,
+#divIdPrixTarif,
+#divIdBtnSuppr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#divIdChampsSelect .participant-slot,
+#divIdPrixTarif .participant-slot,
+#divIdBtnSuppr .participant-slot {
+    min-height: 53px;
+    display: flex;
+    align-items: center;
+}
+
+.btnSuppr {
+    padding-top: 45px;
+}
+
+.selectTarif {
+    width: 329px;
+    max-width: 100%;
+}
+
+/* small screens */
+@media (max-width: 992px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnSuppr {
+        padding-top: 65px;
+    }
+
+    .prixParTarif {
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 550px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnAjoutPersReserv {
+        font-size: 32px;
+        padding: 0px 2px 0px 2px;
+    }
+
+    .btnSuppr {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .prixParTarif {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .selectTarif {
+        width: 300px;
+    }
+
+    .participant-text {
+        min-width: 0px;
+    }
+}
+
+@media (max-width : 480px) {
+    .contentPageReserv {
+        margin-left: 10px;
+    }
+
+    .btnAjoutPersReserv {
+        font-size: 32px;
+        padding: 0px 2px 0px 2px;
+    }
+
+    .btnSuppr {
+        margin-left: 0px;
+        padding-left: 0px;
+        padding-top: 60px;
+    }
+
+    .prixParTarif {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .selectTarif {
+        width: 200px;
+    }
+}
+
+.btnReservation .col-auto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .btnReservation .col-auto {
+        gap: 6px;
+    }
+
+    .btnOptionMesReserv {
+        font-size: 20px;
+        padding: 0 12px;
+        margin: 0;
     }
 }

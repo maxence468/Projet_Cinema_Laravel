@@ -1,0 +1,148 @@
+@extends('layout')
+
+@section('title', 'Page gestion film')
+
+@section('main')
+    <main class="container-fluid pt-3">
+        <div class="d-flex flex-row align-items-start">
+
+            <div class="d-flex flex-column pt-4 ps-2 sidebar">
+                <a href="/gestionFilm" class="nav-text">Gestion film</a>
+                <a href="/gestionGenre" class="nav-text pt-3">Gestion genre</a>
+                <a href="/gestionPersonne" class="nav-text pt-3">Gestion personne</a>
+                <a href="/gestionCinema" class="nav-text pt-3">Gestion cinéma</a>
+                <a href="/gestionSalle" class="nav-text pt-3">Gestion salle</a>
+                <a href="/gestionSeance" class="nav-text pt-3">Gestion séance</a>
+                <a href="/gestionTarif" class="nav-text pt-3">Gestion tarif</a>
+                <a href="/gestionTypeSalle" class="nav-text pt-3">Gestion typeSalle</a>
+            </div>
+
+            <div class="espaceSideBar flex-grow-1">
+                <div class="container-fluid">
+
+                    <form id="myForm" method="post" action="">
+                        @csrf
+                        <div class="row align-items-center mb-1">
+                            <div class="col-12 col-lg-7 order-1 pb-5 pt-4">
+                                <h3 class="mb-3">Ajouter, modifier ou supprimer une personne</h3>
+                            </div>
+
+                            <div class="col-12 col-lg-5 order-2 d-lg-flex justify-content-center pt-5">
+                                <div class="alignment-wrapper">
+                                    <label class="h3 mb-3 labelFilm" for="listeFilm">Personne à modifier</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3 order-4 order-lg-3">
+                                <label class="h3 mb-0">Nom personne</label>
+                            </div>
+
+                            <div class="col-12 col-lg-4 order-5 order-lg-4">
+                                <input id="nomPers" class="inputCatalogue" type="text" placeholder="Nom personne" required>
+                            </div>
+
+                            <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
+                                <div class="alignment-wrapper">
+                                    <select name="movie" id="personneModif" class="choixCatal" onchange="">
+                                        <option value=""></option>
+                                        @foreach($personnes as $personne)
+                                            <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3">
+                                <label class="h3 mb-0">Prenom personne</label>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <input id="prePers" class="inputCatalogue" type="text" placeholder="Prenom personne" required>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block"></div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3">
+                                <label class="h3 mb-0">Date de naissance</label>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <input id="dateNaissPers" class="inputCatalogue" type="date" placeholder="Date de naissance" required>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3">
+                                <label class="h3 mb-0">Lieu de naissance</label>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <input id="lieuNaissPers" class="inputCatalogue" type="text" placeholder="Lieu de naissance" required>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3">
+                                <label class="h3 mb-0">Photo personne</label>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <input id="photoPers" class="inputCatalogue" type="text" placeholder="Photo personne" required>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-12 col-lg-3">
+                                <label class="h3 mb-0">Bibliographie</label>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <textarea id="biblio" class="textareaCatalogue" placeholder="Bibliographie" required></textarea>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
+        </div>
+    </main>
+    <script>
+        /*function submitForm(action) {
+            const form = document.getElementById('');
+            const methodInput = document.getElementById('');
+            const actionInput = document.getElementBydId('');
+
+            actionInput.value = action;
+
+            switch (action) {
+                case 'create':
+                    form.action = "<route('posts.store')";
+                    methodInput.value = 'POST';
+                    break;
+
+                case 'update';
+                    form.action = " route('posts.update'), $post->id ?? 0"
+                    methodInput.value = 'PATCH';
+                    break;
+
+                case 'delete':
+                    if(!confirm('Êtes vous sure ?')) {
+                        event.preventDefault();
+                        return;
+                    }
+                    form.action = "route('posts.destroy', $post->id ?? 0)"
+                    methodInput.value = 'DELETE';
+                    break;
+            }
+        }*/
+    </script>
+    @vite('resources/js/stateButtons.js')
+    @vite('resources/js/gestionPersonne.js')
+    @vite('resources/js/updateSelect.js')
+@endsection

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Cinema;
 use App\Models\Film;
 use App\Models\Genre;
+use App\Models\Reservation;
 use App\Models\Salle;
 use App\Models\Seance;
 use App\Models\Personne;
+use App\Models\Tarif;
+use App\Models\TypeSalle;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -134,11 +137,139 @@ class PageController extends Controller{
         return view('connexion');
     }
 
-    public function parametres() {
+    public function gestionCatalogue() {
+        return view('gestionFilm');
+    }
+
+    public function gestionFilm() {
+        $genres = Genre::all();
+        $films = Film::all();
+        $personnes = Personne::all();
+
+        return view('gestionFilm', [
+            'genres' => $genres,
+            'films' => $films,
+            'personnes' => $personnes
+
+        ]);
+    }
+
+    public function gestionGenre() {
+        $genres = Genre::all();
+        return view('gestionGenre', [
+            'genres' => $genres
+        ]);
+    }
+    public function gestionPersonne() {
+        $personnes = Personne::all();
+        return view('gestionPersonne', [
+            'personnes' => $personnes
+        ]);
+    }
+
+    public function gestionCasting() {
+        $films = Film::all();
+        $personnes = Personne::all();
+        return view('gestionCasting', [
+            'films' => $films,
+            'personnes' => $personnes
+        ]);
+    }
+
+    public function gestionCinema() {
+        $cinemas = Cinema::all();
+        return view('gestionCinema', [
+            'cinemas' => $cinemas
+        ]);
+    }
+
+    public function gestionSalle() {
+        $cinemas = Cinema::all();
+        $typeSalles = TypeSalle::all();
+        $tarifs = Tarif::all();
+        $salles = Salle::all();
+        return view('gestionSalle', [
+            'cinemas' => $cinemas,
+            'typeSalles' => $typeSalles,
+            'tarifs' => $tarifs,
+            'salles' => $salles,
+        ]);
+    }
+
+    public function gestionSeance() {
+        $films = Film::all();
+        $salles = Salle::all();
+        $seances = Seance::all();
+
+        return view('gestionSeance', [
+            'films' => $films,
+            'salles' => $salles,
+            'seances' => $seances
+        ]);
+    }
+
+    public function gestionTarif() {
+        $tarifs = Tarif::all();
+
+        return view('gestionTarif', [
+            'tarifs' => $tarifs,
+        ]);
+    }
+
+    public function gestionTypeSalle() {
+        $typeSalles = TypeSalle::all();
+
+        return view('gestionTypeSalle', [
+            'typeSalles' => $typeSalles,
+        ]);
+    }
+
+    public function gestionTarifSalle() {
+        return view('gestionTarifSalle');
+    }
+
+    public function parametresUtilisateur() {
         return view('parametresUtilisateur');
     }
 
-    public function gestionCatalogue() {
-        return view('gestionFilm');
+    public function mesReservations(Request $request) {
+        $idUser = auth()->id();
+        $filter = $request->input('filter', 'toutes');
+        $query = Reservation::with('seance.film', 'seance.salle.cinema')->where('idUser', $idUser);
+
+        $now = Carbon::now();
+        switch ($filter) {
+            case 'a_venir':
+                $query->whereHas('seance', fn($q) => $q->where('dateSeance', '>', $now));
+                break;
+            case 'en_cours':
+                $query->whereHas('seance', fn($q) => $q->where('dateSeance', '=', $now->toDateString()));
+                break;
+            case 'passees':
+                $query->whereHas('seance', fn($q) => $q->where('dateSeance', '<', $now));
+                break;
+            case 'toutes':
+            default:
+                break;
+        }
+        $reservations = $query->get();
+
+        return view('reservation', compact('reservations', 'filter'));
+    }
+
+    public function effectuerReservation($idSeance) {
+        $seance = Seance::find($idSeance);
+
+        $capaciteTot = $seance->salle->capaciteSal;
+        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
+        $placeRestant = $capaciteTot - $placeReserve;
+
+        $tarifs = Tarif::all();
+
+        return view('effectuerReservation', compact(
+            'seance',
+            'placeRestant',
+            'tarifs',
+        ));
     }
 }

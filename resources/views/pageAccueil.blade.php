@@ -11,9 +11,24 @@
     <h2 class="pt-5 ps-2 pb-2">Les dernières sorties</h2>
     <div class="d-flex flex-row justify-content-evenly">
         @foreach($films as $film)
-            <img src="{{ asset('images/' . $film->posterFilm) }}"
-                 alt="{{ $film->titreFilm }}"
-                 class="poster">
+            <form method="GET" action="{{ route('recherchefilm') }}">
+                <input type="hidden" value="{{ $film->titreFilm }}" name="search">
+                <button type="submit">
+
+                    @if(File::exists(public_path('images/' . $film->posterFilm)))
+                        <img src="{{ asset('images/' . $film->posterFilm) }}"
+                             alt="{{ $film->titreFilm }}"
+                             class="poster">
+                    @else
+                        <img src="{{ asset('images/img.png')}}"
+                        alt="{{ $film->titreFilm }}"
+                        class="poster"
+
+
+                    @endif
+
+                </button>
+            </form>
         @endforeach
     </div>
 </main>

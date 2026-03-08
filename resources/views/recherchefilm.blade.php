@@ -31,11 +31,26 @@
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row align-items-start">
                         <div class="col-auto">
-                            <img src="{{ asset('images/' . $film->posterFilm) }}"
-                                 width="412"
-                                 height="626"
-                                 alt="{{ $film->titreFilm }}"
-                                 class="smd">
+                            @if(File::exists(public_path('images/' . $film->posterFilm)))
+                                <html>
+                                <img src="{{ asset('images/' . $film->posterFilm) }}"
+                                     width="412"
+                                     height="626"
+                                     alt="{{ $film->titreFilm }}"
+                                     class="smd">
+                                </html>
+
+                            @else
+
+                                <html>
+                                <img src="{{ asset('images/img.png')}}"
+                                     width="412"
+                                     height="626"
+                                     alt="{{ $film->titreFilm }}"
+                                     class="smd">
+                                </html>
+
+                            @endif
                         </div>
 
                         <div class="col">
@@ -55,11 +70,13 @@
                             </p>
                             <p class="pt-3">Durée : {{$film->dureeFilm}} minutes</p>
                             @if($film->seances->isEmpty())
+                                <p>Aucune seance disponible</p>
                             @else
-                                <p class="pt-3">Disponible au cinema :
+                                <p class="pt-3">Disponible au cinema : <br><br>
                                 @foreach($film->seances as $s)
-                                        le {{ $s->dateSeance }} au cinéma {{ $s->salle->cinema->nomCinema }} à {{ Carbon::createFromFormat('H:i:s', $s->heureSeance)->format('H:i') }}
-                                        {{ $loop->last ? '' : ',' }}
+                                        le {{ $s->dateSeance }} au cinéma {{ $s->salle->cinema->nomCinema }} à {{$s->heureSeance->format('H:i')}}
+                                        <br><a href="{{ route('effectuerReservation', $s->idSeance) }}" class="btnReservRechFilm">Réserver</a>
+                                        <br><br>
                                 @endforeach
                                 </p>
                             @endif

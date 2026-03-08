@@ -8,19 +8,45 @@
             <a href="/inscription" class="btn-conInc inscription"><span>Inscription</span></a>
             <a href="/connexion" class="btn-conInc connexion"><span>Connexion</span></a>
         </div>
-        <form action="/users" method="POST">
-            <div class="input d-flex flex-column align-items-start pt-4">
-                <label for="email">Email</label>
-                <input type="text" placeholder="Entrer votre email">
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <!-- Email Address -->
+            <div class="inputConInc d-flex flex-column align-items-start pt-4">
+                <x-input-label for="email" :value="__('Email')" />
+                <x-text-input placeholder="Entrer votre email" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
-            <div class="input d-flex flex-column align-items-start pt-3">
-                <label for="email">Mot de passe</label>
-                <input placeholder="........">
+
+            <!-- Password -->
+            <div class="inputConInc d-flex flex-column align-items-start pt-3">
+                <x-input-label for="password" :value="__('Password')" />
+
+                <x-text-input placeholder="........"
+                              id="password" class="block mt-1 w-full"
+                              type="password"
+                              name="password"
+                              required autocomplete="current-password" />
+
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+            <div class="inputConInc d-flex flex-column align-items-center pt-3">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
             <div class="row-auto d-flex justify-content-center pt-4">
-                <button class="btn-validConInc" name="btnCon" type="submit">
-                    <a href="/" ><span>Connexion</span></a>
-                </button>
+                <x-primary-button class="btn-validConInc">
+                    {{ __('Connexion') }}
+                </x-primary-button>
+
             </div>
         </form>
     </main>

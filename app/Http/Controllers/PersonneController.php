@@ -26,7 +26,12 @@ class PersonneController extends Controller
             'prePers' => 'required|string',
             'dateNaissPers' => 'required|date',
             'lieuNaissPers' => 'required|string',
-            'photoPers' => 'required|string',
+            'photoPers' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
             'biblio' => 'required|string',
         ]);
 
@@ -45,30 +50,54 @@ class PersonneController extends Controller
     public function edit(Personne $personne) {
         return view('personnes.edit', compact('personne'));
     }
-
-    public function update(Request $request, Personne $personne) {
+    public function update(Request $request, $id)
+    {
         request()->validate([
             'nomPers' => 'required|string',
             'prePers' => 'required|string',
             'dateNaissPers' => 'required|date',
             'lieuNaissPers' => 'required|string',
-            'photoPers' => 'required|string',
+            'photoPers' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
             'biblio' => 'required|string',
         ]);
 
-        $personne->nomPers = request('nomPers');
-        $personne->prePers = request('prePers');
-        $personne->dateNaissPers = request('dateNaissPers');
-        $personne->lieuNaissPers = request('lieuNaissPers');
-        $personne->photoPers = request('photoPers');
-        $personne->biblio = request('biblio');
-        $personne->save();
+        $personne = Personne::findOrFail($id);
 
-        return redirect()->route('personnes.index');
+        $personne->update([
+            'nomPers' => $request->nomPers,
+            'prePers' => $request->prePers,
+            'dateNaissPers' => $request->dateNaissPers,
+            'lieuNaissPers' => $request->lieuNaissPers,
+            'photoPers' => $request->photoPers,
+            'biblio' => $request->biblio,
+        ]);
+
+        return response()->json([
+            'message' => 'Personne mise à jour !',
+            'personne' => $personne
+        ]);
+    }
+    public function destroy($id)
+    {
+        $personne = Personne::findOrFail($id);
+        $personne->delete();
+
+        return response()->json([
+            'message' => 'Personne supprimé avec succès !'
+        ]);
     }
 
-    public function destroy(Personne $personne) {
-        $personne->delete();
-        return redirect()->route('personnes.index');
+    public function editPersonne(Request $request){
+        $id = $request->idPers;
+        $personne = Personne::find($id);
+
+        return response()->json([
+            'personne'=> $personne,
+        ]);
     }
 }
