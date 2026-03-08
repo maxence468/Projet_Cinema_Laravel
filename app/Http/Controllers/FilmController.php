@@ -23,12 +23,21 @@ class FilmController extends Controller
     public function store() {
         request()->validate([
             'titreFilm' => 'required|string|max:255',
-            'descFilm' => 'nullable|string',
+            'descFilm' => 'string',
             'dateSortieFilm' => 'required|date',
             'dureeFilm' => 'required|integer',
-            'posterFilm' => 'nullable|string',
+            'posterFilm' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
             'idGenre' => 'required|exists:genres,idGenre',
+            'idRealisateurs' => 'required|exists:personnes,idPers',
+            'idScenaristes' => 'required|exists:personnes,idPers',
+            'idActeurs' => 'required|exists:personnes,idPers',
         ]);
+
 
         //film
         $f = new Film();
@@ -87,6 +96,24 @@ class FilmController extends Controller
 
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'titreFilm' => 'required|string|max:255',
+            'descFilm' => 'string',
+            'dateSortieFilm' => 'required|date',
+            'dureeFilm' => 'required|integer',
+            'posterFilm' => [
+                'required',
+                'string',
+                'url',
+                'regex:/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i',
+            ],
+            'idGenre' => 'required|exists:genres,idGenre',
+            'idRealisateurs' => 'required|exists:personnes,idPers',
+            'idScenaristes' => 'required|exists:personnes,idPers',
+            'idActeurs' => 'required|exists:personnes,idPers',
+        ]);
+
+
         $film = Film::findOrFail($id);
 
 

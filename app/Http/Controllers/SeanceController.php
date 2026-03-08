@@ -45,13 +45,13 @@ class SeanceController extends Controller
 
     public function update(Request $request, $id)
     {
-        request()->validate([
-            'heureSeance' => 'required|date_format:H:i',
-            'dateSeance' => 'required|date',
-            'dureeSeance' => 'required|integer',
-            'idFilm' => 'required|exists:films,idFilm',
-            'idSalle' => 'required|exists:salles,idSalle',
-        ]);
+            request()->validate([
+                'heureSeance' => 'required|date_format:H:i',
+                'dateSeance' => 'required|date',
+                'dureeSeance' => 'required|integer',
+                'idFilm' => 'required|exists:films,idFilm',
+                'idSalle' => 'required|exists:salles,idSalle',
+            ]);
 
         $seance = Seance::findOrFail($id);
 

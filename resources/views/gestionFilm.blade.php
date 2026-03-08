@@ -333,7 +333,7 @@
                     <label class="h3 mb-0">Lieu de naissance</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" id="lieuNaissPers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,100}$" placeholder="Lieu de naissance" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="lieuNaissPers" type="text" placeholder="Lieu de naissance" required>
                 </div>
             </div>
 

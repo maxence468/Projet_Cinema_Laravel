@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -129,7 +129,7 @@ Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->
 
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
-Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
+Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion')->middleware('guest');;
 
 Route::get('/parametreUtilisateur/{id}/edit', [UserController::class, 'edit'])
     ->middleware(['auth', 'verified'])->name('parametreUtilisateur');
