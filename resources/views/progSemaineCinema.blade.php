@@ -25,7 +25,7 @@
 
     {{--Quand un cinema est choisi--}}
     @if($cinemaChoisi->isNotEmpty())
-        <h2 class="mt-3">Résultat pour le cinéma :
+        <h2 class="mt-3 ms-4">Résultat pour le cinéma :
             {{ $cinemaChoisi->first()->nomCinema }}
         </h2>
         <div class="col-auto d-flex justify-content-around affichageBtnPageProgSemaine">
