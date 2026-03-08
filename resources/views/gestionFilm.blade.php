@@ -10,13 +10,11 @@
                 <a href="/gestionFilm" class="nav-text">Gestion film</a>
                 <a href="/gestionGenre" class="nav-text pt-3">Gestion genre</a>
                 <a href="/gestionPersonne" class="nav-text pt-3">Gestion personne</a>
-                <a href="/gestionCasting" class="nav-text pt-3">Gestion casting</a>
                 <a href="/gestionCinema" class="nav-text pt-3">Gestion cinéma</a>
                 <a href="/gestionSalle" class="nav-text pt-3">Gestion salle</a>
                 <a href="/gestionSeance" class="nav-text pt-3">Gestion séance</a>
                 <a href="/gestionTarif" class="nav-text pt-3">Gestion tarif</a>
                 <a href="/gestionTypeSalle" class="nav-text pt-3">Gestion typeSalle</a>
-                <a href="/gestionTarifSalle" class="nav-text pt-3">Gestion tarif salle</a>
             </div>
 
             <div class="espaceSideBar flex-grow-1 pt-4">
@@ -43,7 +41,6 @@
                             <div class="col-12 col-lg-3 order-4 order-lg-3">
                                 <label class="h3 mb-0">Titre film</label>
                             </div>
-
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
                                 <input class="inputCatalogue" id="titreFilm" type="text" pattern="^[A-Za-zÀ-ÿ0-9'’\-\s.,:!?()]{2,100}$" placeholder="Titre film" required>
                             </div>
@@ -105,8 +102,7 @@
                                 <label class="h3 mb-0">Genre film</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <select name="genre" class="c
-                                hoixCatal" id="idGenre">
+                                <select name="genre" class="choixCatal" id="idGenre">
                                     <option value="">Genre film</option>
                                     @foreach($genres as $genre)
                                         <option value="{{$genre->idGenre}}">{{$genre->libGenre}}</option>
@@ -195,11 +191,11 @@
                                     <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
                                     <div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue principale" id="principale" type="radio" required>
+                                            <input name="typeActeur_1" class="inputCatalogue principale" id="principale" type="radio" required>
                                             <label for="principale">Principale</label>
                                         </div>
                                         <div>
-                                            <input name="typeActeur" class="inputCatalogue secondaire" id="secondaire" type="radio" required>
+                                            <input name="typeActeur_1" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
                                             <label for="secondaire">Secondaire</label>
                                         </div>
                                     </div>
@@ -227,15 +223,14 @@
                                     <input class="inputCatalogue nomJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Nom Joué" required>
                                     <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
                                     <div>
-                                        <div>
-                                            <div class="col-12 col-lg-4 pb-5">
-                                                <select class="inputCatalogue" type="text" placeholder="Principal ou secondaire" required>
-                                                    <option>Principal ou secondaire</option>
-                                                    <option>Principal</option>
-                                                    <option>Secondaire</option>
-                                                </select>
+                                            <div>
+                                                <input name="typeActeur_" class="inputCatalogue principale" id="principale" type="radio" required>
+                                                <label>Principale</label>
                                             </div>
-                                        </div>
+                                            <div>
+                                                <input name="typeActeur_" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
+                                                <label>Secondaire</label>
+                                            </div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-danger remove">X</button>
@@ -310,7 +305,7 @@
                 </div>
 
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Nom personne" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="nomPers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Nom personne" required>
                 </div>
             </div>
 
@@ -319,7 +314,7 @@
                     <label class="h3 mb-0">Prenom personne</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Prenom personne" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="prePers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Prenom personne" required>
                 </div>
                 <div class="col-lg-5 d-none d-lg-block"></div>
             </div>
@@ -329,7 +324,7 @@
                     <label class="h3 mb-0">Date de naissance</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="date" placeholder="Date de naissance" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="dateNaissPers" type="date" placeholder="Date de naissance" required>
                 </div>
             </div>
 
@@ -338,7 +333,7 @@
                     <label class="h3 mb-0">Lieu de naissance</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,100}$" placeholder="Lieu de naissance" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="lieuNaissPers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,100}$" placeholder="Lieu de naissance" required>
                 </div>
             </div>
 
@@ -347,7 +342,7 @@
                     <label class="h3 mb-0">Photo personne</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" type="text" pattern="^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$" placeholder="Photo personne" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="photoPers" type="text" pattern="^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$" placeholder="Photo personne" required>
                 </div>
             </div>
 
@@ -356,7 +351,7 @@
                     <label class="h3 mb-0">Bibliographie</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <textarea form="formAjoutPersonne" class="textareaCatalogue" placeholder="Bibliographie" required></textarea>
+                    <textarea form="formAjoutPersonne" class="textareaCatalogue" id="biblio" placeholder="Bibliographie" required></textarea>
                 </div>
             </div>
 
@@ -401,5 +396,7 @@
             }
         }
     </script>
+    @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionFilm.js')
+    @vite('resources/js/updateSelect.js')
 @endsection

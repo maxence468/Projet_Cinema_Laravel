@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Page gestion salle')
+@section('title', 'Page gestion film')
 
 @section('main')
     <main class="container-fluid pt-3">
@@ -10,13 +10,11 @@
                 <a href="/gestionFilm" class="nav-text">Gestion film</a>
                 <a href="/gestionGenre" class="nav-text pt-3">Gestion genre</a>
                 <a href="/gestionPersonne" class="nav-text pt-3">Gestion personne</a>
-                <a href="/gestionCasting" class="nav-text pt-3">Gestion casting</a>
                 <a href="/gestionCinema" class="nav-text pt-3">Gestion cinéma</a>
                 <a href="/gestionSalle" class="nav-text pt-3">Gestion salle</a>
                 <a href="/gestionSeance" class="nav-text pt-3">Gestion séance</a>
                 <a href="/gestionTarif" class="nav-text pt-3">Gestion tarif</a>
                 <a href="/gestionTypeSalle" class="nav-text pt-3">Gestion typeSalle</a>
-                <a href="/gestionTarifSalle" class="nav-text pt-3">Gestion tarif salle</a>
             </div>
 
             <div class="espaceSideBar flex-grow-1">
@@ -42,15 +40,21 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <select name="cinema" class="choixCatal" required>
+                                <select id="idCinema" name="cinema" class="choixCatal" required>
                                     <option value="">Cinéma</option>
+                                    @foreach($cinemas as $cinema)
+                                        <option value="{{$cinema->idCinema}}">{{$cinema->nomCinema}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                    <select id="salleModif" name="movie" class="choixCatal" onchange="">
                                         <option value=""></option>
+                                        @foreach($salles as $salle)
+                                            <option value="{{$salle->idSalle}}">{{$salle}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -61,8 +65,11 @@
                                 <label class="h3 mb-0">Type de salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <select name="typeSalle" class="choixCatal" required>
+                                <select id="idTypeSalle" name="typeSalle" class="choixCatal" required>
                                     <option value="">Type de salle</option>
+                                    @foreach($typeSalles as $typeSalle)
+                                        <option value="{{$typeSalle->idTypeSalle}}">{{$typeSalle->libTypeSalle}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
@@ -73,7 +80,7 @@
                                 <label class="h3 mb-0">Numéro de salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="number" min="1" max="1000" step="1"
+                                <input id="numeroSalle" class="inputCatalogue" type="number" min="1" max="1000" step="1"
                                        title="La numéro de la salle doit être entre 1 et 1000" placeholder="Numéro de salle" required>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
@@ -84,7 +91,7 @@
                                 <label class="h3 mb-0">Capacité salle</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="number" min="1" max="1000" step="1"
+                                <input id="capaciteSal" class="inputCatalogue" type="number" min="1" max="1000" step="1"
                                        title="La capacité de la salle doit être entre 1 et 1000" placeholder="Capacité salle" required>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
@@ -95,8 +102,11 @@
                                 <label class="h3 mb-0">Tarif</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <select name="tarif" class="choixCatal" required>
+                                <select id="idTarif" name="tarif" class="choixCatal" required>
                                     <option value="">Tarif</option>
+                                    @foreach($tarifs as $tarif)
+                                        <option value="{{$tarif->idTarif}}">{{$tarif->libTarif}} : {{$tarif->prixTarif}} €</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-5 d-none d-lg-block"></div>
@@ -111,9 +121,9 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
         <template id="tplFormTarif">
             <form id="myForm" method="post" action="">
@@ -158,4 +168,7 @@
             </form>
         </template>
     </main>
+    @vite('resources/js/stateButtons.js')
+    @vite('resources/js/gestionSalle.js')
+    @vite('resources/js/updateSelect.js')
 @endsection

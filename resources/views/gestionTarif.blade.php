@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Page gestion tarif')
+@section('title', 'Page gestion film')
 
 @section('main')
     <main class="container-fluid pt-3">
@@ -10,13 +10,11 @@
                 <a href="/gestionFilm" class="nav-text">Gestion film</a>
                 <a href="/gestionGenre" class="nav-text pt-3">Gestion genre</a>
                 <a href="/gestionPersonne" class="nav-text pt-3">Gestion personne</a>
-                <a href="/gestionCasting" class="nav-text pt-3">Gestion casting</a>
                 <a href="/gestionCinema" class="nav-text pt-3">Gestion cinéma</a>
                 <a href="/gestionSalle" class="nav-text pt-3">Gestion salle</a>
                 <a href="/gestionSeance" class="nav-text pt-3">Gestion séance</a>
                 <a href="/gestionTarif" class="nav-text pt-3">Gestion tarif</a>
                 <a href="/gestionTypeSalle" class="nav-text pt-3">Gestion typeSalle</a>
-                <a href="/gestionTarifSalle" class="nav-text pt-3">Gestion tarif salle</a>
             </div>
 
             <div class="espaceSideBar flex-grow-1">
@@ -41,13 +39,17 @@
                             </div>
 
                             <div class="col-12 col-lg-4 order-5 order-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Libelle tarif" required>
+                                <input id="libTarif" class="inputCatalogue" type="text" placeholder="Libelle tarif" required>
                             </div>
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select name="movie" class="choixCatal" onchange="this.form.submit()">
+                                    <select id="tarifModif" name="movie" class="choixCatal" onchange="">
                                         <option value=""></option>
+                                        @foreach($tarifs as $tarif)
+                                            <option value="{{$tarif->idTarif}}">{{$tarif->libTarif}}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
@@ -58,7 +60,7 @@
                                 <label class="h3 mb-0">Prix tarif</label>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <input class="inputCatalogue" type="text" placeholder="Prix tarif" required>
+                                <input id="prixTarif" class="inputCatalogue" type="number" placeholder="Prix tarif" required>
                             </div>
                         </div>
                     </form>
@@ -67,9 +69,12 @@
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
-            <button form="myForm" name="btnAjout" class="btn-ajoutModifSuppr" type="submit"><span>Ajouter</span></button>
-            <button form="myForm" name="btnModif" class="btn-ajoutModifSuppr" type="submit"><span>Modifier</span></button>
-            <button form="myForm" name="btnSuppr" class="btn-ajoutModifSuppr" type="submit"><span>Supprimer</span></button>
+            <button name="btnAjout" class="btn-ajoutModifSuppr" id="btnAjt"><span>Ajouter</span></button>
+            <button name="btnModif" class="btn-ajoutModifSuppr" id="btnModif"><span>Modifier</span></button>
+            <button name="btnSuppr" class="btn-ajoutModifSuppr" id="btnSuppr"><span>Supprimer</span></button>
         </div>
     </main>
+    @vite('resources/js/stateButtons.js')
+    @vite('resources/js/gestionTarif.js')
+    @vite('resources/js/updateSelect.js')
 @endsection

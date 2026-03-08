@@ -36,16 +36,19 @@ $('#btnAjt').click(function(){
 
 $('#genreModif').change(function(e){
     let idGenre = $('#genreModif').val()
-
+    if(!idGenre){
+        $('#myForm')[0].reset();
+        return;
+    }
     $.ajax({
         url: "/editGenre",
         type: "post",
+        global:false,
         data:{
             idGenre: idGenre,
             _token: $('input[name="_token"]').val(),
         },
         success: function(result){
-            console.log(result['film'])
             $('#libGenre').val(result['genre']['libGenre'])
         },
         error: function(error){
