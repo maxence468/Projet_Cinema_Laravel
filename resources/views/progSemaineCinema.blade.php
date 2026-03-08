@@ -45,7 +45,17 @@
                         <form method="GET" action="{{ route('recherchefilm') }}">
                             <input type="hidden" value="{{ $film->titreFilm }}">
                             <button type="submit">
-                                <img src="{{asset('images/' .$film->posterFilm)}}" alt="{{$film->posterFilm}}" width="100" height="152">
+
+                                @if(File::exists(public_path('images/' . $film->posterFilm)))
+                                    <img src="{{asset('images/' .$film->posterFilm)}}" alt="{{$film->posterFilm}}" width="100" height="152">
+
+                                @else
+                                    <img src="{{ asset('images/img.png')}}"
+                                         width="100" height="152"
+                                         alt="">
+
+                                @endif
+
                             </button>
                         </form>
                     </div>
@@ -60,9 +70,11 @@
                         @if($seance->idFilm == $film->idFilm )
                             <!-- Renvoi de toutes les séances de la journée choisie -->
                             <div class="col-auto me-5">
-                                <h4>{{Carbon::createFromFormat('H:i:s', $seance->heureSeance)->format('H:i')}} -> {{Carbon::createFromFormat('H:i:s', $seance->heureSeance)->addMinutes($seance->film->dureeFilm)->format('H:i')}}</h4>
+                                <h4>{{$seance->heureSeance->format('H:i')}} -> {{$seance->heureSeance->addMinutes($seance->film->dureeFilm)->format('H:i')}}</h4>
                                 <h4 style="margin-top: -10px">Salle {{$seance->idSalle}}</h4>
+                                <h4><a href="/effectuerReservation" class="btnReservProgSemaineCinema">Réserver</a></h4>
                             </div>
+
                         @endif
                     @endforeach
                 </div>

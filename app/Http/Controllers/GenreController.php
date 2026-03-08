@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $genres = Genre::all();
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['genres' => $genres]);
+        }
         return view('genres.index',compact('genres'));
     }
 
@@ -22,14 +25,17 @@ class GenreController extends Controller
     }
 
     public function store(Request $request) {
-        request()->validate([
+        $request->validate([
             'libGenre' => 'required|string',
         ]);
 
         $g = new Genre();
-        $g->libGenre = request('libGenre');
+        $g->libGenre = $request->libGenre;
         $g->save();
 
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['genre' => $g]);
+        }
         return redirect()->route('genres.index');
     }
 
