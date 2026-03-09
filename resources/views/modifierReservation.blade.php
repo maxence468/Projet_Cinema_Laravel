@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+
         </div>
 
         <div class="d-flex w-100 reserverSmallScreen">
@@ -107,4 +107,5 @@
             </button>
         </div>
     </template>
+    </form>
 @endsection

@@ -101,7 +101,7 @@
                 Barthelemy Maxence, Gamet Dylan, Hassani Ayad-Youssouf
             </p>
         </div>
-        <img src="images/devOreo.png" id="logoDevOreo" alt="DevOreo Logo">
+        <img src="images/devoreo.png" id="logoDevOreo" alt="DevOreo Logo">
     </div>
 </footer>
 

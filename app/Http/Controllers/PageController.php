@@ -282,7 +282,7 @@ class PageController extends Controller{
 
         $tarifs = Tarif::all();
 
-        return view('modifierReservation', compact(
+        return view('effectuerReservation', compact(
             'seance',
             'placeRestant',
             'tarifs',

@@ -69,8 +69,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
 
         <div class="d-flex w-100 reserverSmallScreen">
             <div class="d-flex flex-column align-items-center">
@@ -81,7 +79,7 @@
                 <button form="myForm" class="btnReserv">Réserver</button>
             </div>
         </div>
-    </main>
+
 
     <template id="tplTarifParticipant">
         <div class="participant-slot">
@@ -107,4 +105,8 @@
             </button>
         </div>
     </template>
+
+            </form>
+        </div>
+    </main>
 @endsection
