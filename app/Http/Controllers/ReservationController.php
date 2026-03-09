@@ -8,6 +8,8 @@ use App\Models\Salle;
 use App\Models\Seance;
 use App\Models\Tarif;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
 
 class ReservationController extends Controller
 {
@@ -55,6 +57,11 @@ class ReservationController extends Controller
     public function edit(Reservation $reservation) {
         $idSeance = $reservation->idSeance;
         $seance = Seance::find($idSeance);
+
+        $now = Carbon::now();
+        if($seance->dateSeance < $now){
+            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');;
+        }
 
         $capaciteTot = $seance->salle->capaciteSal;
         $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
