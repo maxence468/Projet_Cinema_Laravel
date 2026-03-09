@@ -1,4 +1,4 @@
-    @extends('layout')
+@extends('layout')
 
 @section('title', 'Page effectuer une réservation')
 
@@ -22,13 +22,6 @@
                 </div>
             </div>
 
-
-        <form action="{{ route('reservations.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
-
-            <div class="row">
-                <h3 class="pt-4">Participants</h3>
 
             <form action="{{ route('reservations.store') }}" method="POST">
                 @csrf
@@ -76,7 +69,6 @@
                         </div>
                     </div>
                 </div>
-        </div>
 
         <div class="d-flex w-100 reserverSmallScreen">
             <div class="d-flex flex-column align-items-center">
@@ -87,7 +79,7 @@
                 <button class="btnReserv">Réserver</button>
             </div>
         </div>
-    </main>
+
 
     <template id="tplTarifParticipant">
         <div class="participant-slot">
@@ -114,5 +106,7 @@
         </div>
     </template>
 
-    </form>
+            </form>
+        </div>
+    </main>
 @endsection
