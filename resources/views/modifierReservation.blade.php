@@ -55,7 +55,7 @@
 
                         <div id="divIdPrixTarif" class="participant-stack">
                             <div class="participant-slot participant-text">
-                                <h3 class="prixParTarif">{{$seance->salle->typeSalle->prixTypeSalle}} €</h3>
+                                <h3 class="prixParTarif">Price + {{$seance->salle->typeSalle->prixTypeSalle}} €</h3>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
 
     <template id="tplPrixParticipant">
         <div class="participant-slot participant-text">
-            <h3>{{$seance->salle->typeSalle->prixTypeSalle}} €</h3>
+            <h3>Price + {{$seance->salle->typeSalle->prixTypeSalle}} €</h3>
         </div>
     </template>
 

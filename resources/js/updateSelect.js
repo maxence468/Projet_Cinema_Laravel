@@ -141,8 +141,7 @@ function updateSelectSalle(){
             select.empty();
             select.append('<option value=""> </option>')
             $.each(result['salles'], function(index, salle){
-                //modifier avec le numero de salle
-                select.append('<option value="'+ salle.idSalle +'">'+ salle.idSalle +'</option>')
+                select.append('<option value="'+ salle.idSalle +'">Salle numero '+salle.numeroSalle +' du cinema '+ salle.cinema.nomCinema +'</option>')
             });
         },
         error: function (error) {

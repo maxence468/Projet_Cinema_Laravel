@@ -29,7 +29,8 @@
                     <!-- Actor photo -->
                         <div class="col-auto align-items-start">
                             @if($p->photoPers)
-                                <img src="{{ $p->photoPers }}"
+                                <html>
+                                <img src="{{$p->photoPers }}"
                                      width="412"
                                      height="626"
                                      alt="{{ $p->nomPers }}"

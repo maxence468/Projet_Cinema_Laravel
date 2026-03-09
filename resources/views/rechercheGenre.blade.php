@@ -33,7 +33,7 @@
                                         <div class="recherche-genre-poster">
                                             @if($film->posterFilm)
                                                 <img src="{{ $film->posterFilm }}"
-                                                     alt="" width="410px" height="626px">
+                                                     alt="" class="recherche-genre-img" width="410px" height="626px">
                                             @else
                                                 <img src="{{ asset('images/img.png')}}"
                                                      alt=""
