@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+
         </div>
 
                 <div class="d-flex w-100 reserverSmallScreen">
@@ -78,8 +78,7 @@
                         <div class="totalPrice pt-5">
                             <h3 class="text-center mb-3">Total : prix en euros</h3>
                         </div>
-
-                        <button class="btnReserv">Modifier</button>
+                        <button type="submit" class="btnReserv">Modifier</button>
                     </div>
                 </div>
     </main>
@@ -108,6 +107,5 @@
             </button>
         </div>
     </template>
-
     </form>
 @endsection
