@@ -15,16 +15,15 @@
                 <input type="hidden" value="{{ $film->titreFilm }}" name="search">
                 <button type="submit">
 
-                    @if(File::exists(public_path('images/' . $film->posterFilm)))
+                    @if($film->posterFilm)
                         <img src="{{ asset('images/' . $film->posterFilm) }}"
                              alt="{{ $film->titreFilm }}"
                              class="poster">
+
                     @else
                         <img src="{{ asset('images/img.png')}}"
-                        alt="{{ $film->titreFilm }}"
-                        class="poster"
-
-
+                             alt="{{ $film->titreFilm }}"
+                             class="poster">
                     @endif
 
                 </button>

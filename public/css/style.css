@@ -195,6 +195,12 @@ ul {
     text-align: center;
 }
 
+@media(max-width: 1200px) {
+    .imgReserv {
+        margin-left : 0px;
+    }
+}
+
 @media (min-width: 769px) {
     .hamburger {
         display: none;
@@ -239,6 +245,7 @@ main {
 
 .poster {
     width: 412px;
+    height: 626px;
 }
 
 select {
@@ -301,10 +308,10 @@ a {
     text-decoration: none;
 }
 
-.carousel-col {
-    flex: 0 0 33.333%;
-    max-width: 33.333%;
-}
+/*.carousel-col {*/
+/*    flex: 0 0 33.333%;*/
+/*    max-width: 33.333%;*/
+/*}*/
 
 
 .carousel-inner .carousel-item.active,
@@ -369,10 +376,10 @@ a {
 
 }
 
-.carousel-item {
-    align-items: stretch;
-    overflow: hidden;
-}
+/*.carousel-item {*/
+/*    align-items: stretch;*/
+/*    overflow: hidden;*/
+/*}*/
 
 body {
     display: flex;
@@ -480,19 +487,13 @@ section {
 
 .recherche-genre-poster {
     min-height: 480px;
-    height: 480px;
+    height: 626px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #1a1a1a;
-    overflow: hidden;
 }
-.recherche-genre-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-}
+
 .carousel-3-per-3 .carousel-inner {
     padding: 0.5rem 0;
 }
@@ -768,6 +769,10 @@ section {
     margin-right: 57px;
 }
 
+.imgReserv {
+    margin-left : 175px;
+}
+
 .btnRemove {
     color: white;
     background: #991917;
@@ -972,6 +977,10 @@ section {
 }
 
 @media (max-width : 480px) {
+
+    .imgReserv {
+        margin-left : -95px;
+    }
     .contentPageReserv {
         margin-left: 10px;
     }

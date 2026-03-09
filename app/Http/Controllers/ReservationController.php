@@ -6,7 +6,9 @@ use App\Models\Genre;
 use App\Models\Reservation;
 use App\Models\Salle;
 use App\Models\Seance;
+use App\Models\Tarif;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ReservationController extends Controller
 {
@@ -26,50 +28,79 @@ class ReservationController extends Controller
     }
 
     public function store(Request $request) {
+        $tarifs = $request->input('tarifs'); // tableau d'IDs de tarif
+        $prixTot = 0;
+        $nbPlace = 0;
+        foreach($tarifs as $tarif){
+            $t = Tarif::find($tarif);
+            $prixTot += $t->prixTarif;
+            $nbPlace++;
+        }
+        $idUser = auth()->id();
+
         $date = date("Y-m-d");
         request()->validate([
-            'idUser' => 'required|integer',
             'idSeance' => 'required|integer',
-            'nbPlace' => 'required|numeric|min:1',
-        'montantTotal' => 'required|numeric',
             ]);
         $r = new Reservation();
-        $r->idUser = request('idUser');
+        $r->idUser = $idUser;
         $r->idSeance = request('idSeance');
-        $r->nbPlace = request('nbPlace');
+        $r->nbPlace = $nbPlace;
         $r->dateReservation = $date;
-        $r->montantTotal = request('montantTotal');
+        $r->montantTotal = $prixTot;
         $r->save();
 
-        return redirect()->route('reservations.index');
+        return redirect()->route('mesReservations');
     }
 
     public function edit(Reservation $reservation) {
-        return view('reservations.edit',compact('reservation'));
+        $idSeance = $reservation->idSeance;
+        $seance = Seance::find($idSeance);
+
+        $capaciteTot = $seance->salle->capaciteSal;
+        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
+        $placeRestant = $capaciteTot - $placeReserve;
+
+        $date = date("Y-m-d");
+
+        $tarifs = Tarif::all();
+
+        $now = Carbon::now();
+        if($seance->dateSeance < $now){
+            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');;
+        }
+
+        return view('modifierReservation',compact('reservation', 'seance', 'placeRestant', 'tarifs'));
     }
 
-    public function update(Reservation $reservation){
-        request()->validate([
-            'idUser' => 'required|integer',
-            'idSeance' => 'required|integer',
-            'nbPlace' => 'required|integer|min:1',
-            'montantTotal' => 'required|numeric|min:0',
-        ]);
+    public function update(Request $request, Reservation $reservation){
+        $tarifs = $request->input('tarifs');
+        $prixTot = 0;
+        $nbPlace = 0;
+        foreach($tarifs as $tarif){
+            $t = Tarif::find($tarif);
+            $prixTot += $t->prixTarif;
+            $nbPlace++;
+        }
+        $idUser = auth()->id();
 
-        $reservation->idUser = request('idUser');
+        $date = date("Y-m-d");
+        request()->validate([
+            'idSeance' => 'required|integer',
+        ]);
+        $reservation->idUser = $idUser;
         $reservation->idSeance = request('idSeance');
-        $reservation->nbPlace = request('nbPlace');
-        $reservation->montantTotal = request('montantTotal');
+        $reservation->nbPlace = $nbPlace;
+        $reservation->montantTotal = $prixTot;
         $reservation->save();
 
-        return redirect('/reservations/'.$reservation->idReservation);
-
+        return redirect('/mesReservations');
     }
 
 
     public function destroy(Reservation $reservation) {
         $reservation->delete();
-        return redirect('/reservations');
+        return redirect('/mesReservations');
     }
 
 }

@@ -43,7 +43,9 @@ class CinemaController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-
+            'nomCinema' => 'required|string',
+            'adresseCinema' => 'required|string',
+            'codePostale' => 'required|string',
         ]);
 
         $cinema = Cinema::findOrFail($id);
@@ -58,8 +60,6 @@ class CinemaController extends Controller
             'message' => 'Cinema mis à jour !',
             'cinema' => $cinema
         ]);
-
-        return redirect()->route('cinemas.index');
     }
 
     public function destroy($id)

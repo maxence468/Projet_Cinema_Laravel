@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cinema;
 use App\Models\Film;
 use App\Models\Genre;
+use App\Models\Reservation;
 use App\Models\Salle;
 use App\Models\Seance;
 use App\Models\Personne;
@@ -231,11 +232,60 @@ class PageController extends Controller{
         return view('parametresUtilisateur');
     }
 
-    public function mesReservations() {
-        return view('reservation');
+    public function mesReservations(Request $request) {
+        $idUser = auth()->id();
+        $filter = $request->input('filter', 'toutes');
+        $query = Reservation::with('seance.film', 'seance.salle.cinema')->where('idUser', $idUser);
+
+        $now = Carbon::now();
+        switch ($filter) {
+            case 'a_venir':
+                $query->whereHas('seance', fn($q) => $q->where('dateSeance', '>', $now));
+                break;
+            case 'en_cours':
+                $query->whereHas('seance', fn($q) => $q->where('dateSeance', '=', $now->toDateString()));
+                break;
+            case 'passees':
+                $query->whereHas('seance', fn($q) => $q->where('dateSeance', '<', $now));
+                break;
+            case 'toutes':
+            default:
+                break;
+        }
+        $reservations = $query->get();
+
+        return view('reservation', compact('reservations', 'filter'));
     }
 
-    public function effectuerReservation() {
-        return view('effectuerReservation');
+    public function effectuerReservation($idSeance) {
+        $seance = Seance::find($idSeance);
+
+        $capaciteTot = $seance->salle->capaciteSal;
+        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
+        $placeRestant = $capaciteTot - $placeReserve;
+
+        $tarifs = Tarif::all();
+
+        return view('effectuerReservation', compact(
+            'seance',
+            'placeRestant',
+            'tarifs',
+        ));
+    }
+
+    public function modifierReservation($idSeance) {
+        $seance = Seance::find($idSeance);
+
+        $capaciteTot = $seance->salle->capaciteSal;
+        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
+        $placeRestant = $capaciteTot - $placeReserve;
+
+        $tarifs = Tarif::all();
+
+        return view('modifierReservation', compact(
+            'seance',
+            'placeRestant',
+            'tarifs',
+        ));
     }
 }

@@ -43,8 +43,11 @@ class GenreController extends Controller
         return view('genres.edit', compact('genre'));
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
+        request()->validate([
+            'libGenre' => 'required|string',
+        ]);
+
         $genre = Genre::findOrFail($id);
 
         $genre->update([

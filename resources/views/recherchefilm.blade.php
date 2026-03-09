@@ -31,9 +31,9 @@
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row align-items-start">
                         <div class="col-auto">
-                            @if(File::exists(public_path('images/' . $film->posterFilm)))
+                            @if($film->posterFilm)
                                 <html>
-                                <img src="{{ asset('images/' . $film->posterFilm) }}"
+                                <img src="{{ $film->posterFilm }}"
                                      width="412"
                                      height="626"
                                      alt="{{ $film->titreFilm }}"
@@ -73,11 +73,11 @@
                                 <p>Aucune seance disponible</p>
                             @else
                                 <p class="pt-3">Disponible au cinema : <br><br>
-                                @foreach($film->seances as $s)
+                                    @foreach($film->seances as $s)
                                         le {{ $s->dateSeance }} au cinéma {{ $s->salle->cinema->nomCinema }} à {{$s->heureSeance->format('H:i')}}
-                                        <br><a href="/effectuerReservation" class="btnReservRechFilm">Réserver</a>
+                                        <br><a href="/effectuerReservation/{{ $s->idSeance }}" class="btnReservRechFilm">Réserver</a>
                                         <br><br>
-                                @endforeach
+                                    @endforeach
                                 </p>
                             @endif
                         </div>

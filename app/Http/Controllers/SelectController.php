@@ -41,7 +41,7 @@ class SelectController extends Controller
         ]);
     }
     public function getAllSalle(){
-        $salles = Salle::all();
+        $salles = Salle::with('cinema')->get();
         return response()->json([
             'salles' => $salles
         ]);

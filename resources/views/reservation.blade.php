@@ -9,14 +9,13 @@
         <div class="container">
 
             <div class="pt-5 d-flex justify-content-center">
-                <button class="btnChoixVisionReserv">A venir</button>
-                <button class="btnChoixVisionReserv">En cours</button>
-                <button class="btnChoixVisionReserv">Passées</button>
-                <button class="btnChoixVisionReserv">Toutes</button>
+                <button class="btnChoixVisionReserv"><a href="{{ route('mesReservations', ['filter' => 'a_venir']) }}" class="{{ $filter == 'a_venir' ? 'active' : '' }}">A venir</a></button>
+                <button class="btnChoixVisionReserv"><a href="{{ route('mesReservations', ['filter' => 'en_cours']) }}" class="{{ $filter == 'en_cours' ? 'active' : '' }}">En cours</a></button>
+                <button class="btnChoixVisionReserv"><a href="{{ route('mesReservations', ['filter' => 'passees']) }}" class="{{ $filter == 'passees' ? 'active' : '' }}">Passées</a></button>
+                <button class="btnChoixVisionReserv"><a href="{{ route('mesReservations', ['filter' => 'toutes']) }}" class="{{ $filter == 'toutes' ? 'active' : '' }}">Toutes</a></button>
             </div>
 
             <div id="carouselExampleCaptions" class="carousel slide">
-
 
                 <!-- Bouton pour se déplacer dans le carousel en attente de validation
                 <div class="carousel-indicators">
@@ -24,76 +23,45 @@
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div> -->
-
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row mt-4 pt-5 ms-3 d-flex justify-content-center infoReservation">
-                            <div class="col-auto">
-                                <img src="images/interstellar.jpg" width="170" height="259" alt="test">
-                            </div>
-                            <div class="col-auto">
-                                <h3 class="ms-2">Nom du film</h3>
-                                <p class="ms-2 pt-3">Cinéma et adresse</p>
-                                <p class="ms-2">Date et heure</p>
-                                <p class="ms-2">Nombre de personnes</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="pt-5 mt-5 ms-4">Prix</p>
-                            </div>
-                            <div class="row pt-5 d-flex justify-content-center btnReservation">
-                                <div class="col-auto ms-2">
-                                    <button class="btnOptionMesReserv">Modifier</button>
-                                    <button class="btnOptionMesReserv">Annuler</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @forelse($reservations as $reservation)
 
-                    <div class="carousel-item">
-                        <div class="row mt-4 pt-5 ms-3 d-flex justify-content-center infoReservation">
-                            <div class="col-auto">
-                                <img src="images/interstellar.jpg" width="170" height="259" alt="test">
-                            </div>
-                            <div class="col-auto">
-                                <h3 class="ms-2">Nom du film</h3>
-                                <p class="ms-2 pt-3">Cinéma et adresse</p>
-                                <p class="ms-2">Date et heure</p>
-                                <p class="ms-2">Nombre de personnes</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="pt-5 mt-5 ms-4">Prix</p>
-                            </div>
-                            <div class="row pt-5 d-flex justify-content-center btnReservation">
-                                <div class="col-auto ms-2">
-                                    <button class="btnOptionMesReserv">Modifier</button>
-                                    <button class="btnOptionMesReserv">Annuler</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
 
-                    <div class="carousel-item">
-                        <div class="row mt-4 pt-5 ms-3 d-flex justify-content-center infoReservation">
-                            <div class="col-auto">
-                                <img src="images/interstellar.jpg" width="170" height="259" alt="test">
-                            </div>
-                            <div class="col-auto">
-                                <h3 class="ms-2">Nom du film</h3>
-                                <p class="ms-2 pt-3">Cinéma et adresse</p>
-                                <p class="ms-2">Date et heure</p>
-                                <p class="ms-2">Nombre de personnes</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="pt-5 mt-5 ms-4">Prix</p>
-                            </div>
-                            <div class="col-12 pt-5">
-                                <div class="btnReservation d-flex justify-content-center gap-3 flex-wrap">
-                                    <button class="btnOptionMesReserv">Modifier</button>
-                                    <button class="btnOptionMesReserv">Annuler</button>
+                            <div class="row mt-4 pt-5 ms-2 d-flex justify-content-center infoReservation">
+                                <div class="col-auto">
+                                    <img class="imgReserv" src="{{$reservation->seance->film->posterFilm}}" width="170" height="259" alt="{{$reservation->seance->film->posterFilm}}">
+                                </div>
+                                <div class="col-auto">
+                                    <h3 class="ms-2">{{$reservation->seance->film->titreFilm}}</h3>
+                                    <p class="ms-2 pt-3">{{$reservation->seance->salle->cinema->nomCinema}}, {{$reservation->seance->salle->cinema->adresseCinema}} {{$reservation->seance->salle->cinema->codePostale}}</p>
+                                    <p class="ms-2">{{ \Carbon\Carbon::parse($reservation->seance->dateSeance)->format('d/m/Y') }}
+                                        à
+                                        {{ \Carbon\Carbon::parse($reservation->seance->heureSeance)->format('H:i') }} </p>
+                                    <p class="ms-2">{{$reservation->nbPlace}} personne(s)</p>
+                                </div>
+                                <div class="col-auto">
+                                    <p class="pt-5 mt-5 ms-4">{{$reservation->montantTotal}} €</p>
+                                </div>
+                                <div class="row pt-5 d-flex justify-content-center btnReservation">
+                                    <div class="col-auto ms-2">
+
+                                        <button class="btnOptionMesReserv"><a href="reservations/{{$reservation->idReservation}}/edit">Modifier</a></button>
+
+                                        <form action="{{ route('reservations.destroy', $reservation->idReservation) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btnOptionMesReserv">Annuler</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @empty
+                        <div class="d-flex justify-content-center">aucune reservation</div>
+                    @endforelse
+
+
                 </div>
 
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
