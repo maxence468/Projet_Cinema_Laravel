@@ -23,9 +23,8 @@
             </div>
 
 
-            <form action="{{ route('reservations.update', $reservation->idReservation)}}" method="POST">
+            <form action="{{ route('reservations.store') }}" method="POST">
                 @csrf
-                @method('patch')
                 <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
                 <div class="row">
@@ -39,7 +38,7 @@
                                 <select name="tarifs[]" class="selectTarif" required>
                                     <option value=""></option>
                                     @foreach($tarifs as $tarif)
-                                        <option value="{{$tarif->idTarif}}">{{$tarif->libTarif}}</option>
+                                        <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,7 +54,7 @@
 
                         <div id="divIdPrixTarif" class="participant-stack">
                             <div class="participant-slot participant-text">
-                                <h3 class="prixParTarif">{{$seance->salle->typeSalle->prixTypeSalle}} €</h3>
+                                <h3 class="prixParTarif">0 €</h3>
                             </div>
                         </div>
                     </div>
@@ -73,15 +72,15 @@
             </form>
         </div>
 
-                <div class="d-flex w-100 reserverSmallScreen">
-                    <div class="d-flex flex-column align-items-center">
-                        <div class="totalPrice pt-5">
-                            <h3 class="text-center mb-3">Total : prix en euros</h3>
-                        </div>
-
-                        <button class="btnReserv">Modifier</button>
-                    </div>
+        <div class="d-flex w-100 reserverSmallScreen">
+            <div class="d-flex flex-column align-items-center">
+                <div class="totalPrice pt-5">
+                    <h3 id='prixTotal' class="text-center mb-3">Total : 0 €</h3>
                 </div>
+
+                <button class="btnReserv">Réserver</button>
+            </div>
+        </div>
     </main>
 
     <template id="tplTarifParticipant">
@@ -89,7 +88,7 @@
             <select name="tarifs[]" class="selectTarif" required>
                 <option value=""></option>
                 @foreach($tarifs as $tarif)
-                    <option value="{{$tarif->idTarif}}">{{$tarif->libTarif}}</option>
+                    <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
                 @endforeach
             </select>
         </div>
@@ -97,7 +96,7 @@
 
     <template id="tplPrixParticipant">
         <div class="participant-slot participant-text">
-            <h3>{{$seance->salle->typeSalle->prixTypeSalle}} €</h3>
+            <h3 class="prixParTarif">0 €</h3>
         </div>
     </template>
 
@@ -108,6 +107,4 @@
             </button>
         </div>
     </template>
-
-    </form>
 @endsection
