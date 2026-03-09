@@ -70,11 +70,6 @@ class ReservationController extends Controller
             return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');;
         }
 
-        $capaciteTot = $seance->salle->capaciteSal;
-        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
-        $placeRestant = $capaciteTot - $placeReserve;
-
-        $tarifs = Tarif::all();
         return view('modifierReservation',compact('reservation', 'seance', 'placeRestant', 'tarifs'));
     }
 
