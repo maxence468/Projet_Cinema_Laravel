@@ -23,7 +23,7 @@
             </div>
 
 
-            <form action="{{ route('reservations.store') }}" method="POST">
+            <form form="myForm" action="{{ route('reservations.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
@@ -78,7 +78,7 @@
                     <h3 id='prixTotal' class="text-center mb-3">Total : 0 €</h3>
                 </div>
 
-                <button class="btnReserv">Réserver</button>
+                <button form="myForm" class="btnReserv">Réserver</button>
             </div>
         </div>
     </main>
