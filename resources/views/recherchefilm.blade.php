@@ -75,7 +75,12 @@
                                 <p class="pt-3">Disponible au cinema : <br><br>
                                     @foreach($film->seances as $s)
                                         le {{ $s->dateSeance }} au cinéma {{ $s->salle->cinema->nomCinema }} à {{$s->heureSeance->format('H:i')}}
-                                        <br><a href="/effectuerReservation/{{ $s->idSeance }}" class="btnReservRechFilm">Réserver</a>
+                                        @auth
+                                            @if(Auth::user()->isAdmin())
+                                            @else
+                                                <br><a href="/effectuerReservation/{{ $s->idSeance }}" class="btnReservRechFilm">Réserver</a>
+                                            @endif
+                                        @endauth
                                         <br><br>
                                     @endforeach
                                 </p>

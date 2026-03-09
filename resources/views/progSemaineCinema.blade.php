@@ -72,9 +72,13 @@
                             <div class="col-auto me-5">
                                 <h4>{{$seance->heureSeance->format('H:i')}} -> {{$seance->heureSeance->addMinutes($seance->film->dureeFilm)->format('H:i')}}</h4>
                                 <h4 class="affichageSalleProgSemaine">Salle {{$seance->idSalle}}</h4>
-                                <h4><a href="/effectuerReservation/{{$seance->idSeance}}" class="btnReservProgSemaineCinema">Réserver</a></h4>
+                                @auth
+                                    @if(Auth::user()->isAdmin())
+                                    @else
+                                        <h4><a href="/effectuerReservation/{{$seance->idSeance}}" class="btnReservProgSemaineCinema">Réserver</a></h4>
+                                    @endif
+                                @endauth
                             </div>
-
                         @endif
                     @endforeach
                 </div>
