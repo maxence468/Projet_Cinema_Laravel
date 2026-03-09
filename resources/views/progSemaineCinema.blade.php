@@ -46,8 +46,8 @@
                             <input type="hidden" value="{{ $film->titreFilm }}">
                             <button type="submit">
 
-                                @if(File::exists(public_path('images/' . $film->posterFilm)))
-                                    <img src="{{asset('images/' .$film->posterFilm)}}" alt="{{$film->posterFilm}}" width="100" height="152">
+                                @if($film->posterFilm)
+                                    <img src="{{$film->posterFilm}}" alt="{{$film->posterFilm}}" width="100" height="152">
 
                                 @else
                                     <img src="{{ asset('images/img.png')}}"
@@ -72,7 +72,7 @@
                             <div class="col-auto me-5">
                                 <h4>{{$seance->heureSeance->format('H:i')}} -> {{$seance->heureSeance->addMinutes($seance->film->dureeFilm)->format('H:i')}}</h4>
                                 <h4 class="affichageSalleProgSemaine">Salle {{$seance->idSalle}}</h4>
-                                <h4><a href="/effectuerReservation" class="btnReservProgSemaineCinema">Réserver</a></h4>
+                                <h4><a href="/effectuerReservation/{{$seance->idSeance}}" class="btnReservProgSemaineCinema">Réserver</a></h4>
                             </div>
 
                         @endif
