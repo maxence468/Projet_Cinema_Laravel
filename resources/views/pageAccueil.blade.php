@@ -19,12 +19,11 @@
                         <img src="{{ $film->posterFilm }}"
                              alt="{{ $film->titreFilm }}"
                              class="poster">
+
                     @else
                         <img src="{{ asset('images/img.png')}}"
-                        alt="{{ $film->titreFilm }}"
-                        class="poster"
-
-
+                             alt="{{ $film->titreFilm }}"
+                             class="poster">
                     @endif
 
                 </button>

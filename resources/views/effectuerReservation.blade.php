@@ -30,50 +30,59 @@
             <div class="row">
                 <h3 class="pt-4">Participants</h3>
 
-                <div class="col-auto colAutoRemove">
-                    <h3 class="pt-1">Tarif</h3>
+            <form action="{{ route('reservations.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
-                    <div id="divIdChampsSelect" class="participant-stack">
-                        <div class="participant-slot">
-                            <select name="tarifs[]" class="selectTarif" required>
-                                <option value=""></option>
-                                @foreach($tarifs as $tarif)
-                                    <option value="{{$tarif->idTarif}}">{{$tarif->libTarif}}</option>
-                                @endforeach
-                            </select>
+                <div class="row">
+                    <h3 class="pt-4">Participants</h3>
+
+                    <div class="col-auto colAutoRemove">
+                        <h3 class="pt-1">Tarif</h3>
+
+                        <div id="divIdChampsSelect" class="participant-stack">
+                            <div class="participant-slot">
+                                <select name="tarifs[]" class="selectTarif" required>
+                                    <option value=""></option>
+                                    @foreach($tarifs as $tarif)
+                                        <option value="{{$tarif->idTarif}}">{{$tarif->libTarif}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btnAjoutPersReserv mt-4">
+                            Ajouter une personne
+                        </button>
+                    </div>
+
+                    <div class="col-auto">
+                        <h3>Prix</h3>
+
+                        <div id="divIdPrixTarif" class="participant-stack">
+                            <div class="participant-slot participant-text">
+                                <h3 class="prixParTarif">{{ $seance->salle->typeSalle->prixTypeSalle }} €</h3>
+                            </div>
                         </div>
                     </div>
 
-                    <button type="button" class="btnAjoutPersReserv mt-4">
-                        Ajouter une personne
-                    </button>
-                </div>
-
-                <div class="col-auto">
-                    <h3>Prix</h3>
-
-                    <div id="divIdPrixTarif" class="participant-stack">
-                        <div class="participant-slot participant-text">
-                            <h3 class="prixParTarif">Price + {{$seance->salle->typeSalle->prixTypeSalle}} €</h3>
+                    <div class="col-auto btnSuppr">
+                        <div id="divIdBtnSuppr" class="participant-stack">
+                            <div class="participant-slot">
+                                <button type="button" class="btnSupprParticipant">
+                                    <h3><i class="bi bi-trash"></i></h3>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-auto btnSuppr">
-                    <div id="divIdBtnSuppr" class="participant-stack">
-                        <div class="participant-slot">
-                            <button type="button" class="btnSupprParticipant">
-                                <h3><i class="bi bi-trash"></i></h3>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
+        </div>
 
         <div class="d-flex w-100 reserverSmallScreen">
             <div class="d-flex flex-column align-items-center">
                 <div class="totalPrice pt-5">
-                    <h3 class="text-center mb-3">Total : price</h3>
+                    <h3 class="text-center mb-3">Total : prix euros</h3>
                 </div>
 
                 <button class="btnReserv">Réserver</button>

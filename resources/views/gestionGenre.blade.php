@@ -45,6 +45,11 @@
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
+                                    <!-- <input list="listModif" name="movie" id="genreModif" class="choixCatal">
+                                    <datalist id="listModif">
+                                        <option value=""></option>
+
+                                    </datalist> -->
                                     <select name="movie" id="genreModif" class="choixCatal" onchange="">
                                         <option value=""></option>
                                         @foreach($genres as $genre)

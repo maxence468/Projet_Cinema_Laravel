@@ -36,7 +36,7 @@ function updateSelectGenre(){
         success: function (result) {
             let select = $('#idGenre, #genreModif');
             select.empty();
-            select.append('<option value="">-- Genres --</option>')
+            select.append('<option value="">Genres</option>')
             $.each(result['genres'], function(index, genre){
                 select.append('<option value="'+ genre.idGenre +'">'+ genre.libGenre +'</option>')
             });

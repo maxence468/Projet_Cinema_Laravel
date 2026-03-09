@@ -35,17 +35,13 @@
                                      height="626"
                                      alt="{{ $p->nomPers }}"
                                      class="smd">
-                                </html>
 
                             @else
-
-                                <html>
                                 <img src="{{ asset('images/img.png')}}"
                                      width="412"
                                      height="626"
                                      alt="{{ $p->nomPers }}"
                                      class="smd">
-                                </html>
 
                             @endif
                         </div>

@@ -272,4 +272,20 @@ class PageController extends Controller{
             'tarifs',
         ));
     }
+
+    public function modifierReservation($idSeance) {
+        $seance = Seance::find($idSeance);
+
+        $capaciteTot = $seance->salle->capaciteSal;
+        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
+        $placeRestant = $capaciteTot - $placeReserve;
+
+        $tarifs = Tarif::all();
+
+        return view('effectuerReservation', compact(
+            'seance',
+            'placeRestant',
+            'tarifs',
+        ));
+    }
 }

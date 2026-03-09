@@ -1,10 +1,10 @@
 @extends('layout')
 
-@section('title', 'Page effectuer une réservation')
+@section('title', 'Page modifier une réservation')
 
 @section('main')
-    <main id="pageEffectuerReservation">
-        <h2 class="d-flex justify-content-center pt-3">Effectuer une réservation</h2>
+    <main id="pageModifierReservation">
+        <h2 class="d-flex justify-content-center pt-3">Modifier une réservation</h2>
 
         <div class="contentPageReserv">
             <div class="row pt-5">
@@ -70,14 +70,16 @@
                         </div>
                     </div>
                 </div>
+            </form>
+        </div>
 
                 <div class="d-flex w-100 reserverSmallScreen">
                     <div class="d-flex flex-column align-items-center">
                         <div class="totalPrice pt-5">
-                            <h3 class="text-center mb-3">Total : price</h3>
+                            <h3 class="text-center mb-3">Total : prix en euros</h3>
                         </div>
 
-                        <button class="btnReserv">Réserver</button>
+                        <button class="btnReserv">Modifier</button>
                     </div>
                 </div>
     </main>

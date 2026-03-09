@@ -24,41 +24,41 @@
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div> -->
                 <div class="carousel-inner">
-                @forelse($reservations as $reservation)
+                    @forelse($reservations as $reservation)
 
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
 
-                        <div class="row mt-4 pt-5 ms-3 d-flex justify-content-center infoReservation">
-                            <div class="col-auto">
-                                <img src="{{$reservation->seance->film->posterFilm}}" width="170" height="259" alt="{{$reservation->seance->film->posterFilm}}">
-                            </div>
-                            <div class="col-auto">
-                                <h3 class="ms-2">{{$reservation->seance->film->titreFilm}}</h3>
-                                <p class="ms-2 pt-3">{{$reservation->seance->salle->cinema->nomCinema}}, {{$reservation->seance->salle->cinema->adresseCinema}} {{$reservation->seance->salle->cinema->codePostale}}</p>
-                                <p class="ms-2">{{ \Carbon\Carbon::parse($reservation->seance->dateSeance)->format('d/m/Y') }}
-                                    à
-                                    {{ \Carbon\Carbon::parse($reservation->seance->heureSeance)->format('H:i') }} </p>
-                                <p class="ms-2">{{$reservation->nbPlace}} personne(s)</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="pt-5 mt-5 ms-4">{{$reservation->montantTotal}} €</p>
-                            </div>
-                            <div class="row pt-5 d-flex justify-content-center btnReservation">
-                                <div class="col-auto ms-2">
+                            <div class="row mt-4 pt-5 ms-2 d-flex justify-content-center infoReservation">
+                                <div class="col-auto">
+                                    <img class="imgReserv" src="{{$reservation->seance->film->posterFilm}}" width="170" height="259" alt="{{$reservation->seance->film->posterFilm}}">
+                                </div>
+                                <div class="col-auto">
+                                    <h3 class="ms-2">{{$reservation->seance->film->titreFilm}}</h3>
+                                    <p class="ms-2 pt-3">{{$reservation->seance->salle->cinema->nomCinema}}, {{$reservation->seance->salle->cinema->adresseCinema}} {{$reservation->seance->salle->cinema->codePostale}}</p>
+                                    <p class="ms-2">{{ \Carbon\Carbon::parse($reservation->seance->dateSeance)->format('d/m/Y') }}
+                                        à
+                                        {{ \Carbon\Carbon::parse($reservation->seance->heureSeance)->format('H:i') }} </p>
+                                    <p class="ms-2">{{$reservation->nbPlace}} personne(s)</p>
+                                </div>
+                                <div class="col-auto">
+                                    <p class="pt-5 mt-5 ms-4">{{$reservation->montantTotal}} €</p>
+                                </div>
+                                <div class="row pt-5 d-flex justify-content-center btnReservation">
+                                    <div class="col-auto ms-2">
 
-                                    <button class="btnOptionMesReserv"><a href="reservations/{{$reservation->idReservation}}/edit">Modifier</a></button>
+                                        <button class="btnOptionMesReserv"><a href="reservations/{{$reservation->idReservation}}/edit">Modifier</a></button>
 
-                                    <form action="{{ route('reservations.destroy', $reservation->idReservation) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btnOptionMesReserv">Annuler</button>
-                                    </form>
+                                        <form action="{{ route('reservations.destroy', $reservation->idReservation) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btnOptionMesReserv">Annuler</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @empty
-                        <div>aucune reservation</div>
+                        <div class="d-flex justify-content-center">aucune reservation</div>
                     @endforelse
 
 
