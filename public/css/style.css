@@ -195,6 +195,13 @@ ul {
     text-align: center;
 }
 
+@media(max-width: 1233px) {
+    .poster {
+        width: 33%;
+        height: 417px;
+    }
+}
+
 @media(max-width: 1200px) {
     .imgReserv {
         margin-left : 0px;
@@ -578,6 +585,11 @@ section {
 
 
 @media (max-width: 480px) {
+
+    .poster {
+        width: 150px;
+        height: 100px;
+    }
 
     .d-flex.flex-row.align-items-start {
         flex-direction: row !important;

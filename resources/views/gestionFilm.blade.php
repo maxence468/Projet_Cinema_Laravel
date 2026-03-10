@@ -189,7 +189,7 @@
                                             <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
                                         @endforeach
                                     </select>
-                                    <button id="addActeur">Ajouter un acteur</button><br>
+                                    <button  type="button" class="addActeur">Ajouter un acteur</button><br>
                                     <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                                 </div>
                             </div>
@@ -225,7 +225,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="acteur-container">
+                            <div class="acteur-container">
 
                             </div>
                         </div>
@@ -241,7 +241,7 @@
                                         <label class="h3 mb-0 pb-5">Acteur film</label>
                                     </div>
 
-                                    <div class="col-12 col-lg-4" id="acteur-container">
+                                    <div class="col-12 col-lg-4" class="acteur-container">
                                         <div class="d-flex align-items-center mb-2 acteur-inline">
                                             <select name="idActeur[]" class="inputCatalogue choixCatal idActeur">
                                                 <option value="">Acteur film</option>
@@ -255,7 +255,7 @@
                                             <button type="button" class="remove btnRemove">X</button>
                                         </div>
 
-                                        <button type="button" id="addActeur">Ajouter un acteur</button><br>
+                                        <button type="button" class="addActeur">Ajouter un acteur</button><br>
                                         <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                                     </div>
                                 </div>

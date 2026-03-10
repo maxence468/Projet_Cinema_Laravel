@@ -138,7 +138,7 @@ $('#filmModif').change(function(e){
 
             let acteurs = result['acteurs']
             if(acteurs.length > 0){
-                $('#acteur-container .idActeur:first').val(acteurs[0]['idPers']).trigger('change')
+                $('.acteur-container .idActeur:first').val(acteurs[0]['idPers']).trigger('change')
 
                 $('.nomJoue:first').val(acteurs[0]['pivot']['nomJoue'])
                 $('.preJoue:first').val(acteurs[0]['pivot']['preJoue'])
@@ -153,7 +153,7 @@ $('#filmModif').change(function(e){
                 let newName = 'typeActeur_' + index;
                 index++
                 $row.find('.principale, .secondaire').attr('name', newName);
-                $('#acteur-container').append($row);
+                $('.acteur-container').append($row);
 
 
                 $row.find('select').val(acteur['idPers']).trigger('change');
@@ -301,14 +301,14 @@ $('#addScenariste').click(function(e){
 })
 
 let index = 2
-$('#addActeur').click(function(e){
+$('.addActeur').click(function(e){
     e.preventDefault()
     let $html = $($('#acteur-template').html());
 
     let newName = 'typeActeur_' + index;
     $html.find('.principale, .secondaire').attr('name', newName);
 
-    $('#acteur-container').append($html);
+    $('.acteur-container').append($html);
 
     index++
 })

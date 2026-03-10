@@ -16,9 +16,10 @@
                 <button type="submit">
 
                     @if($film->posterFilm)
-                        <img src="{{ asset('images/' . $film->posterFilm) }}"
+                        <img src="{{ asset('images/avatar.jpg')}}"
                              alt="{{ $film->titreFilm }}"
                              class="poster">
+
 
                     @else
                         <img src="{{ asset('images/img.png')}}"
