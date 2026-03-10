@@ -5,7 +5,11 @@
 @section('main')
     <main>
         <h2 class="d-flex justify-content-center pt-4">Mes réservations</h2>
-
+        @if (session('error'))
+            <div class="d-flex justify-content-center alert alert-danger">
+                {{session('error')}}
+            </div>
+        @endif
         <div class="container">
 
             <div class="pt-5 d-flex justify-content-center">

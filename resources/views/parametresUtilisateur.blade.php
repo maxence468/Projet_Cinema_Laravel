@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="input d-flex flex-column align-items-start pt-2">
-                    <label class="label" for="password">Mot de passe</label>
+                    <label class="label" for="password">Nouveau mot de passe</label>
                     <input placeholder="........">
                 </div>
 

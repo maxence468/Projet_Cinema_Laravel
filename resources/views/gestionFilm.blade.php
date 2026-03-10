@@ -284,9 +284,9 @@
                                     </div>
                                     <div class="col-12 col-lg-4">
                                         <div>
-                                            <input name="typeActeur_1" class="principale" id="principale" type="radio" required>
+                                            <input name="typeActeur_" class="principale" id="principale" type="radio" required>
                                             <label class="h3 mb-0 me-4" for="principale">Principal</label>
-                                            <input name="typeActeur_1" class="secondaire" id="secondaire" type="radio" required checked>
+                                            <input name="typeActeur_" class="secondaire" id="secondaire" type="radio" required checked>
                                             <label class="h3 mb-0" for="secondaire">Secondaire</label>
                                         </div>
                                     </div>

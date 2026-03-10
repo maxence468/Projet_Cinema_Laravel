@@ -38,7 +38,7 @@
 
                     <!-- Password -->
                     <div class="inputConInc d-flex flex-column align-items-start pt-2">
-                        <x-input-label for="password" :value="__('Mot de passe')" />
+                        <x-input-label for="password" :value="__('Nouveau mot de passe')" />
 
                         <x-text-input placeholder="........"
                                       id="password" class="block mt-1 w-full"

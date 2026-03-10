@@ -141,8 +141,7 @@ function updateSelectSalle(){
             select.empty();
             select.append('<option value=""> </option>')
             $.each(result['salles'], function(index, salle){
-                //modifier avec le numero de salle
-                select.append('<option value="'+ salle.idSalle +'">'+ salle.idSalle +'</option>')
+                select.append('<option value="'+ salle.idSalle +'">Salle numero '+salle.numeroSalle +' du cinema '+ salle.cinema.nomCinema +'</option>')
             });
         },
         error: function (error) {
@@ -163,8 +162,20 @@ function updateSelectSeance(){
             let select = $('#seanceModif');
             select.empty();
             select.append('<option value=""> </option>')
+
+
             $.each(result['seances'], function(index, seance){
-                select.append('<option value="'+ seance.idSeance +'"> Seance '+ seance.heureSeance +', Film : '+ seance.film.titreFilm +', Cinema : '+ seance +'</option>')
+                // Convertir la date en objet Date
+                let dateObj = new Date(seance.dateSeance);
+                // Format yyyy-MM-dd
+                let dateFormatted = dateObj.toISOString().split('T')[0]; // "2026-03-11"
+                // Exemple : seance.heureSeance = "2026-03-11T10:30:00.000000Z"
+                let heureFormatted = seance.heureSeance.split('T')[1].slice(0,5); // "10:30"
+                // Construire la phrase
+                let texte = 'Séance du ' + dateFormatted + ', pour le film : ' + seance.film.titreFilm +', à ' + heureFormatted + ' au cinéma ' + seance.salle.cinema.nomCinema;
+
+
+                select.append('<option value="'+ seance.idSeance +'">'+texte+'</option>')
             });
         },
         error: function (error) {

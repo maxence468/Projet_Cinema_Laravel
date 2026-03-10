@@ -138,7 +138,7 @@ $('#filmModif').change(function(e){
 
             let acteurs = result['acteurs']
             if(acteurs.length > 0){
-                $('.acteur-container .idActeur:first').val(acteurs[0]['idPers']).trigger('change')
+                $('.idActeur:first').val(acteurs[0]['idPers']).trigger('change')
 
                 $('.nomJoue:first').val(acteurs[0]['pivot']['nomJoue'])
                 $('.preJoue:first').val(acteurs[0]['pivot']['preJoue'])

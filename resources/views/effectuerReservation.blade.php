@@ -17,13 +17,13 @@
                     <h3>{{$seance->film->titreFilm}}</h3>
                     <p>{{$seance->salle->cinema->nomCinema}}, {{$seance->salle->cinema->adresseCinema}} {{$seance->salle->cinema->codePostale}}</p>
                     <p>Numero de salle : {{$seance->salle->numeroSalle}}</p>
-                    <p>{{$seance->heureSeance}}</p>
+                    <p>le {{$seance->dateSeance->format('d/m/Y')}} à {{$seance->heureSeance->format('H:i')}}</p>
                     <p>{{$placeRestant}} places restantes</p>
                 </div>
             </div>
 
 
-            <form form="myForm" action="{{ route('reservations.store') }}" method="POST">
+            <form form="myForm" id="myForm" action="{{ route('reservations.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
@@ -69,42 +69,44 @@
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
 
-        <div class="d-flex w-100 reserverSmallScreen">
-            <div class="d-flex flex-column align-items-center">
-                <div class="totalPrice pt-5">
-                    <h3 id='prixTotal' class="text-center mb-3">Total : 0 €</h3>
+                <div class="d-flex w-100 reserverSmallScreen">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="totalPrice pt-5">
+                            <h3 id='prixTotal' class="text-center mb-3">Total : 0 €</h3>
+                        </div>
+
+                        <button form="myForm" class="btnReserv">Réserver</button>
+                    </div>
                 </div>
 
-                <button form="myForm" class="btnReserv">Réserver</button>
-            </div>
+
+
+                <template id="tplTarifParticipant">
+                    <div class="participant-slot">
+                        <select name="tarifs[]" class="selectTarif" required>
+                            <option value=""></option>
+                            @foreach($tarifs as $tarif)
+                                <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </template>
+
+                <template id="tplPrixParticipant">
+                    <div class="participant-slot participant-text">
+                        <h3 class="prixParTarif">0 €</h3>
+                    </div>
+                </template>
+
+                <template id="tplSupprChamp">
+                    <div class="participant-slot">
+                        <button type="button" class="btnSupprParticipant">
+                            <h3><i class="bi bi-trash"></i></h3>
+                        </button>
+                    </div>
+                </template>
+            </form>
         </div>
     </main>
-
-    <template id="tplTarifParticipant">
-        <div class="participant-slot">
-            <select name="tarifs[]" class="selectTarif" required>
-                <option value=""></option>
-                @foreach($tarifs as $tarif)
-                    <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
-                @endforeach
-            </select>
-        </div>
-    </template>
-
-    <template id="tplPrixParticipant">
-        <div class="participant-slot participant-text">
-            <h3 class="prixParTarif">0 €</h3>
-        </div>
-    </template>
-
-    <template id="tplSupprChamp">
-        <div class="participant-slot">
-            <button type="button" class="btnSupprParticipant">
-                <h3><i class="bi bi-trash"></i></h3>
-            </button>
-        </div>
-    </template>
 @endsection

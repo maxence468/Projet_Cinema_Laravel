@@ -17,14 +17,15 @@
                     <h3>{{$seance->film->titreFilm}}</h3>
                     <p>{{$seance->salle->cinema->nomCinema}}, {{$seance->salle->cinema->adresseCinema}} {{$seance->salle->cinema->codePostale}}</p>
                     <p>Numero de salle : {{$seance->salle->numeroSalle}}</p>
-                    <p>{{$seance->heureSeance}}</p>
+                    <p>le {{$seance->dateSeance->format('d/m/Y')}} à {{$seance->heureSeance->format('H:i')}}</p>
                     <p>{{$placeRestant}} places restantes</p>
                 </div>
             </div>
 
 
-            <form form="myForm" action="{{ route('reservations.store') }}" method="POST">
+            <form form="myForm" id="myForm" action="{{ route('reservations.update', $reservation->idReservation) }}" method="POST">
                 @csrf
+                @method("PATCH")
                 <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
                 <div class="row">
@@ -69,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+
         </div>
 
         <div class="d-flex w-100 reserverSmallScreen">
@@ -107,4 +108,5 @@
             </button>
         </div>
     </template>
+    </form>
 @endsection

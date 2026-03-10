@@ -31,14 +31,14 @@
                             <div class="row g-2 justify-content-center">
                                     <div class="col-4 col-md-4 carousel-col px-3">
                                         <div class="recherche-genre-poster">
-                                            @if($film->posterFilm)
-                                                <img src="{{ $film->posterFilm }}"
-                                                     alt="" width="410px" height="626px">
-                                            @else
-                                                <img src="{{ asset('images/img.png')}}"
-                                                     alt=""
-                                                     width="410px" height="626px">
-                                            @endif
+                                            <a href="{{ url('/rechercheFilm') }}?search={{ $film->titreFilm }}">
+                                                <img src="{{ $film->posterFilm ?? asset('images/img.png') }}"
+                                                     alt="{{ $film->titreFilm }}"
+                                                     class="recherche-genre-img" width="410px" height="626px"
+                                                     onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
+                                            </a>
+
+
                                         </div>
                                     </div>
                             </div>
