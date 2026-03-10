@@ -23,8 +23,9 @@
             </div>
 
 
-            <form form="myForm" action="{{ route('reservations.store') }}" method="POST">
+            <form form="myForm" id="myForm" action="{{ route('reservations.update', $reservation->idReservation) }}" method="POST">
                 @csrf
+                @method("PATCH")
                 <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
                 <div class="row">

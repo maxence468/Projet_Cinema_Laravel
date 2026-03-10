@@ -178,8 +178,10 @@ class PageController extends Controller{
 
     public function gestionCinema() {
         $cinemas = Cinema::all();
+        $genres = Genre::all();
         return view('gestionCinema', [
-            'cinemas' => $cinemas
+            'cinemas' => $cinemas,
+            'genres' => $genres,
         ]);
     }
 

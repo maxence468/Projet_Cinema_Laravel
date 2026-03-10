@@ -55,8 +55,8 @@ $('#seanceModif').change(function(e){
             _token: $('input[name="_token"]').val(),
         },
         success: function(result){
-            $('#heureSeance').val(result['seance']['heureSeance'])
-            $('#dateSeance').val(result['seance']['dateSeance'])
+            $('#heureSeance').val(result['seance']['heureSeance'].substring(11,16))
+            $('#dateSeance').val(result['seance']['dateSeance'].substring(0,10))
             $('#dureeSeance').val(result['seance']['dureeSeance'])
             $('#idFilm').val(result['seance']['idFilm'])
             $('#idSalle').val(result['seance']['idSalle'])

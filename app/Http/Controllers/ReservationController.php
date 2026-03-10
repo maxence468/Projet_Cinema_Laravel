@@ -28,12 +28,11 @@ class ReservationController extends Controller
     }
 
     public function store(Request $request) {
-        $tarifs = $request->input('tarifs'); // tableau d'IDs de tarif
-        $prixTot = 0;
+        $tableauPrix = $request->input('tarifs'); // tableau de prix
         $nbPlace = 0;
-        foreach($tarifs as $tarif){
-            $t = Tarif::find($tarif);
-            $prixTot += $t->prixTarif;
+        $prixTotal = 0;
+        foreach($tableauPrix as $p){
+            $prixTotal += $p;
             $nbPlace++;
         }
         $idUser = auth()->id();
@@ -41,13 +40,25 @@ class ReservationController extends Controller
         $date = date("Y-m-d");
         request()->validate([
             'idSeance' => 'required|integer',
-            ]);
+        ]);
+
+        $seance = Seance::with('salle')->find(request('idSeance'));
+        $salle = $seance->salle;
+        $reservations = Reservation::where('idSeance', request('idSeance'))->get();
+        $placeRestante = $salle->capaciteSal;
+        foreach($reservations as $res){
+            $placeRestante -= $res->nbPlace;
+        }
+        if($placeRestante <= 0){
+            return redirect()->route('mesReservations')->with('error', 'La séance est complete, vous ne pouvez plus effectuer la réservation.');;
+        }
+
         $r = new Reservation();
         $r->idUser = $idUser;
         $r->idSeance = request('idSeance');
         $r->nbPlace = $nbPlace;
         $r->dateReservation = $date;
-        $r->montantTotal = $prixTot;
+        $r->montantTotal = $prixTotal;
         $r->save();
 
         return redirect()->route('mesReservations');
@@ -67,19 +78,18 @@ class ReservationController extends Controller
 
         $now = Carbon::now();
         if($seance->dateSeance < $now){
-            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');;
+            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');
         }
 
         return view('modifierReservation',compact('reservation', 'seance', 'placeRestant', 'tarifs'));
     }
 
     public function update(Request $request, Reservation $reservation){
-        $tarifs = $request->input('tarifs');
-        $prixTot = 0;
+        $tableauPrix = $request->input('tarifs'); // tableau de prix
         $nbPlace = 0;
-        foreach($tarifs as $tarif){
-            $t = Tarif::find($tarif);
-            $prixTot += $t->prixTarif;
+        $prixTotal = 0;
+        foreach($tableauPrix as $p){
+            $prixTotal += $p;
             $nbPlace++;
         }
         $idUser = auth()->id();
@@ -88,10 +98,23 @@ class ReservationController extends Controller
         request()->validate([
             'idSeance' => 'required|integer',
         ]);
+
+        $seance = Seance::with('salle')->find(request('idSeance'));
+        $salle = $seance->salle;
+        $reservations = Reservation::where('idSeance', request('idSeance'))->get();
+        $placeRestante = $salle->capaciteSal;
+        foreach($reservations as $res){
+            $placeRestante -= $res->nbPlace;
+        }
+        $placeRestante += $reservation->nbPlace;
+        if($placeRestante <= 0){
+            return redirect()->route('mesReservations')->with('error', 'La séance est complete, vous ne pouvez plus effectuer la réservation.');;
+        }
+
         $reservation->idUser = $idUser;
         $reservation->idSeance = request('idSeance');
         $reservation->nbPlace = $nbPlace;
-        $reservation->montantTotal = $prixTot;
+        $reservation->montantTotal = $prixTotal;
         $reservation->save();
 
         return redirect('/mesReservations');

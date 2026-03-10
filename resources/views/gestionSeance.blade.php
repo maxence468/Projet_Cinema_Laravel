@@ -48,7 +48,7 @@
                                     <select id="seanceModif" name="movie" class="choixCatal" onchange="">
                                         <option value=""></option>
                                         @foreach($seances as $seance)
-                                            <option value="{{$seance->idSeance}}">{{$seance->idSeance}}</option>
+                                            <option value="{{$seance->idSeance}}">Seance du {{$seance->dateSeance->format('d/m/Y')}} pour le film {{$seance->film->titreFilm}} à {{$seance->heureSeance->format('H:i')}} pour le cinema {{$seance->salle->cinema->nomCinema}}</option>
                                         @endforeach
                                     </select>
                                 </div>

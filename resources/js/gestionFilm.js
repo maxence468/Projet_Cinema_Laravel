@@ -286,7 +286,6 @@ $('#btnSuppr').click(function(){
             alert(result.message);
             $('#myForm')[0].reset();
             supprimerRealScenaristeActeur()
-            stateButtons('base')
         },
         error: function(error){
             console.log(error);

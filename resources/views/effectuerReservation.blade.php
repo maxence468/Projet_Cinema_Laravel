@@ -23,7 +23,7 @@
             </div>
 
 
-            <form form="myForm" action="{{ route('reservations.store') }}" method="POST">
+            <form form="myForm" id="myForm" action="{{ route('reservations.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
@@ -81,6 +81,7 @@
         </div>
 
 
+
     <template id="tplTarifParticipant">
         <div class="participant-slot">
             <select name="tarifs[]" class="selectTarif" required>
@@ -105,7 +106,6 @@
             </button>
         </div>
     </template>
-
             </form>
         </div>
     </main>
