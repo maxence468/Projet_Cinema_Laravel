@@ -71,12 +71,16 @@
                             <p class="pt-3">Durée : {{$film->dureeFilm}} minutes</p>
                             @if($film->seances->isEmpty())
                                 <p>Aucune seance disponible</p>
+                            @elseif(Carbon::parse($film->seances[0]->dateSeance)->lt(Carbon::today()))
+                                <p>Aucune seance disponible</p>
                             @else
                                 <p class="pt-3">Disponible au cinema : <br><br>
                                     @foreach($film->seances as $s)
                                         le {{$s->dateSeance->format('d/m/Y')}} à {{$s->heureSeance->format('H:i')}} au cinéma {{ $s->salle->cinema->nomCinema }}
                                         @auth
                                             @if(Auth::user()->isAdmin())
+
+
                                             @else
                                                 <br><a href="/effectuerReservation/{{ $s->idSeance }}" class="btnReservRechFilm">Réserver</a>
                                             @endif

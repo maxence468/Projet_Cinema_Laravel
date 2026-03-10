@@ -74,7 +74,6 @@
                             <div class="col-12 col-lg-4">
                                 <input class="inputCatalogue" id="dateSortieFilm" type="date" placeholder="Date de sortie film" required>
                             </div>
-
                         </div>
 
                         <div class="row align-items-center mb-4">
@@ -117,7 +116,7 @@
 
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
-                                <label class="h3 mb-0">Réalisateur film</label>
+                                <label class="h3 mb-0 pb-5">Réalisateur film</label>
                             </div>
                             <div class="col-12 col-lg-4" id="realisateurs-container">
                                 <select name="idRealisateur[]" class="inputCatalogue choixCatal idRealisateur">
@@ -126,7 +125,7 @@
                                         <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
                                     @endforeach
                                 </select>
-                                <button id="addRealisateur">Ajouter un realisateur</button>
+                                <button id="addRealisateur">Ajouter un realisateur</button><br>
                                 <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
                         </div>
@@ -141,22 +140,22 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <button type="button" class="btnRemove remove">X</button>
+                                <button type="button" class="remove btnRemove">X</button>
                             </div>
                         </div>
 
                         <div class="row align-items-center mb-4">
                             <div class="col-12 col-lg-3">
-                                <label class="h3 mb-0">Scénariste film</label>
+                                <label class="h3 mb-0 pb-5">Scénariste film</label>
                             </div>
                             <div class="col-12 col-lg-4" id="scenariste-container">
-                                <select name="idScenariste[]" class="inputCatalogue choixCatal idScenariste">
+                                <select name="idRealisateur[]" class="inputCatalogue choixCatal idScenariste">
                                     <option value="">Scénariste film</option>
                                     @foreach($personnes as $personne)
                                         <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
                                     @endforeach
                                 </select>
-                                <button id="addScenariste">Ajouter un Scénariste</button>
+                                <button id="addScenariste">Ajouter un Scénariste</button><br>
                                 <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
                         </div>
@@ -171,74 +170,133 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <button type="button" class="btnRemove remove">X</button>
+                                <button type="button" class="remove btnRemove">X</button>
                             </div>
                         </div>
 
-                        <div class="row align-items-center mb-4">
-                            <div class="col-12 col-lg-3">
-                                <label class="h3 mb-0">Acteur film</label>
+
+
+                        <div class="champsActeur">
+
+                            <div class="row align-items-center mb-4">
+                                <div class="col-12 col-lg-3">
+                                    <label class="h3 mb-0 pb-5">Acteur film</label>
+                                </div>
+                                <div class="acteur-row-champsActeur col-12 col-lg-4">
+                                    <select name="idActeur[]" class="inputCatalogue choixCatal idActeur acteur-container">
+                                        <option value="">Acteur film</option>
+                                        @foreach($personnes as $personne)
+                                            <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
+                                        @endforeach
+
+                                    </select>
+                                    <button  type="button" class="addActeur">Ajouter un acteur</button><br>
+                                    <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
+
+                                </div>
                             </div>
-                            <div class="acteur-row-champsActeur col-12 col-lg-4" id="acteur-container">
-                                <select name="idActeur[]" class="inputCatalogue choixCatal idActeur">
-                                    <option value="">Acteur film</option>
-                                    @foreach($personnes as $personne)
-                                        <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="champsActeur">
+
+                            <div class="row align-items-center mb-4">
+                                <div class="col-12 col-lg-3">
+                                    <label class="h3 mb-0">Nom joué</label>
+                                </div>
+                                <div class="col-12 col-lg-4">
                                     <input class="inputCatalogue nomJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Nom Joué" required>
-                                    <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center mb-4">
+                                <div class="col-12 col-lg-3">
+                                    <label class="h3 mb-0">Prénom joué</label>
+                                </div>
+                                <div class="col-12 col-lg-4">
+                                    <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Prénom joué" required>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center mb-4">
+                                <div class="col-12 col-lg-3">
+                                    <label class="h3 mb-0">Principal ou secondaire</label>
+                                </div>
+                                <div class="col-12 col-lg-4">
                                     <div>
-                                        <div>
-                                            <input name="typeActeur_1" class="inputCatalogue principale" id="principale" type="radio" required>
-                                            <label for="principale">Principale</label>
-                                        </div>
-                                        <div>
-                                            <input name="typeActeur_1" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
-                                            <label for="secondaire">Secondaire</label>
-                                        </div>
+                                        <input name="typeActeur_1" class="principale" id="principale" type="radio" required>
+                                        <label class="h3 mb-0 me-4" for="">Principal</label>
+                                        <input name="typeActeur_1" class="secondaire" id="secondaire" type="radio" required checked>
+                                        <label class="h3 mb-0" for="">Secondaire</label>
                                     </div>
                                 </div>
-                                <button id="addActeur">Ajouter un acteur</button>
-                                <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                             </div>
 
+                            <div class="acteur-container">
+
+                            </div>
                         </div>
+
 
                         <div id="divIdPersonne">
                         </div>
 
                         <div id="acteur-template" class="d-none">
-                            <div class="acteur-row-champsActeur acteur-row mb-2 d-flex">
-                                <select name="idActeur[]" class="inputCatalogue choixCatal idActeur">
-                                    <option value="">Acteur film</option>
-                                    @foreach($personnes as $personne)
-                                        <option value="{{ $personne->idPers }}">
-                                            {{ $personne->nomPers }} - {{ $personne->prePers }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <div class="champsActeur">
-                                    <input class="inputCatalogue nomJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Nom Joué" required>
-                                    <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="preJoue" required>
-                                    <div>
-                                        <div>
-                                            <input name="typeActeur_" class="inputCatalogue principale" id="principale" type="radio" required>
-                                            <label>Principale</label>
-                                        </div>
-                                        <div>
-                                            <input name="typeActeur_" class="inputCatalogue secondaire" id="secondaire" type="radio" required checked>
-                                            <label>Secondaire</label>
+                            <div class="acteur-block acteur-row">
+                                <div class="row align-items-center mb-4">
+                                    <div class="col-12 col-lg-3">
+                                        <label class="h3 mb-0 pb-5">Acteur film</label>
+                                    </div>
+
+                                    <div class="col-12 col-lg-4" class="acteur-container">
+                                        <div class="d-flex align-items-center mb-2 acteur-inline">
+                                            <select name="idActeur[]" class="inputCatalogue choixCatal idActeur">
+                                                <option value="">Acteur film</option>
+                                                @foreach($personnes as $personne)
+                                                    <option value="{{ $personne->idPers }}">
+                                                        {{ $personne->nomPers }} - {{ $personne->prePers }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                            <button type="button" class="remove btnRemove">X</button>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btnRemove remove">X</button>
+
+                                <div class="row align-items-center mb-4">
+                                    <div class="col-12 col-lg-3">
+                                        <label class="h3 mb-0">Nom joué</label>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <input class="inputCatalogue nomJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Nom Joué" required>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center mb-4">
+                                    <div class="col-12 col-lg-3">
+                                        <label class="h3 mb-0">Prénom joué</label>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <input class="inputCatalogue preJoue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{1,50}$" placeholder="Prénom joué" required>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center mb-4">
+                                    <div class="col-12 col-lg-3">
+                                        <label class="h3 mb-0">Principal ou secondaire</label>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div>
+                                            <input name="typeActeur_" class="principale" id="principale" type="radio" required>
+                                            <label class="h3 mb-0 me-4" for="principale">Principal</label>
+                                            <input name="typeActeur_" class="secondaire" id="secondaire" type="radio" required checked>
+                                            <label class="h3 mb-0" for="secondaire">Secondaire</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
         </div>
 
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end pt-5 pb-5">
@@ -272,7 +330,18 @@
                 </div>
 
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <input form="formAjoutGenre" id="inputGenre" class="inputCatalogue" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Libelle genre" required>
+                    <div class="d-flex align-items-center mb-2 input-inline">
+                        <input
+                            form="formAjoutGenre"
+                            id="inputGenre"
+                            class="inputCatalogue"
+                            type="text"
+                            pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$"
+                            placeholder="Libelle genre"
+                            required
+                        >
+                        <button type="button" id="removeGenre" class="btnRemove">X</button>
+                    </div>
                 </div>
             </div>
 
@@ -312,7 +381,18 @@
                 </div>
 
                 <div class="col-12 col-lg-4 order-5 order-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" id="nomPers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$" placeholder="Nom personne" required>
+                    <div class="d-flex align-items-center mb-2 input-inline">
+                        <input
+                            form="formAjoutPersonne"
+                            class="inputCatalogue"
+                            id="nomPers"
+                            type="text"
+                            pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,50}$"
+                            placeholder="Nom personne"
+                            required
+                        >
+                        <button type="button" id="removePersonne" class="btnRemove">X</button>
+                    </div>
                 </div>
             </div>
 
@@ -340,7 +420,7 @@
                     <label class="h3 mb-0">Lieu de naissance</label>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <input form="formAjoutPersonne" class="inputCatalogue" id="lieuNaissPers" type="text" placeholder="Lieu de naissance" required>
+                    <input form="formAjoutPersonne" class="inputCatalogue" id="lieuNaissPers" type="text" pattern="^[A-Za-zÀ-ÿ'’\-\s]{2,100}$" placeholder="Lieu de naissance" required>
                 </div>
             </div>
 

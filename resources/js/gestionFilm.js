@@ -137,8 +137,9 @@ $('#filmModif').change(function(e){
             });
 
             let acteurs = result['acteurs']
+            console.log(acteurs[0]['idPers'])
             if(acteurs.length > 0){
-                $('#acteur-container .idActeur:first').val(acteurs[0]['idPers']).trigger('change')
+                $('.idActeur:first').val(acteurs[0]['idPers']).trigger('change')
 
                 $('.nomJoue:first').val(acteurs[0]['pivot']['nomJoue'])
                 $('.preJoue:first').val(acteurs[0]['pivot']['preJoue'])
@@ -153,7 +154,7 @@ $('#filmModif').change(function(e){
                 let newName = 'typeActeur_' + index;
                 index++
                 $row.find('.principale, .secondaire').attr('name', newName);
-                $('#acteur-container').append($row);
+                $('.acteur-container').append($row);
 
 
                 $row.find('select').val(acteur['idPers']).trigger('change');
@@ -286,6 +287,7 @@ $('#btnSuppr').click(function(){
             alert(result.message);
             $('#myForm')[0].reset();
             supprimerRealScenaristeActeur()
+            stateButtons('base')
         },
         error: function(error){
             console.log(error);
@@ -300,14 +302,14 @@ $('#addScenariste').click(function(e){
 })
 
 let index = 2
-$('#addActeur').click(function(e){
+$('.addActeur').click(function(e){
     e.preventDefault()
     let $html = $($('#acteur-template').html());
 
     let newName = 'typeActeur_' + index;
     $html.find('.principale, .secondaire').attr('name', newName);
 
-    $('#acteur-container').append($html);
+    $('.acteur-container').append($html);
 
     index++
 })
@@ -326,6 +328,7 @@ $(document).on('click', '.remove', function () {
     blockOptionSelect();
 
 });
+
 $(document).on('click', '.remove', function () {
     $(this).closest('.scenariste-row').remove();
     blockOptionSelect();
@@ -336,21 +339,7 @@ function supprimerRealScenaristeActeur(){
     $('.scenariste-row').not('#scenariste-template .scenariste-row ').remove();
     $('.acteur-row').not('#acteur-template .acteur-row ').remove();
     blockOptionSelect();
-
-    $('.champsActeur').hide();
 }
-$(document).on('change','.idActeur', function(e){
-    let valeur = $(this).val();
-
-    let $row = $(this).closest('.acteur-row-champsActeur');
-    let $champs = $row.find('.champsActeur');
-
-    if(valeur){
-        $champs.show();
-    }else{
-        $champs.hide();
-    }
-})
 
 
 //desactiver les options deja selectionnés des select
@@ -426,7 +415,7 @@ $(document).on('click','#btnSubmitFormGenre', function(e){
 });
 
 $(document).on('click', '.btnAjoutFormGenre', function(e) {
-    $(this).hide();
+    $('.btnAjoutFormGenre').hide();
     $('.formAjoutGenre').show();
 });
 
@@ -434,6 +423,16 @@ $(document).on('click', '.btnDeployFormPers',function(e) {
     e.preventDefault;
     $('.btnDeployFormPers').hide();
     $('#formAjoutPersonne').show();
+});
+
+$(document).on('click', '#removePersonne', function () {
+    $('#formAjoutPersonne').hide();
+    $('.btnDeployFormPers').show();
+});
+
+$(document).on('click', '#removeGenre', function () {
+    $('#formAjoutGenre').hide();
+    $('.btnAjoutFormGenre').show();
 });
 
 $(document).on('click', '#btnAjtPers',function(e) {
@@ -466,7 +465,7 @@ $(document).on('click', '#btnAjtPers',function(e) {
         },
         error: function(error){
             console.log(error);
-            alert(error.responseJSON.message);
+            alert('Le champs doit être rempli');
         },
     });
 

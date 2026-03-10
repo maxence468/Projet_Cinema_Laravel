@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -11,6 +12,11 @@ class UserController extends Controller
 {
     public function edit($id){
         $user = User::findOrfail($id);
+
+        $userId = Auth::id();
+        if($id != $userId){
+            return redirect('/');
+        }
 
         return view('parametreUtilisateur', compact('user'));
     }
