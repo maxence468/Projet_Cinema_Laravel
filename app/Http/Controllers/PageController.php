@@ -14,6 +14,7 @@ use App\Models\TypeSalle;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class PageController extends Controller{
     public function genre(Request $request)
@@ -77,7 +78,10 @@ class PageController extends Controller{
             }
 
             $films = $films->unique('idFilm');
+
         }
+
+
 
 
         return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jours', 'joursSemaine', 'seances', 'films','mois', 'days'));

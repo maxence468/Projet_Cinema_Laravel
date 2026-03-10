@@ -45,7 +45,7 @@
 
                             <div class="col-12 col-lg-5 order-3 order-lg-5 d-lg-flex justify-content-center pt-2 pt-lg-0">
                                 <div class="alignment-wrapper">
-                                    <select id="seanceModif" name="movie" class="choixCatal" onchange="">
+                                    <select id="seanceModif" name="movie" class="choixCatal">
                                         <option value=""></option>
                                         @foreach($seances as $seance)
                                             <option value="{{$seance->idSeance}}">Seance du {{$seance->dateSeance->format('d/m/Y')}} pour le film {{$seance->film->titreFilm}} à {{$seance->heureSeance->format('H:i')}} pour le cinema {{$seance->salle->cinema->nomCinema}}</option>

@@ -28,21 +28,12 @@
                     <div class="row mt-3">
                     <!-- Actor photo -->
                         <div class="col-auto align-items-start">
-                            @if($p->photoPers)
-                                <img src="{{ $p->photoPers }}"
-                                     width="412"
-                                     height="626"
-                                     alt="{{ $p->nomPers }}"
-                                     class="smd">
-
-                            @else
-                                <img src="{{ asset('images/img.png')}}"
-                                     width="412"
-                                     height="626"
-                                     alt="{{ $p->nomPers }}"
-                                     class="smd">
-
-                            @endif
+                            <img src="{{$p->photoPers ?? asset('images/img.png')}} "
+                                 width="412"
+                                 height="626"
+                                 alt="{{ $p->nomPers }}"
+                                 class="smd"
+                                 onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
                         </div>
 
                         <!-- Actor details -->

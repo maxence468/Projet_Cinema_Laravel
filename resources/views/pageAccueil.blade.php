@@ -14,19 +14,10 @@
             <form method="GET" action="{{ route('recherchefilm') }}">
                 <input type="hidden" value="{{ $film->titreFilm }}" name="search">
                 <button type="submit">
-
-                    @if($film->posterFilm)
-                        <img src="{{ $film->posterFilm }}"
-                             alt="{{ $film->titreFilm }}"
-                             class="poster">
-
-
-                    @else
-                        <img src="{{ asset('images/img.png')}}"
-                             alt="{{ $film->titreFilm }}"
-                             class="poster">
-                    @endif
-
+                    <img src="{{ $film->posterFilm ?? asset('images/img.png') }}"
+                         alt="{{ $film->titreFilm }}"
+                         class="poster"
+                         onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
                 </button>
             </form>
         @endforeach

@@ -128,6 +128,10 @@ class ReservationController extends Controller
 
 
     public function destroy(Reservation $reservation) {
+        $seance = Seance::find($reservation->idSeance);
+        if(Carbon::parse($seance->dateSeance)->lt(Carbon::today())){
+            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus supprimer la réservation.');
+        }
         $reservation->delete();
         return redirect('/mesReservations');
     }

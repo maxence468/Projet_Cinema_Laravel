@@ -31,26 +31,10 @@
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                         <div class="row align-items-start">
                             <div class="col-auto">
-                                @if($film->posterFilm)
-                                    <html>
-                                    <img src="{{ $film->posterFilm }}"
-                                         width="412"
-                                         height="626"
-                                         alt="{{ $film->titreFilm }}"
-                                         class="smd">
-                                    </html>
-
-                                @else
-
-                                    <html>
-                                    <img src="{{ asset('images/img.png')}}"
-                                         width="412"
-                                         height="626"
-                                         alt="{{ $film->titreFilm }}"
-                                         class="smd">
-                                    </html>
-
-                                @endif
+                                <img src="{{ $film->posterFilm ?? asset('images/img.png') }}"
+                                     alt="{{ $film->titreFilm }}"
+                                     class="smd" width="412px" height="626px"
+                                     onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
                             </div>
 
                             <div class="col">

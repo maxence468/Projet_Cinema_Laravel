@@ -254,9 +254,6 @@
 
                                             <button type="button" class="remove btnRemove">X</button>
                                         </div>
-
-                                        <button type="button" class="addActeur">Ajouter un acteur</button><br>
-                                        <button type="button" class="btnDeployFormPers" onclick="showFormPersonne()">Créer une personne</button>
                                     </div>
                                 </div>
 

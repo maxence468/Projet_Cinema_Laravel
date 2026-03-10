@@ -616,12 +616,12 @@ section {
     .choixCatal,
     .textareaCatalogue,
     .alignment-wrapper {
-        width: 100% !important; /* Take up all space right of the sidebar */
+        width: 100% !important;
         max-width: 345px !important;
-        font-size: 20px !important; /* 20 small phones */
+        font-size: 20px !important;
     }
 
-    .btnTemplate {      /* Forces select to behave like a box */
+    .btnTemplate {      /* Force */
         width: 100% !important;
         max-width: 345px !important;
         color: white;
