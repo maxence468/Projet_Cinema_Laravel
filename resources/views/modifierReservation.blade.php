@@ -17,7 +17,7 @@
                     <h3>{{$seance->film->titreFilm}}</h3>
                     <p>{{$seance->salle->cinema->nomCinema}}, {{$seance->salle->cinema->adresseCinema}} {{$seance->salle->cinema->codePostale}}</p>
                     <p>Numero de salle : {{$seance->salle->numeroSalle}}</p>
-                    <p>{{$seance->heureSeance}}</p>
+                    <p>le {{$seance->dateSeance->format('d/m/Y')}} à {{$seance->heureSeance->format('H:i')}}</p>
                     <p>{{$placeRestant}} places restantes</p>
                 </div>
             </div>

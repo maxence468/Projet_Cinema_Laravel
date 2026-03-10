@@ -74,7 +74,7 @@
                             @else
                                 <p class="pt-3">Disponible au cinema : <br><br>
                                     @foreach($film->seances as $s)
-                                        le {{ $s->dateSeance }} au cinéma {{ $s->salle->cinema->nomCinema }} à {{$s->heureSeance->format('H:i')}}
+                                        le {{$s->dateSeance->format('d/m/Y')}} à {{$s->heureSeance->format('H:i')}} au cinéma {{ $s->salle->cinema->nomCinema }}
                                         @auth
                                             @if(Auth::user()->isAdmin())
                                             @else

@@ -52,6 +52,9 @@ class ReservationController extends Controller
         if($placeRestante <= 0){
             return redirect()->route('mesReservations')->with('error', 'La séance est complete, vous ne pouvez plus effectuer la réservation.');;
         }
+        if(Carbon::parse($seance->dateSeance)->lt(Carbon::today())){
+            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus effectuer la réservation.');
+        }
 
         $r = new Reservation();
         $r->idUser = $idUser;
@@ -77,7 +80,7 @@ class ReservationController extends Controller
         $tarifs = Tarif::all();
 
         $now = Carbon::now();
-        if($seance->dateSeance < $now){
+        if(Carbon::parse($seance->dateSeance)->lt(Carbon::today())){
             return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');
         }
 
@@ -109,6 +112,9 @@ class ReservationController extends Controller
         $placeRestante += $reservation->nbPlace;
         if($placeRestante <= 0){
             return redirect()->route('mesReservations')->with('error', 'La séance est complete, vous ne pouvez plus effectuer la réservation.');;
+        }
+        if(Carbon::parse($seance->dateSeance)->lt(Carbon::today())){
+            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');
         }
 
         $reservation->idUser = $idUser;
