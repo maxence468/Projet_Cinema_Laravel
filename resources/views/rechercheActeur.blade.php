@@ -22,7 +22,7 @@
     <!-- Carousel pour voir tout les acteurs -->
     <div id="carouselExample" class="carousel slide position-relative" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <h2>Résultat pour l'acteur : {{ $search ?? '' }}</h2>
+            <h2 class="ps-3">Résultat pour l'acteur : {{ $search ?? '' }}</h2>
             @forelse($personnes as $p)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row mt-3">
@@ -32,7 +32,7 @@
                                  width="412"
                                  height="626"
                                  alt="{{ $p->nomPers }}"
-                                 class="smd"
+                                 class="smd ps-2"
                                  onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
                         </div>
 

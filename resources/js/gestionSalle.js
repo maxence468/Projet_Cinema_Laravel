@@ -59,7 +59,7 @@ $('#salleModif').change(function(e){
             $('#capaciteSal').val(result['salle']['capaciteSal'])
             $('#idTypeSalle').val(result['salle']['idTypeSalle'])
             $('#idCinema').val(result['salle']['idCinema'])
-            $('#numeroSalle').val(result['salle']['idSalle'])
+            $('#numeroSalle').val(result['salle']['numeroSalle'])
             $('#idTarif').val(result['salle']['tarifs'][0]['idTarif'])
 
             console.log(result['salle'])

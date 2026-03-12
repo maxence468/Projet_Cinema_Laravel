@@ -19,7 +19,7 @@
         </form>
 
         @if($films->isNotEmpty())
-            <h2 class="mt-3">
+            <h2 class="ps-3 mt-3">
                 Résultat de films pour le genre :
                 {{ $films->first()?->genre?->libGenre }}
             </h2>
@@ -28,7 +28,7 @@
                 <div class="carousel-inner">
                     @foreach ($films as $film)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <div class="row g-2 justify-content-center">
+                            <div class="row justify-content-center">
                                     <div class="col-4 col-md-4 carousel-col px-3">
                                         <div class="recherche-genre-poster">
                                             <a href="{{ url('/rechercheFilm') }}?search={{ $film->titreFilm }}">

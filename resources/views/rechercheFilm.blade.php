@@ -26,14 +26,14 @@
         <!-- Carousel pour voir tout les films -->
         <div id="carouselExample" class="carousel slide position-relative" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <h2>Résultat de films pour : {{ $search ?? '' }}</h2>
+                <h2 class="ps-3">Résultat de films pour : {{ $search ?? '' }}</h2>
                 @forelse($films as $film)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                         <div class="row align-items-start">
                             <div class="col-auto">
                                 <img src="{{ $film->posterFilm ?? asset('images/img.png') }}"
                                      alt="{{ $film->titreFilm }}"
-                                     class="smd" width="412px" height="626px"
+                                     class="smd ps-2" width="412px" height="626px"
                                      onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
                             </div>
 
