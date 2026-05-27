@@ -29,12 +29,32 @@ class ReservationController extends Controller
 
     public function store(Request $request) {
         $tableauPrix = $request->input('tarifs'); // tableau de prix
-        $nbPlace = 0;
+
         $prixTotal = 0;
-        foreach($tableauPrix as $p){
-            $prixTotal += $p;
+        $nbPlace = 0;
+        $idTarif = [];
+
+        foreach($tableauPrix as $p) {
             $nbPlace++;
+            $pieces = explode('|', $p);
+            $prixTotal += $pieces[0];
+
+            $tarifId = $pieces[1];
+
+            // count number of places per tarif
+            if (isset($idTarif[$tarifId])) {
+                $idTarif[$tarifId]++;
+            } else {
+                $idTarif[$tarifId] = 1;
+            }
         }
+
+        // Permet de recréer un nouveau tableau avec l'index 'nbPlace'
+        $syncData = [];
+        foreach ($idTarif as $tarifId => $nb) {
+            $syncData[$tarifId] = ['nbPlace' => $nb];
+        }
+
         $idUser = auth()->id();
 
         $date = date("Y-m-d");
@@ -46,9 +66,12 @@ class ReservationController extends Controller
         $salle = $seance->salle;
         $reservations = Reservation::where('idSeance', request('idSeance'))->get();
         $placeRestante = $salle->capaciteSal;
+
+        // I've to do an update here
         foreach($reservations as $res){
             $placeRestante -= $res->nbPlace;
         }
+
         if($placeRestante <= 0){
             return redirect()->route('mesReservations')->with('error', 'La séance est complete, vous ne pouvez plus effectuer la réservation.');;
         }
@@ -63,6 +86,8 @@ class ReservationController extends Controller
         $r->dateReservation = $date;
         $r->montantTotal = $prixTotal;
         $r->save();
+
+        $r->tarifs()->sync($syncData);
 
         return redirect()->route('mesReservations');
     }
@@ -79,22 +104,55 @@ class ReservationController extends Controller
 
         $tarifs = Tarif::all();
 
+        $montantTotal = $reservation->montantTotal;
+        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
+
         $now = Carbon::now();
-        if(Carbon::parse($seance->dateSeance)->lt(Carbon::today())){
-            return redirect()->route('mesReservations')->with('error', 'La séance est déjà passée, vous ne pouvez plus modifier la réservation.');
+        if(Carbon::parse($seance->dateSeance)->lt(Carbon::today())) {
+            return redirect()->route('mesReservations')->with(
+                'error',
+                'La séance est déjà passée, vous ne pouvez plus modifier la réservation.'
+            );
         }
 
-        return view('modifierReservation',compact('reservation', 'seance', 'placeRestant', 'tarifs'));
+        return view('modifierReservation',compact(
+            'reservation',
+            'seance',
+            'placeRestant',
+            'tarifs',
+            'montantTotal',
+            'placeReserve',
+        ));
     }
 
     public function update(Request $request, Reservation $reservation){
         $tableauPrix = $request->input('tarifs'); // tableau de prix
-        $nbPlace = 0;
+
         $prixTotal = 0;
-        foreach($tableauPrix as $p){
-            $prixTotal += $p;
+        $nbPlace = 0;
+        $idTarif = [];
+
+        foreach($tableauPrix as $p) {
             $nbPlace++;
+            $pieces = explode('|', $p);
+            $prixTotal += $pieces[0];
+
+            $tarifId = $pieces[1];
+
+            // count number of places per tarif
+            if (isset($idTarif[$tarifId])) {
+                $idTarif[$tarifId]++;
+            } else {
+                $idTarif[$tarifId] = 1;
+            }
         }
+
+        // Permet de recréer un nouveau tableau avec l'index 'nbPlace'
+        $syncData = [];
+        foreach ($idTarif as $tarifId => $nb) {
+            $syncData[$tarifId] = ['nbPlace' => $nb];
+        }
+
         $idUser = auth()->id();
 
         $date = date("Y-m-d");
@@ -105,6 +163,7 @@ class ReservationController extends Controller
         $seance = Seance::with('salle')->find(request('idSeance'));
         $salle = $seance->salle;
         $reservations = Reservation::where('idSeance', request('idSeance'))->get();
+
         $placeRestante = $salle->capaciteSal;
         foreach($reservations as $res){
             $placeRestante -= $res->nbPlace;
@@ -122,6 +181,8 @@ class ReservationController extends Controller
         $reservation->nbPlace = $nbPlace;
         $reservation->montantTotal = $prixTotal;
         $reservation->save();
+
+        $reservation->tarifs()->sync($syncData);
 
         return redirect('/mesReservations');
     }

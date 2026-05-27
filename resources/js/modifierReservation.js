@@ -21,6 +21,9 @@ export function initModifierReservationPage() {
         const select = event.target.closest('.selectTarif');
         if (!select) return;
 
+        document.getElementById('prixTotalWhenPageLoad').style.display = 'none';
+        document.getElementById('prixTotal').removeAttribute('hidden');
+
         majPrixModifReserv();
     });
 

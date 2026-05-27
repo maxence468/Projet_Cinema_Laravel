@@ -37,8 +37,12 @@
                             <div class="participant-slot">
                                 <select name="tarifs[]" class="selectTarif" required>
                                     <option value=""></option>
+                                    <!-- I need to take the libelle from here, so I can choose which id from the table 'Tarif'
+                                    to request in the function 'edit' in 'ReservationController' -->
                                     @foreach($tarifs as $tarif)
-                                        <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
+                                        <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}|{{ $tarif->idTarif}}">
+                                            {{$tarif->libTarif}}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -87,7 +91,9 @@
                         <select name="tarifs[]" class="selectTarif" required>
                             <option value=""></option>
                             @foreach($tarifs as $tarif)
-                                <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
+                                <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}|{{ $tarif->idTarif}}">
+                                    {{$tarif->libTarif}}
+                                </option>
                             @endforeach
                         </select>
                     </div>

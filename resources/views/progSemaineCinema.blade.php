@@ -67,7 +67,7 @@
                             @if($seance->idFilm == $film->idFilm )
                                 <!-- Renvoi de toutes les séances de la journée choisie -->
                                 <div class="col-auto me-5">
-                                    <h4>{{$seance->heureSeance->format('H:i')}} -> {{$seance->heureSeance->addMinutes($seance->film->dureeFilm)->format('H:i')}}</h4>
+                                    <h4>{{$seance->heureSeance->format('H:i')}} -> {{                $seance->heureSeance->addMinutes($seance->film->dureeFilm)->addMinutes(15)->format('H:i')}}</h4>
                                     <h4 class="affichageSalleProgSemaine">Salle {{$seance->idSalle}}</h4>
                                     @auth
                                         @if(Auth::user()->isAdmin())

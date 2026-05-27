@@ -6,8 +6,7 @@
     <main class="container-fluid pt-3">
         <div class="d-flex flex-row align-items-start">
 
-            <div class="d-flex flex-column pt-4 ps-2 sidebar">
-                <a href="/gestionFilm" class="nav-text">Gestion film</a>
+            <div class="d-flex flex-column pt-4 ps-2 sidebar"><a href="/gestionFilm" class="nav-text">Gestion film</a>
                 <a href="/gestionGenre" class="nav-text pt-3">Gestion genre</a>
                 <a href="/gestionPersonne" class="nav-text pt-3">Gestion personne</a>
                 <a href="/gestionCinema" class="nav-text pt-3">Gestion cinéma</a>
@@ -183,7 +182,7 @@
                                     <label class="h3 mb-0 pb-5">Acteur film</label>
                                 </div>
                                 <div class="acteur-row-champsActeur col-12 col-lg-4">
-                                    <select name="idActeur[]" class="inputCatalogue choixCatal idActeur">
+                                    <select name="idActeur[]" class="inputCatalogue choixCatal idActeur" required>
                                         <option value="">Acteur film</option>
                                         @foreach($personnes as $personne)
                                             <option value="{{$personne->idPers}}">{{$personne->nomPers}} - {{$personne->prePers}}</option>

@@ -31,6 +31,7 @@
                               required autocomplete="current-password" />
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <a href="">Mot de passe oublié ?</a>
             </div>
             <div class="inputConInc d-flex flex-column align-items-center pt-3">
                 @if ($errors->any())

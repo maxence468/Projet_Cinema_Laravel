@@ -24,7 +24,7 @@
         <br>
 
         <!-- Carousel pour voir tout les films -->
-        <div id="carouselExample" class="carousel slide position-relative" data-bs-ride="carousel">
+        <div id="carouselExample" class="carousel slide position-relative">
             <div class="carousel-inner">
                 <h2 class="ps-3">Résultat de films pour : {{ $search ?? '' }}</h2>
                 @forelse($films as $film)
@@ -59,8 +59,13 @@
                                     <p>Aucune seance disponible</p>
                                 @else
                                     <p class="pt-3">Disponible au cinema : <br><br>
+                                        <?php $date = date('Y:m:d') ?>
                                         @foreach($film->seances as $s)
-                                            le {{$s->dateSeance->format('d/m/Y')}} à {{$s->heureSeance->format('H:i')}} au cinéma {{ $s->salle->cinema->nomCinema }}
+                                            @if($s->dateSeance->lt(Carbon::today()))
+                                            @else
+                                                le {{$s->dateSeance->format('d/m/Y')}} à {{$s->heureSeance->format('H:i')}} au cinéma {{ $s->salle->cinema->nomCinema }}
+
+                                            @endif
                                             @auth
                                                 @if(Auth::user()->isAdmin())
 

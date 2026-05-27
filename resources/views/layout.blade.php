@@ -22,7 +22,6 @@
             <div class="logo-wrapper">
                 <img src="{{ asset('images/logo_CineForAll.png') }}" alt="Logo CinéForAll" width="116" height="105">
             </div>
-
             <div class="nav-links">
                 <a href="/" class="nav-text">Accueil</a>
                 <a href="/rechercheFilm" class="nav-text">Recherche film</a>
@@ -96,7 +95,7 @@
 <footer class="site-footer" style="margin-top: 70px">
     <div class="footer-inner d-flex justify-content-between align-items-center">
         <div class="footer-text">
-            <p>
+            <p><a href="">Mentions légales</a><br><br>
                 Copyright DevOreo :
                 Barthelemy Maxence, Gamet Dylan, Hassani Ayad-Youssouf
             </p>

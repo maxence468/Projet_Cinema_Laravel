@@ -31,21 +31,32 @@
                 <div class="row">
                     <h3 class="pt-4">Participants</h3>
 
+
                     <div class="col-auto colAutoRemove">
                         <h3 class="pt-1">Tarif</h3>
 
                         <div id="divIdChampsSelect" class="participant-stack">
-                            <div class="participant-slot">
-                                <select name="tarifs[]" class="selectTarif" required>
-                                    <option value=""></option>
-                                    @foreach($tarifs as $tarif)
-                                        <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            @foreach($reservation->tarifs as $t)
+                                @for($i = 0; $i < $t->pivot->nbPlace; $i++)
+                                    <div class="participant-slot">
+                                        <select name="tarifs[]" class="selectTarif" required>
+                                            <option value=""></option>
+                                            @foreach($tarifs as $tarif)
+                                                <option class="optionTarif" id="{{$tarif->idTarif}}" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}|{{$tarif->idTarif}}">
+                                                    {{$tarif->libTarif}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <script>
+                                            document.getElementById("{{$t->idTarif}}").selected = true;
+                                        </script>
+                                    </div>
+
+                                @endfor
+                            @endforeach
                         </div>
 
-                        <button type="button" class="btnAjoutPersReserv mt-4">
+                        <button type="button" id="btnAjoutPersReserv" class="btnAjoutPersReserv mt-4">
                             Ajouter une personne
                         </button>
                     </div>
@@ -54,31 +65,40 @@
                         <h3>Prix</h3>
 
                         <div id="divIdPrixTarif" class="participant-stack">
-                            <div class="participant-slot participant-text">
-                                <h3 class="prixParTarif">0 €</h3>
-                            </div>
+                            @foreach($reservation->tarifs as $t)
+                                @for($i = 0; $i < $t->pivot->nbPlace; $i++)
+                                    <div class="participant-slot participant-text">
+                                        <h3 class="prixParTarif">0 €</h3>
+                                    </div>
+                                @endfor
+                            @endforeach
                         </div>
                     </div>
 
                     <div class="col-auto btnSuppr">
                         <div id="divIdBtnSuppr" class="participant-stack">
-                            <div class="participant-slot">
-                                <button type="button" class="btnSupprParticipant">
-                                    <h3><i class="bi bi-trash"></i></h3>
-                                </button>
-                            </div>
+                            @foreach($reservation->tarifs as $t)
+                                @for($i = 0; $i < $t->pivot->nbPlace; $i++)
+                                    <div class="participant-slot">
+                                        <button type="button" class="btnSupprParticipant">
+                                            <h3><i class="bi bi-trash"></i></h3>
+                                        </button>
+                                    </div>
+                                @endfor
+                            @endforeach
                         </div>
+
                     </div>
                 </div>
-
+            </form>
         </div>
 
         <div class="d-flex w-100 reserverSmallScreen">
             <div class="d-flex flex-column align-items-center">
                 <div class="totalPrice pt-5">
-                    <h3 id='prixTotal' class="text-center mb-3">Total : 0 €</h3>
+                    <h3 id='prixTotalWhenPageLoad' class="text-center mb-3">Total : {{$montantTotal}} €</h3>
+                    <h3 id='prixTotal' class="text-center mb-3" hidden>Total : 0 €</h3>
                 </div>
-
                 <button form="myForm" class="btnReserv">Modifier</button>
             </div>
         </div>
@@ -89,7 +109,9 @@
             <select name="tarifs[]" class="selectTarif" required>
                 <option value=""></option>
                 @foreach($tarifs as $tarif)
-                    <option class="optionTarif" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}">{{$tarif->libTarif}}</option>
+                    <option class="optionTarif" value="{{ $seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}|{{ $tarif->idTarif }}">
+                        {{$tarif->libTarif}}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -110,3 +132,4 @@
     </template>
     </form>
 @endsection
+

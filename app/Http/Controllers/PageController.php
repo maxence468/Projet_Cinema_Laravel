@@ -70,18 +70,18 @@ class PageController extends Controller{
             $salles = $cinemaChoisi[0]->salles()->get();
             foreach ($salles as $salle) {
                 $seances = $seances->merge($salle->seances()->where('dateSeance', $date->format('Y-m-d'))->orderBy('heureSeance')->get());
+
             }
 
 
             foreach($seances as $seance){
                 $films->add($seance->film);
+
             }
 
             $films = $films->unique('idFilm');
 
         }
-
-
 
 
         return view('progSemaineCinema', compact('cinemas', 'cinemaChoisi', 'jours', 'joursSemaine', 'seances', 'films','mois', 'days'));
@@ -96,7 +96,7 @@ class PageController extends Controller{
 
         $dernierMercrediStr = $dernierMercredi->format('Y-m-d');
 
-        $films = Film::all()->where('dateSortieFilm', $dernierMercrediStr)->take(3);
+        $films = Film::all()->where('titreFilm',)->take(3);
         $salles = Salle::all();
         $seances = Seance::all();
         $cinemas = Cinema::all();
@@ -279,19 +279,28 @@ class PageController extends Controller{
         ));
     }
 
-    public function modifierReservation($idSeance) {
-        $seance = Seance::find($idSeance);
-
-        $capaciteTot = $seance->salle->capaciteSal;
-        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
-        $placeRestant = $capaciteTot - $placeReserve;
-
-        $tarifs = Tarif::all();
-
-        return view('modifierReservation', compact(
-            'seance',
-            'placeRestant',
-            'tarifs',
-        ));
-    }
+//    public function modifierReservation($idSeance, $idReservation) {
+//        // Find the right reservation
+//        $seance = Seance::find($idSeance);
+//        $reservation = Reservation::find($idReservation);
+//
+//        $capaciteTot = $seance->salle->capaciteSal;
+//        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
+//        $placeRestant = $capaciteTot - $placeReserve;
+//
+//        // Put the price of the reservation
+//        $montantTotal = Reservation::where('idReservation', $idReservation)->sum('montantTotal');
+//
+//        $tarifs = Tarif::all();
+//
+//        // Send data about the price of reservation and the numbers of person to update the frontend
+//
+//        return view('modifierReservation', compact(
+//            'seance',
+//            'placeRestant',
+//            'tarifs',
+//            'placeReserve',
+//            'montantTotal',
+//        ));
+//    }
 }
