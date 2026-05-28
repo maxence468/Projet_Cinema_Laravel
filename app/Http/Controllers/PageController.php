@@ -14,7 +14,6 @@ use App\Models\TypeSalle;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class PageController extends Controller{
     public function genre(Request $request)
@@ -279,28 +278,19 @@ class PageController extends Controller{
         ));
     }
 
-//    public function modifierReservation($idSeance, $idReservation) {
-//        // Find the right reservation
-//        $seance = Seance::find($idSeance);
-//        $reservation = Reservation::find($idReservation);
-//
-//        $capaciteTot = $seance->salle->capaciteSal;
-//        $placeReserve = Reservation::where('idSeance', $idSeance)->sum('nbPlace');
-//        $placeRestant = $capaciteTot - $placeReserve;
-//
-//        // Put the price of the reservation
-//        $montantTotal = Reservation::where('idReservation', $idReservation)->sum('montantTotal');
-//
-//        $tarifs = Tarif::all();
-//
-//        // Send data about the price of reservation and the numbers of person to update the frontend
-//
-//        return view('modifierReservation', compact(
-//            'seance',
-//            'placeRestant',
-//            'tarifs',
-//            'placeReserve',
-//            'montantTotal',
-//        ));
-//    }
+    public function noterFilm(Request $request) {
+        $request->validate([
+            'film'   => 'required|integer|exists:films,idFilm',
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+        $idUser = auth()->id();
+        $film = Film::findOrFail($request->input('film'));
+
+        $film->note()->sync([
+            $idUser => ['note' => $request->input('rating')]
+        ]);
+
+        return back();
+    }
 }

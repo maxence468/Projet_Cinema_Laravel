@@ -42,16 +42,15 @@
                                         <select name="tarifs[]" class="selectTarif" required>
                                             <option value=""></option>
                                             @foreach($tarifs as $tarif)
-                                                <option class="optionTarif" id="{{$tarif->idTarif}}" value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}|{{$tarif->idTarif}}">
+                                                <option
+                                                    class="optionTarif"
+                                                    value="{{$seance->salle->typeSalle->prixTypeSalle + $tarif->prixTarif}}|{{$tarif->idTarif}}"
+                                                    {{$tarif->idTarif == $t->idTarif ? 'selected' : ''}}>
                                                     {{$tarif->libTarif}}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <script>
-                                            document.getElementById("{{$t->idTarif}}").selected = true;
-                                        </script>
                                     </div>
-
                                 @endfor
                             @endforeach
                         </div>

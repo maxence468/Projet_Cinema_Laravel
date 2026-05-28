@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         return $this->admin === 1;
     }
+
+    public function noter(): BelongsToMany {
+        return $this->belongsToMany(Film::class, 'note', 'idUser', 'idFilm')->withPivot('note');
+    }
 }

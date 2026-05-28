@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Prompts\Note;
 
 class Film extends Model
 {
@@ -47,6 +48,15 @@ class Film extends Model
 
     public function scenariste(): BelongsToMany{
         return $this->belongsToMany(Personne::class, 'scenarise', 'idFilm', 'idPers');
+    }
+
+    public function note(): BelongsToMany {
+        return $this->belongsToMany(
+            User::class,
+            'notes',
+            'idFilm',
+            'idUser'
+        )->withPivot('note');
     }
 
     public function seances(): HasMany{

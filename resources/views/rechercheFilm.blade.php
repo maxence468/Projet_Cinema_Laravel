@@ -53,6 +53,37 @@
                                     @endforeach
                                 </p>
                                 <p class="pt-3">Durée : {{$film->dureeFilm}} minutes</p>
+
+                                @for($i < 0; $i < $film->note->pivot->note; $i++)
+                                    {{$noteTotal += $film->note->pivot->note;}}
+                                @endfor
+
+
+                                @auth
+                                    @if(Auth::user())
+                                        <p>Quelle note voulez vous mettre ?</p>
+                                        <form method="GET" action="{{ route('noterFilm') }}">
+
+                                            <input type="hidden" name="film" value="{{$film->idFilm}}">
+                                            <fieldset class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5" />
+                                                <label for="star5">5 stars</label>
+                                                <input type="radio" id="star4" name="rating" value="4" />
+                                                <label for="star4">4 stars</label>
+                                                <input type="radio" id="star3" name="rating" value="3" />
+                                                <label for="star3">3 stars</label>
+                                                <input type="radio" id="star2" name="rating" value="2" />
+                                                <label for="star2">2 stars</label>
+                                                <input type="radio" id="star1" name="rating" value="1" />
+                                                <label for="star1">1 star</label>
+                                            </fieldset>
+
+                                        </form>
+
+                                        <br>
+                                        <br>
+                                    @endif()
+                                @endauth
                                 @if($film->seances->isEmpty())
                                     <p>Aucune séance disponible</p>
                                 @elseif(Carbon::parse($film->seances[0]->dateSeance)->lt(Carbon::today()))
@@ -97,3 +128,12 @@
         </div>
     </main>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('input[type=radio][name="rating"]').on('change', function() {
+                $(this).closest('form').submit();
+            });
+        });
+    </script>
+@endpush
