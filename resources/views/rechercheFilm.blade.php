@@ -54,10 +54,16 @@
                                 </p>
                                 <p class="pt-3">Durée : {{$film->dureeFilm}} minutes</p>
 
-                                @for($i < 0; $i < $film->note->pivot->note; $i++)
-                                    {{$noteTotal += $film->note->pivot->note;}}
-                                @endfor
-
+                                @if($film->noteMoyenne != 0)
+                                    <p>
+                                        @if($film->noteMoyenne == (int)$film->noteMoyenne)
+                                            {{ (int)$film->noteMoyenne }}
+                                        @else
+                                            {{ Number::abbreviate($film->noteMoyenne, precision: 1) }}
+                                        @endif
+                                    sur 5 en France
+                                    </p>
+                                @endif
 
                                 @auth
                                     @if(Auth::user())
@@ -65,17 +71,18 @@
                                         <form method="GET" action="{{ route('noterFilm') }}">
 
                                             <input type="hidden" name="film" value="{{$film->idFilm}}">
+
                                             <fieldset class="rating">
-                                                <input type="radio" id="star5" name="rating" value="5" />
-                                                <label for="star5">5 stars</label>
-                                                <input type="radio" id="star4" name="rating" value="4" />
-                                                <label for="star4">4 stars</label>
-                                                <input type="radio" id="star3" name="rating" value="3" />
-                                                <label for="star3">3 stars</label>
-                                                <input type="radio" id="star2" name="rating" value="2" />
-                                                <label for="star2">2 stars</label>
-                                                <input type="radio" id="star1" name="rating" value="1" />
-                                                <label for="star1">1 star</label>
+                                                <input type="radio" id="star5_{{$film->idFilm}}" name="rating" value="5" />
+                                                <label for="star5_{{$film->idFilm}}">5 stars</label>
+                                                <input type="radio" id="star4_{{$film->idFilm}}" name="rating" value="4" />
+                                                <label for="star4_{{$film->idFilm}}">4 stars</label>
+                                                <input type="radio" id="star3_{{$film->idFilm}}" name="rating" value="3" />
+                                                <label for="star3_{{$film->idFilm}}">3 stars</label>
+                                                <input type="radio" id="star2_{{$film->idFilm}}" name="rating" value="2" />
+                                                <label for="star2_{{$film->idFilm}}">2 stars</label>
+                                                <input type="radio" id="star1_{{$film->idFilm}}" name="rating" value="1" />
+                                                <label for="star1_{{$film->idFilm}}">1 star</label>
                                             </fieldset>
 
                                         </form>
@@ -95,16 +102,15 @@
                                             @if($s->dateSeance->lt(Carbon::today()))
                                             @else
                                                 le {{$s->dateSeance->format('d/m/Y')}} à {{$s->heureSeance->format('H:i')}} au cinéma {{ $s->salle->cinema->nomCinema }}
+                                                @auth
+                                                    @if(Auth::user()->isAdmin())
 
+                                                    @else
+                                                        <br><a href="/effectuerReservation/{{ $s->idSeance }}" class="btnReservRechFilm">Réserver</a>
+                                                    @endif
+                                                @endauth
+                                                <br><br>
                                             @endif
-                                            @auth
-                                                @if(Auth::user()->isAdmin())
-
-                                                @else
-                                                    <br><a href="/effectuerReservation/{{ $s->idSeance }}" class="btnReservRechFilm">Réserver</a>
-                                                @endif
-                                            @endauth
-                                            <br><br>
                                         @endforeach
                                     </p>
                                 @endif

@@ -5,8 +5,8 @@
 @section('main')
     <main class="pt-3">
         <div class="gap-0 d-flex justify-content-center">
-            <a href="/inscription" class="btn-conInc inscription"><span>Inscription</span></a>
-            <a href="/connexion" class="btn-conInc connexion"><span>Connexion</span></a>
+            <a href="{{url('/inscription')}}" class="btn-conInc inscription"><span>Inscription</span></a>
+            <a href="{{url('/connexion')}}" class="btn-conInc connexion"><span>Connexion</span></a>
         </div>
 
         <form method="POST" action="{{ route('register') }}">

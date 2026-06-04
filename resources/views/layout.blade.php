@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     @livewireStyles
-</head>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-tn0RQdqM.css') }}">
+    <script type="module" src="{{ asset('build/assets/app-Cm66RaIg.js') }}" defer></script></head>
 
 <body>
 {{ $slot ?? '' }}
@@ -23,61 +25,61 @@
                 <img src="{{ asset('images/logo_CineForAll.png') }}" alt="Logo CinéForAll" width="116" height="105">
             </div>
             <div class="nav-links">
-                <a href="/" class="nav-text">Accueil</a>
-                <a href="/rechercheFilm" class="nav-text">Recherche film</a>
-                <a href="/rechercheActeur" class="nav-text">Recherche acteur</a>
-                <a href="/rechercheGenre" class="nav-text">Recherche genre</a>
-                <a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a>
+                <a href="{{ url('/') }}" class="nav-text">Accueil</a>
+                <a href="{{ url('/rechercheFilm') }}" class="nav-text">Recherche film</a>
+                <a href="{{ url('/rechercheActeur') }}" class="nav-text">Recherche acteur</a>
+                <a href="{{ url('/rechercheGenre') }}" class="nav-text">Recherche genre</a>
+                <a href="{{ url('/progSemaineCinema') }}" class="nav-text">Programme de la semaine</a>
                 @auth
                     @if(Auth::user()->isAdmin())
-                        <a href="/gestionFilm" class="nav-text">Gestion catalogue</a>
+                        <a href="{{ url('/gestionFilm') }}" class="nav-text">Gestion catalogue</a>
                     @else
-                        <a href="/mesReservations" class="nav-text">Réservation</a>
+                        <a href="{{ url('/mesReservations') }}" class="nav-text">Réservation</a>
                     @endif
-                    <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
+                    <a href="{{ url('/parametreUtilisateur/'. Auth::id() .'/edit') }}" class="nav-text">Paramètres</a>
                 @endauth
             </div>
 
             <div class="nav-buttons">
                 @auth
-                    <form method="POST" action="/logout">
+                    <form method="POST" action="{{ url('/logout') }}">
                         @csrf
                         <input type="submit" value="Déconnexion" class="btn-nav deco">
                     </form>
                 @else
-                    <a href="/inscription" class="btn-nav inscription"><span>Inscription</span></a>
-                    <a href="/connexion" class="btn-nav connexion"><span>Connexion</span></a>
+                    <a href="{{ url('/inscription') }}" class="btn-nav inscription"><span>Inscription</span></a>
+                    <a href="{{ url('/connexion') }}" class="btn-nav connexion"><span>Connexion</span></a>
                 @endauth
             </div>
 
             <button class="hamburger">&#9776;</button> <!-- for mobile toggle -->
             <nav class="hamburgerMenu">
                 <ul class="menu-content">
-                    <li><a href="/" class="nav-text">Accueil</a></li>
-                    <li><a href="/rechercheFilm" class="nav-text">Recherche film</a></li>
-                    <li><a href="/rechercheActeur" class="nav-text">Recherche acteur</a></li>
-                    <li><a href="/rechercheGenre" class="nav-text">Recherche genre</a></li>
-                    <li><a href="/progSemaineCinema" class="nav-text">Programme de la semaine</a></li>
+                    <li><a href="{{ url('/') }}" class="nav-text">Accueil</a></li>
+                    <li><a href="{{ url('/rechercheFilm') }}" class="nav-text">Recherche film</a></li>
+                    <li><a href="{{ url('/rechercheActeur') }}" class="nav-text">Recherche acteur</a></li>
+                    <li><a href="{{ url('/rechercheGenre') }}" class="nav-text">Recherche genre</a></li>
+                    <li><a href="{{ url('/progSemaineCinema') }}" class="nav-text">Programme de la semaine</a></li>
 
                     @auth
                         @if(Auth::user()->isAdmin())
-                            <li><a href="/gestionFilm" class="nav-text">Gestion catalogue</a></li>
+                            <li><a href="{{ url('/gestionFilm') }}" class="nav-text">Gestion catalogue</a></li>
                         @else
-                            <li><a href="/mesReservations" class="nav-text">Réservation</a></li>
+                            <li><a href="{{ url('/mesReservations') }}" class="nav-text">Réservation</a></li>
                         @endif
-                        <a href="/parametreUtilisateur/{{ Auth::id() }}/edit" class="nav-text">Paramètres</a>
+                        <a href="{{ url('/parametreUtilisateur/'. Auth::id() .'/edit') }}" class="nav-text">Paramètres</a>
                     @endauth
 
                     @auth
-                        <form method="POST" action="/logout">
+                        <form method="POST" action="{{ url('/logout') }}">
                             @csrf
                             <li>
                                 <input type="submit" class="btn-nav" value="Déconnexion">
                             </li>
                         </form>
                     @else
-                        <li><a href="/inscription" class="btn-nav"><span>Inscription</span></a></li>
-                        <li><a href="/connexion" class="btn-nav"><span>Connexion</span></a></li>
+                        <li><a href="{{ url('/inscription') }}" class="btn-nav"><span>Inscription</span></a></li>
+                        <li><a href="{{ url('/connexion') }}" class="btn-nav"><span>Connexion</span></a></li>
                     @endauth
                 </ul>
             </nav>
@@ -104,9 +106,7 @@
     </div>
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 @stack('scripts')
 </body>
 </html>
-@vite('resources/js/app.js')

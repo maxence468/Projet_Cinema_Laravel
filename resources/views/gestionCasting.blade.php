@@ -6,16 +6,16 @@
     <main class="container-fluid pt-3">
         <div class="d-flex flex-row align-items-start">
             <div class="d-flex flex-column pt-4 ps-2 sidebar">
-                <a href="/gestionFilm" class="nav-text">Gestion film</a>
-                <a href="/gestionGenre" class="nav-text pt-3">Gestion genre</a>
-                <a href="/gestionPersonne" class="nav-text pt-3">Gestion personne</a>
-                <a href="/gestionCasting" class="nav-text pt-3">Gestion casting</a>
-                <a href="/gestionCinema" class="nav-text pt-3">Gestion cinéma</a>
-                <a href="/gestionSalle" class="nav-text pt-3">Gestion salle</a>
-                <a href="/gestionSeance" class="nav-text pt-3">Gestion séance</a>
-                <a href="/gestionTarif" class="nav-text pt-3">Gestion tarif</a>
-                <a href="/gestionTypeSalle" class="nav-text pt-3">Gestion typeSalle</a>
-                <a href="/gestionTarifSalle" class="nav-text pt-3">Gestion tarif salle</a>
+                <a href="{{url('/gestionFilm')}} " class="nav-text">Gestion film</a>
+                <a href="{{url('/gestionGenre')}}" class="nav-text pt-3">Gestion genre</a>
+                <a href="{{url('/gestionPersonne')}}" class="nav-text pt-3">Gestion personne</a>
+                <a href="{{url('/gestionCasting')}}" class="nav-text pt-3">Gestion casting</a>
+                <a href="{{url('/gestionCinema')}}" class="nav-text pt-3">Gestion cinéma</a>
+                <a href="{{url('/gestionSalle')}}" class="nav-text pt-3">Gestion salle</a>
+                <a href="{{url('/gestionSeance')}}" class="nav-text pt-3">Gestion séance</a>
+                <a href="{{url('/gestionTarif')}}" class="nav-text pt-3">Gestion tarif</a>
+                <a href="{{url('/gestionTypeSalle')}}" class="nav-text pt-3">Gestion typeSalle</a>
+                <a href="{{url('/gestionTarifSalle')}}" class="nav-text pt-3">Gestion tarif salle</a>
             </div>
 
             <div class="espaceSideBar flex-grow-1 pt-4">

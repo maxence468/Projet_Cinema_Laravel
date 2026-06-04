@@ -13,11 +13,12 @@ class Reservation extends Model
     protected $fillable = [
         'idUser',
         'idSeance',
+        'nbPlace',
         'dateReservation',
-        'montantTotal'
+        'montantTotal',
     ];
 
-    public function seance(){
+    public function seance(): BelongsTo {
         return $this->belongsTo(Seance::class, 'idSeance');
     }
 

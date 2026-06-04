@@ -14,6 +14,7 @@ use App\Models\TypeSalle;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use function Laravel\Prompts\note;
 
 class PageController extends Controller{
     public function genre(Request $request)
@@ -88,6 +89,7 @@ class PageController extends Controller{
 
     public function accueil(){
         $dernierMercredi = new DateTime('last wednesday');
+        $dernierMercredi = new DateTime('last wednesday');
 
         if ((new DateTime())->format('N') == 3) {
             $dernierMercredi = new DateTime('today');
@@ -114,8 +116,10 @@ class PageController extends Controller{
             $query->where('titreFilm', 'LIKE', '%' . $search . '%');
         })->get();
 
-        return view('rechercheFilm', compact('films', 'search'));
 
+        $films->each(fn($film) => $film->noteMoyenne = $film->note->avg('pivot.note') ?? 0);
+
+        return view('rechercheFilm', compact('films', 'search'));
     }
 
     public function rechercheActeur(Request $request){

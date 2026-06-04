@@ -1,3 +1,9 @@
+:root {
+    --red-color: #991917;
+    --black-color: #1c1c1c;
+    --white-color: white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -20,9 +26,9 @@ button {
 }
 
 html, body {
-    color: white;
+    color: var(--white-color);
     height: 100%;
-    background-color: #1c1c1c;
+    background-color: var(--black-color);
 }
 
 body {
@@ -66,23 +72,23 @@ ul {
 
 /* Buttons */
 .btn-nav {
-    background-color: #991917;
-    border: 1px solid white;
+    background-color: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 10px 20px;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: white;
+    color: var(--white-color);
 }
 
 .btn-conInc {
     width: 164px;
     height: 52px;
     font-size: 32px;
-    background-color: #991917;
-    border: 1px solid white;
+    background-color: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 3px 4px 0px 4px;
     text-decoration: none;
     display: flex;
@@ -95,15 +101,15 @@ ul {
     width: 329px;
     height: 52px;
     font-size: 32px;
-    background-color: #991917;
-    border: 1px solid white;
+    background-color: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 3px 43px 0px 43px;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: white;
+    color: var(--white-color);
 }
 
 .inputConInc label {
@@ -124,12 +130,12 @@ ul {
     width: 165px;      /* Override rules btn-validConInc */
     padding-left: 0;   /* Override rules btn-validConInc */
     padding-right: 0;  /* Override rules btn-validConInc */
-    color: white;
+    color: var(--white-color);
 }
 
 .btn-ajoutModifSuppr {
-    background-color: #991917;
-    border: 1px solid white;
+    background-color: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 3px 20px 0px 20px;
     margin: 0px 30px 0px 30px;
     width: 181px;
@@ -140,13 +146,13 @@ ul {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: white;
+    color: var(--white-color);
 }
 
 .btnOptionMesReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
+    color: var(--white-color);
+    background: var(--red-color);
+    border: 1px solid var(--white-color);
     font-size: 30px;
     margin: 0px 21px 0px 21px;
     padding: 0px 25px 0px 25px;
@@ -215,10 +221,10 @@ ul {
 }
 
 .btnRemove {
-    background-color: #991917;
-    border: 1px solid white;
+    background-color: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 3px 20px 0px 20px;
-    color: white;
+    color: var(--white-color);
 }
 
 .mainAccueil {
@@ -237,14 +243,14 @@ main {
 }
 
 .rech::placeholder {
-    color: #1c1c1c;
+    color: var(--black-color);
     font-size: 32px;
     display: flex;
     justify-content: center;
 }
 
 .movie::placeholder {
-    color: #1c1c1c;
+    color: var(--black-color);
     font-size: 32px;
     display: flex;
     justify-content: center;
@@ -258,7 +264,7 @@ main {
 select {
     width: 320px;
     height: 53px;
-    color: #1c1c1c;
+    color: var(--black-color);
     font-size: 32px;
     display: flex;
     justify-content: center;
@@ -272,7 +278,7 @@ select {
 
 /* Footer container */
 .site-footer {
-    background-color: #991917;
+    background-color: var(--red-color);
     padding: 0 20px; /* horizontal only */
     flex-shrink: 0;
 }
@@ -285,33 +291,33 @@ select {
 .site-footer p {
     margin: 0;
     line-height: 1;
-    color: white;
+    color: var(--white-color);
 }
 
 footer {
-    background-color: #991917;
+    background-color: var(--red-color);
 }
 
 .btnChoixJour {
     color: #FFFFFF;
-    background-color: #991917;
-    border: 1px solid white;
+    background-color: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 10px 20px;
     text-decoration: none;
     cursor: pointer;
 }
 
 .btnChoixJour:focus {
-    color: #1c1c1c;
-    background-color: #991917;
-    border: 1px solid white;
+    color: var(--black-color);
+    background-color: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 10px 20px;
     text-decoration: none;
     cursor: pointer;
 }
 
 a {
-    color: white;
+    color: var(--white-color);
     text-decoration: none;
 }
 
@@ -352,17 +358,17 @@ a {
 
     .btnChoixJour {
         color: #FFFFFF;
-        background-color: #991917;
-        border: 1px solid white;
+        background-color: var(--red-color);
+        border: 1px solid var(--white-color);
         padding: 3px 6px;
         text-decoration: none;
         cursor: pointer;
     }
 
     .btnChoixJour:focus {
-        color: #1c1c1c;
-        background-color: #991917;
-        border: 1px solid white;
+        color: var(--black-color);
+        background-color: var(--red-color);
+        border: 1px solid var(--white-color);
         padding: 3px 6px;
         text-decoration: none;
         cursor: pointer;
@@ -399,7 +405,7 @@ section {
 }
 
 .inputCatalogue::placeholder, .textareaCatalogue::placeholder, .choixCatal::placeholder{
-    color: #1c1c1c;
+    color: var(--black-color);
     font-size: 32px;
     display: flex;
     justify-content: center;
@@ -439,7 +445,7 @@ section {
         font-size: 28px;
         background: none;
         border: none;
-        color: white;
+        color: var(--white-color);
         cursor: pointer;
     }
 
@@ -475,7 +481,7 @@ section {
     width: 100% !important;
     max-width: 345px !important;
     height: 53px !important;
-    color: #1c1c1c;
+    color: var(--black-color);
     font-size: 32px;
 }
 
@@ -484,9 +490,9 @@ section {
 }
 
 .btnChoixVisionReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
+    color: var(--white-color);
+    background: var(--red-color);
+    border: 1px solid var(--white-color);
     font-size: 30px;
     margin: 0px 28px 0px 28px;
     padding: 0px 10px 0px 10px;
@@ -624,11 +630,11 @@ section {
     .btnTemplate {      /* Force */
         width: 100% !important;
         max-width: 345px !important;
-        color: white;
+        color: var(--white-color);
         font-size: 20px;
-        background: #991917;
+        background: var(--red-color);
         text-decoration: none;
-        border: 1px solid white;
+        border: 1px solid var(--white-color);
     }
 
     /* Adjust labels so they don't take up too much vertical space */
@@ -661,7 +667,7 @@ section {
         white-space: nowrap; /* Prevent links from wrapping to next line */
         padding-bottom: 15px;
         margin-bottom: 20px;
-        border-bottom: 1px solid #991917;
+        border-bottom: 1px solid var(--red-color);
         -webkit-overflow-scrolling: touch;
     }
 
@@ -710,7 +716,7 @@ section {
     text-align: left;
     margin: 0 0 6px 0;
     font-size: 32px;
-    color: white;
+    color: var(--white-color);
 }
 
 
@@ -720,13 +726,13 @@ section {
     margin: 0;
     padding: 0 12px;
     font-size: 32px;
-    color: #1c1c1c;
+    color: var(--black-color);
 }
 
 
 .inputConInc input::placeholder{
     font-size: 32px;
-    color: #1c1c1c;
+    color: var(--black-color);
 }
 
 .sizeTitleSettingAccount {
@@ -766,11 +772,11 @@ section {
     max-width: 345px !important;
     height: 53px !important;
     cursor: pointer;
-    color: white;
+    color: var(--white-color);
     font-size: 32px;
-    background: #991917;
+    background: var(--red-color);
     text-decoration: none;
-    border: 1px solid white;
+    border: 1px solid var(--white-color);
 }
 
 .infoReservation {
@@ -786,34 +792,34 @@ section {
 }
 
 .btnRemove {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
+    color: var(--white-color);
+    background: var(--red-color);
+    border: 1px solid var(--white-color);
     font-size: 30px;
     padding: 3px 15px 3px 15px;
 }
 
 .btnAjoutPersReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
+    color: var(--white-color);
+    background: var(--red-color);
+    border: 1px solid var(--white-color);
     font-size: 32px;
     padding: 0px 17px 0px 17px;
 }
 
 .btnReserv {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
+    color: var(--white-color);
+    background: var(--red-color);
+    border: 1px solid var(--white-color);
     font-size: 32px;
     padding: 0px 103px 0px 103px;
     margin-right: 37px;
 }
 
 .btnReservProgSemaineCinema {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
+    color: var(--white-color);
+    background: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 0px 5px;
 }
 
@@ -836,9 +842,9 @@ section {
 }
 
     .btnReservRechFilm {
-    color: white;
-    background: #991917;
-    border: 1px solid white;
+    color: var(--white-color);
+    background: var(--red-color);
+    border: 1px solid var(--white-color);
     padding: 0px 5px;
     font-size: 22px;
 }
@@ -846,7 +852,7 @@ section {
 .selectTarif {
     width: 329px;
     height: 53px;
-    color: #1c1c1c;
+    color: var(--black-color);
     font-size: 32px;
     display: flex;
     justify-content: center;
@@ -1081,5 +1087,3 @@ Retrieved 2026-05-27, License - CC BY-SA 3.0
         margin: 0;
     }
 }
-
-
