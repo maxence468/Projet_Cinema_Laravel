@@ -6,7 +6,7 @@ $('#btnAjt').click(function(){
 
     if(nomCinema && adresseCinema && codePostale){
         $.ajax({
-            url: "/cinemas",
+            url: window.APP_URL +'/cinemas',
             type: "post",
             data:{
                 nomCinema: nomCinema,
@@ -42,7 +42,7 @@ $('#cinemaModif').change(function(e){
     let idCinema = $('#cinemaModif').val()
 
     $.ajax({
-        url: "/editCinema",
+        url: window.APP_URL +'/editCinema',
         type: "post",
         global:false,
         data:{
@@ -72,7 +72,7 @@ $('#btnModif').click(function(){
 
     if(nomCinema && adresseCinema && codePostale){
         $.ajax({
-            url: `/cinemas/${idCinema}`,
+            url: window.APP_URL +`/cinemas/${idCinema}`,
             type: "patch",
             data:{
                 nomCinema: nomCinema,
@@ -116,7 +116,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/cinemas/${idCinema}`,
+        url: window.APP_URL +`/cinemas/${idCinema}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

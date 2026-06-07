@@ -4,7 +4,7 @@ $('#btnAjt').click(function(){
 
     if(libGenre){
         $.ajax({
-            url: "/genres",
+            url: window.APP_URL +'/genres',
             type: "post",
             data:{
                 libGenre: libGenre,
@@ -41,7 +41,7 @@ $('#genreModif').change(function(e){
         return;
     }
     $.ajax({
-        url: "/editGenre",
+        url: window.APP_URL +'/editGenre',
         type: "post",
         global:false,
         data:{
@@ -66,7 +66,7 @@ $('#btnModif').click(function(){
 
     if(libGenre){
         $.ajax({
-            url: `/genres/${idGenre}`,
+            url: window.APP_URL +`/genres/${idGenre}`,
             type: "patch",
             data:{
                 libGenre: libGenre,
@@ -108,7 +108,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/genres/${idGenre}`,
+        url: window.APP_URL +`/genres/${idGenre}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

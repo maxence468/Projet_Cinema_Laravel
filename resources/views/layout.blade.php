@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     @livewireStyles
     <link rel="stylesheet" href="{{ asset('build/assets/app-tn0RQdqM.css') }}">
-    <script type="module" src="{{ asset('build/assets/app-Cm66RaIg.js') }}" defer></script></head>
+    <script type="module" src="{{ asset('build/assets/app-WG8WQjlL.js') }}" defer></script></head>
 
 <body>
 {{ $slot ?? '' }}
@@ -97,7 +97,7 @@
 <footer class="site-footer" style="margin-top: 70px">
     <div class="footer-inner d-flex justify-content-between align-items-center">
         <div class="footer-text">
-            <p><a href="">Mentions légales</a><br><br>
+            <p>
                 Copyright DevOreo :
                 Barthelemy Maxence, Gamet Dylan, Hassani Ayad-Youssouf
             </p>
@@ -105,8 +105,11 @@
         <img src="{{asset("images/devOreo.png")}}" id="logoDevOreo" alt="DevOreo Logo">
     </div>
 </footer>
-
+<script>
+    window.APP_URL = "{{ rtrim(config('app.url'), '/') }}";
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 @stack('scripts')
 </body>
 </html>
+

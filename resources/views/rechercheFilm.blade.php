@@ -68,20 +68,20 @@
                                 @auth
                                     @if(Auth::user())
                                         <p>Quelle note voulez vous mettre ?</p>
-                                        <form method="GET" action="{{ route('noterFilm') }}">
-
+                                        <form method="POST" action="{{ route('noterFilm') }}">
+                                            @csrf
                                             <input type="hidden" name="film" value="{{$film->idFilm}}">
 
                                             <fieldset class="rating">
-                                                <input type="radio" id="star5_{{$film->idFilm}}" name="rating" value="5" />
+                                                <input type="radio" id="star5_{{$film->idFilm}}" name="rating" value="5" onchange="this.form.submit()"/>
                                                 <label for="star5_{{$film->idFilm}}">5 stars</label>
-                                                <input type="radio" id="star4_{{$film->idFilm}}" name="rating" value="4" />
+                                                <input type="radio" id="star4_{{$film->idFilm}}" name="rating" value="4" onchange="this.form.submit()"/>
                                                 <label for="star4_{{$film->idFilm}}">4 stars</label>
-                                                <input type="radio" id="star3_{{$film->idFilm}}" name="rating" value="3" />
+                                                <input type="radio" id="star3_{{$film->idFilm}}" name="rating" value="3" onchange="this.form.submit()"/>
                                                 <label for="star3_{{$film->idFilm}}">3 stars</label>
-                                                <input type="radio" id="star2_{{$film->idFilm}}" name="rating" value="2" />
+                                                <input type="radio" id="star2_{{$film->idFilm}}" name="rating" value="2" onchange="this.form.submit()"/>
                                                 <label for="star2_{{$film->idFilm}}">2 stars</label>
-                                                <input type="radio" id="star1_{{$film->idFilm}}" name="rating" value="1" />
+                                                <input type="radio" id="star1_{{$film->idFilm}}" name="rating" value="1" onchange="this.form.submit()"/>
                                                 <label for="star1_{{$film->idFilm}}">1 star</label>
                                             </fieldset>
 
@@ -91,6 +91,7 @@
                                         <br>
                                     @endif()
                                 @endauth
+
                                 @if($film->seances->isEmpty())
                                     <p>Aucune séance disponible</p>
                                 @elseif(Carbon::parse($film->seances[0]->dateSeance)->lt(Carbon::today()))
@@ -106,7 +107,7 @@
                                                     @if(Auth::user()->isAdmin())
 
                                                     @else
-                                                        <br><a href="/effectuerReservation/{{ $s->idSeance }}" class="btnReservRechFilm">Réserver</a>
+                                                        <br><a href="{{url('/effectuerReservation',$s->idSeance)}}" class="btnReservRechFilm">Réserver</a>
                                                     @endif
                                                 @endauth
                                                 <br><br>
@@ -135,11 +136,4 @@
     </main>
 @endsection
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('input[type=radio][name="rating"]').on('change', function() {
-                $(this).closest('form').submit();
-            });
-        });
-    </script>
 @endpush

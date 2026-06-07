@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('idReservation');
             $table->integer('idUser');
             $table->integer('idSeance');
-            //$table->integer('nbPlace');
+            $table->integer('nbPlace');
             $table->dateTime('dateReservation');
             $table->decimal('montantTotal');
             $table->timestamps();

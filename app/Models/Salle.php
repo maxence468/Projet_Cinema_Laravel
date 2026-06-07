@@ -22,7 +22,10 @@ class Salle extends Model
         );
     }
     public function typesalle(): BelongsTo{
-      return $this->belongsTo(TypeSalle::class, 'idTypeSalle','idTypeSalle');
+      return $this->belongsTo(
+          TypeSalle::class,
+          'idTypeSalle'
+          ,'idTypeSalle');
     }
 
     public function cinema(): belongsTo{

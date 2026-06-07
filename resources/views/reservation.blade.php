@@ -50,7 +50,7 @@
                                 <div class="row pt-5 d-flex justify-content-center btnReservation">
                                     <div class="col-auto ms-2">
 
-                                        <button class="btnOptionMesReserv"><a href="reservations/{{$reservation->idReservation}}/edit">Modifier</a></button>
+                                        <button class="btnOptionMesReserv"><a href="{{'reservations/'.$reservation->idReservation.'/edit'}}">Modifier</a></button>
 
                                         <form action="{{ route('reservations.destroy', $reservation->idReservation) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
                                             @csrf

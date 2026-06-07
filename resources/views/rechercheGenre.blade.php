@@ -29,18 +29,16 @@
                     @foreach ($films as $film)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="row justify-content-center">
-                                    <div class="col-4 col-md-4 carousel-col px-3">
-                                        <div class="recherche-genre-poster">
-                                            <a href="{{ url('/rechercheFilm') }}?search={{ $film->titreFilm }}">
-                                                <img src="{{ $film->posterFilm ?? asset('images/img.png') }}"
-                                                     alt="{{ $film->titreFilm }}"
-                                                     class="recherche-genre-img" width="410px" height="626px"
-                                                     onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
-                                            </a>
-
-
-                                        </div>
+                                <div class="col-4 col-md-4 carousel-col px-3">
+                                    <div class="recherche-genre-poster">
+                                        <a href="{{ url('/rechercheFilm') }}?search={{ $film->titreFilm }}">
+                                            <img src="{{ $film->posterFilm ?? asset('images/img.png') }}"
+                                                 alt="{{ $film->titreFilm }}"
+                                                 class="recherche-genre-img" width="410px" height="626px"
+                                                 onerror="this.onerror=null;this.src='{{ asset('images/img.png') }}';">
+                                        </a>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -49,6 +47,7 @@
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </button>
+
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                     <span class="carousel-control-next-icon"></span>
                 </button>

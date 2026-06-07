@@ -9,7 +9,7 @@ $('#btnAjt').click(function(){
 
     if(heureSeance && dateSeance && dureeSeance && idFilm && idSalle){
         $.ajax({
-            url: "/seances",
+            url: window.APP_URL +'/seances',
             type: "post",
             data:{
                 heureSeance: heureSeance,
@@ -47,7 +47,7 @@ $('#seanceModif').change(function(e){
     let idSeance = $('#seanceModif').val()
 
     $.ajax({
-        url: "/editSeance",
+        url: window.APP_URL +'/editSeance',
         type: "post",
         global:false,
         data:{
@@ -83,7 +83,7 @@ $('#btnModif').click(function(){
 
     if(heureSeance && dateSeance && dureeSeance && idFilm && idSalle && idSeance){
         $.ajax({
-            url: `/seances/${idSeance}`,
+            url: window.APP_URL +`/seances/${idSeance}`,
             type: "patch",
             data:{
                 heureSeance: heureSeance,
@@ -129,7 +129,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/seances/${idSeance}`,
+        url: window.APP_URL +`/seances/${idSeance}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

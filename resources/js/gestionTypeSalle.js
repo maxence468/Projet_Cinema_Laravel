@@ -6,7 +6,7 @@ $('#btnAjt').click(function(){
 
     if(libTypeSalle && prixTypeSalle){
         $.ajax({
-            url: "/typesalles",
+            url: window.APP_URL +'/typesalles',
             type: "post",
             data:{
                 libTypeSalle: libTypeSalle,
@@ -41,7 +41,7 @@ $('#typeSalleModif').change(function(e){
     let idTypeSalle = $('#typeSalleModif').val()
 
     $.ajax({
-        url: "/edittypesalle",
+        url: window.APP_URL +'/edittypesalle',
         type: "post",
         global:false,
         data:{
@@ -69,7 +69,7 @@ $('#btnModif').click(function(){
 
     if(libTypeSalle && prixTypeSalle && idTypeSalle){
         $.ajax({
-            url: `/typesalles/${idTypeSalle}`,
+            url: window.APP_URL +`/typesalles/${idTypeSalle}`,
             type: "patch",
             data:{
                 libTypeSalle: libTypeSalle,
@@ -112,7 +112,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/typesalles/${idTypeSalle}`,
+        url: window.APP_URL +`/typesalles/${idTypeSalle}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

@@ -233,10 +233,6 @@ class PageController extends Controller{
         ]);
     }
 
-    public function gestionTarifSalle() {
-        return view('gestionTarifSalle');
-    }
-
     public function parametresUtilisateur() {
         return view('parametresUtilisateur');
     }
@@ -267,6 +263,7 @@ class PageController extends Controller{
     }
 
     public function effectuerReservation($idSeance) {
+
         $seance = Seance::find($idSeance);
 
         $capaciteTot = $seance->salle->capaciteSal;

@@ -452,34 +452,6 @@
 
         </form>
     </template>
-    <script>
-        let countFormGenre = 0;
-        let countFormPersonne = 0;
-
-        function showFormGenre() {
-            if (countFormGenre == 0) {
-                const template = document.querySelector("#tplGenre");
-
-                const divIdGenre = document.getElementById('divIdGenre');
-                const clone = document.importNode(template.content, true);
-
-                divIdGenre.appendChild(clone);
-                countFormGenre++;
-            }
-        }
-
-        function showFormPersonne() {
-            if(countFormPersonne == 0) {
-                const template = document.querySelector("#tplPersonne");
-
-                const divIdPersonne = document.getElementById('divIdPersonne');
-                const clone = document.importNode(template.content, true);
-
-                divIdPersonne.appendChild(clone);
-                countFormPersonne++;
-            }
-        }
-    </script>
     @vite('resources/js/stateButtons.js')
     @vite('resources/js/gestionFilm.js')
     @vite('resources/js/updateSelect.js')

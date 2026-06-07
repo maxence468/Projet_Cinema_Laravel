@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="col-auto">
-                        <h3>Prix</h3>
+                        <h3 class="tagPrice">Prix</h3>
 
                         <div id="divIdPrixTarif" class="participant-stack">
                             @foreach($reservation->tarifs as $t)
@@ -129,6 +129,5 @@
             </button>
         </div>
     </template>
-    </form>
 @endsection
 

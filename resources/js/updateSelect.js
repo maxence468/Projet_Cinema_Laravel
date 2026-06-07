@@ -27,7 +27,7 @@ function updateAllSelect(){
 
 function updateSelectGenre(){
     $.ajax({
-        url: '/getAllGenre',
+        url: window.APP_URL +'/getAllGenre',
         type: "post",
         global: false,
         data:{
@@ -49,7 +49,7 @@ function updateSelectGenre(){
 
 function updateSelectPersonne(){
     $.ajax({
-        url: '/getAllPersonne',
+        url: window.APP_URL +'/getAllPersonne',
         type: "post",
         global: false,
         data:{
@@ -86,7 +86,7 @@ function updateSelectPersonne(){
 
 function updateSelectFilm(){
     $.ajax({
-        url: '/getAllFilm',
+        url: window.APP_URL +'/getAllFilm',
         type: "post",
         global: false,
         data:{
@@ -108,7 +108,7 @@ function updateSelectFilm(){
 
 function updateSelectCinema(){
     $.ajax({
-        url: '/getAllCinema',
+        url: window.APP_URL +'/getAllCinema',
         type: "post",
         global: false,
         data:{
@@ -130,7 +130,7 @@ function updateSelectCinema(){
 
 function updateSelectSalle(){
     $.ajax({
-        url: '/getAllSalle',
+        url: window.APP_URL +'/getAllSalle',
         type: "post",
         global: false,
         data:{
@@ -152,7 +152,7 @@ function updateSelectSalle(){
 
 function updateSelectSeance(){
     $.ajax({
-        url: '/getAllSeance',
+        url: window.APP_URL +'/getAllSeance',
         type: "post",
         global: false,
         data:{
@@ -186,7 +186,7 @@ function updateSelectSeance(){
 
 function updateSelectTarif(){
     $.ajax({
-        url: '/getAllTarif',
+        url: window.APP_URL +'/getAllTarif',
         type: "post",
         global: false,
         data:{
@@ -208,7 +208,7 @@ function updateSelectTarif(){
 
 function updateSelectTypeSalle(){
     $.ajax({
-        url: '/getAllTypeSalle',
+        url: window.APP_URL +'/getAllTypeSalle',
         type: "post",
         global: false,
         data:{

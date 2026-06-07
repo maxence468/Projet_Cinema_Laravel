@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Reservation extends Model
@@ -19,7 +20,10 @@ class Reservation extends Model
     ];
 
     public function seance(): BelongsTo {
-        return $this->belongsTo(Seance::class, 'idSeance');
+        return $this->belongsTo(
+            Seance::class,
+            'idSeance'
+        );
     }
 
     public function tarifs(): BelongsToMany {

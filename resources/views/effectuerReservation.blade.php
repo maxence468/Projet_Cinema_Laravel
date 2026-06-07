@@ -28,10 +28,10 @@
                 <input type="hidden" name="idSeance" value="{{ $seance->idSeance }}">
 
                 <div class="row">
-                    <h3 class="pt-4">Participants</h3>
+                    <h3 class="pt-4 tarifText">Participants</h3>
 
                     <div class="col-auto colAutoRemove">
-                        <h3 class="pt-1">Tarif</h3>
+                        <h3 class="pt-1 tarifText">Tarif</h3>
 
                         <div id="divIdChampsSelect" class="participant-stack">
                             <div class="participant-slot">
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="col-auto">
-                        <h3>Prix</h3>
+                        <h3 class="tagPrice">Prix</h3>
 
                         <div id="divIdPrixTarif" class="participant-stack">
                             <div class="participant-slot participant-text">

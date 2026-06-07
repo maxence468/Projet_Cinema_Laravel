@@ -8,7 +8,7 @@ $('#btnAjt').click(function(){
 
     if(capaciteSal && idTypeSalle && idCinema && numeroSalle && idTarif){
         $.ajax({
-            url: "/salles",
+            url: window.APP_URL +'/salles',
             type: "post",
             data:{
                 capaciteSal: capaciteSal,
@@ -48,7 +48,7 @@ $('#salleModif').change(function(e){
         return;
     }
     $.ajax({
-        url: "/editSalle",
+        url: window.APP_URL +'/editSalle',
         type: "post",
         global:false,
         data:{
@@ -83,7 +83,7 @@ $('#btnModif').click(function(){
 
     if(capaciteSal && idTypeSalle && idCinema && numeroSalle && idTarif){
         $.ajax({
-            url: `/salles/${idSalle}`,
+            url: window.APP_URL +`/salles/${idSalle}`,
             type: "patch",
             data:{
                 capaciteSal: capaciteSal,
@@ -126,7 +126,7 @@ $('#btnSuppr').click(function(){
     }
 
     $.ajax({
-        url: `/salles/${idSalle}`,
+        url: window.APP_URL +`/salles/${idSalle}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

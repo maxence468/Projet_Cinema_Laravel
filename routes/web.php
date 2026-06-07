@@ -121,7 +121,7 @@ Route::get('/progSemaineCinema', [PageController::class, 'progSemaineCinema'])->
 
 Route::get('/rechercheFilm', [PageController::class, 'chercheFilm'])->name('recherchefilm');
 
-Route::get('/noterFilm', [PageController::class, 'noterFilm'])->name('noterFilm');
+Route::post('/noterFilm', [PageController::class, 'noterFilm'])->name('noterFilm');
 
 Route::get('/rechercheActeur', [PageController::class, 'rechercheActeur'])->name('rechercheActeur');
 

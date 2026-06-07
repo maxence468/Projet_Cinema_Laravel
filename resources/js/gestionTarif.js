@@ -6,7 +6,7 @@ $('#btnAjt').click(function(){
 
     if(libTarif && prixTarif){
         $.ajax({
-            url: "/tarifs",
+            url: window.APP_URL +'/tarifs',
             type: "POST",
             data:{
                 libTarif: libTarif,
@@ -44,7 +44,7 @@ $('#tarifModif').change(function(e){
     }
 
     $.ajax({
-        url: "/editTarif",
+        url: window.APP_URL +'/editTarif',
         type: "post",
         global:false,
         data:{
@@ -72,7 +72,7 @@ $('#btnModif').click(function(){
 
     if(libTarif && prixTarif){
         $.ajax({
-            url: `/tarifs/${idTarif}`,
+            url: window.APP_URL +`/tarifs/${idTarif}`,
             type: "patch",
             data:{
                 libTarif: libTarif,
@@ -115,7 +115,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/tarifs/${idTarif}`,
+        url: window.APP_URL +`/tarifs/${idTarif}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

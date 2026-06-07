@@ -37,7 +37,8 @@ export function majPrixModifReserv() {
     let totalPrice = 0;
 
     allSelects.forEach((select, index) => {
-        const itemPrice = parseFloat(select.value) || 0;
+        const valueParts = select.value ? select.value.split('|') : [];
+        const itemPrice = parseFloat(valueParts[0]) || 0;
 
         if (allPrices[index]) {
             allPrices[index].textContent = `${itemPrice} €`;

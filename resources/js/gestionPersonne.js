@@ -9,7 +9,7 @@ $('#btnAjt').click(function(){
 
     if(nomPers && prePers && dateNaissPers && lieuNaissPers && photoPers && biblio){
         $.ajax({
-            url: "/personnes",
+            url: window.APP_URL +'/personnes',
             type: "post",
             data:{
                 nomPers: nomPers,
@@ -48,7 +48,7 @@ $('#personneModif').change(function(e){
     let idPers = $('#personneModif').val()
 
     $.ajax({
-        url: "/editPersonne",
+        url: window.APP_URL +'/editPersonne',
         type: "post",
         global:false,
         data:{
@@ -84,7 +84,7 @@ $('#btnModif').click(function(){
 
     if(nomPers && prePers && dateNaissPers && lieuNaissPers && photoPers && biblio){
         $.ajax({
-            url: `/personnes/${idPers}`,
+            url: window.APP_URL +`/personnes/${idPers}`,
             type: "patch",
             data:{
                 nomPers: nomPers,
@@ -131,7 +131,7 @@ $('#btnSuppr').click(function(){
     $(this).prop('disabled', true);
 
     $.ajax({
-        url: `/personnes/${idPers}`,
+        url: window.APP_URL +`/personnes/${idPers}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()

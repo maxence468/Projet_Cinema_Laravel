@@ -46,7 +46,7 @@ $('#btnAjt').click(function(){
 
     if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length && nomJoue.length && preJoue.length && principale.length && secondaire.length){
         $.ajax({
-            url: "/films",
+            url: window.APP_URL +'/films',
             type: "post",
             data:{
                 titreFilm: titreFilm,
@@ -97,7 +97,7 @@ $('#filmModif').change(function(e){
     }
 
     $.ajax({
-        url: "/editFilm",
+        url: window.APP_URL +'/editFilm',
         type: "post",
         global:false,
         data:{
@@ -226,7 +226,7 @@ $('#btnModif').click(function(){
 
     if(titreFilm && descFilm && dateSortieFilm && dureeFilm && posterFilm && idGenre && idRealisateurs.length && idScenaristes.length && idActeurs.length && nomJoue.length && preJoue.length && principale.length && secondaire.length){
         $.ajax({
-            url: `/films/${idFilm}`,
+            url: window.APP_URL +`/films/${idFilm}`,
             type: "patch",
             data:{
                 titreFilm: titreFilm,
@@ -277,7 +277,7 @@ $('#btnSuppr').click(function(){
         return;
     }
     $.ajax({
-        url: `/films/${idFilm}`,
+        url: window.APP_URL +`/films/${idFilm}`,
         type: 'DELETE',
         data: {
             _token: $('input[name="_token"]').val()
@@ -393,7 +393,7 @@ $(document).on('click','#btnSubmitFormGenre', function(e){
     //             })
     //         );
     $.ajax({
-        url: `/genres`,
+        url: window.APP_URL +`/genres`,
         type: 'POST',
         data: {
             libGenre: libGenre,
@@ -445,7 +445,7 @@ $(document).on('click', '#btnAjtPers',function(e) {
     const biblio = $('#biblio').val();
 
     $.ajax({
-        url: `/personnes`,
+        url: window.APP_URL +`/personnes`,
         type: 'POST',
         data: {
             nomPers: nomPers,
@@ -475,7 +475,7 @@ $(document).on('click', '#btnAjtPers',function(e) {
 let countFormGenre = 0;
 let countFormPersonne = 0;
 
-function showFormGenre() {
+window.showFormGenre = function showFormGenre() {
     if (countFormGenre == 0) {
         const template = document.querySelector("#tplGenre");
 
@@ -487,7 +487,7 @@ function showFormGenre() {
     }
 }
 
-function showFormPersonne() {
+window.showFormPersonne = function showFormPersonne() {
     if(countFormPersonne == 0) {
         const template = document.querySelector("#tplPersonne");
 
