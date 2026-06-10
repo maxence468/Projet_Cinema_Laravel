@@ -12,7 +12,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::dropIfExists('reservations'); // must be INSIDE here
+        Schema::dropIfExists('reservations');
         Schema::create('reservations', function (Blueprint $table) {
             $table->id('idReservation');
             $table->integer('idUser');
