@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actionnaire;
+
 use App\Models\Cinema;
 use App\Models\Film;
 use App\Models\Genre;

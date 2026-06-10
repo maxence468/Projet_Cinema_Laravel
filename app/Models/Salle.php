@@ -14,10 +14,18 @@ class Salle extends Model
 
 
     public function tarifs() : BelongsToMany{
-        return $this->belongsToMany(Tarif::class, 'salle_tarif', 'idSalle', 'idTarif');
+        return $this->belongsToMany(
+            Tarif::class,
+            'salle_tarif',
+            'idSalle',
+            'idTarif'
+        );
     }
     public function typesalle(): BelongsTo{
-      return $this->belongsTo(TypeSalle::class, 'idTypeSalle','idTypeSalle');
+        return $this->belongsTo(
+            TypeSalle::class,
+            'idTypeSalle'
+            ,'idTypeSalle');
     }
 
     public function cinema(): belongsTo{
@@ -30,5 +38,5 @@ class Salle extends Model
 
     protected $table = 'salles';
     protected $primaryKey = 'idSalle';
-    protected $fillable = ['capaciteSal','idTypeSalle','idCinema'];
+    protected $fillable = ['capaciteSal','idTypeSalle','idCinema', 'numeroSalle'];
 }

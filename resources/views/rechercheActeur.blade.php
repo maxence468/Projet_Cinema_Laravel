@@ -54,6 +54,15 @@
                             <p class="pt-3">Lieu de naissance : {{ $p->lieuNaissPers }}</p>
                             <p class="pt-3">Biographie : {{ $p->biblio }}</p>
                         </div>
+
+                        <div class="col">
+
+
+                            @foreach($p->films as $film)
+                                <p>{{ $film->titreFilm }}</p>
+                            @endforeach
+
+                        </div>
                     </div>
                 </div>
             @empty

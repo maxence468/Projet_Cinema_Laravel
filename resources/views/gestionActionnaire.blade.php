@@ -43,7 +43,7 @@
                                 <input class="inputCatalogue" id="libGenre" type="text" placeholder="Nom actionnaire" required>
                             </div>
 
-                            
+
                         </div>
 
                         <div class="row align-items-center mb-4">
@@ -94,6 +94,5 @@
         </div>
     </main>
     @vite('resources/js/stateButtons.js')
-    @vite('resources/js/gestionActionnaire.js')
     @vite('resources/js/updateSelect.js')
 @endsection

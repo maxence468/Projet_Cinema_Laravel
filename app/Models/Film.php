@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Prompts\Note;
 
-class Film extends Model
-{
+class Film extends Model {
     use HasFactory;
 
     protected $fillable = [
@@ -24,24 +24,61 @@ class Film extends Model
     protected $table = 'films';
 
     public function genre(): BelongsTo{
-        return $this->belongsTo(Genre::class, 'idGenre', 'idGenre');
+        return $this->belongsTo(
+            Genre::class,
+            'idGenre',
+            'idGenre'
+        );
     }
 
     public function casting(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'caste', 'idFilm', 'idPers'
-        )->withPivot('nomJoue','preJoue','principale','secondaire');
-
+        return $this->belongsToMany(
+            Personne::class,
+            'caste',
+            'idFilm',
+            'idPers'
+        )->withPivot(
+            'nomJoue',
+            'preJoue',
+            'principale',
+            'secondaire'
+        );
     }
 
     public function realisateurs(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'realise', 'idFilm', 'idPers');
+        return $this->belongsToMany(
+            Personne::class,
+            'realise',
+            'idFilm',
+            'idPers'
+        );
     }
 
     public function scenariste(): BelongsToMany{
-        return $this->belongsToMany(Personne::class, 'scenarise', 'idFilm', 'idPers');
+        return $this->belongsToMany(
+            Personne::class,
+            'scenarise',
+            'idFilm',
+            'idPers'
+        );
+    }
+
+    public function note(): BelongsToMany {
+        return $this->belongsToMany(
+            User::class,
+            'notes',
+            'idFilm',
+            'idUser'
+        )->withPivot(
+            'note'
+        );
     }
 
     public function seances(): HasMany{
-        return $this->hasMany(Seance::class, 'idFilm', 'idFilm');
+        return $this->hasMany(
+            Seance::class,
+            'idFilm',
+            'idFilm'
+        );
     }
 }

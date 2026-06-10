@@ -7,8 +7,8 @@
 @section('title', 'Page d\'accueil')
 
 @section('main')
-<main class="pt-5">
-    <h2 class="pt-5 ps-2 pb-2">Les dernières sorties</h2>
+<main class="pt-2">
+    <h2 class="ps-2 pb-2">Les dernières sorties</h2>
     <div class="d-flex flex-row justify-content-evenly">
         @foreach($films as $film)
             <form method="GET" action="{{ route('recherchefilm') }}">
