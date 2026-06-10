@@ -7,6 +7,7 @@
         <div class="d-flex flex-row align-items-start">
 
             <div class="d-flex flex-column pt-4 ps-2 sidebar">
+                <a href="/gestionActionnaire" class="nav-text">Gestion actionnaire</a>
                 <a href="/gestionFilm" class="nav-text">Gestion film</a>
                 <a href="/gestionGenre" class="nav-text pt-3">Gestion genre</a>
                 <a href="/gestionPersonne" class="nav-text pt-3">Gestion personne</a>

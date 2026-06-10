@@ -290,4 +290,8 @@ class PageController extends Controller{
             'tarifs',
         ));
     }
+
+    public function gestionActionnaire() {
+        return view('gestionActionnaire');
+    }
 }

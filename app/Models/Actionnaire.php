@@ -21,6 +21,5 @@ class Film extends Model
     public function investir(): BelongsToMany{
         return $this->belongsToMany(Cinema::class, 'Investir', 'idActio', 'idCinema'
         )->withPivot('argentInv');
-
     }
 }

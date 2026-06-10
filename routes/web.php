@@ -136,6 +136,7 @@ Route::get('/gestionSeance', [PageController::class, 'gestionSeance'])->name('ge
 Route::get('/gestionTarif', [PageController::class, 'gestionTarif'])->name('gestionTarif')->middleware('admin');;
 Route::get('/gestionTypeSalle', [PageController::class, 'gestionTypeSalle'])->name('gestionTypeSalle')->middleware('admin');;
 Route::get('/gestionTarifSalle', [PageController::class, 'gestionTarifSalle'])->name('gestionTarifSalle')->middleware('admin');
+Route::get('/gestionActionnaire', [PageController::class, 'gestionActionnaire'])->name('gestionActionnaire')->middleware('admin');
 
 Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
 
