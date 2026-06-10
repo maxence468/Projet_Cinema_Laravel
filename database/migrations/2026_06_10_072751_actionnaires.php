@@ -9,17 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-
     public function up(): void
     {
-        Schema::dropIfExists('reservations'); // must be INSIDE here
         Schema::create('reservations', function (Blueprint $table) {
             $table->id('idReservation');
-            $table->integer('idUser');
-            $table->integer('idSeance');
-            $table->integer('nbPlace');
-            $table->dateTime('dateReservation');
-            $table->decimal('montantTotal');
+            $table->integer('idActio');
+            $table->string('nomActio');
+            $table->string('preActio');
             $table->timestamps();
         });
     }
